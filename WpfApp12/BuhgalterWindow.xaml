@@ -95,7 +95,7 @@
                     <Grid Name="tD">
                     </Grid>
                 </ScrollViewer>
-                <Button Content="Применить" Grid.Row="5" Name="PrimFKD" Click="PrimFKD_Click" />
+                <Button Content="Применить" Grid.Row="5" Name="PrimFKD" Click="FiltrButton_Click" />
             </Grid>
 
 
@@ -119,7 +119,7 @@
                     <Grid Name="tR">
                     </Grid>
                 </ScrollViewer>
-                <Button Content="Применить"  Name="PrimFKR"  Grid.Row="5"  Click="PrimFKD_Click"/>
+                <Button Content="Применить"  Name="PrimFKR"  Grid.Row="5"  Click="FiltrButton_Click"/>
             </Grid>
 
 

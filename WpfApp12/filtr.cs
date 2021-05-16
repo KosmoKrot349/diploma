@@ -16,7 +16,7 @@ using Microsoft;
 
 namespace WpfApp12
 {
-    class filtr
+   public class filtr
     {
     public CheckBox[] chbxMas;
     public string sql = "";

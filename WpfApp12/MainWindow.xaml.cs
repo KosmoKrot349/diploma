@@ -1,27 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Npgsql;
-using System.Data.SqlClient;
 using System.Collections;
-using System.Diagnostics;
 using System.IO;
-using Microsoft.Win32;
 using WinForms = System.Windows.Forms;
-
-
-
+using WpfApp12.strategiesForMainWind.strategiesForMainWindButtonClick;
 
 namespace WpfApp12
 {
@@ -30,15 +15,10 @@ namespace WpfApp12
     /// </summary>
     public partial class MainWindow : Window
     {
-
-
-
         //строка подключения
-        string connectionString = "";
+        public string connectionString = "";
         public MainWindow()
         {
-
-
             InitializeComponent();
             StreamReader reader = new StreamReader(@"setting.txt");
             ArrayList ls = new ArrayList();
@@ -49,154 +29,18 @@ namespace WpfApp12
             object[] mas = ls.ToArray();
             connectionString = "Server=" + mas[0].ToString().Split(':')[1] + ";Port=" + mas[2].ToString().Split(':')[1] + ";User Id=postgres;Password=" + mas[1].ToString().Split(':')[1] + ";Database=db";
             pereraschet();
-
-      
         }
         //авторизация пользователя
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-
-            try
-            {
-                if (log.Text != "" && pas.Password != "")
-                {
-                    if (pas.Password == "resetrootpass"&& log.Text=="root")
-                    {
-                        NpgsqlConnection npgSqlConnection1 = new NpgsqlConnection(connectionString);
-                        npgSqlConnection1.Open();
-                        string sql1 = "update users set pas='rootpass' where uid = -1";
-                        NpgsqlCommand Command1 = new NpgsqlCommand(sql1, npgSqlConnection1);
-                        Command1.ExecuteNonQuery();
-                        npgSqlConnection1.Close();
-                        pas.Password = "rootpass";
-                    }
-
-                    NpgsqlConnection npgSqlConnection = new NpgsqlConnection(connectionString);
-                    npgSqlConnection.Open();
-                    string sql = "select uid,admin,buhgalter,director,fio from users where log='" + log.Text + "' and pas = '" + pas.Password + "'";
-                    NpgsqlCommand Command = new NpgsqlCommand(sql, npgSqlConnection);
-                    NpgsqlDataReader reader = Command.ExecuteReader();
-                    if (reader.HasRows)
-                    {
-                        
-                        while (reader.Read())
-                        {
-
-                            if (1 == reader.GetInt32(1))
-                            {
-                                
-                                AdminWindow wind = new AdminWindow();
-                                if (reader.GetInt32(1) == 0) { wind.AdminRoleA.IsEnabled = false; }
-                                if (reader.GetInt32(2) == 0) { wind.BuhgRoleA.IsEnabled = false;  }
-                                if (reader.GetInt32(3) == 0) { wind.DirectorRoleA.IsEnabled = false;  }
-                                wind.logUser = reader.GetInt32(0);
-                                wind.FIO = reader.GetString(4);
-                                wind.Title = wind.FIO + " - Админ";
-                                wind.hello_label.Text = "Здравствуйте, Ваша текущая роль администратор. Для начала роботы выберите один из пунктов меню.";
-                                wind.Width = this.Width;
-                                wind.Height = this.Height;
-                                wind.Left = this.Left;
-                                wind.Top = this.Top;
-                                wind.Show();
-                                npgSqlConnection.Close();
-                                this.Close();
-                                return;
-                            }
-                            if (1 == reader.GetInt32(2))
-                            {
-                                BuhgalterWindow wind = new BuhgalterWindow();
-                                if (reader.GetInt32(1) == 0) { wind.AdminRoleB.IsEnabled = false; }
-                                if (reader.GetInt32(2) == 0) { wind.BuhgRoleB.IsEnabled = false; }
-                                if (reader.GetInt32(3) == 0) { wind.DirectorRoleB.IsEnabled = false; }
-                                wind.logUser = reader.GetInt32(0);
-                                wind.FIO = reader.GetString(4);
-                                wind.Title = wind.FIO + " - Бухгалтер";
-                                wind.hello_label.Text = "Здравствуйте, Ваша текущая роль бухгалтер. Для начала роботы выберите один из пунктов меню.";
-                                wind.Width = this.Width;
-                                wind.Height = this.Height;
-                                wind.Left = this.Left;
-                                wind.Top = this.Top;
-                                wind.Show();
-                                npgSqlConnection.Close();
-                                this.Close();
-                                return;
-                            }
-                            if (1 == reader.GetInt32(3))
-                            {
-                                DirectorWindow wind = new DirectorWindow();
-                                if (reader.GetInt32(1) == 0) { wind.AdminRoleD.IsEnabled = false; }
-                                if (reader.GetInt32(2) == 0) { wind.BuhgRoleD.IsEnabled = false; }
-                                if (reader.GetInt32(3) == 0) { wind.DirectorRoleD.IsEnabled = false; }
-                                wind.logUser = reader.GetInt32(0);
-                                wind.FIO = reader.GetString(4);
-                                wind.Title = wind.FIO + " - Директор";
-                                wind.hello_label.Text = "Здравствуйте, Ваша текущая роль директор. Для начала роботы выберите один из пунктов меню.";
-                                wind.Width = this.Width;
-                                wind.Height = this.Height;
-                                wind.Left = this.Left;
-                                wind.Top = this.Top;
-                                wind.Show();
-                                npgSqlConnection.Close();
-                                this.Close();
-                                return;
-                            }
-                        }
-
-
-                    }
-                    else { MessageBox.Show("Такого пользователя не существует"); }
-                    npgSqlConnection.Close();
-                }
-                else MessageBox.Show("Одно из полей не заполнено");
-        }
-            catch
-            {
-                MessageBoxResult res = MessageBox.Show("Не получается обратиться к базе данных. \n Хотите провести настройки подключения?", "Ошибка соединения", MessageBoxButton.YesNo);
-
-                if (res == MessageBoxResult.Yes)
-                {
-                    settingGrid.Visibility = Visibility.Visible;
-                    autGrid.Visibility = Visibility.Collapsed;
-                    StreamReader streamReader = new StreamReader(@"setting.txt");
-        ArrayList list = new ArrayList();
-                    while (!streamReader.EndOfStream)
-                    {
-                        list.Add(streamReader.ReadLine());
-                    }
-    streamReader.Close();
-                    object[] mas_str = list.ToArray();
-    connect.Text = mas_str[0].ToString().Split(':')[1];
-                    dbPassText.Text = mas_str[1].ToString().Split(':')[1];
-                    dbPortText.Text = mas_str[2].ToString().Split(':')[1];
-
-                }
-                if (res == MessageBoxResult.No)
-                    {
-                        return;
-                    }  
-            }
+            IButtonClick actionReact = new Authorize(this);
+            actionReact.ButtonClick();
         }
         //проверка подключения
         private void Button_Click11(object sender, RoutedEventArgs e)
         {
-            string testConStr = "Server=" + connect.Text + ";Port=" + dbPortText.Text + ";User Id=postgres;Password=" + dbPassText.Text + ";Database=db;";
-            NpgsqlConnection testcon = new NpgsqlConnection(testConStr);
-            try
-            {
-                testcon.Open();
-            }
-            catch { MessageBox.Show("Не удалось подключиться к базе по заданным параметрам"); return; }
-            testcon.Close();
-            MessageBoxResult res = MessageBox.Show("Подключение по данным параметрам прошло успешно. \nСохранить параметры?", "Сохранение", MessageBoxButton.YesNo);
-            if (res == MessageBoxResult.Yes)
-            {
-                saveSettings();
-
-            }
-            if (res == MessageBoxResult.No)
-            {
-                return;
-            }
+            IButtonClick actionReact = new ConnectionCheck(this);
+            actionReact.ButtonClick();
         }
         //сохранение настроек
         public void saveSettings()
@@ -221,7 +65,8 @@ namespace WpfApp12
         //принудительное сохранение
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            saveSettings();
+            IButtonClick actionReact = new EnforcementSeatings(this);
+            actionReact.ButtonClick();
         }
         //воод только цифр
         private void ip1_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -232,8 +77,6 @@ namespace WpfApp12
                 { e.Handled = true; }
             }
         }
-
-
         public void pereraschet()
         {
             DateTime DT = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
