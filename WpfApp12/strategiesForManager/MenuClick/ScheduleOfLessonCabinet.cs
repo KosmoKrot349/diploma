@@ -7,19 +7,19 @@ using WpfApp12.strategiesForManager.OtherMethods;
 
 namespace WpfApp12.strategiesForManager.MenuClick
 {
-    class ScheduleGroopMenu:IMenuClick
+    class ScheduleOfLessonCabinet:IMenuClick
     {
-        DirectorWindow windowObj;
+        DirectorWindow window;
 
-        public ScheduleGroopMenu(DirectorWindow windowObj)
+        public ScheduleOfLessonCabinet(DirectorWindow window)
         {
-            this.windowObj = windowObj;
+            this.window = window;
         }
 
         public void MenuClick()
         {
             DateTime dateNow = DateTime.Now;
-            windowObj.dateMonday = new DateTime();
+            window.dateMonday = new DateTime();
             int day_razn = 0;
             switch (dateNow.DayOfWeek.ToString())
             {
@@ -31,8 +31,8 @@ namespace WpfApp12.strategiesForManager.MenuClick
                 case "Saturday": { day_razn = -5; } break;
                 case "Sunday": { day_razn = -6; } break;
             }
-            windowObj.dateMonday = dateNow.AddDays(day_razn);
-            ShowLearningSchedule.ShowForGroops(windowObj.dateMonday, windowObj.dateMonday.AddDays(6),windowObj);
+            window.dateMonday = dateNow.AddDays(day_razn);
+            ShowLearningSchedule.ShowForCabinets(window.dateMonday, window.dateMonday.AddDays(6),window);
         }
     }
 }

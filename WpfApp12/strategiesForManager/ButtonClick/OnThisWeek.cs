@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using WpfApp12.strategiesForManager.OtherMethods;
 
 namespace WpfApp12.strategiesForManager.ButtonClick
 {
@@ -36,9 +37,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 
             windowObj.dateMonday = dateNow.AddDays(day_razn);
             Button but = sender as Button;
-            if (but.Name == "NuwRaspBut") { windowObj.showRaspG(windowObj.dateMonday, windowObj.dateMonday.AddDays(6)); }
-            if (but.Name == "NuwRaspButP") { windowObj.showRaspP(windowObj.dateMonday, windowObj.dateMonday.AddDays(6)); }
-            if (but.Name == "NuwRaspButС") { windowObj.showRaspС(windowObj.dateMonday, windowObj.dateMonday.AddDays(6)); }
+            if (but.Name == "NuwRaspBut") { ShowLearningSchedule.ShowForGroops(windowObj.dateMonday, windowObj.dateMonday.AddDays(6),windowObj); }
+            if (but.Name == "NuwRaspButP") { ShowLearningSchedule.ShowForTeachers(windowObj.dateMonday, windowObj.dateMonday.AddDays(6),windowObj); }
+            if (but.Name == "NuwRaspButС") { ShowLearningSchedule.ShowForCabinets(windowObj.dateMonday, windowObj.dateMonday.AddDays(6),windowObj); }
         }
     }
 }

@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using WpfApp12.strategiesForManager.OtherMethods;
 
 namespace WpfApp12.strategiesForManager.ButtonClick
 {
@@ -43,9 +44,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
             windowObj.LabelDateRasp.Content = "Расписание на " + windowObj.dateMonday.ToShortDateString() + " - " + windowObj.dateMonday.AddDays(6).ToShortDateString();
             Button but = sender as Button;
-            if (but.Name == "PrevRaspBut") windowObj.showRaspG(windowObj.dateMonday, windowObj.dateMonday.AddDays(6));
-            if (but.Name == "PrevRaspButP") windowObj.showRaspP(windowObj.dateMonday, windowObj.dateMonday.AddDays(6));
-            if (but.Name == "PrevRaspButС") windowObj.showRaspС(windowObj.dateMonday, windowObj.dateMonday.AddDays(6));
+            if (but.Name == "PrevRaspBut") ShowLearningSchedule.ShowForGroops(windowObj.dateMonday, windowObj.dateMonday.AddDays(6),windowObj);
+            if (but.Name == "PrevRaspButP") ShowLearningSchedule.ShowForTeachers(windowObj.dateMonday, windowObj.dateMonday.AddDays(6),windowObj);
+            if (but.Name == "PrevRaspButС") ShowLearningSchedule.ShowForCabinets(windowObj.dateMonday, windowObj.dateMonday.AddDays(6),windowObj);
 
             for (int i = 0; i < (windowObj.m * 7) + 1; i++)
             {

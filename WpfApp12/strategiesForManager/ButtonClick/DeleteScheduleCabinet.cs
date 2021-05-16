@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using WpfApp12.strategiesForManager.OtherMethods;
 
 namespace WpfApp12.strategiesForManager.ButtonClick
 {
@@ -37,7 +38,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                 con.Close();
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
-            windowObj.showRaspС(windowObj.dateMonday, windowObj.dateMonday.AddDays(6));
+            ShowLearningSchedule.ShowForCabinets(windowObj.dateMonday, windowObj.dateMonday.AddDays(6),windowObj);
         }
     }
 }

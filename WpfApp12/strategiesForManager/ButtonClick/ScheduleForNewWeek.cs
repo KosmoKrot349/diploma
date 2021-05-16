@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using WpfApp12.strategiesForManager.OtherMethods;
 
 namespace WpfApp12.strategiesForManager.ButtonClick
 {
@@ -43,9 +44,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
             Button but = sender as Button;
-            if (but.Name == "NewRaspBut") windowObj.showRaspG(windowObj.dateMonday, windowObj.dateMonday.AddDays(6));
-            if (but.Name == "NewRaspButP") windowObj.showRaspP(windowObj.dateMonday, windowObj.dateMonday.AddDays(6));
-            if (but.Name == "NewRaspButС") windowObj.showRaspС(windowObj.dateMonday, windowObj.dateMonday.AddDays(6));
+            if (but.Name == "NewRaspBut") ShowLearningSchedule.ShowForGroops(windowObj.dateMonday, windowObj.dateMonday.AddDays(6),windowObj);
+            if (but.Name == "NewRaspButP") ShowLearningSchedule.ShowForTeachers(windowObj.dateMonday, windowObj.dateMonday.AddDays(6),windowObj);
+            if (but.Name == "NewRaspButС") ShowLearningSchedule.ShowForCabinets(windowObj.dateMonday, windowObj.dateMonday.AddDays(6),windowObj);
         }
     }
 }

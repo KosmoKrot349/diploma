@@ -21,7 +21,10 @@ using OxyPlot.Series;
 using OxyPlot.Axes;
 using WpfApp12.strategiesForManager.ButtonClick;
 using WpfApp12.strategiesForManager.MenuClick;
-
+using WpfApp12.strategiesForManager.LabelMousDown;
+using WpfApp12.strategiesForManager.SelectedChanged;
+using WpfApp12.strategiesForManager.OtherMethods;
+using WpfApp12.strategiesForManager.SelectionChanged;
 
 namespace WpfApp12
 {
@@ -112,122 +115,7 @@ public int logUser;
         //+
         public void HideAll()
         {
-            listenerDataGrid.SelectedItem = null;
-            coursDataGrid.SelectedItem = null;
-            subsDataGrid.SelectedItem = null;
-            groupsDataGrid.SelectedItem = null;
-            prepDataGrid.SelectedItem = null;
-            kategDataGrid.SelectedItem = null;
-            allSotrDataGrid.SelectedItem = null;
-            zvonkiDataGrid.SelectedItem = null;
-            cabDataGrid.SelectedItem = null;
-            StateDataGrid.SelectedItem = null;
-            ObslWorkDataGrid.SelectedItem = null;
-            ShtatDataGrid.SelectedItem = null;
-            KoefDataGrid.SelectedItem = null;
-            TypeRashDataGrid.SelectedItem = null;
-            TypeDohDataGrid.SelectedItem = null;
-
-
-
-            //слушатели
-            listenerDeleteButton.IsEnabled = false;
-            listenerChangeButton.IsEnabled = false;
-
-            //курсы
-            coursDeleteButton.IsEnabled = false;
-            coursChangeButton.IsEnabled = false;
-
-            //предметы
-            subDeleteButton.IsEnabled = false;
-
-            //группы
-            groupDeleteButton.IsEnabled = false;
-            groupChangeButton.IsEnabled = false;
-
-            //преподаватели
-            prepDeleteButton.IsEnabled = false;
-            prepChangeButton.IsEnabled = false;
-
-            //категории
-            kategDeleteButton.IsEnabled = false;
-
-            //все сотрудники
-            allSotrDeleteButton.IsEnabled = false;
-            allSotrToPrepBtton.IsEnabled = false;
-            allSotrToShtatBtton.IsEnabled = false;
-
-            //расписание звонков
-            zvonkiDeleteButton.IsEnabled = false;
-
-            //кабинеты
-            cabDeleteButton.IsEnabled = false;
-
-            //типы дохода
-            TypeDohDeleteButton.IsEnabled = false;
-
-            //типы расходов
-            TypeRashDeleteButton.IsEnabled = false;
-
-            //коефициент за выслугу лет
-            KoefDeleteButton.IsEnabled = false;
-
-            //работы обслуживания
-            ObslWorkDeleteButton.IsEnabled = false;
-
-            //должности 
-            StateChangeButton.IsEnabled = false;
-            StateDeleteButton.IsEnabled = false;
-
-            //штат
-            shtatDeleteButton.IsEnabled = false;
-            shtatChangeButton.IsEnabled = false;
-
-            //штатное расписание
-            ShtatRaspSaveBut.IsEnabled = false;
-
-            ListenerAddGrid.Visibility = Visibility.Collapsed;
-            helloGrdi.Visibility = Visibility.Collapsed;
-            zvonkiGrid.Visibility = Visibility.Collapsed;
-            prepGrid.Visibility = Visibility.Collapsed;
-            kategGrid.Visibility = Visibility.Collapsed;
-            allSotrGrid.Visibility = Visibility.Collapsed;
-            groupsGrid.Visibility = Visibility.Collapsed;
-            prepChangeGrid.Visibility = Visibility.Collapsed;
-            subGrid.Visibility = Visibility.Collapsed;
-            courseGrid.Visibility = Visibility.Collapsed;
-            groupAddGrid.Visibility = Visibility.Collapsed;
-            groupChangeGrid.Visibility = Visibility.Collapsed;
-            courseAddGrid.Visibility = Visibility.Collapsed;
-            courseChangeGrid.Visibility = Visibility.Collapsed;
-            addPrepGrid.Visibility = Visibility.Collapsed;
-            raspGridG.Visibility = Visibility.Collapsed;
-            raspGridP.Visibility = Visibility.Collapsed;
-            raspGridС.Visibility = Visibility.Collapsed;
-            addRaspGrid.Visibility = Visibility.Collapsed;
-            changeRaspGrid.Visibility = Visibility.Collapsed;
-            ListenerGrid.Visibility = Visibility.Collapsed;
-            ListenerChangeGrid.Visibility = Visibility.Collapsed;
-            addRaspGridKab.Visibility = Visibility.Collapsed;
-            changeRaspGridKab.Visibility = Visibility.Collapsed;
-            addRaspGridPrep.Visibility = Visibility.Collapsed;
-            changeRaspGridPrep.Visibility = Visibility.Collapsed;
-            cabGrid.Visibility = Visibility.Collapsed;
-            skidkiGrid.Visibility = Visibility.Collapsed;
-            TypeDohGrid.Visibility = Visibility.Collapsed;
-            TypeRashGrid.Visibility = Visibility.Collapsed;
-            KoefGrid.Visibility = Visibility.Collapsed;
-            ObslWorkGrid.Visibility = Visibility.Collapsed;
-            StateGrid.Visibility = Visibility.Collapsed;
-            StateAddGrid.Visibility = Visibility.Collapsed;
-            StateChaneGrid.Visibility = Visibility.Collapsed;
-            addShtatGrid.Visibility = Visibility.Collapsed;
-            ShtatGrid.Visibility = Visibility.Collapsed;
-            ChangeShtatGrid.Visibility = Visibility.Collapsed;
-            ShtatRaspGrid.Visibility = Visibility.Collapsed;
-            kassaGrid.Visibility = Visibility.Collapsed;
-            StatisticaGrid.Visibility = Visibility.Collapsed;
-            ZpOthcetGrid.Visibility = Visibility.Collapsed;
+            WpfApp12.strategiesForManager.OtherMethods.HideAll.HideAllGrids(this);
 
         }
         //переход из меню директора в меню админа+
@@ -422,7 +310,6 @@ public int logUser;
         //сохранение изменений курса +
         private void courseChangeButton2_Click(object sender, RoutedEventArgs e)
         {
-
             IButtonClick actionReact = new ChangeCourse(this);
             actionReact.ButtonClick();
         }
@@ -442,42 +329,26 @@ public int logUser;
         //клик по меню прав +
         private void MenuRolesD_Click(object sender, RoutedEventArgs e)
         {
-            MenuRolesD.BorderBrush = Brushes.DarkRed;
-            raspMenu.BorderBrush = null;
-            sotrMenu.BorderBrush = null;
-            obuchMenu.BorderBrush = null;
-            skidki.BorderBrush = null;
-            MenuOtchety.BorderBrush = null;
+            IMenuClick actionReact = new RoleMenu(this);
+            actionReact.MenuClick();
         }
         //клик по меню расписания +
         private void raspMenu_Click(object sender, RoutedEventArgs e)
         {
-            MenuRolesD.BorderBrush = null;
-            raspMenu.BorderBrush = Brushes.DarkRed;
-            sotrMenu.BorderBrush = null;
-            obuchMenu.BorderBrush = null;
-            skidki.BorderBrush = null;
-            MenuOtchety.BorderBrush = null;
+            IMenuClick actionReact = new ScheduleMenu(this);
+            actionReact.MenuClick();
         }
         //клик по меню персонала +
         private void sotrMenu_Click(object sender, RoutedEventArgs e)
         {
-            MenuRolesD.BorderBrush = null;
-            raspMenu.BorderBrush = null;
-            sotrMenu.BorderBrush = Brushes.DarkRed;
-            obuchMenu.BorderBrush = null;
-            skidki.BorderBrush = null;
-            MenuOtchety.BorderBrush = null;
+            IMenuClick actionReact = new PersonnelMenu(this);
+            actionReact.MenuClick();
         }
         //клик по меню обучения +
         private void obuchMenu_Click(object sender, RoutedEventArgs e)
         {
-            MenuRolesD.BorderBrush = null;
-            raspMenu.BorderBrush = null;
-            sotrMenu.BorderBrush = null;
-            skidki.BorderBrush = null;
-            MenuOtchety.BorderBrush = null;
-            obuchMenu.BorderBrush = Brushes.DarkRed;
+            IMenuClick actionReact = new LearningMenu(this);
+            actionReact.MenuClick();
         }
         //сделать сотрудника преподавателем(переход к гриду)+
         private void allSotrToPrepBtton_Click(object sender, RoutedEventArgs e)
@@ -524,65 +395,7 @@ public int logUser;
             IButtonClick actionReact = new EmployeeToTeacher(this);
             actionReact.ButtonClick();
         }
-        //вывод расписания по групрпам +
-        public void showRaspG(DateTime dm, DateTime ds)
-        {
-            m = 0;//число зантий в дне
-            n = 0;//число групп
-            LabelDateRasp.Content = "Расписание на " + dm.ToShortDateString() + " - " + ds.ToShortDateString();
-            try
-            {
-                NpgsqlConnection con = new NpgsqlConnection(connectionString);
-                con.Open();
-                string sql = "select count(grid) from groups";
-                NpgsqlCommand command = new NpgsqlCommand(sql, con);
-                NpgsqlDataReader reader = command.ExecuteReader();
-                if (reader.HasRows)
-                {
-                    while (reader.Read())
-                    {
-                        n = reader.GetInt32(0);
-                    }
-                }
-                con.Close();
-            }
-            catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
-            if (n == 0) { MessageBox.Show("Нету групп"); return; }
-            try
-            {
-                NpgsqlConnection con = new NpgsqlConnection(connectionString);
-                con.Open();
-                string sql = "select count(lesson_number) from lessons_time";
-                NpgsqlCommand command = new NpgsqlCommand(sql, con);
-                NpgsqlDataReader reader = command.ExecuteReader();
-                if (reader.HasRows)
-                {
-                    while (reader.Read())
-                    {
-                        m = reader.GetInt32(0);
-                    }
-                }
-                con.Close();
-            }
-            catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
-            if (m == 0) { MessageBox.Show("Нету занятий"); return; }
-            HideAll();
-            DeleteRaspBut.IsEnabled = false;
-            ChangeRaspBut.IsEnabled = false;
-            AddRaspBut.IsEnabled = false;
-            raspGridG.Visibility = Visibility.Visible;
-            lbmas = new Label[(m * 7) + 1, n + 2];
-            DataGridUpdater.updateGridRaspG(connectionString, tG, m, n, lbmas, dm, ds);
-            for (int i = 0; i < (m * 7) + 1; i++)
-            {
-                for (int j = 1; j < n + 2; j++)
-                {
-                    if (i != 0 && j != 1)
-                        lbmas[i, j].MouseDown += Label_MouseDown;
-                }
-
-            }
-        }
+       
         //переход к расписанию уроков по группам +
         private void yrokiMenu_Click(object sender, RoutedEventArgs e)
         {
@@ -592,39 +405,9 @@ public int logUser;
         //клик на лейбл в расписании по группам +
         public void Label_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            Label l = sender as Label;
-            iRaspLebale = Convert.ToInt32(l.Name.Split('_')[1]);
-            jRaspLebale = Convert.ToInt32(l.Name.Split('_')[2]);
-            for (int i = 0; i < (m * 7) + 1; i++)
-            {
-                for (int j = 1; j < n + 2; j++)
-                {
-                    if (i != 0 && j != 1)
-                        lbmas[i, j].Background = Brushes.White;
-                }
-            }
-            lbmas[iRaspLebale, jRaspLebale].Background = Brushes.Aqua;
-            DeleteRaspBut.IsEnabled = false;
-            ChangeRaspBut.IsEnabled = false;
-            AddRaspBut.IsEnabled = false;
-            DeleteRaspButС.IsEnabled = false;
-            ChangeRaspButС.IsEnabled = false;
-            AddRaspButС.IsEnabled = false;
-            DeleteRaspButP.IsEnabled = false;
-            ChangeRaspButP.IsEnabled = false;
-            AddRaspButP.IsEnabled = false;
-            if (lbmas[iRaspLebale, jRaspLebale].Content.ToString() == "") { AddRaspBut.IsEnabled = true; AddRaspButС.IsEnabled = true; AddRaspButP.IsEnabled = true; }
-            if (lbmas[iRaspLebale, jRaspLebale].Content.ToString() != "")
-            {
-                DeleteRaspBut.IsEnabled = true;
-                ChangeRaspBut.IsEnabled = true;
-
-                DeleteRaspButС.IsEnabled = true;
-                ChangeRaspButС.IsEnabled = true;
-
-                DeleteRaspButP.IsEnabled = true;
-                ChangeRaspButP.IsEnabled = true;
-            }
+            IMousDown actionReact = new LabelClickFromGroopsSchedule(this, sender);
+            actionReact.MousDown();
+           
         }
         //добавление записив таблицу расписания по группам +
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -724,65 +507,14 @@ public int logUser;
         //изменение кнопок контроля для DataGrid+
         private void listenerDataGrid_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
         {
-            //слушатели
-            listenerDeleteButton.IsEnabled = true;
-            listenerChangeButton.IsEnabled = true;
-
-            //курсы
-            coursDeleteButton.IsEnabled = true;
-            coursChangeButton.IsEnabled = true;
-
-            //предметы
-            subDeleteButton.IsEnabled = true;
-
-            //группы
-            groupDeleteButton.IsEnabled = true;
-            groupChangeButton.IsEnabled = true;
-
-            //преподаватели
-            prepDeleteButton.IsEnabled = true;
-            prepChangeButton.IsEnabled = true;
-
-            //категории
-            kategDeleteButton.IsEnabled = true;
-
-            //все сотрудники
-            allSotrDeleteButton.IsEnabled = true;
-            allSotrToPrepBtton.IsEnabled = true;
-            allSotrToShtatBtton.IsEnabled = true;
-
-            //расписание звонков
-            zvonkiDeleteButton.IsEnabled = true;
-
-            //кабинеты
-            cabDeleteButton.IsEnabled = true;
-
-            //типы дохода 
-            TypeDohDeleteButton.IsEnabled = true;
-
-            //типы расходов
-            TypeRashDeleteButton.IsEnabled = true;
-
-            //коефициент за выслугу лет
-            KoefDeleteButton.IsEnabled = true;
-
-            //работы обслуживания
-            ObslWorkDeleteButton.IsEnabled = true;
-
-            //должности 
-            StateChangeButton.IsEnabled = true;
-            StateDeleteButton.IsEnabled = true;
-
-            //штат
-            shtatDeleteButton.IsEnabled = true;
-            shtatChangeButton.IsEnabled = true;
+            ISelectedChanged actionReact = new ControlButtonState(this);
+            actionReact.SelectedChanged();
         }
         //переход к гриду кабинетов+
         private void kabMenu_Click(object sender, RoutedEventArgs e)
         {
-            HideAll();
-            cabGrid.Visibility = Visibility.Visible;
-            DataGridUpdater.updateDataGridСab(connectionString, cabDataGrid);
+            IMenuClick actionReact = new CabinteMenu(this);
+            actionReact.MenuClick();
         }
         //добавление и изменение в кабинетах +
         private void cabChangeButton_Click(object sender, RoutedEventArgs e)
@@ -796,161 +528,19 @@ public int logUser;
             IButtonClick actionReact = new DeleteCabinet(this);
             actionReact.ButtonClick();
         }
-        //вывод расписания по преподавателям+
-        public void showRaspP(DateTime dm, DateTime ds)
-        {
-            m = 0;//число зантий в дне
-            n = 0;//число преподавателей
-            LabelDateRaspP.Content = "Расписание на " + dm.ToShortDateString() + " - " + ds.ToShortDateString();
-            try
-            {
-                NpgsqlConnection con = new NpgsqlConnection(connectionString);
-                con.Open();
-                string sql = "select count(prepid) from prep";
-                NpgsqlCommand command = new NpgsqlCommand(sql, con);
-                NpgsqlDataReader reader = command.ExecuteReader();
-                if (reader.HasRows)
-                {
-                    while (reader.Read())
-                    {
-                        n = reader.GetInt32(0);
-                    }
-                }
-                con.Close();
-            }
-            catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
-            if (n == 0) { MessageBox.Show("Нету преподавателей"); return; }
-            try
-            {
-                NpgsqlConnection con = new NpgsqlConnection(connectionString);
-                con.Open();
-                string sql = "select count(lesson_number) from lessons_time";
-                NpgsqlCommand command = new NpgsqlCommand(sql, con);
-                NpgsqlDataReader reader = command.ExecuteReader();
-                if (reader.HasRows)
-                {
-                    while (reader.Read())
-                    {
-                        m = reader.GetInt32(0);
-                    }
-                }
-                con.Close();
-            }
-            catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
-            if (m == 0) { MessageBox.Show("Нету занятий"); return; }
-            HideAll();
-            DeleteRaspButP.IsEnabled = false;
-            ChangeRaspButP.IsEnabled = false;
-            AddRaspButP.IsEnabled = false;
-            raspGridP.Visibility = Visibility.Visible;
-            lbmas = new Label[(m * 7) + 1, n + 2];
-            DataGridUpdater.updateGridRaspP(connectionString, tGp, m, n, lbmas, dm, ds);
-            for (int i = 0; i < (m * 7) + 1; i++)
-            {
-                for (int j = 1; j < n + 2; j++)
-                {
-                    if (i != 0 && j != 1)
-                        lbmas[i, j].MouseDown += Label_MouseDown;
-                }
-
-            }
-        }
+        
         //переход к расписанию уроков по преподавателям+
         private void yrokiPMenu_Click(object sender, RoutedEventArgs e)
         {
-            DateTime dateNow = DateTime.Now;
-            dateMonday = new DateTime();
-            int day_razn = 0;
-            switch (dateNow.DayOfWeek.ToString())
-            {
-                case "Monday": { day_razn = 0; } break;
-                case "Tuesday": { day_razn = -1; } break;
-                case "Wednesday": { day_razn = -2; } break;
-                case "Thursday": { day_razn = -3; } break;
-                case "Friday": { day_razn = -4; } break;
-                case "Saturday": { day_razn = -5; } break;
-                case "Sunday": { day_razn = -6; } break;
-            }
-            dateMonday = dateNow.AddDays(day_razn);
-            showRaspP(dateMonday, dateMonday.AddDays(6));
+            IMenuClick actionReact = new ScheduleOfLessonTeachers(this);
+            actionReact.MenuClick();
         }
-        //вывод расписания по кабинетам+
-        public void showRaspС(DateTime dm, DateTime ds)
-        {
-            m = 0;//число зантий в дне
-            n = 0;//число кабинетов
-            LabelDateRaspС.Content = "Расписание на " + dm.ToShortDateString() + " - " + ds.ToShortDateString();
-            try
-            {
-                NpgsqlConnection con = new NpgsqlConnection(connectionString);
-                con.Open();
-                string sql = "select count(cabid) from cabinet";
-                NpgsqlCommand command = new NpgsqlCommand(sql, con);
-                NpgsqlDataReader reader = command.ExecuteReader();
-                if (reader.HasRows)
-                {
-                    while (reader.Read())
-                    {
-                        n = reader.GetInt32(0);
-                    }
-                }
-                con.Close();
-            }
-            catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
-            if (n == 0) { MessageBox.Show("Нет кабинетов"); return; }
-            try
-            {
-                NpgsqlConnection con = new NpgsqlConnection(connectionString);
-                con.Open();
-                string sql = "select count(lesson_number) from lessons_time";
-                NpgsqlCommand command = new NpgsqlCommand(sql, con);
-                NpgsqlDataReader reader = command.ExecuteReader();
-                if (reader.HasRows)
-                {
-                    while (reader.Read())
-                    {
-                        m = reader.GetInt32(0);
-                    }
-                }
-                con.Close();
-            }
-            catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
-            if (m == 0) { MessageBox.Show("Нет занятий"); return; }
-            HideAll();
-            DeleteRaspButС.IsEnabled = false;
-            ChangeRaspButС.IsEnabled = false;
-            AddRaspButС.IsEnabled = false;
-            raspGridС.Visibility = Visibility.Visible;
-            lbmas = new Label[(m * 7) + 1, n + 2];
-            DataGridUpdater.updateGridRaspС(connectionString, tGс, m, n, lbmas, dm, ds);
-            for (int i = 0; i < (m * 7) + 1; i++)
-            {
-                for (int j = 1; j < n + 2; j++)
-                {
-                    if (i != 0 && j != 1)
-                        lbmas[i, j].MouseDown += Label_MouseDown;
-                }
-
-            }
-        }
+        
         //переход к расписанию уроков по кабинетам+
         private void yrokiCMenu_Click(object sender, RoutedEventArgs e)
         {
-            DateTime dateNow = DateTime.Now;
-            dateMonday = new DateTime();
-            int day_razn = 0;
-            switch (dateNow.DayOfWeek.ToString())
-            {
-                case "Monday": { day_razn = 0; } break;
-                case "Tuesday": { day_razn = -1; } break;
-                case "Wednesday": { day_razn = -2; } break;
-                case "Thursday": { day_razn = -3; } break;
-                case "Friday": { day_razn = -4; } break;
-                case "Saturday": { day_razn = -5; } break;
-                case "Sunday": { day_razn = -6; } break;
-            }
-            dateMonday = dateNow.AddDays(day_razn);
-            showRaspС(dateMonday, dateMonday.AddDays(6));
+            IMenuClick actionReact = new ScheduleOfLessonCabinet(this);
+            actionReact.MenuClick();
         }
         //переход к форме добавления в расписание занятий по кабинетам +
         private void AddRaspButС_Click(object sender, RoutedEventArgs e)
@@ -959,54 +549,20 @@ public int logUser;
             actionReact.ButtonClick();
 
         }
-        //изменение группы в расписании по кабинетам+
+        //изменение группы в расписании по кабинетам/преподам при добавлении+
         private void raspAddGroupK_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ComboBox box = sender as ComboBox;
             if (box.Name == "raspAddGroupK")
             {
-                try
-                {
-                    NpgsqlConnection con = new NpgsqlConnection(connectionString);
-                    con.Open();
-                    string sql = "SELECT title FROM subject where(select courses.subs from courses inner join groups using(courseid) where nazvanie ='" + raspAddGroupK.SelectedItem + "' )  @> ARRAY[subid]";
-                    NpgsqlCommand com = new NpgsqlCommand(sql, con);
-                    NpgsqlDataReader reader = com.ExecuteReader();
-                    if (reader.HasRows)
-                    {
-                        raspAddSubsK.Items.Clear();
-                        while (reader.Read())
-                        {
-                            raspAddSubsK.Items.Add(reader.GetString(0));
-                        }
-                        raspAddSubsK.SelectedIndex = 0;
-                    }
-
-                }
-                catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
+                ISelectionChaged actionReact = new ChangeGroopFromAddCabinetSchedule(this);
+                actionReact.SelectionChanged();
             }
 
             if (box.Name == "raspAddGroupP")
             {
-                try
-                {
-                    NpgsqlConnection con = new NpgsqlConnection(connectionString);
-                    con.Open();
-                    string sql = "SELECT title FROM subject where(select courses.subs from courses inner join groups using(courseid) where nazvanie ='" + raspAddGroupP.SelectedItem + "' )  @> ARRAY[subid]";
-                    NpgsqlCommand com = new NpgsqlCommand(sql, con);
-                    NpgsqlDataReader reader = com.ExecuteReader();
-                    if (reader.HasRows)
-                    {
-                        raspAddSubsP.Items.Clear();
-                        while (reader.Read())
-                        {
-                            raspAddSubsP.Items.Add(reader.GetString(0));
-                        }
-                        raspAddSubsP.SelectedIndex = 0;
-                    }
-
-                }
-                catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
+                ISelectionChaged actionReact = new ChangeGroopFromAddTeacherSchedule(this);
+                actionReact.SelectionChanged();
             }
 
         }
@@ -1016,62 +572,20 @@ public int logUser;
             IButtonClick actionReact = new GoToChangeScheduleCabinet(this);
             actionReact.ButtonClick();
         }
-        //изменение группы в изменении в расписании по кабинетам+
+        //изменение группы в изменении в расписании по кабинетам/преподам+
         private void raspChangeGroupK_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ComboBox box = sender as ComboBox;
             if (box.Name == "raspChangeGroupK")
             {
-                try
-                {
-                    NpgsqlConnection con = new NpgsqlConnection(connectionString);
-                    con.Open();
-                    string sql = "SELECT title FROM subject where(select courses.subs from courses inner join groups using(courseid) where nazvanie ='" + raspChangeGroupK.SelectedItem + "' )  @> ARRAY[subid]";
-                    NpgsqlCommand com = new NpgsqlCommand(sql, con);
-                    NpgsqlDataReader reader = com.ExecuteReader();
-                    if (reader.HasRows)
-                    {
-                        raspChangeSubsK.Items.Clear();
-                        raspChangeSubsK.SelectedIndex = 0;
-                        int i = 0;
-                        while (reader.Read())
-                        {
-                            raspChangeSubsK.Items.Add(reader.GetString(0));
-                            if (reader.GetString(0) == lbmas[iRaspLebale, jRaspLebale].Content.ToString().Split('\n')[0]) { raspChangeSubsK.SelectedIndex = i; }
-                            i++;
-                        }
-
-                    }
-
-                }
-                catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
+                ISelectionChaged actionReact = new ChangeGroopFromChangeCabinetSchedule(this);
+                actionReact.SelectionChanged();
             }
 
             if (box.Name == "raspChangeGroupP")
             {
-                try
-                {
-                    NpgsqlConnection con = new NpgsqlConnection(connectionString);
-                    con.Open();
-                    string sql = "SELECT title FROM subject where(select courses.subs from courses inner join groups using(courseid) where nazvanie ='" + raspChangeGroupP.SelectedItem + "' )  @> ARRAY[subid]";
-                    NpgsqlCommand com = new NpgsqlCommand(sql, con);
-                    NpgsqlDataReader reader = com.ExecuteReader();
-                    if (reader.HasRows)
-                    {
-                        raspChangeSubsP.Items.Clear();
-                        raspChangeSubsP.SelectedIndex = 0;
-                        int i = 0;
-                        while (reader.Read())
-                        {
-                            raspChangeSubsP.Items.Add(reader.GetString(0));
-                            if (reader.GetString(0) == lbmas[iRaspLebale, jRaspLebale].Content.ToString().Split('\n')[0]) { raspChangeSubsP.SelectedIndex = i; }
-                            i++;
-                        }
-
-                    }
-
-                }
-                catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
+                ISelectionChaged actionReact = new ChangeGroopFromChangeTeacherSchedule(this);
+                actionReact.SelectionChanged();
             }
         }
         //переход к форме добавления в роасписание занятий по преподавателю+
@@ -1187,16 +701,14 @@ public int logUser;
         //переход к таблице расходов +
         private void rash_Click(object sender, RoutedEventArgs e)
         {
-            HideAll();
-            TypeRashGrid.Visibility = Visibility.Visible;
-            DataGridUpdater.updateDataGriTypeRash(connectionString, TypeRashDataGrid);
+            IMenuClick actionReact = new TypeOfCostsMenu(this);
+            actionReact.MenuClick();
         }
         //переход к таблице доходов +
         private void doh_Click(object sender, RoutedEventArgs e)
         {
-            HideAll();
-            TypeDohGrid.Visibility = Visibility.Visible;
-            DataGridUpdater.updateDataGriTypeDoh(connectionString,TypeDohDataGrid);
+            IMenuClick actionReact = new TypeOfProfitsMenu(this);
+            actionReact.MenuClick();
         }
         //обновление/сохранение типов дохода +
         private void TypeDohChangeButton_Click(object sender, RoutedEventArgs e)
@@ -1225,34 +737,14 @@ public int logUser;
         //пеня +
         private void penya_Click(object sender, RoutedEventArgs e)
         {
-            try
-            {
-                NpgsqlConnection con = new NpgsqlConnection(connectionString);
-                con.Open();
-                string sql = "select penyaproc from last_pereraschet";
-                NpgsqlCommand com = new NpgsqlCommand(sql,con);
-                DateIn wind = new DateIn();
-                wind.gridProcentPeni.Visibility = Visibility.Visible;
-                wind.constr = connectionString;
-                NpgsqlDataReader reader = com.ExecuteReader();
-                if (reader.HasRows)
-                {
-                    while (reader.Read())
-                    {
-                        wind.PenyaProc.Text = reader.GetDouble(0).ToString();
-                    }
-                }
-                con.Close();
-                wind.Show();
-            }
-            catch { System.Windows.Forms.MessageBox.Show("Не удалось подключиться к базе данных"); return; }
+            IMenuClick actionReact = new FineMenu(this);
+            actionReact.MenuClick();
         }
         //переход к работе с коефициентом выслуги лет+
         private void koefVisl_Click(object sender, RoutedEventArgs e)
         {
-            HideAll();
-            KoefGrid.Visibility = Visibility.Visible;
-            DataGridUpdater.updateDataGridKoef(connectionString, KoefDataGrid);
+            IMenuClick actionReact = new WorkCoeffMenu(this);
+            actionReact.MenuClick();
         }
         //обновление/сохранение коефициента за выслуги лет +
         private void KoefChangeButton_Click(object sender, RoutedEventArgs e)
@@ -1269,9 +761,8 @@ public int logUser;
         //переход к работам обслуживания+
         private void sdelniy_rab_Click(object sender, RoutedEventArgs e)
         {
-            HideAll();
-            ObslWorkGrid.Visibility = Visibility.Visible;
-            DataGridUpdater.updateDataGridRaboty(connectionString, ObslWorkDataGrid);
+            IMenuClick actionReact = new ServiceWorkMenu(this);
+            actionReact.MenuClick();
         }
         //обновление/сохранение работ обслуживания +
         private void ObslWorkChangeButton_Click(object sender, RoutedEventArgs e)
@@ -1288,9 +779,8 @@ public int logUser;
         //переход к должностям+
         private void states_Click(object sender, RoutedEventArgs e)
         {
-            HideAll();
-            StateGrid.Visibility = Visibility.Visible;
-            DataGridUpdater.updateDataGridStates(connectionString,StateDataGrid);
+            IMenuClick actionReact = new PositionMenu(this);
+            actionReact.MenuClick();
         }
         //переход к добавлению должности+
         private void StateAddButton_Click(object sender, RoutedEventArgs e)
@@ -1335,14 +825,8 @@ public int logUser;
         //переход к штату +
         private void shtat_Click(object sender, RoutedEventArgs e)
         {
-            HideAll();
-            ShtatGrid.Visibility = Visibility.Visible;
-
-            ShtatFiltrCmbx.SelectedIndex = 0;
-
-
-            filtr.sql = "SELECT shtat.shtatid, sotrudniki.fio, array_to_string(stavky,'_') as stavky,array_to_string(obem,'_') as obem   FROM shtat inner join sotrudniki using(sotrid)";
-            DataGridUpdater.updateDataGridShtat(connectionString, filtr.sql, ShtatDataGrid);
+            IMenuClick actionReact = new StaffMenu(this);
+            actionReact.MenuClick();
         }
         //добавление сотрдуника в таблицу штата  +
         private void addToShtat_Click(object sender, RoutedEventArgs e)
@@ -1372,97 +856,14 @@ public int logUser;
         //переход к штатному расписанию+
         private void shtatRasp_Click(object sender, RoutedEventArgs e)
         {
-            HideAll();
-            ShtatRaspGrid.Visibility = Visibility.Visible;
-            for (int i = 0; i < 7; i++)
-            {
-                for (int j = 0; j < 7; j++)
-                {
-                    lbmas_shtatRasp[i, j] = new Label();
-                    lbmas_shtatRasp[i, j].Content = "";
-                    lbmas_shtatRasp[i, j].FontSize = 16;
-                    lbmas_shtatRasp[i, j].HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center;
-                    lbmas_shtatRasp[i, j].VerticalContentAlignment = System.Windows.VerticalAlignment.Center;
-                    lbmas_shtatRasp[i, j].Name = "name_" +i+"_"+j;
-                    lbmas_shtatRasp[i, j].BorderThickness = new Thickness(2);
-                    lbmas_shtatRasp[i, j].BorderBrush = Brushes.Black;
-                    lbmas_shtatRasp[i, j].MouseDown += Label_shtatRasp_MouseDown;
-                }
-            
-            }
-
-            try
-            {
-                NpgsqlConnection con = new NpgsqlConnection(connectionString);
-                con.Open();
-                string sql = "select count(sotrid) from shtat";
-                NpgsqlCommand com = new NpgsqlCommand(sql, con);
-                NpgsqlDataReader reader = com.ExecuteReader();
-                int i = 0;
-                if (reader.HasRows)
-                {
-                    while (reader.Read())
-                    {
-                        chbxMas_stateRasp = new CheckBox[reader.GetInt32(0)];
-                    }
-                }
-                con.Close();
-            }
-            catch { System.Windows.Forms.MessageBox.Show("Не удалось подключиться к базе данных"); return; }
-
-            DataGridUpdater.updateGridShtatRasp(connectionString, MonthGrid, ShtatRaspSotrpGrid, lbmas_shtatRasp, chbxMas_stateRasp, ShtatRaspMonthYearLabel, date);
+            IMenuClick actionReact = new ScheduleOfStaff(this);
+            actionReact.MenuClick();
         }
         //клик по лейблу штатного расписания +
-        private void Label_shtatRasp_MouseDown(object sender, MouseButtonEventArgs e)
+        public void Label_shtatRasp_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            for (int i = 0; i < 7; i++)
-            {
-                for (int j = 0; j < 7; j++)
-                {
-                    lbmas_shtatRasp[i, j].Background = Brushes.White;
-                }
-            }
-            
-            Label lb = sender as Label;
-            int index_i = Convert.ToInt32(lb.Name.Split('_')[1]);
-            int index_j = Convert.ToInt32(lb.Name.Split('_')[2]);
-            if (index_i != 0 && lb.Content.ToString() != "")
-            {
-                lbmas_shtatRasp[index_i, index_j].Background = Brushes.Aqua;
-                ShtatRaspSaveBut.IsEnabled = true;
-                for (int j = 0; j < chbxMas_stateRasp.Length; j++)
-                {
-                    chbxMas_stateRasp[j].IsChecked = false; 
-
-                }
-                try
-                {
-                    DateTime dateToSelect = new DateTime(date.Year, date.Month, Convert.ToInt32(lb.Content.ToString()));
-                    NpgsqlConnection con = new NpgsqlConnection(connectionString);
-                    con.Open();
-                    string sql = "select array_to_string(shtatid,'_') from shtatrasp where date='" + dateToSelect.ToShortDateString().Replace('.', '-') + "'";
-                    NpgsqlCommand com = new NpgsqlCommand(sql, con);
-                    NpgsqlDataReader reader = com.ExecuteReader();
-                    if (reader.HasRows)
-                    {
-                        while (reader.Read())
-                        {
-                            string[] strSotrid = reader.GetString(0).Split('_');
-                            for (int i = 0; i < strSotrid.Length; i++)
-                            {
-                                for (int j = 0; j < chbxMas_stateRasp.Length; j++)
-                                {
-                                    if (strSotrid[i] == chbxMas_stateRasp[j].Name.Split('_')[1]) { chbxMas_stateRasp[j].IsChecked = true; }
-                                
-                                }
-                            }
-                        }
-                    
-                    }
-                    con.Close();
-                }
-                catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
-            }
+            IMousDown actionReact = new LabelClickFromStaffSchedule(this, sender);
+            actionReact.MousDown();
         }
         //переход к предыдщуему месяцу+
         private void ShtatRaspPrevBut_Click(object sender, RoutedEventArgs e)
@@ -1580,173 +981,29 @@ public int logUser;
                 filtr.CreateShtatFiltrSecond(FiltrShtatSotr);
             }
         }
-        ////переход к гриду отчета кассы+
+        //переход к гриду отчета кассы+
         private void kassaMenu_Click(object sender, RoutedEventArgs e)
         {
-            HideAll();
-            kassaGrid.Visibility = Visibility.Visible;
-            fda.CreateKassaDAFiltr(pD);
-            fdb.CreateKassaDBFiltr(tD);
-            fra.CreateKassaRAFiltr(pR);
-            frb.CreateKassaRBFiltr(tR);
-            fda.sql = "SELECT data,title,sum,fio  FROM dodhody inner join typedohod using(idtype)";
-            fra.sql = "SELECT data,title,fio,summ  FROM rashody inner join typerash using(typeid) inner join sotrudniki using(sotrid)";
-            DataGridUpdater.updateGridKassa(connectionString, KassaDodohGrid, KassaRashodGrid, kassaTitleLabel, KassaItogoDohod, KassaItogoRashod, kassaAllDohodLabel,fda.sql,fra.sql);
+            IMenuClick actionReact = new CashboxReportMenu(this);
+            actionReact.MenuClick();
         }
         //+
         private void SpiskiVyplatMenu_Click(object sender, RoutedEventArgs e)
         {
-            DataGridUpdater.updateGridStatistica(connectionString, statGraf);
-            HideAll();
-            StatisticaGrid.Visibility = Visibility.Visible;
+            IMenuClick actionReact = new StatisticMenu(this);
+            actionReact.MenuClick();
         }
         //+
         private void StatistikaMenu_Click(object sender, RoutedEventArgs e)
         {
-            HideAll();
-            ZpOthcetGrid.Visibility = Visibility.Visible;
-            ZPOtchetVivodGrid.ColumnDefinitions.Clear();
-            ZPOtchetVivodGrid.Children.Clear();
-
-            ZPOtchetLabel.Content = "Отчёт 'Списки выплат' на " + DateTime.Now.ToShortDateString();
-
-            ColumnDefinition cmd = new ColumnDefinition();
-            cmd.Width = new GridLength(200);
-            Grid gr = new Grid();
-            Grid.SetColumn(gr, 0);
-            ZPOtchetVivodGrid.ColumnDefinitions.Add(cmd);
-            ZPOtchetVivodGrid.Children.Add(gr);
-
-            try
-            {
-                NpgsqlConnection con = new NpgsqlConnection(connectionString);
-                con.Open();
-                string sql = "select  count(fio) from sotrudniki";
-                NpgsqlCommand com = new NpgsqlCommand(sql, con);
-                NpgsqlDataReader reader = com.ExecuteReader();
-                if (reader.HasRows)
-                {
-                    while (reader.Read())
-                    {
-                        for (int i = 0; i < reader.GetInt32(0) + 3; i++)
-                        {
-                            RowDefinition cmdGr = new RowDefinition();
-                            cmdGr.Height = new GridLength(50);
-                            gr.RowDefinitions.Add(cmdGr);
-                        }
-                    }
-
-                }
-                con.Close();
-
-            }
-            catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
-
-            Label mesLb = new Label();
-            mesLb.Content = "Месяц";
-            mesLb.BorderBrush = Brushes.Black;
-            mesLb.BorderThickness = new Thickness(2);
-
-            Label zpLb = new Label();
-            zpLb.Content = "ЗП";
-            zpLb.BorderBrush = Brushes.Black;
-            zpLb.BorderThickness = new Thickness(2);
-
-            Label itogLb = new Label();
-            itogLb.Content = "Итого";
-            itogLb.BorderBrush = Brushes.Black;
-            itogLb.BorderThickness = new Thickness(2);
-
-            Grid.SetRow(mesLb, 0);
-            Grid.SetRow(zpLb, 1);
-            Grid.SetRow(itogLb, gr.RowDefinitions.Count - 1);
-
-            gr.Children.Add(mesLb); gr.Children.Add(zpLb); gr.Children.Add(itogLb);
-
-            //заполнение первого грида
-            ArrayList sotrList = new ArrayList();
-            try
-            {
-                NpgsqlConnection con = new NpgsqlConnection(connectionString);
-                con.Open();
-                string sql = "select  fio,sotrid from sotrudniki order by fio";
-                NpgsqlCommand com = new NpgsqlCommand(sql, con);
-                NpgsqlDataReader reader = com.ExecuteReader();
-                if (reader.HasRows)
-                {
-                    int i = 2;
-                    while (reader.Read())
-                    {
-                        Label sotrLb = new Label();
-                        sotrLb.Content = reader.GetString(0);
-                        sotrLb.BorderBrush = Brushes.Black;
-                        sotrLb.BorderThickness = new Thickness(2);
-                        Grid.SetRow(sotrLb, i);
-                        gr.Children.Add(sotrLb);
-                        sotrList.Add(reader.GetInt32(1));
-                        i++;
-                    }
-
-                }
-                con.Close();
-
-            }
-            catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
-            //получение дат (мемсяц/год из таблиц начислений)
-
-            ArrayList dateList = new ArrayList();
-            try
-            {
-                NpgsqlConnection con1 = new NpgsqlConnection(connectionString);
-                con1.Open();
-                string sql1 = "select payday from nachisl order by payday";
-                NpgsqlCommand com1 = new NpgsqlCommand(sql1, con1);
-                NpgsqlDataReader reader1 = com1.ExecuteReader();
-                if (reader1.HasRows)
-                {
-                    while (reader1.Read())
-                    {
-                        int month = reader1.GetDateTime(0).Month;
-                        int year = reader1.GetDateTime(0).Year;
-
-
-
-                        DateTime dd = new DateTime(year, month, 1);
-                        if (dateList.IndexOf(DateTimeAxis.ToDouble(dd)) == -1) dateList.Add(DateTimeAxis.ToDouble(dd));
-                    }
-
-                }
-                con1.Close();
-
-            }
-            catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
-
-            for (int i = 0; i < dateList.Count; i++)
-            {
-
-                ColumnDefinition cmdd = new ColumnDefinition();
-                cmdd.Width = new GridLength(600);
-                ZPOtchetVivodGrid.ColumnDefinitions.Add(cmdd);
-                Grid monthGrid = new Grid();
-                for (int j = 0; j < 4; j++)
-                {
-                    ColumnDefinition cmdd2 = new ColumnDefinition();
-                    monthGrid.ColumnDefinitions.Add(cmdd2);
-                }
-                DataGridUpdater.updateGridSpisciVyplat(connectionString, DateTimeAxis.ToDateTime(Convert.ToDouble(dateList[i])), sotrList, monthGrid);
-                Grid.SetColumn(monthGrid, i + 1);
-                ZPOtchetVivodGrid.Children.Add(monthGrid);
-            }
+            IMenuClick actiomReact = new PaymentListMenu(this);
+            actiomReact.MenuClick();
         }
         //клилк по меню отчётов
         private void MenuOtchety_Click(object sender, RoutedEventArgs e)
         {
-            MenuRolesD.BorderBrush = null;
-            raspMenu.BorderBrush = null;
-            sotrMenu.BorderBrush = null;
-            obuchMenu.BorderBrush = null;
-            skidki.BorderBrush = null;
-            MenuOtchety.BorderBrush = Brushes.DarkRed;
+            IMenuClick actiomReact = new ReportMenu(this);
+            actiomReact.MenuClick();
         }
         //применение фильтров для кассы
         private void Button_Click_1(object sender, RoutedEventArgs e)
