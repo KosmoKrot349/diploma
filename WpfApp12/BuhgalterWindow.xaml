@@ -1,0 +1,704 @@
+﻿<Window x:Class="WpfApp12.BuhgalterWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:oxy="http://oxyplot.org/wpf"
+        xmlns:local="clr-namespace:WpfApp12"
+        mc:Ignorable="d"
+        Title="BuhgalterWindow" Height="300" Width="300">
+    <Grid Name="glGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="15pt"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <!--меню бухаглтера-->
+        <Menu Name="buhgMenu"  Grid.Row="0">
+            <MenuItem Name="MenuRolesB" Header="Права" ToolTip="Нажмите для выбора доступной Вам роли" Click="MenuRolesB_Click" >
+                <MenuItem  Name="AdminRoleB" Header="Админ" Click="AdminRoleB_Click" ToolTip="Нажмите для перехода к роли администратора"/>
+                <MenuItem  Name="BuhgRoleB" Header="Бухгалтер" Click="BuhgRoleB_Click" ToolTip="Роль бухгалтера уже выбрана"/>
+                <MenuItem  Name="DirectorRoleB" Header="Директор" Click="DirectorRoleB_Click" ToolTip="Нажмите для перехода к роли директора"/>
+            </MenuItem>
+            <MenuItem Name="Dohody" Header="Доходы" Click="Dohody_Click">
+                <MenuItem Header="Оплата за обучение">
+                    <MenuItem Name="OplataSlysh" Header="Оплата слушателя" Click="OplataSlysh_Click" />
+                    <MenuItem Name="OplataDolgMenu" Header="Оплата за прошлые года" Click="OplataDolgMenu_Click"  />
+                </MenuItem>
+                
+           
+                <MenuItem Name="DodhodyTable" Header="Таблица доходов" Click="DodhodyTable_Click"/>
+            </MenuItem>
+            <MenuItem Name="Rashody" Header="Расходы" Click="Rashody_Click">
+                <MenuItem Name="ZP" Header="Начисления ЗП" Click="ZP_Click" />
+                <MenuItem Name="RashodyTable" Header="Таблица расходов" Click="RashodyTable_Click"/>
+            </MenuItem>
+            <MenuItem Name="Nalogi" Header="Налоги" Click="Nalogi_Click" />
+            <MenuItem Header="Отчёты" Name="otchetMenu" Click="otchetMenu_Click">
+                <MenuItem  Header="Касса" Click="MenuItem_Click" />
+                <MenuItem  Header="Списки выплат" Click="MenuItem_Click_2" />
+                <MenuItem  Header="Статистика доходов/расходов" Click="MenuItem_Click_1" />
+            </MenuItem>
+
+            <MenuItem Name="Leave" Header="Выйти" ToolTip="Нажмите что бы выйти из учётной записи" Click="Leave_Click" />
+        </Menu>
+        <!--грид окна приветсвия-->
+        <Grid Name="helloGrdi" Grid.Row="1" >
+            <TextBlock  TextWrapping="Wrap" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"  Name="hello_label" />
+        </Grid>
+
+        <!--грид списки выплат -->
+        <Grid Name="ZpOthcetGrid"  Grid.Row="1" Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="8*"/>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Name="ZPOtchetLabel" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
+            <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
+                <Grid Name="ZPOtchetVivodGrid">
+
+                </Grid>
+            </ScrollViewer>
+        </Grid>
+
+        <!--грид статистика -->
+        <Grid Name="StatisticaGrid"  Grid.Row="1" Visibility="Collapsed">
+            <oxy:PlotView Name="statGraf"/>
+        </Grid>
+
+
+
+        <!--грид касса -->
+        <Grid Name="kassaGrid"  Grid.Row="1" Visibility="Collapsed">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="7*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30pt"/>
+                    <RowDefinition Height="30pt"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="30pt"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="30pt"/>
+                </Grid.RowDefinitions>
+                <Label Content="Фильтр для доходов" Grid.Row="0" />
+                <Label Content="Кто внёс" Grid.Row="1" />
+                <ScrollViewer Grid.Row="2" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
+                    <Grid Name="pD">
+                    </Grid>
+                </ScrollViewer>
+                <Label Content="Тип дохода" Grid.Row="3" />
+                <ScrollViewer Grid.Row="4" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
+                    <Grid Name="tD">
+                    </Grid>
+                </ScrollViewer>
+                <Button Content="Применить" Grid.Row="5" Name="PrimFKD" Click="PrimFKD_Click" />
+            </Grid>
+
+
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30pt"/>
+                    <RowDefinition Height="30pt"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="30pt"/>
+                    <RowDefinition/>
+                    <RowDefinition Height="30pt"/>
+                </Grid.RowDefinitions>
+                <Label Content="Фильтр для расходов" Grid.Row="0" />
+                <Label Content="Кто получил" Grid.Row="1" />
+                <ScrollViewer Grid.Row="2" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
+                    <Grid Name="pR">
+                    </Grid>
+                </ScrollViewer>
+                <Label Content="Тип расхода" Grid.Row="3" />
+                <ScrollViewer Grid.Row="4" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
+                    <Grid Name="tR">
+                    </Grid>
+                </ScrollViewer>
+                <Button Content="Применить"  Name="PrimFKR"  Grid.Row="5"  Click="PrimFKD_Click"/>
+            </Grid>
+
+
+            <Grid Grid.Column="1"  >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.5*"/>
+                    <RowDefinition Height="0.5*"/>
+                    <RowDefinition Height="3*"/>
+                    <RowDefinition Height="0.5*"/>
+                    <RowDefinition Height="0.5*"/>
+                </Grid.RowDefinitions>
+
+                <Label Name="kassaTitleLabel" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"   BorderThickness="2" BorderBrush="Black" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
+
+                <Label Content="Доходы" Grid.Row="1" Grid.Column="0" BorderThickness="2" BorderBrush="Black" FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
+                <Label Content="Расходы" Grid.Row="1" Grid.Column="1"  BorderThickness="2" BorderBrush="Black"  FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
+
+                   
+                <ScrollViewer Grid.Row="2" Grid.Column="0" >
+                    <Grid  Name="KassaDodohGrid">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+                </ScrollViewer>
+                <ScrollViewer Grid.Row="2" Grid.Column="1">
+                    <Grid  Name="KassaRashodGrid">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                    </Grid>
+                </ScrollViewer>
+
+                <Label Content="Итого:" Name="KassaItogoDohod" Grid.Row="3" Grid.Column="0"  BorderThickness="2" BorderBrush="Black"  FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
+                <Label Content="Итого:" Name="KassaItogoRashod" Grid.Row="3" Grid.Column="1"  BorderThickness="2" BorderBrush="Black"  FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
+
+                <Label Name="kassaAllDohodLabel" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"  BorderThickness="2" BorderBrush="Black" FontSize="20" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  />
+                
+            </Grid>
+            
+        </Grid>
+
+        <!--грид нет долгов -->
+        <Grid Name="NoDolgGrdi" Grid.Row="1" Visibility="Collapsed" >
+            <TextBlock  TextWrapping="Wrap" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center" Text="У слушателей на данный момент нет долгов за прошлые года." />
+        </Grid>
+
+
+        
+
+        <!--грид долгов-->
+        <Grid Name="DolgGrid" Grid.Row="1" Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30pt"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="30pt"/>
+            </Grid.RowDefinitions>
+
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.5*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="0.5*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1.5*"/>
+                    <ColumnDefinition Width="1.5*"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Content="Группа: " FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Right"  />
+                <ComboBox Name="GroupsDolg" Grid.Column="1" SelectionChanged="Groups_SelectionChanged" />
+                <Label Grid.Column="2" Content="Слушатель: " FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Right"  />
+                <ComboBox Name="ListenerDolg" Grid.Column="3" SelectionChanged="Listener_SelectionChanged" />
+                <Label Grid.Column="4" Name="DataPerehoda" Content="Data Perehoda" FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  />
+                <Label Grid.Column="5" Name="isStopDolg" FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  />
+            </Grid>
+            <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" Grid.Row="1" Grid.Column="1">
+                <Grid >
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="200"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Name="MonthOplGridDolg" Grid.Column="1">
+                        <Grid.ColumnDefinitions>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50" />
+                            <RowDefinition Height="50" />
+                            <RowDefinition Height="50" />
+                            <RowDefinition Height="50" />
+                            <RowDefinition Height="50" />
+                            <RowDefinition Height="50" />
+                            <RowDefinition Height="50" />
+                        </Grid.RowDefinitions>
+                    </Grid>
+
+                    <Grid Name="MonthOplGrid2Dolg" Grid.Column="0">
+
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50" />
+                            <RowDefinition Height="50" />
+                            <RowDefinition Height="50" />
+                            <RowDefinition Height="50" />
+                            <RowDefinition Height="50" />
+                            <RowDefinition Height="50" />
+                            <RowDefinition Height="50" />
+                        </Grid.RowDefinitions>
+                        <Label Name="MonthDolg" Content="Месяц" BorderBrush="Black" BorderThickness="2" Grid.Column="0" Grid.Row="0" />
+                        <Label Name="OplataDolg" Content="Оплата за месяц" BorderBrush="Black" BorderThickness="2" Grid.Column="0" Grid.Row="1" />
+                        <Label Name="YjeOplachenoDolg" BorderBrush="Black" Content="Уже оплачено" BorderThickness="2" Grid.Column="0" Grid.Row="2" />
+                        <Label Name="SkidkiPriOplateDolg" BorderBrush="Black" Content="Скидки при оплате на перед" BorderThickness="2" Grid.Column="0" Grid.Row="3" />
+                        <Label Name="PenyaDolg" BorderBrush="Black" BorderThickness="2" Content="Пеня" Grid.Column="0" Grid.Row="4" />
+                        <Label Name="NadoZaplotitDolg" BorderBrush="Black" BorderThickness="2" Content="Необходимо заплатить" Grid.Column="0" Grid.Row="5" />
+                        <Label Name="VnesNowDolg" BorderBrush="Black" BorderThickness="2" Content="Внесёно" Grid.Column="0" Grid.Row="6" />
+                    </Grid>
+
+                </Grid>
+            </ScrollViewer>
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" FontSize="16" Content="Оплата" Name="AddPAyDolg" Click="AddPAyDolg_Click"  />
+                <Button Grid.Column="1" FontSize="16" Content="Удалить запись" Name="deleteDolg" Click="deleteDolg_Click" />
+               
+            </Grid>
+        </Grid>
+
+
+
+        <!--грид начислений-->
+        <Grid Name="GlNachGrid" Grid.Row="1" Visibility="Collapsed">
+            <Grid.ColumnDefinitions  >
+                <ColumnDefinition Width="4*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions  >
+                <RowDefinition Height="3*"/>
+                <RowDefinition Height="30pt"/>
+            </Grid.RowDefinitions>
+
+            <!--грид с таблицей начилений-->
+                <Grid Name="NachGrid" Grid.Column="0" Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30pt"/>
+                    <RowDefinition Height="3*"/>
+                </Grid.RowDefinitions>
+                
+                <Grid>
+                    <Grid.ColumnDefinitions >
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="3*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Name="NachMonthPrev" Content="Предыдущий" FontSize="16" Grid.Column="0" Grid.Row="0" Click="NachMonthPrev_Click" />
+                    <Label Grid.Row="0" Grid.Column="1" Name="NachMonthLabel" FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
+                    <Button Name="NachMonthNext" Content="Следующий"  FontSize="16" Grid.Column="2" Grid.Row="0" Click="NachMonthNext_Click" />
+                </Grid>
+                
+                    <DataGrid Name="NachDataGrid" IsReadOnly="true" Grid.Column="0" Grid.Row="1" ItemsSource="{Binding}" AutoGenerateColumns="False" SelectedCellsChanged="NachDataGrid_SelectedCellsChanged">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Visibility="Collapsed" Header="ID" Binding="{Binding nachid}" Width="10*" />
+                            <DataGridTextColumn Header="ФИО" Binding="{Binding fio}" Width="10*" />
+                            <DataGridTextColumn Header="ЗП преподавателя" Binding="{Binding prepzp}" Width="10*" />
+                        <DataGridTextColumn Header="ЗП штатная" Binding="{Binding shtatzp}" Width="10*" />
+                        <DataGridTextColumn Header="Военный сбор" Binding="{Binding vs}" Width="10*" />
+                            <DataGridTextColumn Header="ФСС" Binding="{Binding fss}" Width="10*" />
+                            <DataGridTextColumn Header="НДФЛ" Binding="{Binding ndfl}" Width="10*" />
+                            <DataGridTextColumn Header="Всего ЗП" Binding="{Binding allzp}" Width="10*" />
+                            <DataGridTextColumn Header="Выплачено ЗП" Binding="{Binding viplacheno}" Width="10*" />
+                            <DataGridTextColumn Header="К оплате ЗП" Binding="{Binding topay}" Width="10*" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                
+            </Grid>
+
+            <Grid Grid.Column="1" Grid.Row="0" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30pt"/>
+                    <RowDefinition Height="6*"/>
+                </Grid.RowDefinitions>
+                <!--грид с таблицей сотрудников-->
+                <Label Content="Выберите сотрудников" FontSize="14" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Grid.Row="0" />
+                <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" Grid.Row="1" >
+                    <Grid Name="NachSotrGrid" >
+
+                    </Grid>
+                </ScrollViewer>
+            </Grid>
+
+            <!--конпки-->
+            <Grid Grid.Row="1" Grid.Column="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Button Name="NachAddBut" FontSize="16" Content="Начислить" Grid.Column="0" Click="NachAddBut_Click" />
+                <Button Name="ViplataBut" FontSize="16" Content="Выплатить" Grid.Column="1" Click="ViplataBut_Click" />
+            </Grid>
+
+            <Button Name="NuchSelectAllSotrBut" FontSize="16" Content="Выбрать всех" Grid.Column="1" Grid.Row="1" Click="NuchSelectAllSotrBut_Click" />
+     
+        </Grid>
+
+        <!--грид налогов-->
+        <Grid Name="NalogiGrid" Grid.Row="1" Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"/>
+                <RowDefinition Height="1.5*"/>
+                <RowDefinition Height="30pt"/>
+            </Grid.RowDefinitions>
+            <ScrollViewer Grid.Row="0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30pt"/>
+                        <RowDefinition Height="30pt"/>
+                        <RowDefinition Height="30pt"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Column="0" FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Grid.Row="0"  Content="Отчисления в фонд социального страхования"/>
+                    <Label Grid.Column="0" FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Grid.Row="1"  Content="Военный сбор"/>
+                    <Label Grid.Column="0" FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Grid.Row="2"  Content="Налог с дохода физических лиц"/>
+
+                    <TextBox Name="FondSotsStrah" Grid.Column="1" Grid.Row="0" PreviewTextInput="TextBox_PreviewTextInput"/>
+                    <TextBox Name="VoenSbor" Grid.Column="1" Grid.Row="1" PreviewTextInput="TextBox_PreviewTextInput"/>
+                    <TextBox Name="NDFL" Grid.Column="1" Grid.Row="2" PreviewTextInput="TextBox_PreviewTextInput"/>
+                    
+                </Grid>
+            </ScrollViewer>
+            <Canvas Grid.Row="1" Background="LightGray" />
+            <Button Name="NalogiSave" Content="Сохранить" FontSize="16" ToolTip="Нажмите для сохранения процентов налогов" Grid.Row="2" Click="NalogiSave_Click" />
+
+        </Grid>
+
+        <!--грид изменения расхода-->
+        <Grid Name="RashodyChangeGrid" Grid.Row="1" Visibility="Collapsed">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30pt"/>
+                <RowDefinition Height="30pt"/>
+                <RowDefinition Height="30pt"/>
+                <RowDefinition Height="30pt"/>
+                <RowDefinition Height="30pt"/>
+                <RowDefinition Height="30pt" />
+                <RowDefinition />
+                <RowDefinition Height="30pt"/>
+            </Grid.RowDefinitions>
+            <Label Content="Изменение расхода"  HorizontalContentAlignment="Center"  VerticalContentAlignment="Center" FontSize="20" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0"/>
+
+            <Label Content="Тип расхода" FontSize="16"  HorizontalContentAlignment="Right"  VerticalContentAlignment="Center"  Grid.Column="0" Grid.Row="1" />
+            <Label Content="Кому выданны деньги" FontSize="16"  HorizontalContentAlignment="Right"  VerticalContentAlignment="Center" Grid.Column="0" Grid.Row="2" />
+            <Label Content="Размер расхода" FontSize="16"  HorizontalContentAlignment="Right"  VerticalContentAlignment="Center" Grid.Column="0" Grid.Row="3" />
+            <Label Content="Дата выдачи" FontSize="16"  HorizontalContentAlignment="Right"  VerticalContentAlignment="Center" Grid.Column="0" Grid.Row="4" />
+            <Label Content="Уточнение" FontSize="16"  HorizontalContentAlignment="Right"  VerticalContentAlignment="Center" Grid.Column="0" Grid.Row="5" />
+
+            <ComboBox Name="RashodyChangeType" Grid.Column="1" Grid.Row="1" />
+            <ComboBox Name="RashodyChangeFIO" Grid.Column="1" Grid.Row="2" />
+            <TextBox Name="RashodyChangeSum"  Grid.Column="1" Grid.Row="3" PreviewTextInput="TextBox_PreviewTextInput"/>
+            <DatePicker Name="RashodyChangeDate"  Grid.Column="1" Grid.Row="4"/>
+            <TextBox Name="RashodyChangeDesc"  Grid.Column="1" Grid.Row="5" />
+
+            <Button Name="RashodyChangeButton" FontSize="16" Content="Сохранить"  ToolTip="Нажмите для изменения расхода" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="8" Click="RashodyChangeButton_Click" />
+
+        </Grid>
+
+
+        <!--грид добавления расхода-->
+        <Grid Name="RashodyAddGrid" Grid.Row="1" Visibility="Collapsed">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30pt"/>
+                <RowDefinition Height="30pt"/>
+                <RowDefinition Height="30pt"/>
+                <RowDefinition Height="30pt"/>
+                <RowDefinition Height="30pt"/>
+                <RowDefinition Height="30pt" />
+                <RowDefinition />
+                <RowDefinition Height="30pt"/>
+            </Grid.RowDefinitions>
+            <Label Content="Добавление расхода" FontSize="20" HorizontalContentAlignment="Center"  VerticalContentAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0"/>
+
+            <Label Content="Тип расхода" FontSize="16"  HorizontalContentAlignment="Right"  VerticalContentAlignment="Center" Grid.Column="0" Grid.Row="1" />
+            <Label Content="Кому выданны деньги"  FontSize="16"  HorizontalContentAlignment="Right"  VerticalContentAlignment="Center" Grid.Column="0" Grid.Row="2" />
+            <Label Content="Размер расхода" FontSize="16"  HorizontalContentAlignment="Right"  VerticalContentAlignment="Center" Grid.Column="0" Grid.Row="3" />
+            <Label Content="Дата выдачи" FontSize="16"  HorizontalContentAlignment="Right"  VerticalContentAlignment="Center" Grid.Column="0" Grid.Row="4" />
+            <Label Content="Уточнение" FontSize="16"  HorizontalContentAlignment="Right"  VerticalContentAlignment="Center" Grid.Column="0" Grid.Row="5" />
+
+            <ComboBox Name="RashodyAddType" Grid.Column="1" Grid.Row="1" />
+            <ComboBox Name="RashodyAddFIO" Grid.Column="1" Grid.Row="2" />
+            <TextBox Name="RashodyAddSum"  Grid.Column="1" Grid.Row="3" PreviewTextInput="TextBox_PreviewTextInput"/>
+            <DatePicker Name="RashodyAddDate"  Grid.Column="1" Grid.Row="4"/>
+            <TextBox Name="RashodyAddDesc"  Grid.Column="1" Grid.Row="5" />
+
+            <Button Name="RashodyAddButton" FontSize="16" Content="Добавить"  ToolTip="Нажмите для добавления нового расхода" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="8" Click="RashodyAddButton_Click"     />
+
+        </Grid>
+        
+        <!--грид расходов-->
+        <Grid Name="RoshodyGrid" Grid.Row="1" Visibility="Collapsed">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30pt"/>
+                <RowDefinition/>
+                <RowDefinition Height="30pt"/>
+            </Grid.RowDefinitions>
+
+
+            <Grid Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0">
+                    <Grid.ColumnDefinitions >
+                        <ColumnDefinition Width="5*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
+                <ScrollViewer Grid.Column="0"  HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
+                        <Grid Name="FiltrGridRashody" >
+                    </Grid>
+                </ScrollViewer>
+                <Button Content="Применить" FontSize="16" Name="FiltrRashodyButton" Grid.Column="1" Click="FiltrButton_Click"/>
+                </Grid>
+
+
+
+            <DataGrid ToolTip="Таблица в которой отображаются расходы. Для работы с ними выберете одну из записей кликнув н неё, после чего выберете одно из действий ниже." Name="RoshodyDataGrid" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" IsReadOnly="true" ItemsSource="{Binding}" AutoGenerateColumns="False" SelectedCellsChanged="NachDataGrid_SelectedCellsChanged">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Visibility="Collapsed" Header="ID" Binding="{Binding rashid}" Width="6*" />
+                    <DataGridTextColumn Header="Тип расхода" Binding="{Binding title}" Width="6*" />
+                    <DataGridTextColumn Header="Кому выдан" Binding="{Binding fio}" Width="6*" />
+                    <DataGridTextColumn Header="Сумма" Binding="{Binding summ}" Width="6*" />
+                    <DataGridTextColumn Header="Дата" Binding="{Binding data}" Width="6*" />
+                    <DataGridTextColumn Header="Уточнение" Binding="{Binding description}" Width="6*" />
+                </DataGrid.Columns>
+            </DataGrid>
+            <Button Name="RashDeleteButton" FontSize="16" Content="Удалить" ToolTip="Нажмите для удаления выбранного расхода" Grid.Column="0"  Grid.Row="2" Click="RashDeleteButton_Click"    />
+            <Button Name="RashChangeButton" FontSize="16" Content="Изменить" ToolTip="Нажмите для изменения выбранного расхода" Grid.Column="1" Grid.Row="2" Click="RashChangeButton_Click"     />
+            <Button Name="RashAddButton" FontSize="16" Content="Добавить"  ToolTip="Нажмите для добавления нового расхода" Grid.Column="2" Grid.Row="2" Click="RashAddButton_Click" />
+
+        </Grid>
+        
+        
+        <!--грид изменения дохода-->
+        <Grid Name="DohodyChangeGrid" Grid.Row="1" Visibility="Collapsed">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30pt"/>
+                <RowDefinition Height="30pt"/>
+                <RowDefinition Height="30pt"/>
+                <RowDefinition Height="30pt"/>
+                <RowDefinition Height="30pt"/>
+                <RowDefinition />
+                <RowDefinition Height="30pt"/>
+            </Grid.RowDefinitions>
+            <Label Content="Изменение дохода" FontSize="20" HorizontalContentAlignment="Center"  VerticalContentAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0"/>
+
+            <Label Content="Тип дохода" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" FontSize="16" Grid.Column="0" Grid.Row="1" />
+            <Label Content="Размер дохода" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" FontSize="16" Grid.Column="0" Grid.Row="2" />
+            <Label Content="Дата получения дохода" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" FontSize="16" Grid.Column="0" Grid.Row="3" />
+            <Label Content="Кто внес" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" FontSize="16" Grid.Column="0" Grid.Row="4" />
+
+            <ComboBox Name="DohodyChangeType" Grid.Column="1" Grid.Row="1" />
+            <TextBox Name="DohodyChangeSum"  Grid.Column="1" Grid.Row="2" PreviewTextInput="TextBox_PreviewTextInput"/>
+            <DatePicker Name="DohodyChangeDate"  Grid.Column="1" Grid.Row="3"/>
+
+            <Grid Grid.Column="1" Grid.Row="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+              
+                <ComboBox Name="dohChKtoVnesCmF" Grid.Column="0" SelectionChanged="Groups_SelectionChanged" >
+                    <ComboBoxItem Content="Сотрудники"/>
+                    <ComboBoxItem Content="Слушатели"/>
+                    <ComboBoxItem Content="Другое"/>
+                </ComboBox>
+                <ComboBox Name="dohChKtoVnesCm" Grid.Column="1" SelectionChanged="dohAddKtoVnesCm_SelectionChanged" />
+                <TextBox Name="dohChKtoVnesTb" IsEnabled="False" Grid.Column="2" />
+            </Grid>
+
+            <Button Name="DohodyChangeButton" FontSize="16" Content="Изменить"  ToolTip="Нажмите для изменения дохода" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="6" Click="DohodyChangeButton_Click" />
+
+        </Grid>
+
+
+        <!--грид добавления дохода-->
+        <Grid Name="DohodyrAddGrid" Grid.Row="1" Visibility="Collapsed">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30pt"/>
+                <RowDefinition Height="30pt"/>
+                <RowDefinition Height="30pt"/>
+                <RowDefinition Height="30pt"/>
+                <RowDefinition Height="30pt"/>
+                <RowDefinition />
+                <RowDefinition Height="30pt"/>
+            </Grid.RowDefinitions>
+            <Label Content="Добавление дохода" FontSize="20" HorizontalContentAlignment="Center"  VerticalContentAlignment="Center" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0"/>
+
+            <Label Content="Тип дохода" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" FontSize="16" Grid.Column="0" Grid.Row="1" />
+            <Label Content="Размер дохода" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" FontSize="16" Grid.Column="0" Grid.Row="2" />
+            <Label Content="Дата получения дохода" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" FontSize="16" Grid.Column="0" Grid.Row="3" />
+            <Label Content="Кто внес" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" FontSize="16" Grid.Column="0" Grid.Row="4" />
+
+            <ComboBox Name="DohodyAddType" Grid.Column="1" Grid.Row="1" />
+            <TextBox Name="DohodyAddSum"  Grid.Column="1" Grid.Row="2" PreviewTextInput="TextBox_PreviewTextInput"/>
+            <DatePicker Name="DohodyAddDate"  Grid.Column="1" Grid.Row="3"/>
+
+            <Grid Grid.Column="1" Grid.Row="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <ComboBox Name="dohAddKtoVnesCmF" Grid.Column="0" SelectionChanged="Groups_SelectionChanged" >
+                    <ComboBoxItem Content="Сотрудники"/>
+                    <ComboBoxItem Content="Слушатели"/>
+                    <ComboBoxItem Content="Другое"/>
+                </ComboBox>
+                <ComboBox Name="dohAddKtoVnesCm" Grid.Column="1" SelectionChanged="dohAddKtoVnesCm_SelectionChanged" />
+                <TextBox Name="dohAddKtoVnesTb" IsEnabled="False" Grid.Column="2" />
+              
+            </Grid>
+
+            <Button Name="DohodyAddButton" FontSize="16" Content="Добавить"  ToolTip="Нажмите для добавления нового дохода" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="6" Click="DohodyAddButton_Click"     />
+
+        </Grid>
+
+
+        <!--грид доходов-->
+        <Grid Name="DohodyrGrid" Grid.Row="1" Visibility="Collapsed">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30pt"/>
+                <RowDefinition/>
+                <RowDefinition Height="30pt"/>
+            </Grid.RowDefinitions>
+
+
+            <Grid Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0">
+                <Grid.ColumnDefinitions >
+                    <ColumnDefinition Width="5*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+                <ScrollViewer Grid.Column="0"  HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
+                    <Grid Name="FiltrGridDohody" >
+                    </Grid>
+                </ScrollViewer>
+                <Button Content="Применить" FontSize="16" Name="FiltrDohodyButton" Grid.Column="1" Click="FiltrButton_Click"/>
+            </Grid>
+
+            <DataGrid ToolTip="Таблица в которой отображаются поступившие доходы. Для работы с ними выберете одну из записей кликнув н неё, после чего выберете одно из действий ниже." Name="DohodyDataGrid" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" IsReadOnly="true" ItemsSource="{Binding}" AutoGenerateColumns="False" SelectedCellsChanged="NachDataGrid_SelectedCellsChanged">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Visibility="Collapsed" Header="ID" Binding="{Binding dohid}" Width="5*" />
+                    <DataGridTextColumn Header="Тип дохода" Binding="{Binding title}" Width="5*" />
+                    <DataGridTextColumn Header="Кто внёс" Binding="{Binding fio}" Width="5*" />
+                    <DataGridTextColumn Header="Сумма" Binding="{Binding sum}" Width="5*" />
+                    <DataGridTextColumn Header="Дата" Binding="{Binding data}" Width="5*" />
+                </DataGrid.Columns>
+            </DataGrid>
+            <Button Name="DohDeleteButton" FontSize="16" Content="Удалить" ToolTip="Нажмите для удаления выбранного дохода" Grid.Column="0"  Grid.Row="2" Click="DohDeleteButton_Click"    />
+            <Button Name="DohChangeButton" FontSize="16" Content="Изменить" ToolTip="Нажмите для изменения выбранного дохода" Grid.Column="1" Grid.Row="2" Click="DohChangeButton_Click"    />
+            <Button Name="DohAddButton" FontSize="16" Content="Добавить"  ToolTip="Нажмите для добавления нового дохода" Grid.Column="2" Grid.Row="2" Click="DohAddButton_Click"    />
+
+        </Grid>
+
+
+
+        <!--грид оплат-->
+        <Grid Name="OplataGrid" Grid.Row="1" Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30pt"/>
+                <RowDefinition Height="2*"/>
+                <RowDefinition Height="30pt"/>
+            </Grid.RowDefinitions>
+            
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.5*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="0.5*"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="1.5*"/>
+                    <ColumnDefinition Width="1.5*"/>
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Content="Группа: " VerticalContentAlignment="Center" HorizontalContentAlignment="Right" FontSize="16"  />
+                <ComboBox Name="Groups" Grid.Column="1" SelectionChanged="Groups_SelectionChanged" />
+                <Label Grid.Column="2" Content="Слушатель: " VerticalContentAlignment="Center" HorizontalContentAlignment="Right" FontSize="16"  />
+                <ComboBox Name="Listener" Grid.Column="3" SelectionChanged="Listener_SelectionChanged" />
+                <Label Grid.Column="4" Name="isStop"  FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
+                <Label Grid.Column="5"  Name="isClose"  FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
+            </Grid>
+            <ScrollViewer HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible" Grid.Row="1" Grid.Column="1">
+                <Grid >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="200"/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                    <Grid Name="MonthOplGrid" Grid.Column="1">
+                        <Grid.ColumnDefinitions>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50" />
+                            <RowDefinition Height="50" />
+                            <RowDefinition Height="50" />
+                            <RowDefinition Height="50" />
+                            <RowDefinition Height="50" />
+                            <RowDefinition Height="50" />
+                            <RowDefinition Height="50" />
+                        </Grid.RowDefinitions>
+                    </Grid>
+
+                <Grid Name="MonthOplGrid2" Grid.Column="0">
+                     
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="50" />
+                            <RowDefinition Height="50" />
+                            <RowDefinition Height="50" />
+                            <RowDefinition Height="50" />
+                            <RowDefinition Height="50" />
+                            <RowDefinition Height="50" />
+                            <RowDefinition Height="50" />
+                        </Grid.RowDefinitions>
+                        <Label Name="Month" Content="Месяц" BorderBrush="Black" BorderThickness="2" Grid.Column="0" Grid.Row="0" />
+                        <Label Name="Oplata" Content="Оплата за месяц" BorderBrush="Black" BorderThickness="2" Grid.Column="0" Grid.Row="1" />
+                        <Label Name="YjeOplacheno" BorderBrush="Black" Content="Уже оплачено" BorderThickness="2" Grid.Column="0" Grid.Row="2" />
+                        <Label Name="SkidkiPriOplate" BorderBrush="Black" Content="Скидки при оплате на перед" BorderThickness="2" Grid.Column="0" Grid.Row="3" />
+                        <Label Name="Penya" BorderBrush="Black" BorderThickness="2" Content="Пеня" Grid.Column="0" Grid.Row="4" />
+                        <Label Name="NadoZaplotit" BorderBrush="Black" BorderThickness="2" Content="Необходимо заплатить" Grid.Column="0" Grid.Row="5" />
+                        <Label Name="VnesNow" BorderBrush="Black" BorderThickness="2" Content="Внесёно" Grid.Column="0" Grid.Row="6" />
+                    </Grid>
+                
+            </Grid>
+        </ScrollViewer>
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+                <Button Grid.Column="0" FontSize="16" Content="Оплата" Name="AddPAy" Click="AddPAy_Click" />
+                <Button Grid.Column="1" FontSize="16" Content="Остановить обучение" Visibility="Collapsed" Name="StopLern" Click="StopLern_Click" />
+                <Button Grid.Column="1" FontSize="16" Content="Восстановить обучение" Visibility="Collapsed" Name="RestartLern" Click="RestartLern_Click"  />
+                <Button Grid.Column="2" FontSize="16" Content="Закрыть оплату" Name="Closeing" Click="Closeing_Click" Visibility="Collapsed" />
+                <Button Grid.Column="2" FontSize="16" Content="Открыть оплату" Name="Open"  Visibility="Collapsed" Click="Open_Click"/>
+            </Grid>
+        </Grid>
+
+    </Grid>
+</Window>
