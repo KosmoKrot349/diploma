@@ -1,4 +1,5 @@
 ﻿using Npgsql;
+using OxyPlot.Axes;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,22 +9,19 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using OxyPlot;
-using OxyPlot.Series;
-using OxyPlot.Axes;
 
-namespace WpfApp12.strategiesForBuhgalter.strategiesForBuhgalterWindButtonClick
+namespace WpfApp12.strategiesForBookkeeper.MenuClick
 {
-    class GoToListsOfPaymentReport:IButtonClick
+    class ListOfPaymentReportMenu:IMenuClick
     {
-        BuhgalterWindow windowObj;
+        BookkeeperWindow windowObj;
 
-        public GoToListsOfPaymentReport(BuhgalterWindow windowObj)
+        public ListOfPaymentReportMenu(BookkeeperWindow windowObj)
         {
             this.windowObj = windowObj;
         }
 
-        public void ButtonClick()
+        public void MenuClick()
         {
             windowObj.HideAll();
             windowObj.ZpOthcetGrid.Visibility = Visibility.Visible;

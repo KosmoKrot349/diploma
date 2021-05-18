@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace WpfApp12.strategiesForBuhgalter.strategiesForBuhgalterSelectionChanged
+namespace WpfApp12.strategiesForBookkeeper.SelectionChanged
 {
-    class SelectingPersonProfitAdd:ISelectionChanged
+    class SelectingPersonTypeProfitAdd:ISelectionChanged
     {
-        BuhgalterWindow windowObj;
+        BookkeeperWindow windowObj;
         ComboBox cmb;
 
-        public SelectingPersonProfitAdd(BuhgalterWindow windowObj, ComboBox cmb)
+        public SelectingPersonTypeProfitAdd(BookkeeperWindow windowObj, ComboBox cmb)
         {
             this.windowObj = windowObj;
             this.cmb = cmb;

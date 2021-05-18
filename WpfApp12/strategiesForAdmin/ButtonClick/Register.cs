@@ -32,7 +32,7 @@ namespace WpfApp12.strategiesForAdmin
                 if (reader.HasRows) { MessageBox.Show("Пользовтель с таким логином уже существует"); return; }
                 npgSqlConnection.Close();
                 npgSqlConnection.Open();
-                sql = "insert into users (fio, log, pas, admin, buhgalter, director) values('" + windowObj.fio.Text + "','" + windowObj.log_reg.Text + "','" + windowObj.pas_reg.Password + "'," + windowObj.adminR + "," + windowObj.buhgR + "," + windowObj.rykR + ")";
+                sql = "insert into users (fio, log, pas, admin, buhgalter, director) values('" + windowObj.fio.Text + "','" + windowObj.log_reg.Text + "','" + windowObj.pas_reg.Password + "'," + windowObj.adminRole + "," + windowObj.bookkeeperRole + "," + windowObj.managerRole + ")";
                 Command = new NpgsqlCommand(sql, npgSqlConnection);
                 Command.ExecuteReader();
                 npgSqlConnection.Close();
@@ -58,7 +58,7 @@ namespace WpfApp12.strategiesForAdmin
 
                 windowObj.changeUser.IsEnabled = false;
                 windowObj.dellUser.IsEnabled = false;
-                DataGridUpdater.updateDataGridUsers(windowObj.connectionString, windowObj.filtr.sql, windowObj.usersDGrid);
+                DataGridUpdater.updateDataGridUsers(windowObj.connectionString, windowObj.filter.sql, windowObj.usersDGrid);
             }
         }
     }

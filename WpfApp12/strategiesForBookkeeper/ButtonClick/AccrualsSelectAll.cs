@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WpfApp12.strategiesForBuhgalter.strategiesForBuhgalterWindButtonClick
+namespace WpfApp12.strategiesForBookkeeper.ButtonClick
 {
     class AccrualsSelectAll:IButtonClick
     {
-        BuhgalterWindow windowObj;
+        BookkeeperWindow windowObj;
 
-        public AccrualsSelectAll(BuhgalterWindow windowObj)
+        public AccrualsSelectAll(BookkeeperWindow windowObj)
         {
             this.windowObj = windowObj;
         }
@@ -19,18 +19,18 @@ namespace WpfApp12.strategiesForBuhgalter.strategiesForBuhgalterWindButtonClick
         {
             if (windowObj.selected == false)
             {
-                for (int i = 0; i < windowObj.ChbxMas_SotrNuch.Length; i++)
+                for (int i = 0; i < windowObj.checkBoxArrStaffForAccrual.Length; i++)
                 {
-                    windowObj.ChbxMas_SotrNuch[i].IsChecked = true;
+                    windowObj.checkBoxArrStaffForAccrual[i].IsChecked = true;
 
                 }
                 windowObj.selected = true; return;
             }
             else
             {
-                for (int i = 0; i < windowObj.ChbxMas_SotrNuch.Length; i++)
+                for (int i = 0; i < windowObj.checkBoxArrStaffForAccrual.Length; i++)
                 {
-                    windowObj.ChbxMas_SotrNuch[i].IsChecked = false;
+                    windowObj.checkBoxArrStaffForAccrual[i].IsChecked = false;
 
                 }
                 windowObj.selected = false; return;

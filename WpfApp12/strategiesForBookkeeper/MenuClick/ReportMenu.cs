@@ -5,13 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media;
 
-namespace WpfApp12.strategiesForBuhgalter.strategiesForBuhgalterMenuClick
+namespace WpfApp12.strategiesForBookkeeper.MenuClick
 {
     class ReportMenu:IMenuClick
     {
-        BuhgalterWindow windowObj;
+        BookkeeperWindow windowObj;
 
-        public ReportMenu(BuhgalterWindow windowObj)
+        public ReportMenu(BookkeeperWindow windowObj)
         {
             this.windowObj = windowObj;
         }

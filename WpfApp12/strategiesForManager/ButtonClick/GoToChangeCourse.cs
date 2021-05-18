@@ -13,9 +13,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 {
     class GoToChangeCourse:IButtonClick
     {
-        DirectorWindow windowObj;
+        ManagerWindow windowObj;
 
-        public GoToChangeCourse(DirectorWindow windowObj)
+        public GoToChangeCourse(ManagerWindow windowObj)
         {
             this.windowObj = windowObj;
         }
@@ -31,7 +31,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             object[] arr = DR.ItemArray;
             windowObj.courseID = Convert.ToInt32(arr[0]);
             windowObj.courseChangeTitle.Text = arr[1].ToString();
-            windowObj.dontChCName = arr[1].ToString();
+            windowObj.dontChangeCourseName = arr[1].ToString();
             windowObj.courseChangeComm.Text = arr[3].ToString();
             object[] masSubjects = arr[2].ToString().Replace(" ", "").Split(',');
             ArrayList list = new ArrayList(masSubjects);

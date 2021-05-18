@@ -2,49 +2,48 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-using System.Windows.Media;
 using System.IO;
-using Npgsql;
 using System.Collections;
-
-using WpfApp12.strategiesForBuhgalter.strategiesForBuhgalterWindButtonClick;
-using WpfApp12.strategiesForBuhgalter.strategiesForBuhgalterMenuClick;
-using WpfApp12.strategiesForBuhgalter.strategiesForBuhgalterSelectionChanged;
+using WpfApp12.strategiesForBookkeeper.ButtonClick;
+using WpfApp12.strategiesForBookkeeper.MenuClick;
+using WpfApp12.strategiesForBookkeeper.SelectionChanged;
+using WpfApp12.strategiesForBookkeeper.OtherMethods;
+using WpfApp12.strategiesForBookkeeper.SelectedCellsChanged;
 
 namespace WpfApp12
 {
     /// <summary>
     /// Логика взаимодействия для BuhgalterWindow.xaml
     /// </summary>
-    public partial class BuhgalterWindow : Window
+    public partial class BookkeeperWindow : Window
     {
         public int logUser;
         public string FIO = "";
-        public TextBox[] masTbx;
-        public TextBox[] masTbx2;
+        public TextBox[] textBoxArrForDefreyment;
+        public TextBox[] textBoxArrForArrearsDefreyment;
         //строка подключения
         public string connectionString = "";
 
-      public  int DohodID = -1;
-       public int RashodID = 1;
+      public  int profitID = -1;
+       public int costID = 1;
 
         //начисления
-        public DateTime dateNuch;
-        public CheckBox[] ChbxMas_SotrNuch;
+        public DateTime dateAccrual;
+        public CheckBox[] checkBoxArrStaffForAccrual;
         public bool selected = false;
 
 
-        public filtr filtr = new filtr();
-        public filtr fda = new filtr();
-        public filtr fdb = new filtr();
+        public filtr filter = new filtr();
+        public filtr PeopleFromCashboxFilter = new filtr();
+        public filtr ProfitTypesFromCashboxFilter = new filtr();
 
-        public filtr fra = new filtr();
-        public filtr frb = new filtr();
-        public string strrr = "";
+        public filtr StaffFromCashboxFiltr = new filtr();
+        public filtr CostsTypesFromCashboxFilter = new filtr();
+        public string personForProfit = "";
 
 
         //+
-        public BuhgalterWindow()
+        public BookkeeperWindow()
         {
             InitializeComponent();
             StreamReader reader = new StreamReader(@"setting.txt");
@@ -55,11 +54,11 @@ namespace WpfApp12
             }
             object[] mas = ls.ToArray();
             connectionString = "Server=" + mas[0].ToString().Split(':')[1] + ";Port=" + mas[2].ToString().Split(':')[1] + ";User Id=postgres;Password=" + mas[1].ToString().Split(':')[1] + ";Database=db";
-            filtr.connectionString = connectionString;
-            fda.connectionString = connectionString;
-            fra.connectionString = connectionString;
-            fdb.connectionString = connectionString;
-            frb.connectionString = connectionString;
+            filter.connectionString = connectionString;
+            PeopleFromCashboxFilter.connectionString = connectionString;
+            StaffFromCashboxFiltr.connectionString = connectionString;
+            ProfitTypesFromCashboxFilter.connectionString = connectionString;
+            CostsTypesFromCashboxFilter.connectionString = connectionString;
             MenuRolesB.BorderBrush = null;
             Dohody.BorderBrush = null;
             Rashody.BorderBrush = null;
@@ -71,124 +70,10 @@ namespace WpfApp12
         public void HideAll()
         {
 
-            NachDataGrid.SelectedItem = null;
-            RoshodyDataGrid.SelectedItem = null;
-            DohodyDataGrid.SelectedItem = null;
-
-            helloGrdi.Visibility = Visibility.Collapsed;
-            OplataGrid.Visibility = Visibility.Collapsed;
-            DohodyrGrid.Visibility = Visibility.Collapsed;
-            DohodyrAddGrid.Visibility = Visibility.Collapsed;
-            DohodyChangeGrid.Visibility = Visibility.Collapsed;
-            RoshodyGrid.Visibility = Visibility.Collapsed;
-            RashodyAddGrid.Visibility = Visibility.Collapsed;
-            RashodyChangeGrid.Visibility = Visibility.Collapsed;
-            NalogiGrid.Visibility = Visibility.Collapsed;
-            GlNachGrid.Visibility = Visibility.Collapsed;
-            DolgGrid.Visibility = Visibility.Collapsed;
-            NoDolgGrdi.Visibility = Visibility.Collapsed;
-            kassaGrid.Visibility = Visibility.Collapsed;
-            StatisticaGrid.Visibility = Visibility.Collapsed;
-            ZpOthcetGrid.Visibility = Visibility.Collapsed;
-
-            //начисления
-            ViplataBut.IsEnabled = false;
-
-            //расходы
-            RashDeleteButton.IsEnabled = false;
-            RashChangeButton.IsEnabled = false;
-
-            //доходы
-            DohDeleteButton.IsEnabled = false;
-            DohChangeButton.IsEnabled = false;
+            strategiesForBookkeeper.OtherMethods.HideAll.Hide(this);
         }
         //+
-        public void updateOplataTable(int a)
-        {
-            if (a == 1)
-            {
-                int kol_Month = 0;
-                try
-                {
-                    NpgsqlConnection con = new NpgsqlConnection(connectionString);
-                    con.Open();
-                    string sql = "SELECT  array_to_string(payformonth,'_')  FROM listnuch where listenerid = (select listenerid from listeners where fio='" + Listener.SelectedItem + "') and grid = (select grid from groups where nazvanie ='" + Groups.SelectedItem + "')";
-                    NpgsqlCommand com = new NpgsqlCommand(sql, con);
-                    NpgsqlDataReader reader = com.ExecuteReader();
-                    if (reader.HasRows)
-                    {
-                        while (reader.Read())
-                        {
-                            string payformonth = reader.GetString(0);
-                            string[] payformonthMas = payformonth.Split('_');
-
-                            for (int i = 0; i < 12; i++)
-                            {
-                                if (payformonthMas[i] != "0")
-                                {
-
-                                    kol_Month++;
-
-                                }
-                            }
-                            masTbx = new TextBox[kol_Month];
-                            for (int i = 0; i < kol_Month; i++)
-                            {
-                                masTbx[i] = new TextBox();
-                                masTbx[i].PreviewTextInput += TextBox_PreviewTextInput;
-                            }
-                        }
-                    }
-                    con.Close();
-                }
-                catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
-
-                DataGridUpdater.updateDataGridOpat(connectionString, MonthOplGrid, Groups, Listener, masTbx, isClose, isStop, Closeing, Open, StopLern, RestartLern);
-            }
-
-
-            if (a == 2)
-            {
-                
-                int kol_Month = 0;
-                try
-                {
-                    NpgsqlConnection con = new NpgsqlConnection(connectionString);
-                    con.Open();
-                    string sql = "SELECT  array_to_string(payformonth,'_')  FROM listdolg where listenerid = (select listenerid from listeners where fio='" + ListenerDolg.SelectedItem + "') and grid = (select grid from groups where nazvanie ='" + GroupsDolg.SelectedItem + "')";
-                    NpgsqlCommand com = new NpgsqlCommand(sql, con);
-                    NpgsqlDataReader reader = com.ExecuteReader();
-                    if (reader.HasRows)
-                    {
-                        while (reader.Read())
-                        {
-                            string payformonth = reader.GetString(0);
-                            string[] payformonthMas = payformonth.Split('_');
-
-                            for (int i = 0; i < 12; i++)
-                            {
-                                if (payformonthMas[i] != "0")
-                                {
-
-                                    kol_Month++;
-
-                                }
-                            }
-                            masTbx2 = new TextBox[kol_Month];
-                            for (int i = 0; i < kol_Month; i++)
-                            {
-                                masTbx2[i] = new TextBox();
-                                masTbx2[i].PreviewTextInput += TextBox_PreviewTextInput;
-                            }
-                        }
-                    }
-                con.Close();
-                }
-                catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
-
-                DataGridUpdater.updateDataGridDolg(connectionString, MonthOplGridDolg, GroupsDolg, ListenerDolg, masTbx2, DataPerehoda, isStopDolg);
-            }
-        }
+      
         //переход из меню бухаглтера в меню админа +
         private void AdminRoleB_Click(object sender, RoutedEventArgs e)
         {
@@ -217,8 +102,8 @@ namespace WpfApp12
         //переход к оплате слушателей+
         private void OplataSlysh_Click(object sender, RoutedEventArgs e)
         {
-            IButtonClick actionReact = new GoToPayment(this);
-            actionReact.ButtonClick();
+            IMenuClick actionReact = new PaymentMenu(this);
+            actionReact.MenuClick();
         }
         //изменение группы выбор слушталей +
         private void Groups_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -226,13 +111,13 @@ namespace WpfApp12
             ComboBox cmb = sender as ComboBox;
             if (cmb.Name == "dohAddKtoVnesCmF")
             {
-                ISelectionChanged actionReact = new SelectingPersonProfitAdd(this, cmb);
+                ISelectionChanged actionReact = new SelectingPersonTypeProfitAdd(this, cmb);
                 actionReact.SelectionChanged();
             }
 
             if (cmb.Name == "dohChKtoVnesCmF")
             {
-                ISelectionChanged actionReact = new SelectingPersonProfitChange(this,cmb);
+                ISelectionChanged actionReact = new SelectingPersonTypeProfitChange(this,cmb);
                 actionReact.SelectionChanged();
             }
 
@@ -253,10 +138,10 @@ namespace WpfApp12
         private void Listener_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ComboBox cmb = sender as ComboBox;
-            if(cmb.Name== "Listener")
-            updateOplataTable(1);
+            if (cmb.Name == "Listener")
+                updateDefraymentTable.Update(this, 1);
             if (cmb.Name == "ListenerDolg")
-            updateOplataTable(2);
+                updateDefraymentTable.Update(this, 2);
 
         }
         //закрытие запими об оплате +
@@ -278,7 +163,7 @@ namespace WpfApp12
             actionReact.ButtonClick();
         }
         //вод только цифер +
-        private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        public void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             TextBox tbne = sender as TextBox;
             if ((!Char.IsDigit(e.Text, 0)) && (e.Text != ","))
@@ -304,8 +189,8 @@ namespace WpfApp12
         //переход к таблице доходов+
         private void DodhodyTable_Click(object sender, RoutedEventArgs e)
         {
-            IButtonClick actionReact = new GoToProfitTable(this);
-            actionReact.ButtonClick();
+            IMenuClick actionReact = new ProfitMenu(this);
+            actionReact.MenuClick();
         }
         // переход к добавление дохода+
         private void DohAddButton_Click(object sender, RoutedEventArgs e)
@@ -341,8 +226,8 @@ namespace WpfApp12
         //переход к расходам+
         private void RashodyTable_Click(object sender, RoutedEventArgs e)
         {
-            IButtonClick actionReact = new GoToCosts(this);
-            actionReact.ButtonClick();
+            IMenuClick actionReact = new CostsMenu(this);
+            actionReact.MenuClick();
         }
         //переход к доабвлению расходов+
         private void RashAddButton_Click(object sender, RoutedEventArgs e)
@@ -377,8 +262,8 @@ namespace WpfApp12
         //переход к налогам+
         private void Nalogi_Click(object sender, RoutedEventArgs e)
         {
-            IButtonClick actionReact = new GoToTax(this);
-            actionReact.ButtonClick();
+            IMenuClick actionReact = new TaxMenu(this);
+            actionReact.MenuClick();
         }
         //сохранение налогов+
         private void NalogiSave_Click(object sender, RoutedEventArgs e)
@@ -389,8 +274,8 @@ namespace WpfApp12
         //переход к начислениям+
         private void ZP_Click(object sender, RoutedEventArgs e)
         {
-            IButtonClick actionReact = new GoToAccruals(this);
-            actionReact.ButtonClick();
+            IMenuClick actionReact = new AccrualsMenu(this);
+            actionReact.MenuClick();
         }
         //выбрать всех в таблице начилсений +
         private void NuchSelectAllSotrBut_Click(object sender, RoutedEventArgs e)
@@ -425,34 +310,13 @@ namespace WpfApp12
         //применение фильтров + 
         private void FiltrButton_Click(object sender, RoutedEventArgs e)
         {
-            Button but = sender as Button;
-            if (but.Name == "FiltrRashodyButton")
-            {
-                IButtonClick actionReact = new AppCostsFiltr(this);
-                actionReact.ButtonClick();
-            }
-
-            if (but.Name == "FiltrDohodyButton")
-            {
-                IButtonClick actionReact = new AppProfitFiltr(this);
-                actionReact.ButtonClick();
-            }
-            if (but.Name == "PrimFKD")
-            {
-                IButtonClick actionReact = new AppCashierProfitFiltr(this);
-                actionReact.ButtonClick();
-            }
-            if (but.Name == "PrimFKR")
-            {
-                IButtonClick actionReact = new AppCashierCostsFiltr(this);
-                actionReact.ButtonClick();
-            }
+            ApplyFiltersButtonClick.ApplyForBookkeeper(this, sender);
         }
         //переход к гриду долга+
         private void OplataDolgMenu_Click(object sender, RoutedEventArgs e)
         {
-            IButtonClick actionReact = new GoToArrears(this);
-            actionReact.ButtonClick();
+            IMenuClick actionReact = new ArrearsMenu(this);
+            actionReact.MenuClick();
         }
         //оплата долга слушателем +
         private void AddPAyDolg_Click(object sender, RoutedEventArgs e)
@@ -469,21 +333,21 @@ namespace WpfApp12
         //переход к гриду отчета кассы+
         private void MenuItem_Click(object sender, RoutedEventArgs e)
         {
-            IButtonClick actionReact = new GoToCashierReport(this);
-            actionReact.ButtonClick();
+            IMenuClick actionReact = new CashboxReportMenu(this);
+            actionReact.MenuClick();
         }
         //переход к гриду отчета статистика+
         private void MenuItem_Click_1(object sender, RoutedEventArgs e)
         {
-            IButtonClick actionReact = new GoToStatsReport(this);
-            actionReact.ButtonClick();
+            IMenuClick actionReact = new StatisticReportMenu(this);
+            actionReact.MenuClick();
 
         }
         //переход к гриду отчета списки выплат+
         private void MenuItem_Click_2(object sender, RoutedEventArgs e)
         {
-            IButtonClick actionReact = new GoToListsOfPaymentReport(this);
-            actionReact.ButtonClick();
+            IMenuClick actionReact = new ListOfPaymentReportMenu(this);
+            actionReact.MenuClick();
         }
         //кликл по меню прав+
         private void MenuRolesB_Click(object sender, RoutedEventArgs e)
@@ -494,13 +358,13 @@ namespace WpfApp12
         //кликл по меню доходов+
         private void Dohody_Click(object sender, RoutedEventArgs e)
         {
-            IMenuClick actionReact = new ProfitMenu(this);
+            IMenuClick actionReact = new SelectProfitMenu(this);
             actionReact.MenuClick();
         }
         //кликл по меню расходов+
         private void Rashody_Click(object sender, RoutedEventArgs e)
         {
-            IMenuClick actionReact = new CostsMenu(this);
+            IMenuClick actionReact = new SelectCostsMenu(this);
             actionReact.MenuClick();
         }
         //кликл по меню отчётов+
@@ -512,18 +376,8 @@ namespace WpfApp12
         //разблокировка всех кнопок +
         private void NachDataGrid_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
         {
-            //начисления
-            ViplataBut.IsEnabled = true;
-
-           //расходы
-            RashDeleteButton.IsEnabled = true;
-            RashChangeButton.IsEnabled = true;
-
-            //доходы
-            DohDeleteButton.IsEnabled = true;
-            DohChangeButton.IsEnabled = true;
-
-
+            ISelectedCellsChanged actionReact = new ControlButtonState(this);
+            actionReact.SelectedCellsChanged();
         }
    
 
@@ -532,20 +386,14 @@ namespace WpfApp12
             ComboBox cmb = sender as ComboBox;
             if (cmb.Name == "dohAddKtoVnesCm")
             {
-                if (cmb.Items.Count == 0) { return; }
-                if (cmb.SelectedItem.ToString() == "Нет в списке") { dohAddKtoVnesTb.Text = ""; dohAddKtoVnesTb.IsEnabled = true; }
-                else { dohAddKtoVnesTb.Text = cmb.SelectedItem.ToString(); dohAddKtoVnesTb.IsEnabled = false; }
-
+                ISelectionChanged actionReact = new SelectingPersonAddProfit(this);
+                actionReact.SelectionChanged();
             }
 
             if (cmb.Name == "dohChKtoVnesCm")
             {
-
-                if (cmb.Items.Count == 0) { return; }
-                if (cmb.SelectedItem.ToString() == "Нет в списке") { dohChKtoVnesTb.Text = ""; dohChKtoVnesTb.IsEnabled = true; }
-                else
-                { dohChKtoVnesTb.Text = cmb.SelectedItem.ToString(); dohChKtoVnesTb.IsEnabled = false; }
-
+                ISelectionChanged actionReact = new SelectingPersonChangeProfit(this);
+                actionReact.SelectionChanged();
             }
         }
     }

@@ -9,9 +9,9 @@ namespace WpfApp12.strategiesForManager.MenuClick
 {
     class PersonnelMenu:IMenuClick
     {
-        DirectorWindow window;
+        ManagerWindow window;
 
-        public PersonnelMenu(DirectorWindow window)
+        public PersonnelMenu(ManagerWindow window)
         {
             this.window = window;
         }

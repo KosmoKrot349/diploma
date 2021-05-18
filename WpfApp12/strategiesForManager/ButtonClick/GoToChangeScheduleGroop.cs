@@ -10,21 +10,21 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 {
     class GoToChangeScheduleGroop:IButtonClick
     {
-        DirectorWindow windowObj;
+        ManagerWindow windowObj;
 
-        public GoToChangeScheduleGroop(DirectorWindow windowObj)
+        public GoToChangeScheduleGroop(ManagerWindow windowObj)
         {
             this.windowObj = windowObj;
         }
 
         public void ButtonClick()
         {
-            int grid = Convert.ToInt32(windowObj.lbmas[0, windowObj.jRaspLebale].Name.Split('_')[1]);
-            int lesNum = Convert.ToInt32(windowObj.lbmas[windowObj.iRaspLebale, 1].Content.ToString().Split('\n')[0]);
+            int grid = Convert.ToInt32(windowObj.labelArr[0, windowObj.jCoordScheduleLabel].Name.Split('_')[1]);
+            int lesNum = Convert.ToInt32(windowObj.labelArr[windowObj.iCoordScheduleLabel, 1].Content.ToString().Split('\n')[0]);
             int day = 0;
             for (int ii = 1; ii <= 7; ii++)
             {
-                if (ii * windowObj.m < windowObj.iRaspLebale) { day++; } else break;
+                if (ii * windowObj.quanLessonsInDay < windowObj.iCoordScheduleLabel) { day++; } else break;
             }
             windowObj.raspChangeSubs.Items.Clear();
             windowObj.raspChangePrep.Items.Clear();
@@ -44,7 +44,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                     while (reader.Read())
                     {
                         windowObj.raspChangeSubs.Items.Add(reader.GetString(0));
-                        if (reader.GetString(0) == windowObj.lbmas[windowObj.iRaspLebale, windowObj.jRaspLebale].Content.ToString().Split('\n')[0]) { windowObj.raspChangeSubs.SelectedIndex = i; }
+                        if (reader.GetString(0) == windowObj.labelArr[windowObj.iCoordScheduleLabel, windowObj.jCoordScheduleLabel].Content.ToString().Split('\n')[0]) { windowObj.raspChangeSubs.SelectedIndex = i; }
                         i++;
                     }
 
@@ -65,17 +65,17 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                 if (reader.HasRows == false)
                 {
                     windowObj.raspChangePrep.SelectedIndex = 0;
-                    windowObj.raspChangePrep.Items.Add(windowObj.lbmas[windowObj.iRaspLebale, windowObj.jRaspLebale].Content.ToString().Split('\n')[1]);
+                    windowObj.raspChangePrep.Items.Add(windowObj.labelArr[windowObj.iCoordScheduleLabel, windowObj.jCoordScheduleLabel].Content.ToString().Split('\n')[1]);
                 }
                 if (reader.HasRows)
                 {
                     int i = 0;
                     windowObj.raspChangePrep.SelectedIndex = 0;
-                    windowObj.raspChangePrep.Items.Add(windowObj.lbmas[windowObj.iRaspLebale, windowObj.jRaspLebale].Content.ToString().Split('\n')[1]);
+                    windowObj.raspChangePrep.Items.Add(windowObj.labelArr[windowObj.iCoordScheduleLabel, windowObj.jCoordScheduleLabel].Content.ToString().Split('\n')[1]);
                     while (reader.Read())
                     {
                         windowObj.raspChangePrep.Items.Add(reader.GetString(0));
-                        if (reader.GetString(0) == windowObj.lbmas[windowObj.iRaspLebale, windowObj.jRaspLebale].Content.ToString().Split('\n')[1]) { windowObj.raspChangePrep.SelectedIndex = i; }
+                        if (reader.GetString(0) == windowObj.labelArr[windowObj.iCoordScheduleLabel, windowObj.jCoordScheduleLabel].Content.ToString().Split('\n')[1]) { windowObj.raspChangePrep.SelectedIndex = i; }
                         i++;
                     }
 
@@ -95,17 +95,17 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                 if (reader.HasRows == false)
                 {
                     windowObj.raspChangeKab.SelectedIndex = 0;
-                    windowObj.raspChangeKab.Items.Add(windowObj.lbmas[windowObj.iRaspLebale, windowObj.jRaspLebale].Content.ToString().Split('\n')[2]);
+                    windowObj.raspChangeKab.Items.Add(windowObj.labelArr[windowObj.iCoordScheduleLabel, windowObj.jCoordScheduleLabel].Content.ToString().Split('\n')[2]);
                 }
                 if (reader.HasRows)
                 {
                     int i = 0;
                     windowObj.raspChangeKab.SelectedIndex = 0;
-                    windowObj.raspChangeKab.Items.Add(windowObj.lbmas[windowObj.iRaspLebale, windowObj.jRaspLebale].Content.ToString().Split('\n')[2]);
+                    windowObj.raspChangeKab.Items.Add(windowObj.labelArr[windowObj.iCoordScheduleLabel, windowObj.jCoordScheduleLabel].Content.ToString().Split('\n')[2]);
                     while (reader.Read())
                     {
                         windowObj.raspChangeKab.Items.Add(reader.GetString(0));
-                        if (reader.GetString(0) == windowObj.lbmas[windowObj.iRaspLebale, windowObj.jRaspLebale].Content.ToString().Split('\n')[2]) { windowObj.raspChangeKab.SelectedIndex = i; }
+                        if (reader.GetString(0) == windowObj.labelArr[windowObj.iCoordScheduleLabel, windowObj.jCoordScheduleLabel].Content.ToString().Split('\n')[2]) { windowObj.raspChangeKab.SelectedIndex = i; }
                         i++;
                     }
                 }
@@ -125,7 +125,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             }
             windowObj.raspChangeDate.Text = windowObj.dateMonday.AddDays(day).ToShortDateString();
             windowObj.raspChangeLesNum.Text = "" + lesNum;
-            windowObj.raspChangeGr.Text = windowObj.lbmas[0, windowObj.jRaspLebale].Content.ToString();
+            windowObj.raspChangeGr.Text = windowObj.labelArr[0, windowObj.jCoordScheduleLabel].Content.ToString();
             windowObj.HideAll();
             windowObj.changeRaspGrid.Visibility = Visibility.Visible;
         }

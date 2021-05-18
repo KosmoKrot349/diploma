@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WpfApp12.strategiesForMainWind.strategiesForMainWindButtonClick
+namespace WpfApp12.strategiesForMainWind.ButtonClick
 {
     interface IButtonClick
     {

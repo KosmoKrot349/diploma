@@ -11,9 +11,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 {
     class GoToAddCourse:IButtonClick
     {
-        DirectorWindow windowObj;
+        ManagerWindow windowObj;
 
-        public GoToAddCourse(DirectorWindow windowObj)
+        public GoToAddCourse(ManagerWindow windowObj)
         {
             this.windowObj = windowObj;
         }

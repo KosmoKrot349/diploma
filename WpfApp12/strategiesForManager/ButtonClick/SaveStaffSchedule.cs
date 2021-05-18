@@ -12,9 +12,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 {
     class SaveStaffSchedule:IButtonClick
     {
-        DirectorWindow windowObj;
+        ManagerWindow windowObj;
 
-        public SaveStaffSchedule(DirectorWindow windowObj)
+        public SaveStaffSchedule(ManagerWindow windowObj)
         {
             this.windowObj = windowObj;
         }
@@ -27,7 +27,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                 {
                     for (int j = 0; j < 7; j++)
                     {
-                        if (windowObj.lbmas_shtatRasp[i, j].Background == Brushes.Aqua) { day = Convert.ToInt32(windowObj.lbmas_shtatRasp[i, j].Content.ToString()); windowObj.lbmas_shtatRasp[i, j].Background = Brushes.White; }
+                        if (windowObj.labelArrForStaffSchedule[i, j].Background == Brushes.Aqua) { day = Convert.ToInt32(windowObj.labelArrForStaffSchedule[i, j].Content.ToString()); windowObj.labelArrForStaffSchedule[i, j].Background = Brushes.White; }
                     }
                 }
                 DateTime dateToAdd = new DateTime(windowObj.date.Year, windowObj.date.Month, day);
@@ -47,11 +47,11 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 
 
                 string sotrMas = "'{-1,";
-                for (int i = 0; i < windowObj.chbxMas_stateRasp.Length; i++)
+                for (int i = 0; i < windowObj.checkBoxArrForStaffSchedule.Length; i++)
                 {
-                    if (windowObj.chbxMas_stateRasp[i].IsChecked == true)
+                    if (windowObj.checkBoxArrForStaffSchedule[i].IsChecked == true)
                     {
-                        sotrMas += windowObj.chbxMas_stateRasp[i].Name.Split('_')[1] + ",";
+                        sotrMas += windowObj.checkBoxArrForStaffSchedule[i].Name.Split('_')[1] + ",";
                     }
                 }
                 sotrMas = sotrMas.Substring(0, sotrMas.Length - 1) + "}'";
@@ -86,7 +86,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 
 
                 }
-                DataGridUpdater.updateGridShtatRasp(windowObj.connectionString, windowObj.MonthGrid, windowObj.ShtatRaspSotrpGrid, windowObj.lbmas_shtatRasp, windowObj.chbxMas_stateRasp, windowObj.ShtatRaspMonthYearLabel, windowObj.date);
+                DataGridUpdater.updateGridShtatRasp(windowObj.connectionString, windowObj.MonthGrid, windowObj.ShtatRaspSotrpGrid, windowObj.labelArrForStaffSchedule, windowObj.checkBoxArrForStaffSchedule, windowObj.ShtatRaspMonthYearLabel, windowObj.date);
             windowObj.ShtatRaspSaveBut.IsEnabled = false;
          
 

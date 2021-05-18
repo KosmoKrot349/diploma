@@ -13,9 +13,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 {
     class GoToChangeStaffEmployee:IButtonClick
     {
-        DirectorWindow windowObj;
+        ManagerWindow windowObj;
 
-        public GoToChangeStaffEmployee(DirectorWindow windowObj)
+        public GoToChangeStaffEmployee(ManagerWindow windowObj)
         {
             this.windowObj = windowObj;
         }
@@ -26,7 +26,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             if (DRV == null) { MessageBox.Show("Добавление прервано, Вы не выбрали сотрудника."); return; }
             DataRow DR = DRV.Row;
             object[] arr = DR.ItemArray;
-            windowObj.ShtatID = Convert.ToInt32(arr[0]);
+            windowObj.staffID = Convert.ToInt32(arr[0]);
             windowObj.HideAll();
             windowObj.ChangeShtatGrid.Visibility = Visibility.Visible;
 
@@ -78,10 +78,10 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
 
-            windowObj.tbxMas_stavki = new TextBox[kol_states];
-            windowObj.chbxMas_state = new CheckBox[kol_states];
-            windowObj.tbxMas_obem = new TextBox[kol_obsWork];
-            windowObj.chbxMas_obslwork = new CheckBox[kol_obsWork];
+            windowObj.textBoxArrRate = new TextBox[kol_states];
+            windowObj.checkBoxArrPositions = new CheckBox[kol_states];
+            windowObj.textBoxArrVolumeWork = new TextBox[kol_obsWork];
+            windowObj.checkBoxArrServiceWorks = new CheckBox[kol_obsWork];
 
 
 
@@ -92,7 +92,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                 NpgsqlConnection con1 = new NpgsqlConnection(windowObj.connectionString);
                 con1.Open();
 
-                string sql1 = "select title from states where ARRAY[statesid] <@ (select states from shtat where shtatid=" + windowObj.ShtatID + " ) order by statesid";
+                string sql1 = "select title from states where ARRAY[statesid] <@ (select states from shtat where shtatid=" + windowObj.staffID + " ) order by statesid";
                 NpgsqlCommand com1 = new NpgsqlCommand(sql1, con1);
                 NpgsqlDataReader reader1 = com1.ExecuteReader();
                 if (reader1.HasRows)
@@ -113,7 +113,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                 NpgsqlConnection con1 = new NpgsqlConnection(windowObj.connectionString);
                 con1.Open();
 
-                string sql1 = "select title from raboty_obsl where ARRAY[rabotyid] <@ (select obslwork from shtat where shtatid=" + windowObj.ShtatID + " ) order by rabotyid";
+                string sql1 = "select title from raboty_obsl where ARRAY[rabotyid] <@ (select obslwork from shtat where shtatid=" + windowObj.staffID + " ) order by rabotyid";
                 NpgsqlCommand com1 = new NpgsqlCommand(sql1, con1);
                 NpgsqlDataReader reader1 = com1.ExecuteReader();
                 if (reader1.HasRows)
@@ -134,7 +134,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                 NpgsqlConnection con12 = new NpgsqlConnection(windowObj.connectionString);
                 con12.Open();
 
-                string sql12 = "select array_to_string(stavky,'_'),array_to_string(obem,'_') from shtat where shtatid=" + windowObj.ShtatID;
+                string sql12 = "select array_to_string(stavky,'_'),array_to_string(obem,'_') from shtat where shtatid=" + windowObj.staffID;
                 NpgsqlCommand com12 = new NpgsqlCommand(sql12, con12);
                 NpgsqlDataReader reader12 = com12.ExecuteReader();
                 if (reader12.HasRows)
@@ -188,36 +188,36 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                     int j = 0;
                     while (reader.Read())
                     {
-                        windowObj.tbxMas_stavki[i] = new TextBox();
-                        windowObj.chbxMas_state[i] = new CheckBox();
+                        windowObj.textBoxArrRate[i] = new TextBox();
+                        windowObj.checkBoxArrPositions[i] = new CheckBox();
 
 
 
-                        windowObj.chbxMas_state[i].Name = "Name_" + i + "_" + reader.GetInt32(0) + "_state";
-                        windowObj.chbxMas_state[i].Content = reader.GetString(1);
-                        windowObj.chbxMas_state[i].Checked += windowObj.Shtat_Checked;
-                        windowObj.chbxMas_state[i].Unchecked += windowObj.Shtat_UnChecked;
+                        windowObj.checkBoxArrPositions[i].Name = "Name_" + i + "_" + reader.GetInt32(0) + "_state";
+                        windowObj.checkBoxArrPositions[i].Content = reader.GetString(1);
+                        windowObj.checkBoxArrPositions[i].Checked += windowObj.Shtat_Checked;
+                        windowObj.checkBoxArrPositions[i].Unchecked += windowObj.Shtat_UnChecked;
 
-                        windowObj.tbxMas_stavki[i].IsEnabled = false;
-                        windowObj.tbxMas_stavki[i].PreviewTextInput += windowObj.grPayment_PreviewTextInput;
+                        windowObj.textBoxArrRate[i].IsEnabled = false;
+                        windowObj.textBoxArrRate[i].PreviewTextInput += windowObj.grPayment_PreviewTextInput;
 
-                        if (StatesLs.IndexOf(reader.GetString(1)) != -1) { windowObj.chbxMas_state[i].IsChecked = true; windowObj.tbxMas_stavki[i].Text = stavkiMas[j]; j++; }
+                        if (StatesLs.IndexOf(reader.GetString(1)) != -1) { windowObj.checkBoxArrPositions[i].IsChecked = true; windowObj.textBoxArrRate[i].Text = stavkiMas[j]; j++; }
 
                         RowDefinition rwd = new RowDefinition();
                         rwd.Height = new GridLength(40);
 
                         windowObj.ChangeStates.RowDefinitions.Add(rwd);
 
-                        Grid.SetRow(windowObj.tbxMas_stavki[i], (i + 1));
-                        Grid.SetRow(windowObj.chbxMas_state[i], (i + 1));
+                        Grid.SetRow(windowObj.textBoxArrRate[i], (i + 1));
+                        Grid.SetRow(windowObj.checkBoxArrPositions[i], (i + 1));
 
 
-                        Grid.SetColumn(windowObj.tbxMas_stavki[i], 1);
-                        Grid.SetColumn(windowObj.chbxMas_state[i], 0);
+                        Grid.SetColumn(windowObj.textBoxArrRate[i], 1);
+                        Grid.SetColumn(windowObj.checkBoxArrPositions[i], 0);
 
 
-                        windowObj.ChangeStates.Children.Add(windowObj.tbxMas_stavki[i]);
-                        windowObj.ChangeStates.Children.Add(windowObj.chbxMas_state[i]);
+                        windowObj.ChangeStates.Children.Add(windowObj.textBoxArrRate[i]);
+                        windowObj.ChangeStates.Children.Add(windowObj.checkBoxArrPositions[i]);
 
                         i++;
                     }
@@ -266,36 +266,36 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                     int j = 0;
                     while (reader.Read())
                     {
-                        windowObj.tbxMas_obem[i] = new TextBox();
-                        windowObj.chbxMas_obslwork[i] = new CheckBox();
+                        windowObj.textBoxArrVolumeWork[i] = new TextBox();
+                        windowObj.checkBoxArrServiceWorks[i] = new CheckBox();
                         Label lb = new Label();
 
                         lb.Content = reader.GetString(2);
-                        windowObj.chbxMas_obslwork[i].Name = "Name_" + i + "_" + reader.GetInt32(0) + "_obsl";
-                        windowObj.chbxMas_obslwork[i].Content = reader.GetString(1);
-                        windowObj.chbxMas_obslwork[i].Checked += windowObj.Shtat_Checked;
-                        windowObj.chbxMas_obslwork[i].Unchecked += windowObj.Shtat_UnChecked;
+                        windowObj.checkBoxArrServiceWorks[i].Name = "Name_" + i + "_" + reader.GetInt32(0) + "_obsl";
+                        windowObj.checkBoxArrServiceWorks[i].Content = reader.GetString(1);
+                        windowObj.checkBoxArrServiceWorks[i].Checked += windowObj.Shtat_Checked;
+                        windowObj.checkBoxArrServiceWorks[i].Unchecked += windowObj.Shtat_UnChecked;
 
-                        windowObj.tbxMas_obem[i].IsEnabled = false;
-                        windowObj.tbxMas_obem[i].PreviewTextInput += windowObj.grPayment_PreviewTextInput;
+                        windowObj.textBoxArrVolumeWork[i].IsEnabled = false;
+                        windowObj.textBoxArrVolumeWork[i].PreviewTextInput += windowObj.grPayment_PreviewTextInput;
 
-                        if (WorkLs.IndexOf(reader.GetString(1)) != -1) { windowObj.chbxMas_obslwork[i].IsChecked = true; windowObj.tbxMas_obem[i].Text = obemMas[j]; j++; }
+                        if (WorkLs.IndexOf(reader.GetString(1)) != -1) { windowObj.checkBoxArrServiceWorks[i].IsChecked = true; windowObj.textBoxArrVolumeWork[i].Text = obemMas[j]; j++; }
 
                         RowDefinition rwd = new RowDefinition();
                         rwd.Height = new GridLength(40);
 
                         windowObj.ChangeObslWorks.RowDefinitions.Add(rwd);
 
-                        Grid.SetRow(windowObj.tbxMas_obem[i], (i + 1));
-                        Grid.SetRow(windowObj.chbxMas_obslwork[i], (i + 1));
+                        Grid.SetRow(windowObj.textBoxArrVolumeWork[i], (i + 1));
+                        Grid.SetRow(windowObj.checkBoxArrServiceWorks[i], (i + 1));
                         Grid.SetRow(lb, (i + 1));
 
-                        Grid.SetColumn(windowObj.tbxMas_obem[i], 1);
-                        Grid.SetColumn(windowObj.chbxMas_obslwork[i], 0);
+                        Grid.SetColumn(windowObj.textBoxArrVolumeWork[i], 1);
+                        Grid.SetColumn(windowObj.checkBoxArrServiceWorks[i], 0);
                         Grid.SetColumn(lb, 2);
 
-                        windowObj.ChangeObslWorks.Children.Add(windowObj.tbxMas_obem[i]);
-                        windowObj.ChangeObslWorks.Children.Add(windowObj.chbxMas_obslwork[i]);
+                        windowObj.ChangeObslWorks.Children.Add(windowObj.textBoxArrVolumeWork[i]);
+                        windowObj.ChangeObslWorks.Children.Add(windowObj.checkBoxArrServiceWorks[i]);
                         windowObj.ChangeObslWorks.Children.Add(lb);
                         i++;
                     }

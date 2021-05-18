@@ -30,7 +30,10 @@ namespace WpfApp12.strategiesForAdmin
             MessageBoxResult res = MessageBox.Show("Подключение по данным пораметрам прошло успешно.\nСохранить параметры?", "Сохранение", MessageBoxButton.YesNo);
             if (res == MessageBoxResult.Yes)
             {
-                windowObj.saveSettings();
+                SaveDataBaseSettings.Save(windowObj.connect.Text, windowObj.dbPassText.Text, windowObj.dbPortText.Text);
+                windowObj.connectionString = "Server=" + windowObj.connect.Text + ";Port=" + windowObj.dbPortText.Text + ";User Id=postgres;Password=" + windowObj.dbPassText.Text + ";Database=db";
+
+                MessageBox.Show("Настройки сохранены и применены");
 
             }
             if (res == MessageBoxResult.No)

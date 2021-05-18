@@ -11,9 +11,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 {
     class DeleteFromStaff:IButtonClick
     {
-        DirectorWindow windowObj;
+        ManagerWindow windowObj;
 
-        public DeleteFromStaff(DirectorWindow windowObj)
+        public DeleteFromStaff(ManagerWindow windowObj)
         {
             this.windowObj = windowObj;
         }

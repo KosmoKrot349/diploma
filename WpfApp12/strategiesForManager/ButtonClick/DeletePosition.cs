@@ -11,9 +11,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 {
     class DeletePosition:IButtonClick
     {
-        DirectorWindow windowObj;
+        ManagerWindow windowObj;
 
-        public DeletePosition(DirectorWindow windowObj)
+        public DeletePosition(ManagerWindow windowObj)
         {
             this.windowObj = windowObj;
         }

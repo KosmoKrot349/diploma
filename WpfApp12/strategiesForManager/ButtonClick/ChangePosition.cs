@@ -10,9 +10,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 {
     class ChangePosition:IButtonClick
     {
-        DirectorWindow windowObj;
+        ManagerWindow windowObj;
 
-        public ChangePosition(DirectorWindow windowObj)
+        public ChangePosition(ManagerWindow windowObj)
         {
             this.windowObj = windowObj;
         }
@@ -25,7 +25,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             {
                 NpgsqlConnection con = new NpgsqlConnection(windowObj.connectionString);
                 con.Open();
-                string sql = "update states set title='" + windowObj.StateChaneTitle.Text + "', kol_work_day='{" + windowObj.Chanedays1.Text + "," + windowObj.Chanedays2.Text + "," + windowObj.Chanedays3.Text + "," + windowObj.Chanedays4.Text + "," + windowObj.Chanedays5.Text + "," + windowObj.Chanedays6.Text + "," + windowObj.Chanedays7.Text + "," + windowObj.Chanedays8.Text + "," + windowObj.Chanedays9.Text + "," + windowObj.Chanedays10.Text + "," + windowObj.Chanedays11.Text + "," + windowObj.Chanedays12.Text + "}', zp=" + windowObj.StateChanePay.Text.Replace(',', '.') + ",comment='" + windowObj.StateChaneCom.Text + "' where statesid=" + windowObj.stateID;
+                string sql = "update states set title='" + windowObj.StateChaneTitle.Text + "', kol_work_day='{" + windowObj.Chanedays1.Text + "," + windowObj.Chanedays2.Text + "," + windowObj.Chanedays3.Text + "," + windowObj.Chanedays4.Text + "," + windowObj.Chanedays5.Text + "," + windowObj.Chanedays6.Text + "," + windowObj.Chanedays7.Text + "," + windowObj.Chanedays8.Text + "," + windowObj.Chanedays9.Text + "," + windowObj.Chanedays10.Text + "," + windowObj.Chanedays11.Text + "," + windowObj.Chanedays12.Text + "}', zp=" + windowObj.StateChanePay.Text.Replace(',', '.') + ",comment='" + windowObj.StateChaneCom.Text + "' where statesid=" + windowObj.positionID;
                 NpgsqlCommand command = new NpgsqlCommand(sql, con);
                 command.ExecuteNonQuery();
                 con.Close();

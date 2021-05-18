@@ -1,4 +1,4 @@
-﻿<Window x:Class="WpfApp12.DirectorWindow"
+﻿<Window x:Class="WpfApp12.ManagerWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,7 +6,7 @@
            xmlns:oxy="http://oxyplot.org/wpf"
         xmlns:local="clr-namespace:WpfApp12"
         mc:Ignorable="d"
-        Title="DirectorWindow"  Height="300" Width="300">
+        Title="Менеджер"  Height="300" Width="300">
     <!--самый главный грид-->
     <Grid Name="glGrid">
         <Grid.RowDefinitions>

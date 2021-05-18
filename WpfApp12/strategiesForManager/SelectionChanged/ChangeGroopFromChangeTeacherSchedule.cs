@@ -10,9 +10,9 @@ namespace WpfApp12.strategiesForManager.SelectionChanged
 {
     class ChangeGroopFromChangeTeacherSchedule:ISelectionChaged
     {
-        DirectorWindow window;
+        ManagerWindow window;
 
-        public ChangeGroopFromChangeTeacherSchedule(DirectorWindow window)
+        public ChangeGroopFromChangeTeacherSchedule(ManagerWindow window)
         {
             this.window = window;
         }
@@ -34,7 +34,7 @@ namespace WpfApp12.strategiesForManager.SelectionChanged
                     while (reader.Read())
                     {
                         window.raspChangeSubsP.Items.Add(reader.GetString(0));
-                        if (reader.GetString(0) == window.lbmas[window.iRaspLebale, window.jRaspLebale].Content.ToString().Split('\n')[0]) { window.raspChangeSubsP.SelectedIndex = i; }
+                        if (reader.GetString(0) == window.labelArr[window.iCoordScheduleLabel, window.jCoordScheduleLabel].Content.ToString().Split('\n')[0]) { window.raspChangeSubsP.SelectedIndex = i; }
                         i++;
                     }
 

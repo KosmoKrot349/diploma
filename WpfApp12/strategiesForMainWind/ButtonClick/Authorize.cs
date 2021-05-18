@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace WpfApp12.strategiesForMainWind.strategiesForMainWindButtonClick
+namespace WpfApp12.strategiesForMainWind.ButtonClick
 {
     class Authorize : IButtonClick
     {
@@ -69,7 +69,7 @@ namespace WpfApp12.strategiesForMainWind.strategiesForMainWindButtonClick
                             }
                             if (1 == reader.GetInt32(2))
                             {
-                                BuhgalterWindow wind = new BuhgalterWindow();
+                                BookkeeperWindow wind = new BookkeeperWindow();
                                 if (reader.GetInt32(1) == 0) { wind.AdminRoleB.IsEnabled = false; }
                                 if (reader.GetInt32(2) == 0) { wind.BuhgRoleB.IsEnabled = false; }
                                 if (reader.GetInt32(3) == 0) { wind.DirectorRoleB.IsEnabled = false; }
@@ -88,7 +88,7 @@ namespace WpfApp12.strategiesForMainWind.strategiesForMainWindButtonClick
                             }
                             if (1 == reader.GetInt32(3))
                             {
-                                DirectorWindow wind = new DirectorWindow();
+                                ManagerWindow wind = new ManagerWindow();
                                 if (reader.GetInt32(1) == 0) { wind.AdminRoleD.IsEnabled = false; }
                                 if (reader.GetInt32(2) == 0) { wind.BuhgRoleD.IsEnabled = false; }
                                 if (reader.GetInt32(3) == 0) { wind.DirectorRoleD.IsEnabled = false; }

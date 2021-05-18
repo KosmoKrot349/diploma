@@ -10,21 +10,21 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 {
     class GoToChangeScheduleCabinet:IButtonClick
     {
-        DirectorWindow windowObj;
+        ManagerWindow windowObj;
 
-        public GoToChangeScheduleCabinet(DirectorWindow windowObj)
+        public GoToChangeScheduleCabinet(ManagerWindow windowObj)
         {
             this.windowObj = windowObj;
         }
 
         public void ButtonClick()
         {
-            int kab = Convert.ToInt32(windowObj.lbmas[0, windowObj.jRaspLebale].Name.Split('_')[1]);
-            int lesNum = Convert.ToInt32(windowObj.lbmas[windowObj.iRaspLebale, 1].Content.ToString().Split('\n')[0]);
+            int kab = Convert.ToInt32(windowObj.labelArr[0, windowObj.jCoordScheduleLabel].Name.Split('_')[1]);
+            int lesNum = Convert.ToInt32(windowObj.labelArr[windowObj.iCoordScheduleLabel, 1].Content.ToString().Split('\n')[0]);
             int day = 0;
             for (int ii = 1; ii <= 7; ii++)
             {
-                if (ii * windowObj.m < windowObj.iRaspLebale) { day++; } else break;
+                if (ii * windowObj.quanLessonsInDay < windowObj.iCoordScheduleLabel) { day++; } else break;
             }
             windowObj.raspChangeSubsK.Items.Clear();
             windowObj.raspChangePrepK.Items.Clear();
@@ -42,18 +42,18 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                 NpgsqlDataReader reader = command.ExecuteReader();
                 if (reader.HasRows == false)
                 {
-                    windowObj.raspChangeGroupK.Items.Add(windowObj.lbmas[windowObj.iRaspLebale, windowObj.jRaspLebale].Content.ToString().Split('\n')[2]);
+                    windowObj.raspChangeGroupK.Items.Add(windowObj.labelArr[windowObj.iCoordScheduleLabel, windowObj.jCoordScheduleLabel].Content.ToString().Split('\n')[2]);
                     windowObj.raspChangeGroupK.SelectedIndex = 0;
                 }
                 if (reader.HasRows)
                 {
                     int i = 0;
                     bool b = false;
-                    windowObj.raspChangeGroupK.Items.Add(windowObj.lbmas[windowObj.iRaspLebale, windowObj.jRaspLebale].Content.ToString().Split('\n')[2]);
+                    windowObj.raspChangeGroupK.Items.Add(windowObj.labelArr[windowObj.iCoordScheduleLabel, windowObj.jCoordScheduleLabel].Content.ToString().Split('\n')[2]);
                     while (reader.Read())
                     {
                         windowObj.raspChangeGroupK.Items.Add(reader.GetString(0));
-                        if (reader.GetString(0) == windowObj.lbmas[windowObj.iRaspLebale, windowObj.jRaspLebale].Content.ToString().Split('\n')[2]) { windowObj.raspChangeGroupK.SelectedIndex = i; grid = reader.GetInt32(1); b = true; }
+                        if (reader.GetString(0) == windowObj.labelArr[windowObj.iCoordScheduleLabel, windowObj.jCoordScheduleLabel].Content.ToString().Split('\n')[2]) { windowObj.raspChangeGroupK.SelectedIndex = i; grid = reader.GetInt32(1); b = true; }
                     }
                     if (b == false) { windowObj.raspChangeGroupK.SelectedIndex = 0; }
                 }
@@ -74,17 +74,17 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                 if (reader.HasRows == false)
                 {
                     windowObj.raspChangePrepK.SelectedIndex = 0;
-                    windowObj.raspChangePrepK.Items.Add(windowObj.lbmas[windowObj.iRaspLebale, windowObj.jRaspLebale].Content.ToString().Split('\n')[1]);
+                    windowObj.raspChangePrepK.Items.Add(windowObj.labelArr[windowObj.iCoordScheduleLabel, windowObj.jCoordScheduleLabel].Content.ToString().Split('\n')[1]);
                 }
                 if (reader.HasRows)
                 {
                     int i = 0;
                     windowObj.raspChangePrepK.SelectedIndex = 0;
-                    windowObj.raspChangePrepK.Items.Add(windowObj.lbmas[windowObj.iRaspLebale, windowObj.jRaspLebale].Content.ToString().Split('\n')[1]);
+                    windowObj.raspChangePrepK.Items.Add(windowObj.labelArr[windowObj.iCoordScheduleLabel, windowObj.jCoordScheduleLabel].Content.ToString().Split('\n')[1]);
                     while (reader.Read())
                     {
                         windowObj.raspChangePrepK.Items.Add(reader.GetString(0));
-                        if (reader.GetString(0) == windowObj.lbmas[windowObj.iRaspLebale, windowObj.jRaspLebale].Content.ToString().Split('\n')[1]) { windowObj.raspChangePrepK.SelectedIndex = i; }
+                        if (reader.GetString(0) == windowObj.labelArr[windowObj.iCoordScheduleLabel, windowObj.jCoordScheduleLabel].Content.ToString().Split('\n')[1]) { windowObj.raspChangePrepK.SelectedIndex = i; }
                         i++;
                     }
 
@@ -105,7 +105,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             }
             windowObj.raspChangeDateK.Text = windowObj.dateMonday.AddDays(day).ToShortDateString();
             windowObj.raspChangeLesNumK.Text = "" + lesNum;
-            windowObj.raspChangeKabK.Text = windowObj.lbmas[0, windowObj.jRaspLebale].Content.ToString();
+            windowObj.raspChangeKabK.Text = windowObj.labelArr[0, windowObj.jCoordScheduleLabel].Content.ToString();
             windowObj.HideAll();
             windowObj.changeRaspGridKab.Visibility = Visibility.Visible;
         }

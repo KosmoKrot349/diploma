@@ -10,10 +10,10 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 {
     class OnThisWeek:IButtonClick
     {
-        DirectorWindow windowObj;
+        ManagerWindow windowObj;
         object sender;
 
-        public OnThisWeek(DirectorWindow windowObj, object sender)
+        public OnThisWeek(ManagerWindow windowObj, object sender)
         {
             this.windowObj = windowObj;
             this.sender = sender;

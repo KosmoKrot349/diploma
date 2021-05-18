@@ -26,7 +26,7 @@ namespace WpfApp12.strategiesForAdmin
 
                 NpgsqlConnection npgSqlConnection = new NpgsqlConnection(windowObj.connectionString);
                 npgSqlConnection.Open();
-                string sql = "update users set log = '" + windowObj.uClog.Text + "', fio = '" + windowObj.uCFio.Text + "', pas = '" + windowObj.uCpas.Text + "', admin = '" + windowObj.adminR + "', buhgalter = '" + windowObj.buhgR + "', director = '" + windowObj.rykR + "' where uid=" + windowObj.uID;
+                string sql = "update users set log = '" + windowObj.uClog.Text + "', fio = '" + windowObj.uCFio.Text + "', pas = '" + windowObj.uCpas.Text + "', admin = '" + windowObj.adminRole + "', buhgalter = '" + windowObj.bookkeeperRole + "', director = '" + windowObj.managerRole + "' where uid=" + windowObj.userID;
                 NpgsqlCommand Command = new NpgsqlCommand(sql, npgSqlConnection);
                 Command.ExecuteReader();
                 npgSqlConnection.Close();
@@ -39,7 +39,7 @@ namespace WpfApp12.strategiesForAdmin
             windowObj.usersDGrid.SelectedItem = null;
             windowObj.changeUser.IsEnabled = false;
             windowObj.dellUser.IsEnabled = false;
-            DataGridUpdater.updateDataGridUsers(windowObj.connectionString, windowObj.filtr.sql, windowObj.usersDGrid);
+            DataGridUpdater.updateDataGridUsers(windowObj.connectionString, windowObj.filter.sql, windowObj.usersDGrid);
         }
     }
 }

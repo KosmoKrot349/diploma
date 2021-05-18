@@ -12,9 +12,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 {
     class AddChangeCostsType:IButtonClick
     {
-        DirectorWindow windowObj;
+        ManagerWindow windowObj;
 
-        public AddChangeCostsType(DirectorWindow windowObj)
+        public AddChangeCostsType(ManagerWindow windowObj)
         {
             this.windowObj = windowObj;
         }

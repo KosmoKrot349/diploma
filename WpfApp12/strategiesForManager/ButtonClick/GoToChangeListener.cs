@@ -13,9 +13,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 {
     class GoToChangeListener:IButtonClick
     {
-        DirectorWindow windowObj;
+        ManagerWindow windowObj;
 
-        public GoToChangeListener(DirectorWindow windowObj)
+        public GoToChangeListener(ManagerWindow windowObj)
         {
             this.windowObj = windowObj;
         }
@@ -98,8 +98,8 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
 
-            windowObj.chbxMas_gr_lg = new CheckBox[countGr];
-            windowObj.tbxMas_gr_lg = new TextBox[countGr];
+            windowObj.checkBoxArrForListeners = new CheckBox[countGr];
+            windowObj.textBoxArrForListeners = new TextBox[countGr];
 
 
             try
@@ -114,26 +114,26 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                     int i = 0;
                     while (reader.Read())
                     {
-                        windowObj.chbxMas_gr_lg[i] = new CheckBox();
-                        windowObj.chbxMas_gr_lg[i].Unchecked += windowObj.CheckBox_Unchecked;
-                        windowObj.chbxMas_gr_lg[i].Checked += windowObj.CheckBox_Checked;
-                        windowObj.tbxMas_gr_lg[i] = new TextBox();
-                        windowObj.tbxMas_gr_lg[i].PreviewTextInput += windowObj.grPayment_PreviewTextInput;
+                        windowObj.checkBoxArrForListeners[i] = new CheckBox();
+                        windowObj.checkBoxArrForListeners[i].Unchecked += windowObj.CheckBox_Unchecked;
+                        windowObj.checkBoxArrForListeners[i].Checked += windowObj.CheckBox_Checked;
+                        windowObj.textBoxArrForListeners[i] = new TextBox();
+                        windowObj.textBoxArrForListeners[i].PreviewTextInput += windowObj.grPayment_PreviewTextInput;
                         RowDefinition rwd = new RowDefinition();
                         rwd.Height = new GridLength(40);
                         windowObj.gr_lgCh.RowDefinitions.Add(rwd);
 
-                        windowObj.tbxMas_gr_lg[i].IsEnabled = false;
-                        windowObj.chbxMas_gr_lg[i].Content = reader.GetString(0) + "-льгота: ";
-                        windowObj.chbxMas_gr_lg[i].Name = "chbxMasgrlg_" + i;
-                        if (GrMas.IndexOf(reader.GetString(0)) != -1) { windowObj.chbxMas_gr_lg[i].IsChecked = true; windowObj.tbxMas_gr_lg[i].Text = LGMas[GrMas.IndexOf(reader.GetString(0))]; }
+                        windowObj.textBoxArrForListeners[i].IsEnabled = false;
+                        windowObj.checkBoxArrForListeners[i].Content = reader.GetString(0) + "-льгота: ";
+                        windowObj.checkBoxArrForListeners[i].Name = "chbxMasgrlg_" + i;
+                        if (GrMas.IndexOf(reader.GetString(0)) != -1) { windowObj.checkBoxArrForListeners[i].IsChecked = true; windowObj.textBoxArrForListeners[i].Text = LGMas[GrMas.IndexOf(reader.GetString(0))]; }
 
-                        Grid.SetRow(windowObj.chbxMas_gr_lg[i], i);
-                        Grid.SetColumn(windowObj.chbxMas_gr_lg[i], 0);
-                        windowObj.gr_lgCh.Children.Add(windowObj.chbxMas_gr_lg[i]);
-                        Grid.SetRow(windowObj.tbxMas_gr_lg[i], i);
-                        Grid.SetColumn(windowObj.tbxMas_gr_lg[i], 1);
-                        windowObj.gr_lgCh.Children.Add(windowObj.tbxMas_gr_lg[i]);
+                        Grid.SetRow(windowObj.checkBoxArrForListeners[i], i);
+                        Grid.SetColumn(windowObj.checkBoxArrForListeners[i], 0);
+                        windowObj.gr_lgCh.Children.Add(windowObj.checkBoxArrForListeners[i]);
+                        Grid.SetRow(windowObj.textBoxArrForListeners[i], i);
+                        Grid.SetColumn(windowObj.textBoxArrForListeners[i], 1);
+                        windowObj.gr_lgCh.Children.Add(windowObj.textBoxArrForListeners[i]);
 
                         i++;
                     }

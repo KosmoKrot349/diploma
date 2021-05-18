@@ -10,9 +10,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 {
     class AddCourse:IButtonClick
     {
-        DirectorWindow windowObj;
+        ManagerWindow windowObj;
 
-        public AddCourse(DirectorWindow windowObj)
+        public AddCourse(ManagerWindow windowObj)
         {
             this.windowObj = windowObj;
         }

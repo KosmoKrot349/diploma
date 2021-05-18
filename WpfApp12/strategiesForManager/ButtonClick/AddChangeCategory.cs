@@ -12,9 +12,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 {
     class AddChangeCategory:IButtonClick
     {
-        DirectorWindow windowObj;
+        ManagerWindow windowObj;
 
-        public AddChangeCategory(DirectorWindow windowObj)
+        public AddChangeCategory(ManagerWindow windowObj)
         {
             this.windowObj = windowObj;
         }

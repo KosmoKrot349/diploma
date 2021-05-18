@@ -10,9 +10,9 @@ namespace WpfApp12.strategiesForManager.MenuClick
 {
     class FineMenu:IMenuClick
     {
-        DirectorWindow window;
+        ManagerWindow window;
 
-        public FineMenu(DirectorWindow window)
+        public FineMenu(ManagerWindow window)
         {
             this.window = window;
         }

@@ -10,9 +10,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 {
     class ChangeTeacher:IButtonClick
     {
-        DirectorWindow windowObj;
+        ManagerWindow windowObj;
 
-        public ChangeTeacher(DirectorWindow windowObj)
+        public ChangeTeacher(ManagerWindow windowObj)
         {
             this.windowObj = windowObj;
         }
@@ -47,7 +47,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             {
                 NpgsqlConnection con = new NpgsqlConnection(windowObj.connectionString);
                 con.Open();
-                string sql = "select sotrid from prep where prepid = " + windowObj.prepID;
+                string sql = "select sotrid from prep where prepid = " + windowObj.teacherID;
                 NpgsqlCommand command = new NpgsqlCommand(sql, con);
                 NpgsqlDataReader reader = command.ExecuteReader();
                 if (reader.HasRows)
@@ -65,7 +65,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             {
                 NpgsqlConnection con = new NpgsqlConnection(windowObj.connectionString);
                 con.Open();
-                string sql = "UPDATE prep SET  kategid =" + kategId + ", date_start ='" + windowObj.dateStartAdd.Text + "' WHERE prepid = " + windowObj.prepID;
+                string sql = "UPDATE prep SET  kategid =" + kategId + ", date_start ='" + windowObj.dateStartAdd.Text + "' WHERE prepid = " + windowObj.teacherID;
                 NpgsqlCommand command = new NpgsqlCommand(sql, con);
                 command.ExecuteNonQuery();
                 con.Close();

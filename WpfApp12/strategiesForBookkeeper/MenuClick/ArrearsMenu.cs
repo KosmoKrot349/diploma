@@ -5,43 +5,48 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
 
-namespace WpfApp12.strategiesForBuhgalter.strategiesForBuhgalterWindButtonClick
+namespace WpfApp12.strategiesForBookkeeper.MenuClick
 {
-    class GoToAccruals : IButtonClick
+    class ArrearsMenu:IMenuClick
     {
-        BuhgalterWindow windowObj;
+        BookkeeperWindow windowObj;
 
-        public GoToAccruals(BuhgalterWindow windowObj)
+        public ArrearsMenu(BookkeeperWindow windowObj)
         {
             this.windowObj = windowObj;
         }
 
-        public void ButtonClick()
+        public void MenuClick()
         {
             windowObj.HideAll();
-            windowObj.GlNachGrid.Visibility = Visibility.Visible;
-            windowObj.dateNuch = DateTime.Now;
+            windowObj.DolgGrid.Visibility = Visibility.Visible;
+
+            windowObj.GroupsDolg.Items.Clear();
             try
             {
                 NpgsqlConnection con = new NpgsqlConnection(windowObj.connectionString);
                 con.Open();
-                string sql = "select count(sotrid) from sotrudniki where sotrid in (select sotrid from shtat) or sotrid in (select sotrid from prep)";
+                string sql = "select nazvanie from groups where grid in (select distinct grid from listdolg) order by grid";
                 NpgsqlCommand com = new NpgsqlCommand(sql, con);
                 NpgsqlDataReader reader = com.ExecuteReader();
                 if (reader.HasRows)
                 {
                     while (reader.Read())
                     {
-                        windowObj.ChbxMas_SotrNuch = new CheckBox[reader.GetInt32(0)];
+                        windowObj.GroupsDolg.Items.Add(reader.GetString(0));
                     }
+                    windowObj.GroupsDolg.SelectedIndex = 0;
+                }
+                if (reader.HasRows == false)
+                {
+                    windowObj.HideAll();
+                    windowObj.NoDolgGrdi.Visibility = Visibility.Visible;
                 }
                 con.Close();
+
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
-
-            DataGridUpdater.updateGridNachZp(windowObj.connectionString, windowObj.NachMonthLabel, windowObj.ChbxMas_SotrNuch, windowObj.NachSotrGrid, windowObj.NachDataGrid, windowObj.dateNuch);
         }
     }
 }

@@ -7,13 +7,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace WpfApp12.strategiesForBuhgalter.strategiesForBuhgalterWindButtonClick
+namespace WpfApp12.strategiesForBookkeeper.ButtonClick
 {
     class DeleteCosts:IButtonClick
     {
-        BuhgalterWindow windowObj;
+        BookkeeperWindow windowObj;
 
-        public DeleteCosts(BuhgalterWindow windowObj)
+        public DeleteCosts(BookkeeperWindow windowObj)
         {
             this.windowObj = windowObj;
         }
@@ -40,7 +40,7 @@ namespace WpfApp12.strategiesForBuhgalter.strategiesForBuhgalterWindButtonClick
                 windowObj.RoshodyDataGrid.SelectedItem = null;
                 windowObj.RashDeleteButton.IsEnabled = false;
                 windowObj.RashChangeButton.IsEnabled = false;
-                DataGridUpdater.updateDataGridRashody(windowObj.connectionString, windowObj.filtr.sql, windowObj.RoshodyDataGrid);
+                DataGridUpdater.updateDataGridRashody(windowObj.connectionString, windowObj.filter.sql, windowObj.RoshodyDataGrid);
             }
         }
     }

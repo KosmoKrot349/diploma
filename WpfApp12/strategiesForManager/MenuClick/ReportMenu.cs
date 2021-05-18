@@ -9,9 +9,9 @@ namespace WpfApp12.strategiesForManager.MenuClick
 {
     class ReportMenu:IMenuClick
     {
-        DirectorWindow window;
+        ManagerWindow window;
 
-        public ReportMenu(DirectorWindow window)
+        public ReportMenu(ManagerWindow window)
         {
             this.window = window;
         }

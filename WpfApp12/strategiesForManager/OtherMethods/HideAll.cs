@@ -9,7 +9,7 @@ namespace WpfApp12.strategiesForManager.OtherMethods
 {
     class HideAll
     {
-        public static void HideAllGrids(DirectorWindow window) {
+        public static void Hide(ManagerWindow window) {
 
             window.listenerDataGrid.SelectedItem = null;
             window.coursDataGrid.SelectedItem = null;

@@ -9,9 +9,9 @@ namespace WpfApp12.strategiesForManager.MenuClick
 {
     class CabinteMenu:IMenuClick
     {
-        DirectorWindow window;
+        ManagerWindow window;
 
-        public CabinteMenu(DirectorWindow window)
+        public CabinteMenu(ManagerWindow window)
         {
             this.window = window;
         }

@@ -11,9 +11,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 {
     class GoToChangeGroop:IButtonClick
     {
-        DirectorWindow windowObj;
+        ManagerWindow windowObj;
 
-        public GoToChangeGroop(DirectorWindow windowObj)
+        public GoToChangeGroop(ManagerWindow windowObj)
         {
             this.windowObj = windowObj;
         }
@@ -42,9 +42,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             windowObj.HideAll();
             windowObj.groupChangeGrid.Visibility = Visibility.Visible;
             object[] arr = DR.ItemArray;
-            windowObj.grID = Convert.ToInt32(arr[0]);
+            windowObj.groopID = Convert.ToInt32(arr[0]);
             windowObj.grTitleCh.Text = arr[1].ToString();
-            windowObj.dontChGName = arr[1].ToString();
+            windowObj.dontChangeGroopName = arr[1].ToString();
             windowObj.payToYearCh.Content = arr[3].ToString();
             windowObj.grCommCh.Text = arr[6].ToString();
             bool ListHasGr = false;
@@ -53,7 +53,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 
                 NpgsqlConnection con = new NpgsqlConnection(windowObj.connectionString);
                 con.Open();
-                string sql = "select listenerid from listeners where ARRAY[" + windowObj.grID + "] <@ grid";
+                string sql = "select listenerid from listeners where ARRAY[" + windowObj.groopID + "] <@ grid";
                 NpgsqlCommand command = new NpgsqlCommand(sql, con);
                 NpgsqlDataReader reader = command.ExecuteReader();
 
@@ -71,7 +71,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 
                 NpgsqlConnection con = new NpgsqlConnection(windowObj.connectionString);
                 con.Open();
-                string sql = "select payment[1],payment[2],payment[3],payment[4],payment[5],payment[6],payment[7],payment[8],payment[9],payment[10],payment[11],payment[12],date_start,date_end from groups where grid =" + windowObj.grID;
+                string sql = "select payment[1],payment[2],payment[3],payment[4],payment[5],payment[6],payment[7],payment[8],payment[9],payment[10],payment[11],payment[12],date_start,date_end from groups where grid =" + windowObj.groopID;
                 NpgsqlCommand command = new NpgsqlCommand(sql, con);
                 NpgsqlDataReader reader = command.ExecuteReader();
 

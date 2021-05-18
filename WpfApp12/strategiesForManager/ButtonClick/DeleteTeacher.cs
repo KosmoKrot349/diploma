@@ -11,9 +11,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 {
     class DeleteTeacher:IButtonClick
     {
-        DirectorWindow windowObj;
+        ManagerWindow windowObj;
 
-        public DeleteTeacher(DirectorWindow windowObj)
+        public DeleteTeacher(ManagerWindow windowObj)
         {
             this.windowObj = windowObj;
         }

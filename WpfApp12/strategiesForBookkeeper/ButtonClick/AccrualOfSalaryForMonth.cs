@@ -6,29 +6,29 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace WpfApp12.strategiesForBuhgalter.strategiesForBuhgalterWindButtonClick
+namespace WpfApp12.strategiesForBookkeeper.ButtonClick
 {
     class AccrualOfSalaryForMonth:IButtonClick
     {
-        BuhgalterWindow windowObj;
+        BookkeeperWindow windowObj;
 
-        public AccrualOfSalaryForMonth(BuhgalterWindow windowObj)
+        public AccrualOfSalaryForMonth(BookkeeperWindow windowObj)
         {
             this.windowObj = windowObj;
         }
 
         public void ButtonClick()
         {
-            for (int i = 0; i < windowObj.ChbxMas_SotrNuch.Length; i++)
+            for (int i = 0; i < windowObj.checkBoxArrStaffForAccrual.Length; i++)
             {
-                if (windowObj.ChbxMas_SotrNuch[i].IsChecked == true)
+                if (windowObj.checkBoxArrStaffForAccrual[i].IsChecked == true)
                 {
                     //проверка есть ли запись уже
                     try
                     {
                         NpgsqlConnection con = new NpgsqlConnection(windowObj.connectionString);
                         con.Open();
-                        string sql = "select nachid from nachisl where sotrid = " + windowObj.ChbxMas_SotrNuch[i].Name.Split('_')[1] + " and EXTRACT(Year FROM nachisl.payday)=" + windowObj.dateNuch.Year + " and  EXTRACT(Month FROM nachisl.payday)=" + windowObj.dateNuch.Month;
+                        string sql = "select nachid from nachisl where sotrid = " + windowObj.checkBoxArrStaffForAccrual[i].Name.Split('_')[1] + " and EXTRACT(Year FROM nachisl.payday)=" + windowObj.dateAccrual.Year + " and  EXTRACT(Month FROM nachisl.payday)=" + windowObj.dateAccrual.Month;
                         NpgsqlCommand com = new NpgsqlCommand(sql, con);
                         NpgsqlDataReader reader = com.ExecuteReader();
                         //если запись есть
@@ -45,7 +45,7 @@ namespace WpfApp12.strategiesForBuhgalter.strategiesForBuhgalterWindButtonClick
                             {
                                 NpgsqlConnection con1 = new NpgsqlConnection(windowObj.connectionString);
                                 con1.Open();
-                                string sql1 = "select kategorii.pay from kategorii inner join prep using(kategid) where sotrid = " + windowObj.ChbxMas_SotrNuch[i].Name.Split('_')[1];
+                                string sql1 = "select kategorii.pay from kategorii inner join prep using(kategid) where sotrid = " + windowObj.checkBoxArrStaffForAccrual[i].Name.Split('_')[1];
                                 NpgsqlCommand com1 = new NpgsqlCommand(sql1, con1);
                                 NpgsqlDataReader reader1 = com1.ExecuteReader();
                                 if (reader1.HasRows)
@@ -61,7 +61,7 @@ namespace WpfApp12.strategiesForBuhgalter.strategiesForBuhgalterWindButtonClick
                             {
                                 NpgsqlConnection con1 = new NpgsqlConnection(windowObj.connectionString);
                                 con1.Open();
-                                string sql1 = "select count(raspisanie.idrasp) from prep inner join raspisanie using(prepid) where prep.sotrid=" + windowObj.ChbxMas_SotrNuch[i].Name.Split('_')[1] + " and EXTRACT(Month FROM raspisanie.date)= " + windowObj.dateNuch.Month + " and EXTRACT(Year FROM  raspisanie.date)= " + windowObj.dateNuch.Year;
+                                string sql1 = "select count(raspisanie.idrasp) from prep inner join raspisanie using(prepid) where prep.sotrid=" + windowObj.checkBoxArrStaffForAccrual[i].Name.Split('_')[1] + " and EXTRACT(Month FROM raspisanie.date)= " + windowObj.dateAccrual.Month + " and EXTRACT(Year FROM  raspisanie.date)= " + windowObj.dateAccrual.Year;
                                 NpgsqlCommand com1 = new NpgsqlCommand(sql1, con1);
                                 NpgsqlDataReader reader1 = com1.ExecuteReader();
                                 if (reader1.HasRows)
@@ -77,7 +77,7 @@ namespace WpfApp12.strategiesForBuhgalter.strategiesForBuhgalterWindButtonClick
                             {
                                 NpgsqlConnection con1 = new NpgsqlConnection(windowObj.connectionString);
                                 con1.Open();
-                                string sql1 = "select koef from koef_vislugi where kol_year<=(select Extract(Year from age('" + windowObj.dateNuch.ToShortDateString().Replace('.', '-') + "',prep.date_start)) from prep where sotrid = " + windowObj.ChbxMas_SotrNuch[i].Name.Split('_')[1] + ") order by kol_year desc limit 1";
+                                string sql1 = "select koef from koef_vislugi where kol_year<=(select Extract(Year from age('" + windowObj.dateAccrual.ToShortDateString().Replace('.', '-') + "',prep.date_start)) from prep where sotrid = " + windowObj.checkBoxArrStaffForAccrual[i].Name.Split('_')[1] + ") order by kol_year desc limit 1";
                                 NpgsqlCommand com1 = new NpgsqlCommand(sql1, con1);
                                 NpgsqlDataReader reader1 = com1.ExecuteReader();
                                 if (reader1.HasRows)
@@ -103,7 +103,7 @@ namespace WpfApp12.strategiesForBuhgalter.strategiesForBuhgalterWindButtonClick
                             {
                                 NpgsqlConnection con1 = new NpgsqlConnection(windowObj.connectionString);
                                 con1.Open();
-                                string sql1 = "select count(shraspid) from shtatrasp where shtatid @> ARRAY[" + windowObj.ChbxMas_SotrNuch[i].Name.Split('_')[1] + "] and extract(Year from date)=" + windowObj.dateNuch.Year + " and extract(Month from date)=" + windowObj.dateNuch.Month;
+                                string sql1 = "select count(shraspid) from shtatrasp where shtatid @> ARRAY[" + windowObj.checkBoxArrStaffForAccrual[i].Name.Split('_')[1] + "] and extract(Year from date)=" + windowObj.dateAccrual.Year + " and extract(Month from date)=" + windowObj.dateAccrual.Month;
                                 NpgsqlCommand com1 = new NpgsqlCommand(sql1, con1);
                                 NpgsqlDataReader reader1 = com1.ExecuteReader();
                                 if (reader1.HasRows)
@@ -121,7 +121,7 @@ namespace WpfApp12.strategiesForBuhgalter.strategiesForBuhgalterWindButtonClick
                             {
                                 NpgsqlConnection con13 = new NpgsqlConnection(windowObj.connectionString);
                                 con13.Open();
-                                string sql13 = "select array_to_string(states,'_'),array_to_string(stavky,'_'),array_to_string(obslwork,'_'),array_to_string(obem,'_') from shtat where sotrid =" + windowObj.ChbxMas_SotrNuch[i].Name.Split('_')[1];
+                                string sql13 = "select array_to_string(states,'_'),array_to_string(stavky,'_'),array_to_string(obslwork,'_'),array_to_string(obem,'_') from shtat where sotrid =" + windowObj.checkBoxArrStaffForAccrual[i].Name.Split('_')[1];
                                 NpgsqlCommand com13 = new NpgsqlCommand(sql13, con13);
                                 NpgsqlDataReader reader13 = com13.ExecuteReader();
                                 if (reader13.HasRows)
@@ -141,7 +141,7 @@ namespace WpfApp12.strategiesForBuhgalter.strategiesForBuhgalterWindButtonClick
                                             {
                                                 NpgsqlConnection con2 = new NpgsqlConnection(windowObj.connectionString);
                                                 con2.Open();
-                                                string sql2 = "select zp, kol_work_day[" + windowObj.dateNuch.Month + "] from states where statesid =" + statesStr[j];
+                                                string sql2 = "select zp, kol_work_day[" + windowObj.dateAccrual.Month + "] from states where statesid =" + statesStr[j];
                                                 NpgsqlCommand com2 = new NpgsqlCommand(sql2, con2);
                                                 NpgsqlDataReader reader2 = com2.ExecuteReader();
                                                 if (reader2.HasRows)
@@ -214,7 +214,7 @@ namespace WpfApp12.strategiesForBuhgalter.strategiesForBuhgalterWindButtonClick
                             {
                                 NpgsqlConnection con12 = new NpgsqlConnection(windowObj.connectionString);
                                 con12.Open();
-                                string sql12 = "UPDATE nachisl SET  prepzp=" + prep_zp.ToString().Replace(',', '.') + ", shtatzp=" + payShtat.ToString().Replace(',', '.') + ", obslzp=" + payObsl.ToString().Replace(',', '.') + ", vs=" + vs.ToString().Replace(',', '.') + ", fss=" + fss.ToString().Replace(',', '.') + ", ndfl=" + ndfl.ToString().Replace(',', '.') + " WHERE sotrid=" + windowObj.ChbxMas_SotrNuch[i].Name.Split('_')[1] + " and extract(Year from payday)=" + windowObj.dateNuch.Year + " and extract(month from payday)=" + windowObj.dateNuch.Month;
+                                string sql12 = "UPDATE nachisl SET  prepzp=" + prep_zp.ToString().Replace(',', '.') + ", shtatzp=" + payShtat.ToString().Replace(',', '.') + ", obslzp=" + payObsl.ToString().Replace(',', '.') + ", vs=" + vs.ToString().Replace(',', '.') + ", fss=" + fss.ToString().Replace(',', '.') + ", ndfl=" + ndfl.ToString().Replace(',', '.') + " WHERE sotrid=" + windowObj.checkBoxArrStaffForAccrual[i].Name.Split('_')[1] + " and extract(Year from payday)=" + windowObj.dateAccrual.Year + " and extract(month from payday)=" + windowObj.dateAccrual.Month;
                                 NpgsqlCommand com12 = new NpgsqlCommand(sql12, con12);
                                 com12.ExecuteNonQuery();
                                 con12.Close();
@@ -236,7 +236,7 @@ namespace WpfApp12.strategiesForBuhgalter.strategiesForBuhgalterWindButtonClick
                             {
                                 NpgsqlConnection con1 = new NpgsqlConnection(windowObj.connectionString);
                                 con1.Open();
-                                string sql1 = "select kategorii.pay from kategorii inner join prep using(kategid) where sotrid = " + windowObj.ChbxMas_SotrNuch[i].Name.Split('_')[1];
+                                string sql1 = "select kategorii.pay from kategorii inner join prep using(kategid) where sotrid = " + windowObj.checkBoxArrStaffForAccrual[i].Name.Split('_')[1];
                                 NpgsqlCommand com1 = new NpgsqlCommand(sql1, con1);
                                 NpgsqlDataReader reader1 = com1.ExecuteReader();
                                 if (reader1.HasRows)
@@ -252,7 +252,7 @@ namespace WpfApp12.strategiesForBuhgalter.strategiesForBuhgalterWindButtonClick
                             {
                                 NpgsqlConnection con1 = new NpgsqlConnection(windowObj.connectionString);
                                 con1.Open();
-                                string sql1 = "select count(raspisanie.idrasp) from prep inner join raspisanie using(prepid) where prep.sotrid=" + windowObj.ChbxMas_SotrNuch[i].Name.Split('_')[1] + " and EXTRACT(Month FROM raspisanie.date)= " + windowObj.dateNuch.Month + " and EXTRACT(Year FROM  raspisanie.date)= " + windowObj.dateNuch.Year;
+                                string sql1 = "select count(raspisanie.idrasp) from prep inner join raspisanie using(prepid) where prep.sotrid=" + windowObj.checkBoxArrStaffForAccrual[i].Name.Split('_')[1] + " and EXTRACT(Month FROM raspisanie.date)= " + windowObj.dateAccrual.Month + " and EXTRACT(Year FROM  raspisanie.date)= " + windowObj.dateAccrual.Year;
                                 NpgsqlCommand com1 = new NpgsqlCommand(sql1, con1);
                                 NpgsqlDataReader reader1 = com1.ExecuteReader();
                                 if (reader1.HasRows)
@@ -268,7 +268,7 @@ namespace WpfApp12.strategiesForBuhgalter.strategiesForBuhgalterWindButtonClick
                             {
                                 NpgsqlConnection con1 = new NpgsqlConnection(windowObj.connectionString);
                                 con1.Open();
-                                string sql1 = "select koef from koef_vislugi where kol_year<=(select Extract(Year from age('" + windowObj.dateNuch.ToShortDateString().Replace('.', '-') + "',prep.date_start)) from prep where sotrid = " + windowObj.ChbxMas_SotrNuch[i].Name.Split('_')[1] + ") order by kol_year desc limit 1";
+                                string sql1 = "select koef from koef_vislugi where kol_year<=(select Extract(Year from age('" + windowObj.dateAccrual.ToShortDateString().Replace('.', '-') + "',prep.date_start)) from prep where sotrid = " + windowObj.checkBoxArrStaffForAccrual[i].Name.Split('_')[1] + ") order by kol_year desc limit 1";
                                 NpgsqlCommand com1 = new NpgsqlCommand(sql1, con1);
                                 NpgsqlDataReader reader1 = com1.ExecuteReader();
                                 if (reader1.HasRows)
@@ -294,7 +294,7 @@ namespace WpfApp12.strategiesForBuhgalter.strategiesForBuhgalterWindButtonClick
                             {
                                 NpgsqlConnection con1 = new NpgsqlConnection(windowObj.connectionString);
                                 con1.Open();
-                                string sql1 = "select count(shraspid) from shtatrasp where shtatid @> ARRAY[" + windowObj.ChbxMas_SotrNuch[i].Name.Split('_')[1] + "] and extract(Year from date)=" + windowObj.dateNuch.Year + " and extract(Month from date)=" + windowObj.dateNuch.Month;
+                                string sql1 = "select count(shraspid) from shtatrasp where shtatid @> ARRAY[" + windowObj.checkBoxArrStaffForAccrual[i].Name.Split('_')[1] + "] and extract(Year from date)=" + windowObj.dateAccrual.Year + " and extract(Month from date)=" + windowObj.dateAccrual.Month;
                                 NpgsqlCommand com1 = new NpgsqlCommand(sql1, con1);
                                 NpgsqlDataReader reader1 = com1.ExecuteReader();
                                 if (reader1.HasRows)
@@ -312,7 +312,7 @@ namespace WpfApp12.strategiesForBuhgalter.strategiesForBuhgalterWindButtonClick
                             {
                                 NpgsqlConnection con11 = new NpgsqlConnection(windowObj.connectionString);
                                 con11.Open();
-                                string sql11 = "select array_to_string(states,'_'),array_to_string(stavky,'_'),array_to_string(obslwork,'_'),array_to_string(obem,'_') from shtat where sotrid =" + windowObj.ChbxMas_SotrNuch[i].Name.Split('_')[1];
+                                string sql11 = "select array_to_string(states,'_'),array_to_string(stavky,'_'),array_to_string(obslwork,'_'),array_to_string(obem,'_') from shtat where sotrid =" + windowObj.checkBoxArrStaffForAccrual[i].Name.Split('_')[1];
                                 NpgsqlCommand com11 = new NpgsqlCommand(sql11, con11);
                                 NpgsqlDataReader reader11 = com11.ExecuteReader();
                                 if (reader11.HasRows)
@@ -332,7 +332,7 @@ namespace WpfApp12.strategiesForBuhgalter.strategiesForBuhgalterWindButtonClick
                                             {
                                                 NpgsqlConnection con2 = new NpgsqlConnection(windowObj.connectionString);
                                                 con2.Open();
-                                                string sql2 = "select zp, kol_work_day[" + windowObj.dateNuch.Month + "] from states where statesid =" + statesStr[j];
+                                                string sql2 = "select zp, kol_work_day[" + windowObj.dateAccrual.Month + "] from states where statesid =" + statesStr[j];
                                                 NpgsqlCommand com2 = new NpgsqlCommand(sql2, con2);
                                                 NpgsqlDataReader reader2 = com2.ExecuteReader();
                                                 if (reader2.HasRows)
@@ -407,7 +407,7 @@ namespace WpfApp12.strategiesForBuhgalter.strategiesForBuhgalterWindButtonClick
                             {
                                 NpgsqlConnection con1 = new NpgsqlConnection(windowObj.connectionString);
                                 con1.Open();
-                                string sql1 = "INSERT INTO nachisl(sotrid, prepzp, shtatzp, obslzp, viplacheno, payday,vs, fss, ndfl) VALUES (" + windowObj.ChbxMas_SotrNuch[i].Name.Split('_')[1] + ", " + prep_zp.ToString().Replace(',', '.') + " , " + payShtat.ToString().Replace(',', '.') + ", " + payObsl.ToString().Replace(',', '.') + ", 0, '" + windowObj.dateNuch.ToShortDateString().Replace('.', '-') + "', " + vs.ToString().Replace(',', '.') + ", " + fss.ToString().Replace(',', '.') + ", " + ndfl.ToString().Replace(',', '.') + ")";
+                                string sql1 = "INSERT INTO nachisl(sotrid, prepzp, shtatzp, obslzp, viplacheno, payday,vs, fss, ndfl) VALUES (" + windowObj.checkBoxArrStaffForAccrual[i].Name.Split('_')[1] + ", " + prep_zp.ToString().Replace(',', '.') + " , " + payShtat.ToString().Replace(',', '.') + ", " + payObsl.ToString().Replace(',', '.') + ", 0, '" + windowObj.dateAccrual.ToShortDateString().Replace('.', '-') + "', " + vs.ToString().Replace(',', '.') + ", " + fss.ToString().Replace(',', '.') + ", " + ndfl.ToString().Replace(',', '.') + ")";
                                 NpgsqlCommand com1 = new NpgsqlCommand(sql1, con1);
                                 com1.ExecuteNonQuery();
                                 con1.Close();
@@ -422,7 +422,7 @@ namespace WpfApp12.strategiesForBuhgalter.strategiesForBuhgalterWindButtonClick
             }
             windowObj.NachDataGrid.SelectedItem = null;
             windowObj.ViplataBut.IsEnabled = false;
-            DataGridUpdater.updateGridNachZp(windowObj.connectionString, windowObj.NachMonthLabel, windowObj.ChbxMas_SotrNuch, windowObj.NachSotrGrid, windowObj.NachDataGrid, windowObj.dateNuch);
+            DataGridUpdater.updateGridNachZp(windowObj.connectionString, windowObj.NachMonthLabel, windowObj.checkBoxArrStaffForAccrual, windowObj.NachSotrGrid, windowObj.NachDataGrid, windowObj.dateAccrual);
         }
     }
 }

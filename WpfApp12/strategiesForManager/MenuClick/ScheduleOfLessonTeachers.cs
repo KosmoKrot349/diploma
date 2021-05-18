@@ -9,9 +9,9 @@ namespace WpfApp12.strategiesForManager.MenuClick
 {
     class ScheduleOfLessonTeachers:IMenuClick
     {
-        DirectorWindow window;
+        ManagerWindow window;
 
-        public ScheduleOfLessonTeachers(DirectorWindow window)
+        public ScheduleOfLessonTeachers(ManagerWindow window)
         {
             this.window = window;
         }

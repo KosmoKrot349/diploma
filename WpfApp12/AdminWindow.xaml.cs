@@ -14,15 +14,15 @@ namespace WpfApp12
     /// </summary>
     public partial class AdminWindow : Window
     {
-        public int adminR = 0;
-        public int rykR = 0;
-        public int buhgR = 0;
-        public int uID = 0;
+        public int adminRole = 0;
+        public int managerRole = 0;
+        public int bookkeeperRole = 0;
+        public int userID = 0;
         public int logUser;
         public string FIO = "";
         //строка подключения
         public string connectionString = "";
-        public filtr filtr = new filtr();
+        public filtr filter = new filtr();
         //+
         public AdminWindow()
         {
@@ -33,9 +33,9 @@ namespace WpfApp12
             {
                 ls.Add(reader.ReadLine());
             }
-            object[] mas = ls.ToArray();
-            connectionString = "Server=" + mas[0].ToString().Split(':')[1] + ";Port=" + mas[2].ToString().Split(':')[1] + ";User Id=postgres;Password=" + mas[1].ToString().Split(':')[1] + ";Database=db";
-            filtr.connectionString = connectionString;
+            object[] arr = ls.ToArray();
+            connectionString = "Server=" + arr[0].ToString().Split(':')[1] + ";Port=" + arr[2].ToString().Split(':')[1] + ";User Id=postgres;Password=" + arr[1].ToString().Split(':')[1] + ";Database=db";
+            filter.connectionString = connectionString;
             MenuRolesA.BorderBrush = null;
             usersMenu.BorderBrush = null;
             arhivMenu.BorderBrush = null;
@@ -77,32 +77,32 @@ namespace WpfApp12
         //Выбор роли админа для пользователя+
         private void adm_Checked(object sender, RoutedEventArgs e)
         {
-            adminR = 1;
+            adminRole = 1;
         }
         //Выбор роли админа для пользователя+
         private void adm_Unchecked(object sender, RoutedEventArgs e)
         {
-            adminR = 0;
+            adminRole = 0;
         }
         //Выбор роли бухгалтера для пользователя+
         private void bh_Unchecked(object sender, RoutedEventArgs e)
         {
-            buhgR = 0;
+            bookkeeperRole = 0;
         }
         //Выбор роли бухгалтера для пользователя+
         private void bh_Checked(object sender, RoutedEventArgs e)
         {
-            buhgR = 1;
+            bookkeeperRole = 1;
         }
         //Выбор роли директора для пользователя+
         private void dr_Checked(object sender, RoutedEventArgs e)
         {
-            rykR = 1;
+            managerRole = 1;
         }
         //Выбор роли директора для пользователя+
         private void dr_Unchecked(object sender, RoutedEventArgs e)
         {
-            rykR = 0;
+            managerRole = 0;
         }
         //Переход к окну регистрации+
         private void useradd_menu_Click(object sender, RoutedEventArgs e)
@@ -203,23 +203,7 @@ namespace WpfApp12
             IButtonClick actReact = new ConnectionCheck(this);
             actReact.buttonClick();
         }
-        //сохранение настроек+
-        public void saveSettings()
-        {
-            object[] mas = new object[4];
-
-            mas[0] = "conn:"+connect.Text;
-            mas[1] = "pass:"+dbPassText.Text;
-            mas[2] = "port:" + dbPortText.Text;
-
-            StreamWriter writer = new StreamWriter(@"setting.txt");
-            writer.WriteLine(mas[0]); writer.WriteLine(mas[1]); writer.WriteLine(mas[2]); writer.WriteLine(mas[3]);
-            writer.Close();
-
-            connectionString = "Server=" + connect.Text + ";Port=" + dbPortText.Text + ";User Id=postgres;Password=" + dbPassText.Text + ";Database=db";
-
-          MessageBox.Show("Настройки сохранены и применены");
-        }
+        
         //принудительное сохранение+
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {

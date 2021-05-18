@@ -9,9 +9,9 @@ namespace WpfApp12.strategiesForManager.MenuClick
 {
     class WorkCoeffMenu:IMenuClick
     {
-        DirectorWindow window;
+        ManagerWindow window;
 
-        public WorkCoeffMenu(DirectorWindow window)
+        public WorkCoeffMenu(ManagerWindow window)
         {
             this.window = window;
         }

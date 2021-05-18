@@ -6,13 +6,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace WpfApp12.strategiesForBuhgalter.strategiesForBuhgalterWindButtonClick
+namespace WpfApp12.strategiesForBookkeeper.ButtonClick
 {
     class AddCosts:IButtonClick
     {
-        BuhgalterWindow windowObj;
+        BookkeeperWindow windowObj;
 
-        public AddCosts(BuhgalterWindow windowObj)
+        public AddCosts(BookkeeperWindow windowObj)
         {
             this.windowObj = windowObj;
         }
@@ -43,7 +43,7 @@ namespace WpfApp12.strategiesForBuhgalter.strategiesForBuhgalterWindButtonClick
             {
                 windowObj.HideAll();
                 windowObj.RoshodyGrid.Visibility = Visibility.Visible;
-                DataGridUpdater.updateDataGridRashody(windowObj.connectionString, windowObj.filtr.sql, windowObj.RoshodyDataGrid);
+                DataGridUpdater.updateDataGridRashody(windowObj.connectionString, windowObj.filter.sql, windowObj.RoshodyDataGrid);
             }
 
             windowObj.RoshodyDataGrid.SelectedItem = null;

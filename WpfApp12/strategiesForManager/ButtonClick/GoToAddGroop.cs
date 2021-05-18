@@ -10,9 +10,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 {
     class GoToAddGroop:IButtonClick
     {
-        DirectorWindow windowObj;
+        ManagerWindow windowObj;
 
-        public GoToAddGroop(DirectorWindow windowObj)
+        public GoToAddGroop(ManagerWindow windowObj)
         {
             this.windowObj = windowObj;
         }

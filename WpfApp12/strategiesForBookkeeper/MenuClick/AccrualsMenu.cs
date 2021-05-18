@@ -5,42 +5,43 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 
-namespace WpfApp12.strategiesForBuhgalter.strategiesForBuhgalterWindButtonClick
+namespace WpfApp12.strategiesForBookkeeper.MenuClick
 {
-    class GoToPayment:IButtonClick
+    class AccrualsMenu:IMenuClick
     {
-        BuhgalterWindow windowObj;
+        BookkeeperWindow windowObj;
 
-        public GoToPayment(BuhgalterWindow windowObj)
+        public AccrualsMenu(BookkeeperWindow windowObj)
         {
             this.windowObj = windowObj;
         }
 
-        public void ButtonClick()
+        public void MenuClick()
         {
             windowObj.HideAll();
-            windowObj.OplataGrid.Visibility = Visibility.Visible;
-            windowObj.Groups.Items.Clear();
+            windowObj.GlNachGrid.Visibility = Visibility.Visible;
+            windowObj.dateAccrual = DateTime.Now;
             try
             {
                 NpgsqlConnection con = new NpgsqlConnection(windowObj.connectionString);
                 con.Open();
-                string sql = "select nazvanie from groups where grid in (select distinct grid from listnuch) order by grid";
+                string sql = "select count(sotrid) from sotrudniki where sotrid in (select sotrid from shtat) or sotrid in (select sotrid from prep)";
                 NpgsqlCommand com = new NpgsqlCommand(sql, con);
                 NpgsqlDataReader reader = com.ExecuteReader();
                 if (reader.HasRows)
                 {
                     while (reader.Read())
                     {
-                        windowObj.Groups.Items.Add(reader.GetString(0));
+                        windowObj.checkBoxArrStaffForAccrual = new CheckBox[reader.GetInt32(0)];
                     }
-                    windowObj.Groups.SelectedIndex = 0;
                 }
                 con.Close();
-
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
+
+            DataGridUpdater.updateGridNachZp(windowObj.connectionString, windowObj.NachMonthLabel, windowObj.checkBoxArrStaffForAccrual, windowObj.NachSotrGrid, windowObj.NachDataGrid, windowObj.dateAccrual);
         }
     }
 }

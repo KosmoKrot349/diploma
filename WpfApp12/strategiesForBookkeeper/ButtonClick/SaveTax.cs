@@ -6,13 +6,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace WpfApp12.strategiesForBuhgalter.strategiesForBuhgalterWindButtonClick
+namespace WpfApp12.strategiesForBookkeeper.ButtonClick
 {
     class SaveTax:IButtonClick
     {
-        BuhgalterWindow windowObj;
+        BookkeeperWindow windowObj;
 
-        public SaveTax(BuhgalterWindow windowObj)
+        public SaveTax(BookkeeperWindow windowObj)
         {
             this.windowObj = windowObj;
         }

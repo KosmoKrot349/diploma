@@ -11,9 +11,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 {
     class DeleteListener:IButtonClick
     {
-        DirectorWindow windowObj;
+        ManagerWindow windowObj;
 
-        public DeleteListener(DirectorWindow windowObj)
+        public DeleteListener(ManagerWindow windowObj)
         {
             this.windowObj = windowObj;
         }

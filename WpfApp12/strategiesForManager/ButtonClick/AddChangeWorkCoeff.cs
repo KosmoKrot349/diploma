@@ -12,9 +12,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 {
     class AddChangeWorkCoeff:IButtonClick
     {
-        DirectorWindow windowObj;
+        ManagerWindow windowObj;
 
-        public AddChangeWorkCoeff(DirectorWindow windowObj)
+        public AddChangeWorkCoeff(ManagerWindow windowObj)
         {
             this.windowObj = windowObj;
         }

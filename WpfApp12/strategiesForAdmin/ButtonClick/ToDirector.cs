@@ -24,7 +24,7 @@ namespace WpfApp12.strategiesForAdmin
 
             if (d == 1 || windowObj.logUser == -1)
             {
-                DirectorWindow wind = new DirectorWindow();
+                ManagerWindow wind = new ManagerWindow();
                 try
                 {
                     NpgsqlConnection connection = new NpgsqlConnection(windowObj.connectionString);

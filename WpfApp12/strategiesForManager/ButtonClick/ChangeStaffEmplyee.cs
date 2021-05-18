@@ -10,9 +10,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 {
     class ChangeStaffEmplyee:IButtonClick
     {
-        DirectorWindow windowObj;
+        ManagerWindow windowObj;
 
-        public ChangeStaffEmplyee(DirectorWindow windowObj)
+        public ChangeStaffEmplyee(ManagerWindow windowObj)
         {
             this.windowObj = windowObj;
         }
@@ -25,16 +25,16 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             string states = "'{ ";
             string stavki = "'{ ";
             bool b = false;
-            for (int i = 0; i < windowObj.chbxMas_obslwork.Length; i++)
+            for (int i = 0; i < windowObj.checkBoxArrServiceWorks.Length; i++)
             {
-                if (windowObj.chbxMas_obslwork[i].IsChecked == true && windowObj.tbxMas_obem[i].Text == "") { System.Windows.Forms.MessageBox.Show("Объём работ не заполнен"); return; }
-                else { if (windowObj.chbxMas_obslwork[i].IsChecked == true) { b = true; oblswork += windowObj.chbxMas_obslwork[i].Name.Split('_')[2] + ","; obem += windowObj.tbxMas_obem[i].Text.Replace(',', '.') + ","; } }
+                if (windowObj.checkBoxArrServiceWorks[i].IsChecked == true && windowObj.textBoxArrVolumeWork[i].Text == "") { System.Windows.Forms.MessageBox.Show("Объём работ не заполнен"); return; }
+                else { if (windowObj.checkBoxArrServiceWorks[i].IsChecked == true) { b = true; oblswork += windowObj.checkBoxArrServiceWorks[i].Name.Split('_')[2] + ","; obem += windowObj.textBoxArrVolumeWork[i].Text.Replace(',', '.') + ","; } }
             }
-            for (int i = 0; i < windowObj.chbxMas_state.Length; i++)
+            for (int i = 0; i < windowObj.checkBoxArrPositions.Length; i++)
             {
-                if (windowObj.chbxMas_state[i].IsChecked == true && windowObj.tbxMas_stavki[i].Text == "") { System.Windows.Forms.MessageBox.Show("Ставки не указаны"); return; }
+                if (windowObj.checkBoxArrPositions[i].IsChecked == true && windowObj.textBoxArrRate[i].Text == "") { System.Windows.Forms.MessageBox.Show("Ставки не указаны"); return; }
                 else
-                { if (windowObj.chbxMas_state[i].IsChecked == true) { b = true; states += windowObj.chbxMas_state[i].Name.Split('_')[2] + ","; stavki += windowObj.tbxMas_stavki[i].Text.Replace(',', '.') + ","; } }
+                { if (windowObj.checkBoxArrPositions[i].IsChecked == true) { b = true; states += windowObj.checkBoxArrPositions[i].Name.Split('_')[2] + ","; stavki += windowObj.textBoxArrRate[i].Text.Replace(',', '.') + ","; } }
             }
             if (b == false) { MessageBox.Show("Выберите хотя бы одну должность или работу для сотрудника"); return; }
 
@@ -48,7 +48,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             {
                 NpgsqlConnection con = new NpgsqlConnection(windowObj.connectionString);
                 con.Open();
-                string sql = "UPDATE shtat SET  states=" + states + ", stavky=" + stavki + ", obslwork=" + oblswork + ", obem=" + obem + " WHERE shtatid = " + windowObj.ShtatID;
+                string sql = "UPDATE shtat SET  states=" + states + ", stavky=" + stavki + ", obslwork=" + oblswork + ", obem=" + obem + " WHERE shtatid = " + windowObj.staffID;
                 NpgsqlCommand com = new NpgsqlCommand(sql, con);
                 com.ExecuteNonQuery();
                 con.Close();
@@ -59,7 +59,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             {
                 NpgsqlConnection con = new NpgsqlConnection(windowObj.connectionString);
                 con.Open();
-                string sql = "UPDATE sotrudniki SET fio='" + windowObj.fioChangeShtat.Text + "' WHERE sotrid=(select sotrid from shtat where shtatid =" + windowObj.ShtatID + ")";
+                string sql = "UPDATE sotrudniki SET fio='" + windowObj.fioChangeShtat.Text + "' WHERE sotrid=(select sotrid from shtat where shtatid =" + windowObj.staffID + ")";
                 NpgsqlCommand com = new NpgsqlCommand(sql, con);
                 com.ExecuteNonQuery();
                 con.Close();

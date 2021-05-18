@@ -12,9 +12,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 {
     class AddChangeToTimeSchedule:IButtonClick
     {
-        DirectorWindow windowObj;
+        ManagerWindow windowObj;
 
-        public AddChangeToTimeSchedule(DirectorWindow windowObj)
+        public AddChangeToTimeSchedule(ManagerWindow windowObj)
         {
             this.windowObj = windowObj;
         }

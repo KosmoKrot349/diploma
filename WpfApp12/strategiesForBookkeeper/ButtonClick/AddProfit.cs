@@ -6,13 +6,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace WpfApp12.strategiesForBuhgalter.strategiesForBuhgalterWindButtonClick
+namespace WpfApp12.strategiesForBookkeeper.ButtonClick
 {
     class AddProfit:IButtonClick
     {
-        BuhgalterWindow windowObj;
+        BookkeeperWindow windowObj;
 
-        public AddProfit(BuhgalterWindow windowObj)
+        public AddProfit(BookkeeperWindow windowObj)
         {
             this.windowObj = windowObj;
         }
@@ -46,7 +46,7 @@ namespace WpfApp12.strategiesForBuhgalter.strategiesForBuhgalterWindButtonClick
                 windowObj.DohodyDataGrid.SelectedItem = null;
                 windowObj.DohDeleteButton.IsEnabled = false;
                 windowObj.DohChangeButton.IsEnabled = false;
-                DataGridUpdater.updateDataGridDohody(windowObj.connectionString, windowObj.filtr.sql, windowObj.DohodyDataGrid);
+                DataGridUpdater.updateDataGridDohody(windowObj.connectionString, windowObj.filter.sql, windowObj.DohodyDataGrid);
             }
         }
     }

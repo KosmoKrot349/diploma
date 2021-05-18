@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfApp12"
         mc:Ignorable="d"
-        Title="AdminWindow" Height="300" Width="300">
+        Title="Администратор" Height="300" Width="300">
     <Grid Name="glGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="15pt"/>

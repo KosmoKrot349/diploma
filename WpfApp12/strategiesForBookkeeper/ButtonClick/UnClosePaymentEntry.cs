@@ -5,14 +5,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using WpfApp12.strategiesForBookkeeper.OtherMethods;
 
-namespace WpfApp12.strategiesForBuhgalter.strategiesForBuhgalterWindButtonClick
+namespace WpfApp12.strategiesForBookkeeper.ButtonClick
 {
     class UnClosePaymentEntry:IButtonClick
     {
-        BuhgalterWindow windowObj;
+        BookkeeperWindow windowObj;
 
-        public UnClosePaymentEntry(BuhgalterWindow windowObj)
+        public UnClosePaymentEntry(BookkeeperWindow windowObj)
         {
             this.windowObj = windowObj;
         }
@@ -36,7 +37,7 @@ namespace WpfApp12.strategiesForBuhgalter.strategiesForBuhgalterWindButtonClick
                 MessageBox.Show("Запись успешно восстановлена");
 
 
-                windowObj.updateOplataTable(1);
+                updateDefraymentTable.Update(windowObj,1);
             }
         }
     }

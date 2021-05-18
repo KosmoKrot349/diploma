@@ -9,9 +9,9 @@ namespace WpfApp12.strategiesForManager.MenuClick
 {
     class TypeOfCostsMenu:IMenuClick
     {
-        DirectorWindow window;
+        ManagerWindow window;
 
-        public TypeOfCostsMenu(DirectorWindow window)
+        public TypeOfCostsMenu(ManagerWindow window)
         {
             this.window = window;
         }

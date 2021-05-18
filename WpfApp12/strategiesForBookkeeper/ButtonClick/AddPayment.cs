@@ -6,14 +6,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using WpfApp12.strategiesForBookkeeper.OtherMethods;
 
-namespace WpfApp12.strategiesForBuhgalter.strategiesForBuhgalterWindButtonClick
+namespace WpfApp12.strategiesForBookkeeper.ButtonClick
 {
     class AddPayment:IButtonClick
     {
-        BuhgalterWindow windowObj;
+        BookkeeperWindow windowObj;
 
-        public AddPayment(BuhgalterWindow windowObj)
+        public AddPayment(BookkeeperWindow windowObj)
         {
             this.windowObj = windowObj;
         }
@@ -63,8 +64,8 @@ namespace WpfApp12.strategiesForBuhgalter.strategiesForBuhgalterWindButtonClick
                             if (payformonthMasDouble[i] != 0)
                             {
 
-                                if (windowObj.masTbx[j].Text == "") oplMas[i] = 0;
-                                else { oplMas[i] = Convert.ToDouble(windowObj.masTbx[j].Text); }
+                                if (windowObj.textBoxArrForDefreyment[j].Text == "") oplMas[i] = 0;
+                                else { oplMas[i] = Convert.ToDouble(windowObj.textBoxArrForDefreyment[j].Text); }
                                 j++;
                                 continue;
 
@@ -163,7 +164,7 @@ namespace WpfApp12.strategiesForBuhgalter.strategiesForBuhgalterWindButtonClick
                 con.Close();
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных4"); return; }
-            windowObj.updateOplataTable(1);
+            updateDefraymentTable.Update(windowObj,1);
         }
     }
 }

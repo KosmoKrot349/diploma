@@ -10,9 +10,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 {
     class EmployeeToTeacher:IButtonClick
     {
-        DirectorWindow windowObj;
+        ManagerWindow windowObj;
 
-        public EmployeeToTeacher(DirectorWindow windowObj)
+        public EmployeeToTeacher(ManagerWindow windowObj)
         {
             this.windowObj = windowObj;
         }
@@ -46,7 +46,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 
                 NpgsqlConnection con = new NpgsqlConnection(windowObj.connectionString);
                 con.Open();
-                string sql = "INSERT INTO prep(kategid, date_start, sotrid) VALUES(" + kategID + ", '" + windowObj.dateStart.Text + "', " + windowObj.sotrID + ")";
+                string sql = "INSERT INTO prep(kategid, date_start, sotrid) VALUES(" + kategID + ", '" + windowObj.dateStart.Text + "', " + windowObj.employeeID + ")";
                 NpgsqlCommand command = new NpgsqlCommand(sql, con);
                 NpgsqlDataReader reader = command.ExecuteReader();
                 con.Close();
@@ -54,7 +54,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
             MessageBox.Show("Сотрудник определён как преподаватель");
-            DataGridUpdater.updateDataGridSotr(windowObj.connectionString, windowObj.sqlAllSotr, windowObj.allSotrDataGrid);
+            DataGridUpdater.updateDataGridSotr(windowObj.connectionString, windowObj.sqlForAllEmployees, windowObj.allSotrDataGrid);
             windowObj.HideAll();
             windowObj.allSotrGrid.Visibility = Visibility.Visible;
         }

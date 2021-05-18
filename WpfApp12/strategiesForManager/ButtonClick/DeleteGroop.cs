@@ -11,9 +11,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 {
     class DeleteGroop:IButtonClick
     {
-        DirectorWindow windowObj;
+        ManagerWindow windowObj;
 
-        public DeleteGroop(DirectorWindow windowObj)
+        public DeleteGroop(ManagerWindow windowObj)
         {
             this.windowObj = windowObj;
         }

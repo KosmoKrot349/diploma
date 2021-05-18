@@ -12,9 +12,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 {
     class AddEmployee:IButtonClick
     {
-        DirectorWindow windoObj;
+        ManagerWindow windoObj;
 
-        public AddEmployee(DirectorWindow windoObj)
+        public AddEmployee(ManagerWindow windoObj)
         {
             this.windoObj = windoObj;
         }
@@ -53,7 +53,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             windoObj.allSotrDeleteButton.IsEnabled = false;
             windoObj.allSotrToPrepBtton.IsEnabled = false;
             windoObj.allSotrToShtatBtton.IsEnabled = false;
-            DataGridUpdater.updateDataGridSotr(windoObj.connectionString, windoObj.sqlAllSotr, windoObj.allSotrDataGrid);
+            DataGridUpdater.updateDataGridSotr(windoObj.connectionString, windoObj.sqlForAllEmployees, windoObj.allSotrDataGrid);
         }
     }
 }

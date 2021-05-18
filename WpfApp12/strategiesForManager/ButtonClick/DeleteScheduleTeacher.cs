@@ -11,21 +11,21 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 {
     class DeleteScheduleTeacher:IButtonClick
     {
-        DirectorWindow windowObj;
+        ManagerWindow windowObj;
 
-        public DeleteScheduleTeacher(DirectorWindow windowObj)
+        public DeleteScheduleTeacher(ManagerWindow windowObj)
         {
             this.windowObj = windowObj;
         }
 
         public void ButtonClick()
         {
-            int prep = Convert.ToInt32(windowObj.lbmas[0, windowObj.jRaspLebale].Name.Split('_')[1]);
-            int lesNum = Convert.ToInt32(windowObj.lbmas[windowObj.iRaspLebale, 1].Content.ToString().Split('\n')[0]);
+            int prep = Convert.ToInt32(windowObj.labelArr[0, windowObj.jCoordScheduleLabel].Name.Split('_')[1]);
+            int lesNum = Convert.ToInt32(windowObj.labelArr[windowObj.iCoordScheduleLabel, 1].Content.ToString().Split('\n')[0]);
             int day = 0;
             for (int ii = 1; ii <= 7; ii++)
             {
-                if (ii * windowObj.m < windowObj.iRaspLebale) { day++; } else break;
+                if (ii * windowObj.quanLessonsInDay < windowObj.iCoordScheduleLabel) { day++; } else break;
             }
 
             try

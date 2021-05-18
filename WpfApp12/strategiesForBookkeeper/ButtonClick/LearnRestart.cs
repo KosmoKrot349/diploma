@@ -5,14 +5,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using WpfApp12.strategiesForBookkeeper.OtherMethods;
 
-namespace WpfApp12.strategiesForBuhgalter.strategiesForBuhgalterWindButtonClick
+namespace WpfApp12.strategiesForBookkeeper.ButtonClick
 {
     class LearnRestart:IButtonClick
     {
-        BuhgalterWindow windowObj;
+        BookkeeperWindow windowObj;
 
-        public LearnRestart(BuhgalterWindow windowObj)
+        public LearnRestart(BookkeeperWindow windowObj)
         {
             this.windowObj = windowObj;
         }
@@ -31,7 +32,7 @@ namespace WpfApp12.strategiesForBuhgalter.strategiesForBuhgalterWindButtonClick
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
            MessageBox.Show("Запись успешно восстановлена");
-            windowObj.updateOplataTable(1);
+            updateDefraymentTable.Update(windowObj,1);
         }
     }
 }

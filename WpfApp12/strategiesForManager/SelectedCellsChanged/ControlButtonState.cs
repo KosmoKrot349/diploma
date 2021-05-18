@@ -8,9 +8,9 @@ namespace WpfApp12.strategiesForManager.SelectedChanged
 {
     class ControlButtonState:ISelectedChanged
     {
-        DirectorWindow window;
+        ManagerWindow window;
 
-        public ControlButtonState(DirectorWindow window)
+        public ControlButtonState(ManagerWindow window)
         {
             this.window = window;
         }

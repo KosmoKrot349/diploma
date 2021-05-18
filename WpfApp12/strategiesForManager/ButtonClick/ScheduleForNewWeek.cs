@@ -12,10 +12,10 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 {
     class ScheduleForNewWeek:IButtonClick
     {
-        DirectorWindow windowObj;
+        ManagerWindow windowObj;
         object sender;
 
-        public ScheduleForNewWeek(DirectorWindow windowObj, object sender)
+        public ScheduleForNewWeek(ManagerWindow windowObj, object sender)
         {
             this.windowObj = windowObj;
             this.sender = sender;

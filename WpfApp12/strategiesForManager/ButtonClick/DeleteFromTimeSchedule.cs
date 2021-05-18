@@ -11,9 +11,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 {
     class DeleteFromTimeSchedule:IButtonClick
     {
-        DirectorWindow windowObj;
+        ManagerWindow windowObj;
 
-        public DeleteFromTimeSchedule(DirectorWindow windowObj)
+        public DeleteFromTimeSchedule(ManagerWindow windowObj)
         {
             this.windowObj = windowObj;
         }

@@ -24,7 +24,7 @@ namespace WpfApp12.strategiesForAdmin
             DataRow DR = DRV.Row;
 
             object[] arr = DR.ItemArray;
-            windowObj.uID = Convert.ToInt32(arr[0]);
+            windowObj.userID = Convert.ToInt32(arr[0]);
             windowObj.hideAll();
             windowObj.userChangeGrid.Visibility = Visibility.Visible;
             windowObj.uCFio.Text = arr[1].ToString();

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WpfApp12.strategiesForBuhgalter.strategiesForBuhgalterSelectionChanged
+namespace WpfApp12.strategiesForBookkeeper.SelectionChanged
 {
     interface ISelectionChanged
     {

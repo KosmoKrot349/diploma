@@ -17,8 +17,8 @@ namespace WpfApp12.strategiesForAdmin
 
         public void buttonClick()
         {
-            windowObj.filtr.ApplyUsersFiltr();
-            DataGridUpdater.updateDataGridUsers(windowObj.connectionString, windowObj.filtr.sql, windowObj.usersDGrid);
+            windowObj.filter.ApplyUsersFiltr();
+            DataGridUpdater.updateDataGridUsers(windowObj.connectionString, windowObj.filter.sql, windowObj.usersDGrid);
         }
     }
 }

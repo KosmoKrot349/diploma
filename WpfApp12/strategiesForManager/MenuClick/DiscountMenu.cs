@@ -11,9 +11,9 @@ namespace WpfApp12.strategiesForManager.MenuClick
 {
     class DiscountMenu:IMenuClick
     {
-        DirectorWindow windowObj;
+        ManagerWindow windowObj;
 
-        public DiscountMenu(DirectorWindow windowObj)
+        public DiscountMenu(ManagerWindow windowObj)
         {
             this.windowObj = windowObj;
         }

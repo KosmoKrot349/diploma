@@ -9,9 +9,9 @@ namespace WpfApp12.strategiesForManager.MenuClick
 {
     class EmploeesMenu:IMenuClick
     {
-        DirectorWindow windowObj;
+        ManagerWindow windowObj;
 
-        public EmploeesMenu(DirectorWindow windowObj)
+        public EmploeesMenu(ManagerWindow windowObj)
         {
             this.windowObj = windowObj;
         }
@@ -20,8 +20,8 @@ namespace WpfApp12.strategiesForManager.MenuClick
         {
             windowObj.HideAll();
             windowObj.allSotrGrid.Visibility = Visibility.Visible;
-            windowObj.sqlAllSotr = "SELECT * FROM sotrudniki";
-            DataGridUpdater.updateDataGridSotr(windowObj.connectionString, windowObj.sqlAllSotr, windowObj.allSotrDataGrid);
+            windowObj.sqlForAllEmployees = "SELECT * FROM sotrudniki";
+            DataGridUpdater.updateDataGridSotr(windowObj.connectionString, windowObj.sqlForAllEmployees, windowObj.allSotrDataGrid);
         }
     }
 }

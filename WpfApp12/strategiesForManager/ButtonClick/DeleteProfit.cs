@@ -11,9 +11,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 {
     class DeleteProfit:IButtonClick
     {
-        DirectorWindow windowObj;
+        ManagerWindow windowObj;
 
-        public DeleteProfit(DirectorWindow windowObj)
+        public DeleteProfit(ManagerWindow windowObj)
         {
             this.windowObj = windowObj;
         }

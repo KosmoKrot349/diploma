@@ -11,9 +11,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 {
     class GoToEmployeeToTeacher:IButtonClick
     {
-        DirectorWindow windowObj;
+        ManagerWindow windowObj;
 
-        public GoToEmployeeToTeacher(DirectorWindow windowObj)
+        public GoToEmployeeToTeacher(ManagerWindow windowObj)
         {
             this.windowObj = windowObj;
         }
@@ -24,12 +24,12 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             if (DRV == null) { MessageBox.Show("Добавление прервано, Вы не выбрали сотрудника."); return; }
             DataRow DR = DRV.Row;
             object[] arr = DR.ItemArray;
-            windowObj.sotrID = Convert.ToInt32(arr[0]);
+            windowObj.employeeID = Convert.ToInt32(arr[0]);
             try
             {
                 NpgsqlConnection con = new NpgsqlConnection(windowObj.connectionString);
                 con.Open();
-                string sql = "select prepid from prep where sotrid=" + windowObj.sotrID;
+                string sql = "select prepid from prep where sotrid=" + windowObj.employeeID;
                 NpgsqlCommand command = new NpgsqlCommand(sql, con);
                 NpgsqlDataReader reader = command.ExecuteReader();
                 if (reader.HasRows)

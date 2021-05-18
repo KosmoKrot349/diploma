@@ -11,9 +11,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 {
     class DeleteWorkCoeff:IButtonClick
     {
-        DirectorWindow windowObj;
+        ManagerWindow windowObj;
 
-        public DeleteWorkCoeff(DirectorWindow windowObj)
+        public DeleteWorkCoeff(ManagerWindow windowObj)
         {
             this.windowObj = windowObj;
         }

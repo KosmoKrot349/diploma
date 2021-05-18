@@ -11,9 +11,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 {
     class AddListener:IButtonClick
     {
-        DirectorWindow windowObj;
+        ManagerWindow windowObj;
 
-        public AddListener(DirectorWindow windowobj)
+        public AddListener(ManagerWindow windowobj)
         {
             this.windowObj = windowobj;
         }
@@ -25,14 +25,14 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             string grLgMas = "'{";
             ArrayList ls = new ArrayList();
             string sql = "select grid from groups where ";
-            for (int i = 0; i < windowObj.chbxMas_gr_lg.Length; i++)
+            for (int i = 0; i < windowObj.checkBoxArrForListeners.Length; i++)
             {
-                if (windowObj.chbxMas_gr_lg[i].IsChecked == true)
+                if (windowObj.checkBoxArrForListeners[i].IsChecked == true)
                 {
                     b = true;
-                    sql += "nazvanie='" + windowObj.chbxMas_gr_lg[i].Content.ToString().Substring(0, windowObj.chbxMas_gr_lg[i].Content.ToString().Length - 9) + "' or ";
-                    if (windowObj.tbxMas_gr_lg[i].Text != "" && Convert.ToDouble(windowObj.tbxMas_gr_lg[i].Text) > 100) { MessageBox.Show("Процент не может быть больше 100"); return; }
-                    if (windowObj.tbxMas_gr_lg[i].Text != "") grLgMas += Convert.ToDouble(windowObj.tbxMas_gr_lg[i].Text).ToString().Replace(',', '.') + ",";
+                    sql += "nazvanie='" + windowObj.checkBoxArrForListeners[i].Content.ToString().Substring(0, windowObj.checkBoxArrForListeners[i].Content.ToString().Length - 9) + "' or ";
+                    if (windowObj.textBoxArrForListeners[i].Text != "" && Convert.ToDouble(windowObj.textBoxArrForListeners[i].Text) > 100) { MessageBox.Show("Процент не может быть больше 100"); return; }
+                    if (windowObj.textBoxArrForListeners[i].Text != "") grLgMas += Convert.ToDouble(windowObj.textBoxArrForListeners[i].Text).ToString().Replace(',', '.') + ",";
                     else
                         grLgMas += "0,";
                 }
@@ -178,8 +178,8 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                 windowObj.listenerFIO.Text = "";
                 windowObj.listenerPhones.Text = "";
                 windowObj.listenerComm.Text = "";
-                for (int i = 0; i < windowObj.chbxMas_gr_lg.Length; i++)
-                { windowObj.chbxMas_gr_lg[i].IsChecked = false; }
+                for (int i = 0; i < windowObj.checkBoxArrForListeners.Length; i++)
+                { windowObj.checkBoxArrForListeners[i].IsChecked = false; }
             }
             if (res == MessageBoxResult.No)
             {

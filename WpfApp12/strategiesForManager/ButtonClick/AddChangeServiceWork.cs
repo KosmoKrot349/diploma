@@ -12,9 +12,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 {
     class AddChangeServiceWork:IButtonClick
     {
-        DirectorWindow windowObj;
+        ManagerWindow windowObj;
 
-        public AddChangeServiceWork(DirectorWindow windowObj)
+        public AddChangeServiceWork(ManagerWindow windowObj)
         {
             this.windowObj = windowObj;
         }

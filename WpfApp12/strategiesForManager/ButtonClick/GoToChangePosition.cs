@@ -11,9 +11,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 {
     class GoToChangePosition:IButtonClick
     {
-        DirectorWindow windowObj;
+        ManagerWindow windowObj;
 
-        public GoToChangePosition(DirectorWindow windowObj)
+        public GoToChangePosition(ManagerWindow windowObj)
         {
             this.windowObj = windowObj;
         }
@@ -24,7 +24,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             if (DRV == null) { MessageBox.Show("Изменение не возможно, Вы не выбрали запись."); return; }
             DataRow DR = DRV.Row;
             object[] arr = DR.ItemArray;
-            windowObj.stateID = (int)arr[0];
+            windowObj.positionID = (int)arr[0];
             try
             {
                 NpgsqlConnection con = new NpgsqlConnection(windowObj.connectionString);

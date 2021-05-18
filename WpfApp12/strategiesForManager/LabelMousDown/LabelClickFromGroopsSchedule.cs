@@ -10,10 +10,10 @@ namespace WpfApp12.strategiesForManager.LabelMousDown
 {
     class LabelClickFromGroopsSchedule:IMousDown
     {
-        DirectorWindow window;
+        ManagerWindow window;
         object sender;
 
-        public LabelClickFromGroopsSchedule(DirectorWindow window, object sender)
+        public LabelClickFromGroopsSchedule(ManagerWindow window, object sender)
         {
             this.window = window;
             this.sender = sender;
@@ -22,17 +22,17 @@ namespace WpfApp12.strategiesForManager.LabelMousDown
         public void MousDown()
         {
             Label l = sender as Label;
-            window.iRaspLebale = Convert.ToInt32(l.Name.Split('_')[1]);
-            window.jRaspLebale = Convert.ToInt32(l.Name.Split('_')[2]);
-            for (int i = 0; i < (window.m * 7) + 1; i++)
+            window.iCoordScheduleLabel = Convert.ToInt32(l.Name.Split('_')[1]);
+            window.jCoordScheduleLabel = Convert.ToInt32(l.Name.Split('_')[2]);
+            for (int i = 0; i < (window.quanLessonsInDay * 7) + 1; i++)
             {
-                for (int j = 1; j < window.n + 2; j++)
+                for (int j = 1; j < window.quanGroops + 2; j++)
                 {
                     if (i != 0 && j != 1)
-                        window.lbmas[i, j].Background = Brushes.White;
+                        window.labelArr[i, j].Background = Brushes.White;
                 }
             }
-            window.lbmas[window.iRaspLebale, window.jRaspLebale].Background = Brushes.Aqua;
+            window.labelArr[window.iCoordScheduleLabel, window.jCoordScheduleLabel].Background = Brushes.Aqua;
             window.DeleteRaspBut.IsEnabled = false;
             window.ChangeRaspBut.IsEnabled = false;
             window.AddRaspBut.IsEnabled = false;
@@ -42,8 +42,8 @@ namespace WpfApp12.strategiesForManager.LabelMousDown
             window.DeleteRaspButP.IsEnabled = false;
             window.ChangeRaspButP.IsEnabled = false;
             window.AddRaspButP.IsEnabled = false;
-            if (window.lbmas[window.iRaspLebale, window.jRaspLebale].Content.ToString() == "") { window.AddRaspBut.IsEnabled = true; window.AddRaspButС.IsEnabled = true; window.AddRaspButP.IsEnabled = true; }
-            if (window.lbmas[window.iRaspLebale, window.jRaspLebale].Content.ToString() != "")
+            if (window.labelArr[window.iCoordScheduleLabel, window.jCoordScheduleLabel].Content.ToString() == "") { window.AddRaspBut.IsEnabled = true; window.AddRaspButС.IsEnabled = true; window.AddRaspButP.IsEnabled = true; }
+            if (window.labelArr[window.iCoordScheduleLabel, window.jCoordScheduleLabel].Content.ToString() != "")
             {
                 window.DeleteRaspBut.IsEnabled = true;
                 window.ChangeRaspBut.IsEnabled = true;

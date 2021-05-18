@@ -12,10 +12,10 @@ namespace WpfApp12.strategiesForManager.LabelMousDown
 {
     class LabelClickFromStaffSchedule:IMousDown
     {
-        DirectorWindow window;
+        ManagerWindow window;
         object sender;
 
-        public LabelClickFromStaffSchedule(DirectorWindow window,object sender)
+        public LabelClickFromStaffSchedule(ManagerWindow window,object sender)
         {
             this.window = window;
             this.sender = sender;
@@ -27,7 +27,7 @@ namespace WpfApp12.strategiesForManager.LabelMousDown
             {
                 for (int j = 0; j < 7; j++)
                 {
-                    window.lbmas_shtatRasp[i, j].Background = Brushes.White;
+                    window.labelArrForStaffSchedule[i, j].Background = Brushes.White;
                 }
             }
 
@@ -36,11 +36,11 @@ namespace WpfApp12.strategiesForManager.LabelMousDown
             int index_j = Convert.ToInt32(lb.Name.Split('_')[2]);
             if (index_i != 0 && lb.Content.ToString() != "")
             {
-                window.lbmas_shtatRasp[index_i, index_j].Background = Brushes.Aqua;
+                window.labelArrForStaffSchedule[index_i, index_j].Background = Brushes.Aqua;
                 window.ShtatRaspSaveBut.IsEnabled = true;
-                for (int j = 0; j < window.chbxMas_stateRasp.Length; j++)
+                for (int j = 0; j < window.checkBoxArrForStaffSchedule.Length; j++)
                 {
-                    window.chbxMas_stateRasp[j].IsChecked = false;
+                    window.checkBoxArrForStaffSchedule[j].IsChecked = false;
 
                 }
                 try
@@ -58,9 +58,9 @@ namespace WpfApp12.strategiesForManager.LabelMousDown
                             string[] strSotrid = reader.GetString(0).Split('_');
                             for (int i = 0; i < strSotrid.Length; i++)
                             {
-                                for (int j = 0; j < window.chbxMas_stateRasp.Length; j++)
+                                for (int j = 0; j < window.checkBoxArrForStaffSchedule.Length; j++)
                                 {
-                                    if (strSotrid[i] == window.chbxMas_stateRasp[j].Name.Split('_')[1]) { window.chbxMas_stateRasp[j].IsChecked = true; }
+                                    if (strSotrid[i] == window.checkBoxArrForStaffSchedule[j].Name.Split('_')[1]) { window.checkBoxArrForStaffSchedule[j].IsChecked = true; }
 
                                 }
                             }

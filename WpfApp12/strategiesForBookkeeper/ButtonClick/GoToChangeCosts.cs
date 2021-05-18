@@ -7,13 +7,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace WpfApp12.strategiesForBuhgalter.strategiesForBuhgalterWindButtonClick
+namespace WpfApp12.strategiesForBookkeeper.ButtonClick
 {
     class GoToChangeCosts:IButtonClick
     {
-        BuhgalterWindow windowObj;
+        BookkeeperWindow windowObj;
 
-        public GoToChangeCosts(BuhgalterWindow window)
+        public GoToChangeCosts(BookkeeperWindow window)
         {
             this.windowObj = window;
         }
@@ -70,7 +70,7 @@ namespace WpfApp12.strategiesForBuhgalter.strategiesForBuhgalterWindButtonClick
                 con.Close();
             }
             catch { System.Windows.Forms.MessageBox.Show("Не удалось подклюситься к базе данных"); return; }
-            windowObj.RashodID = (int)arr[0];
+            windowObj.costID = (int)arr[0];
             windowObj.RashodyChangeSum.Text = arr[3].ToString();
             windowObj.RashodyChangeDate.Text = arr[4].ToString().Replace('/', '.');
             windowObj.RashodyChangeDesc.Text = arr[5].ToString();

@@ -10,9 +10,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 {
     class ChangeDiscounts:IButtonClick
     {
-        DirectorWindow windowObj;
+        ManagerWindow windowObj;
 
-        public ChangeDiscounts(DirectorWindow windowObj)
+        public ChangeDiscounts(ManagerWindow windowObj)
         {
             this.windowObj = windowObj;
         }

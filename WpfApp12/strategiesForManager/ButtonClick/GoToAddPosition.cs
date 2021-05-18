@@ -9,9 +9,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 {
     class GoToAddPosition:IButtonClick
     {
-        DirectorWindow windowObj;
+        ManagerWindow windowObj;
 
-        public GoToAddPosition(DirectorWindow windowObj)
+        public GoToAddPosition(ManagerWindow windowObj)
         {
             this.windowObj = windowObj;
         }

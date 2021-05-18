@@ -10,9 +10,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 {
     class GoToAdmin:IButtonClick
     {
-        DirectorWindow windowObj;
+        ManagerWindow windowObj;
 
-        public GoToAdmin(DirectorWindow windowObj)
+        public GoToAdmin(ManagerWindow windowObj)
         {
             this.windowObj = windowObj;
         }

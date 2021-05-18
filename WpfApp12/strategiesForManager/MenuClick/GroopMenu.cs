@@ -9,9 +9,9 @@ namespace WpfApp12.strategiesForManager.MenuClick
 {
     class GroopMenu:IMenuClick
     {
-        DirectorWindow windowObj;
+        ManagerWindow windowObj;
 
-        public GroopMenu(DirectorWindow windowObj)
+        public GroopMenu(ManagerWindow windowObj)
         {
             this.windowObj = windowObj;
         }

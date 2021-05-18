@@ -6,13 +6,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace WpfApp12.strategiesForBuhgalter.strategiesForBuhgalterWindButtonClick
+namespace WpfApp12.strategiesForBookkeeper.ButtonClick
 {
     class ChangeProfit : IButtonClick
     {
-        BuhgalterWindow windowObj;
+        BookkeeperWindow windowObj;
 
-        public ChangeProfit(BuhgalterWindow windowObj)
+        public ChangeProfit(BookkeeperWindow windowObj)
         {
             this.windowObj = windowObj;
         }
@@ -24,7 +24,7 @@ namespace WpfApp12.strategiesForBuhgalter.strategiesForBuhgalterWindButtonClick
             {
                 NpgsqlConnection con = new NpgsqlConnection(windowObj.connectionString);
                 con.Open();
-                string sql = "UPDATE dodhody SET idtype=(select idtype from typedohod where title='" + windowObj.DohodyChangeType.SelectedItem + "'), sum=" + windowObj.DohodyChangeSum.Text.Replace(',', '.') + ", data='" + windowObj.DohodyChangeDate.Text.Replace('.', '-') + "',fio='" + windowObj.dohChKtoVnesTb.Text + "' WHERE dohid= " + windowObj.DohodID;
+                string sql = "UPDATE dodhody SET idtype=(select idtype from typedohod where title='" + windowObj.DohodyChangeType.SelectedItem + "'), sum=" + windowObj.DohodyChangeSum.Text.Replace(',', '.') + ", data='" + windowObj.DohodyChangeDate.Text.Replace('.', '-') + "',fio='" + windowObj.dohChKtoVnesTb.Text + "' WHERE dohid= " + windowObj.profitID;
                 NpgsqlCommand com = new NpgsqlCommand(sql, con);
                 com.ExecuteNonQuery();
                 con.Close();
@@ -32,7 +32,7 @@ namespace WpfApp12.strategiesForBuhgalter.strategiesForBuhgalterWindButtonClick
             catch { System.Windows.Forms.MessageBox.Show("Не удалось подключиться к базе данных"); return; }
             windowObj.HideAll();
             windowObj.DohodyrGrid.Visibility = Visibility.Visible;
-            DataGridUpdater.updateDataGridDohody(windowObj.connectionString, windowObj.filtr.sql, windowObj.DohodyDataGrid);
+            DataGridUpdater.updateDataGridDohody(windowObj.connectionString, windowObj.filter.sql, windowObj.DohodyDataGrid);
         }
     }
 }

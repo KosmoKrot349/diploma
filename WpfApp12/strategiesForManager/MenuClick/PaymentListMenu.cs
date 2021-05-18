@@ -14,9 +14,9 @@ namespace WpfApp12.strategiesForManager.MenuClick
 {
     class PaymentListMenu:IMenuClick
     {
-        DirectorWindow window;
+        ManagerWindow window;
 
-        public PaymentListMenu(DirectorWindow window)
+        public PaymentListMenu(ManagerWindow window)
         {
             this.window = window;
         }

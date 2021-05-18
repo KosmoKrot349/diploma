@@ -11,9 +11,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 {
     class ChangeScheduleGroops:IButtonClick
     {
-        DirectorWindow windowObj;
+        ManagerWindow windowObj;
 
-        public ChangeScheduleGroops(DirectorWindow windowObj)
+        public ChangeScheduleGroops(ManagerWindow windowObj)
         {
             this.windowObj = windowObj;
         }
@@ -79,7 +79,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                 con.Close();
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
-            int grid = Convert.ToInt32(windowObj.lbmas[0, windowObj.jRaspLebale].Name.Split('_')[1]);
+            int grid = Convert.ToInt32(windowObj.labelArr[0, windowObj.jCoordScheduleLabel].Name.Split('_')[1]);
             int day = 0;
 
             switch (windowObj.raspChangeDayOfWeek.Text)

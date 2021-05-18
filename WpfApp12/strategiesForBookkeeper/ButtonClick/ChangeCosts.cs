@@ -6,13 +6,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace WpfApp12.strategiesForBuhgalter.strategiesForBuhgalterWindButtonClick
+namespace WpfApp12.strategiesForBookkeeper.ButtonClick
 {
     class ChangeCosts:IButtonClick
     {
-        BuhgalterWindow windowObj;
+        BookkeeperWindow windowObj;
 
-        public ChangeCosts(BuhgalterWindow windowObj)
+        public ChangeCosts(BookkeeperWindow windowObj)
         {
             this.windowObj = windowObj;
         }
@@ -24,7 +24,7 @@ namespace WpfApp12.strategiesForBuhgalter.strategiesForBuhgalterWindButtonClick
             {
                 NpgsqlConnection con = new NpgsqlConnection(windowObj.connectionString);
                 con.Open();
-                string sql = "UPDATE rashody SET typeid=(SELECT typeid FROM typerash where title='" + windowObj.RashodyChangeType.SelectedItem + "'), sotrid=(SELECT sotrid FROM sotrudniki where fio='" + windowObj.RashodyChangeFIO.SelectedItem + "'), summ=" + windowObj.RashodyChangeSum.Text.Replace(',', '.') + ", data='" + windowObj.RashodyChangeDate.Text.Replace('.', '-') + "', description='" + windowObj.RashodyChangeDesc.Text + "' WHERE rashid =" + windowObj.RashodID;
+                string sql = "UPDATE rashody SET typeid=(SELECT typeid FROM typerash where title='" + windowObj.RashodyChangeType.SelectedItem + "'), sotrid=(SELECT sotrid FROM sotrudniki where fio='" + windowObj.RashodyChangeFIO.SelectedItem + "'), summ=" + windowObj.RashodyChangeSum.Text.Replace(',', '.') + ", data='" + windowObj.RashodyChangeDate.Text.Replace('.', '-') + "', description='" + windowObj.RashodyChangeDesc.Text + "' WHERE rashid =" + windowObj.costID;
                 NpgsqlCommand com = new NpgsqlCommand(sql, con);
                 com.ExecuteNonQuery();
                 con.Close();
@@ -37,7 +37,7 @@ namespace WpfApp12.strategiesForBuhgalter.strategiesForBuhgalterWindButtonClick
             windowObj.RoshodyDataGrid.SelectedItem = null;
             windowObj.RashDeleteButton.IsEnabled = false;
             windowObj.RashChangeButton.IsEnabled = false;
-            DataGridUpdater.updateDataGridRashody(windowObj.connectionString, windowObj.filtr.sql, windowObj.RoshodyDataGrid);
+            DataGridUpdater.updateDataGridRashody(windowObj.connectionString, windowObj.filter.sql, windowObj.RoshodyDataGrid);
         }
     }
 }

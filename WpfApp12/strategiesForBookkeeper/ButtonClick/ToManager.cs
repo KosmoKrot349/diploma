@@ -6,13 +6,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace WpfApp12.strategiesForBuhgalter.strategiesForBuhgalterWindButtonClick
+namespace WpfApp12.strategiesForBookkeeper.ButtonClick
 {
     class ToManager:IButtonClick
     {
-        BuhgalterWindow windowObj;
+        BookkeeperWindow windowObj;
 
-        public ToManager(BuhgalterWindow windowObj)
+        public ToManager(BookkeeperWindow windowObj)
         {
             this.windowObj = windowObj;
         }
@@ -24,7 +24,7 @@ namespace WpfApp12.strategiesForBuhgalter.strategiesForBuhgalterWindButtonClick
 
             if (d == 1 || windowObj.logUser == -1)
             {
-                DirectorWindow wind = new DirectorWindow();
+                ManagerWindow wind = new ManagerWindow();
                 try
                 {
                     NpgsqlConnection connection = new NpgsqlConnection(windowObj.connectionString);

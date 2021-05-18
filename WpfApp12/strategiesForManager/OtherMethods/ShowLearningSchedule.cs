@@ -11,10 +11,10 @@ namespace WpfApp12.strategiesForManager.OtherMethods
 {
     public class ShowLearningSchedule
     {
-        public static void ShowForGroops(DateTime dm, DateTime ds,DirectorWindow window)
+        public static void ShowForGroops(DateTime dm, DateTime ds,ManagerWindow window)
         {
-            window.m = 0;//число зантий в дне
-            window.n = 0;//число групп
+            window.quanLessonsInDay = 0;//число зантий в дне
+            window.quanGroops = 0;//число групп
             window.LabelDateRasp.Content = "Расписание на " + dm.ToShortDateString() + " - " + ds.ToShortDateString();
             try
             {
@@ -27,13 +27,13 @@ namespace WpfApp12.strategiesForManager.OtherMethods
                 {
                     while (reader.Read())
                     {
-                        window.n = reader.GetInt32(0);
+                        window.quanGroops = reader.GetInt32(0);
                     }
                 }
                 con.Close();
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
-            if (window.n == 0) { MessageBox.Show("Нету групп"); return; }
+            if (window.quanGroops == 0) { MessageBox.Show("Нету групп"); return; }
             try
             {
                 NpgsqlConnection con = new NpgsqlConnection(window.connectionString);
@@ -45,34 +45,34 @@ namespace WpfApp12.strategiesForManager.OtherMethods
                 {
                     while (reader.Read())
                     {
-                        window.m = reader.GetInt32(0);
+                        window.quanLessonsInDay = reader.GetInt32(0);
                     }
                 }
                 con.Close();
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
-            if (window.m == 0) { MessageBox.Show("Нету занятий"); return; }
+            if (window.quanLessonsInDay == 0) { MessageBox.Show("Нету занятий"); return; }
             window.HideAll();
             window.DeleteRaspBut.IsEnabled = false;
             window.ChangeRaspBut.IsEnabled = false;
             window.AddRaspBut.IsEnabled = false;
             window.raspGridG.Visibility = Visibility.Visible;
-            window.lbmas = new Label[(window.m * 7) + 1, window.n + 2];
-            DataGridUpdater.updateGridRaspG(window.connectionString, window.tG, window.m, window.n, window.lbmas, dm, ds);
-            for (int i = 0; i < (window.m * 7) + 1; i++)
+            window.labelArr = new Label[(window.quanLessonsInDay * 7) + 1, window.quanGroops + 2];
+            DataGridUpdater.updateGridRaspG(window.connectionString, window.tG, window.quanLessonsInDay, window.quanGroops, window.labelArr, dm, ds);
+            for (int i = 0; i < (window.quanLessonsInDay * 7) + 1; i++)
             {
-                for (int j = 1; j < window.n + 2; j++)
+                for (int j = 1; j < window.quanGroops + 2; j++)
                 {
                     if (i != 0 && j != 1)
-                        window.lbmas[i, j].MouseDown += window.Label_MouseDown;
+                        window.labelArr[i, j].MouseDown += window.Label_MouseDown;
                 }
 
             }
         }
-        public static void ShowForTeachers(DateTime dm, DateTime ds,DirectorWindow window)
+        public static void ShowForTeachers(DateTime dm, DateTime ds,ManagerWindow window)
         {
-            window.m = 0;//число зантий в дне
-            window.n = 0;//число преподавателей
+            window.quanLessonsInDay = 0;//число зантий в дне
+            window.quanGroops = 0;//число преподавателей
             window.LabelDateRaspP.Content = "Расписание на " + dm.ToShortDateString() + " - " + ds.ToShortDateString();
             try
             {
@@ -85,13 +85,13 @@ namespace WpfApp12.strategiesForManager.OtherMethods
                 {
                     while (reader.Read())
                     {
-                        window.n = reader.GetInt32(0);
+                        window.quanGroops = reader.GetInt32(0);
                     }
                 }
                 con.Close();
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
-            if (window.n == 0) { MessageBox.Show("Нету преподавателей"); return; }
+            if (window.quanGroops == 0) { MessageBox.Show("Нету преподавателей"); return; }
             try
             {
                 NpgsqlConnection con = new NpgsqlConnection(window.connectionString);
@@ -103,34 +103,34 @@ namespace WpfApp12.strategiesForManager.OtherMethods
                 {
                     while (reader.Read())
                     {
-                        window.m = reader.GetInt32(0);
+                        window.quanLessonsInDay = reader.GetInt32(0);
                     }
                 }
                 con.Close();
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
-            if (window.m == 0) { MessageBox.Show("Нету занятий"); return; }
+            if (window.quanLessonsInDay == 0) { MessageBox.Show("Нету занятий"); return; }
             window.HideAll();
             window.DeleteRaspButP.IsEnabled = false;
             window.ChangeRaspButP.IsEnabled = false;
             window.AddRaspButP.IsEnabled = false;
             window.raspGridP.Visibility = Visibility.Visible;
-            window.lbmas = new Label[(window.m * 7) + 1, window.n + 2];
-            DataGridUpdater.updateGridRaspP(window.connectionString, window.tGp, window.m, window.n, window.lbmas, dm, ds);
-            for (int i = 0; i < (window.m * 7) + 1; i++)
+            window.labelArr = new Label[(window.quanLessonsInDay * 7) + 1, window.quanGroops + 2];
+            DataGridUpdater.updateGridRaspP(window.connectionString, window.tGp, window.quanLessonsInDay, window.quanGroops, window.labelArr, dm, ds);
+            for (int i = 0; i < (window.quanLessonsInDay * 7) + 1; i++)
             {
-                for (int j = 1; j < window.n + 2; j++)
+                for (int j = 1; j < window.quanGroops + 2; j++)
                 {
                     if (i != 0 && j != 1)
-                        window.lbmas[i, j].MouseDown += window.Label_MouseDown;
+                        window.labelArr[i, j].MouseDown += window.Label_MouseDown;
                 }
 
             }
         }
-        public static void ShowForCabinets(DateTime dm, DateTime ds,DirectorWindow window)
+        public static void ShowForCabinets(DateTime dm, DateTime ds,ManagerWindow window)
         {
-           window.m = 0;//число зантий в дне
-            window.n = 0;//число кабинетов
+           window.quanLessonsInDay = 0;//число зантий в дне
+            window.quanGroops = 0;//число кабинетов
             window.LabelDateRaspС.Content = "Расписание на " + dm.ToShortDateString() + " - " + ds.ToShortDateString();
             try
             {
@@ -143,13 +143,13 @@ namespace WpfApp12.strategiesForManager.OtherMethods
                 {
                     while (reader.Read())
                     {
-                        window.n = reader.GetInt32(0);
+                        window.quanGroops = reader.GetInt32(0);
                     }
                 }
                 con.Close();
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
-            if (window.n == 0) { MessageBox.Show("Нет кабинетов"); return; }
+            if (window.quanGroops == 0) { MessageBox.Show("Нет кабинетов"); return; }
             try
             {
                 NpgsqlConnection con = new NpgsqlConnection(window.connectionString);
@@ -161,26 +161,26 @@ namespace WpfApp12.strategiesForManager.OtherMethods
                 {
                     while (reader.Read())
                     {
-                        window.m = reader.GetInt32(0);
+                        window.quanLessonsInDay = reader.GetInt32(0);
                     }
                 }
                 con.Close();
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
-            if (window.m == 0) { MessageBox.Show("Нет занятий"); return; }
+            if (window.quanLessonsInDay == 0) { MessageBox.Show("Нет занятий"); return; }
             window.HideAll();
             window.DeleteRaspButС.IsEnabled = false;
             window.ChangeRaspButС.IsEnabled = false;
             window.AddRaspButС.IsEnabled = false;
             window.raspGridС.Visibility = Visibility.Visible;
-            window.lbmas = new Label[(window.m * 7) + 1, window.n + 2];
-            DataGridUpdater.updateGridRaspС(window.connectionString, window.tGс,window.m, window.n, window.lbmas, dm, ds);
-            for (int i = 0; i < (window.m * 7) + 1; i++)
+            window.labelArr = new Label[(window.quanLessonsInDay * 7) + 1, window.quanGroops + 2];
+            DataGridUpdater.updateGridRaspС(window.connectionString, window.tGс,window.quanLessonsInDay, window.quanGroops, window.labelArr, dm, ds);
+            for (int i = 0; i < (window.quanLessonsInDay * 7) + 1; i++)
             {
-                for (int j = 1; j < window.n + 2; j++)
+                for (int j = 1; j < window.quanGroops + 2; j++)
                 {
                     if (i != 0 && j != 1)
-                        window.lbmas[i, j].MouseDown += window.Label_MouseDown;
+                        window.labelArr[i, j].MouseDown += window.Label_MouseDown;
                 }
 
             }

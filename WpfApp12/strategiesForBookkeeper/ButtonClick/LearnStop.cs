@@ -5,14 +5,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using WpfApp12.strategiesForBookkeeper.OtherMethods;
 
-namespace WpfApp12.strategiesForBuhgalter.strategiesForBuhgalterWindButtonClick
+namespace WpfApp12.strategiesForBookkeeper.ButtonClick
 {
     class LearnStop:IButtonClick
     {
-        BuhgalterWindow windowObj;
+        BookkeeperWindow windowObj;
 
-        public LearnStop(BuhgalterWindow windowObj)
+        public LearnStop(BookkeeperWindow windowObj)
         {
             this.windowObj = windowObj;
         }
@@ -38,7 +39,7 @@ namespace WpfApp12.strategiesForBuhgalter.strategiesForBuhgalterWindButtonClick
             MessageBox.Show("Запись успешно остановлена");
 
 
-            windowObj.updateOplataTable(1);
+            updateDefraymentTable.Update(windowObj,1);
         }
     }
 }

@@ -9,9 +9,9 @@ namespace WpfApp12.strategiesForManager.MenuClick
 {
     class ListenerMenu:IMenuClick
     {
-        DirectorWindow windowObj;
+        ManagerWindow windowObj;
 
-        public ListenerMenu(DirectorWindow windowObj)
+        public ListenerMenu(ManagerWindow windowObj)
         {
             this.windowObj = windowObj;
         }

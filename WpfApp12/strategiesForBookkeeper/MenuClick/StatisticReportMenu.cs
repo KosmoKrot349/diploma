@@ -5,18 +5,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace WpfApp12.strategiesForBuhgalter.strategiesForBuhgalterWindButtonClick
+namespace WpfApp12.strategiesForBookkeeper.MenuClick
 {
-    class GoToStatsReport:IButtonClick
+    class StatisticReportMenu:IMenuClick
     {
-        BuhgalterWindow windowObj;
+        BookkeeperWindow windowObj;
 
-        public GoToStatsReport(BuhgalterWindow windowObj)
+        public StatisticReportMenu(BookkeeperWindow windowObj)
         {
             this.windowObj = windowObj;
         }
 
-        public void ButtonClick()
+        public void MenuClick()
         {
             DataGridUpdater.updateGridStatistica(windowObj.connectionString, windowObj.statGraf);
             windowObj.HideAll();

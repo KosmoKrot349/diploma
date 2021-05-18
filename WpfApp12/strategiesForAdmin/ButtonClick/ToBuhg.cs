@@ -24,7 +24,7 @@ namespace WpfApp12.strategiesForAdmin
             if (windowObj.logUser != -1) b = Checker.buhgCheck(windowObj.logUser, windowObj.connectionString);
             if (b == 1 || windowObj.logUser == -1)
             {
-                BuhgalterWindow wind = new BuhgalterWindow();
+                BookkeeperWindow wind = new BookkeeperWindow();
                 try
                 {
                     NpgsqlConnection connection = new NpgsqlConnection(windowObj.connectionString);

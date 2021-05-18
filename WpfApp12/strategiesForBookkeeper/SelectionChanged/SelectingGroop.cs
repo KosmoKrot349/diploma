@@ -6,13 +6,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace WpfApp12.strategiesForBuhgalter.strategiesForBuhgalterSelectionChanged
+namespace WpfApp12.strategiesForBookkeeper.SelectionChanged
 {
     class SelectingGroop:ISelectionChanged
     {
-        BuhgalterWindow windowObj;
+        BookkeeperWindow windowObj;
 
-        public SelectingGroop(BuhgalterWindow windowObj)
+        public SelectingGroop(BookkeeperWindow windowObj)
         {
             this.windowObj = windowObj;
         }

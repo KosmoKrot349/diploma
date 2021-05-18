@@ -10,9 +10,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 {
     class GoToBuhgalter:IButtonClick
     {
-        DirectorWindow windowObj;
+        ManagerWindow windowObj;
 
-        public GoToBuhgalter(DirectorWindow windowObj)
+        public GoToBuhgalter(ManagerWindow windowObj)
         {
             this.windowObj = windowObj;
         }
@@ -23,7 +23,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             if (windowObj.logUser != -1) b = Checker.buhgCheck(windowObj.logUser, windowObj.connectionString);
             if (b == 1 || windowObj.logUser == -1)
             {
-                BuhgalterWindow wind = new BuhgalterWindow();
+                BookkeeperWindow wind = new BookkeeperWindow();
                 try
                 {
                     NpgsqlConnection connection = new NpgsqlConnection(windowObj.connectionString);

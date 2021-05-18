@@ -99,17 +99,19 @@
     <Compile Include="AdminWindow.xaml.cs">
       <DependentUpon>AdminWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BuhgalterWindow.xaml.cs">
-      <DependentUpon>BuhgalterWindow.xaml</DependentUpon>
+    <Compile Include="ApplyFiltersButtonClick.cs" />
+    <Compile Include="BookkeeperWindow.xaml.cs">
+      <DependentUpon>BookkeeperWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Checker.cs" />
     <Compile Include="DataGridUpdater.cs" />
     <Compile Include="DateIn.xaml.cs">
       <DependentUpon>DateIn.xaml</DependentUpon>
     </Compile>
-    <Compile Include="DirectorWindow.xaml.cs">
-      <DependentUpon>DirectorWindow.xaml</DependentUpon>
+    <Compile Include="ManagerWindow.xaml.cs">
+      <DependentUpon>ManagerWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SaveDataBaseSettings.cs" />
     <Compile Include="strategiesForAdmin\MenuClick\AccessMenuClick.cs" />
     <Compile Include="strategiesForAdmin\MenuClick\ArchiveMenuClick.cs" />
     <Compile Include="strategiesForAdmin\MenuClick\IMenuClick.cs" />
@@ -145,31 +147,18 @@
     <Compile Include="strategiesForBookkeeper\ButtonClick\AddPayment.cs" />
     <Compile Include="strategiesForBookkeeper\ButtonClick\AddPaymentForArrears.cs" />
     <Compile Include="strategiesForBookkeeper\ButtonClick\AddProfit.cs" />
-    <Compile Include="strategiesForBookkeeper\ButtonClick\AppCashierCostsFiltr.cs" />
-    <Compile Include="strategiesForBookkeeper\ButtonClick\AppCashierProfitFiltr.cs" />
-    <Compile Include="strategiesForBookkeeper\ButtonClick\AppCostsFiltr.cs" />
-    <Compile Include="strategiesForBookkeeper\ButtonClick\AppProfitFiltr.cs" />
     <Compile Include="strategiesForBookkeeper\ButtonClick\ChangeCosts.cs" />
     <Compile Include="strategiesForBookkeeper\ButtonClick\ChangeProfit.cs" />
     <Compile Include="strategiesForBookkeeper\ButtonClick\DeleteArrears.cs" />
     <Compile Include="strategiesForBookkeeper\ButtonClick\DeleteCosts.cs" />
     <Compile Include="strategiesForBookkeeper\ButtonClick\DeleteProfit.cs" />
-    <Compile Include="strategiesForBookkeeper\ButtonClick\GoToAccruals.cs" />
     <Compile Include="strategiesForBookkeeper\ButtonClick\GoToAddCosts.cs" />
     <Compile Include="strategiesForBookkeeper\ButtonClick\GoToAddProfit.cs" />
     <Compile Include="strategiesForBookkeeper\ButtonClick\ClosePaymentEntry.cs" />
-    <Compile Include="strategiesForBookkeeper\ButtonClick\GoToCashierReport.cs" />
     <Compile Include="strategiesForBookkeeper\ButtonClick\GoToChangeCosts.cs" />
     <Compile Include="strategiesForBookkeeper\ButtonClick\GoToChangeProfit.cs" />
-    <Compile Include="strategiesForBookkeeper\ButtonClick\GoToCosts.cs" />
-    <Compile Include="strategiesForBookkeeper\ButtonClick\GoToArrears.cs" />
-    <Compile Include="strategiesForBookkeeper\ButtonClick\GoToListsOfPaymentReport.cs" />
     <Compile Include="strategiesForBookkeeper\ButtonClick\GoToNextMonth.cs" />
-    <Compile Include="strategiesForBookkeeper\ButtonClick\GoToPayment.cs" />
     <Compile Include="strategiesForBookkeeper\ButtonClick\GoToPreviouslyMonth.cs" />
-    <Compile Include="strategiesForBookkeeper\ButtonClick\GoToProfitTable.cs" />
-    <Compile Include="strategiesForBookkeeper\ButtonClick\GoToStatsReport.cs" />
-    <Compile Include="strategiesForBookkeeper\ButtonClick\GoToTax.cs" />
     <Compile Include="strategiesForBookkeeper\ButtonClick\IButtonClick.cs" />
     <Compile Include="strategiesForBookkeeper\ButtonClick\LearnRestart.cs" />
     <Compile Include="strategiesForBookkeeper\ButtonClick\LearnStop.cs" />
@@ -181,19 +170,36 @@
     <Compile Include="strategiesForBookkeeper\ButtonClick\UnClosePaymentEntry.cs" />
     <Compile Include="strategiesForBookkeeper\ButtonClick\UnLogin.cs" />
     <Compile Include="strategiesForBookkeeper\MenuClick\AccessMenu.cs" />
+    <Compile Include="strategiesForBookkeeper\MenuClick\AccrualsMenu.cs" />
+    <Compile Include="strategiesForBookkeeper\MenuClick\ArrearsMenu.cs" />
+    <Compile Include="strategiesForBookkeeper\MenuClick\CashboxReportMenu.cs" />
     <Compile Include="strategiesForBookkeeper\MenuClick\CostsMenu.cs" />
-    <Compile Include="strategiesForBookkeeper\MenuClick\IMenuClick.cs" />
+    <Compile Include="strategiesForBookkeeper\MenuClick\ListOfPaymentReportMenu.cs" />
+    <Compile Include="strategiesForBookkeeper\MenuClick\PaymentMenu.cs" />
     <Compile Include="strategiesForBookkeeper\MenuClick\ProfitMenu.cs" />
+    <Compile Include="strategiesForBookkeeper\MenuClick\SelectCostsMenu.cs" />
+    <Compile Include="strategiesForBookkeeper\MenuClick\IMenuClick.cs" />
+    <Compile Include="strategiesForBookkeeper\MenuClick\SelectProfitMenu.cs" />
     <Compile Include="strategiesForBookkeeper\MenuClick\ReportMenu.cs" />
+    <Compile Include="strategiesForBookkeeper\MenuClick\StatisticReportMenu.cs" />
+    <Compile Include="strategiesForBookkeeper\MenuClick\TaxMenu.cs" />
+    <Compile Include="strategiesForBookkeeper\OtherMethods\HideAll.cs" />
+    <Compile Include="strategiesForBookkeeper\OtherMethods\updateDefraymentTable.cs" />
+    <Compile Include="strategiesForBookkeeper\SelectedCellsChanged\ControlButtonState.cs" />
+    <Compile Include="strategiesForBookkeeper\SelectedCellsChanged\ISelectedCellsChanged.cs" />
     <Compile Include="strategiesForBookkeeper\SelectionChanged\ISelectionChanged.cs" />
     <Compile Include="strategiesForBookkeeper\SelectionChanged\SelectingGroop.cs" />
     <Compile Include="strategiesForBookkeeper\SelectionChanged\SelectingGroopArrears.cs" />
-    <Compile Include="strategiesForBookkeeper\SelectionChanged\SelectingPersonProfitAdd.cs" />
-    <Compile Include="strategiesForBookkeeper\SelectionChanged\SelectingPersonProfitChange.cs" />
+    <Compile Include="strategiesForBookkeeper\SelectionChanged\SelectingPersonAddProfit.cs" />
+    <Compile Include="strategiesForBookkeeper\SelectionChanged\SelectingPersonChangeProfit.cs" />
+    <Compile Include="strategiesForBookkeeper\SelectionChanged\SelectingPersonTypeProfitAdd.cs" />
+    <Compile Include="strategiesForBookkeeper\SelectionChanged\SelectingPersonTypeProfitChange.cs" />
     <Compile Include="strategiesForMainWind\ButtonClick\Authorize.cs" />
     <Compile Include="strategiesForMainWind\ButtonClick\ConnectionCheck.cs" />
     <Compile Include="strategiesForMainWind\ButtonClick\EnforcementSetaing.cs" />
     <Compile Include="strategiesForMainWind\ButtonClick\IButtonClick.cs" />
+    <Compile Include="strategiesForMainWind\OtherMethods\FillingStaffSchedule.cs" />
+    <Compile Include="strategiesForMainWind\OtherMethods\Recalculation.cs" />
     <Compile Include="strategiesForManager\ButtonClick\AddChangeCabinet.cs" />
     <Compile Include="strategiesForManager\ButtonClick\AddChangeCategory.cs" />
     <Compile Include="strategiesForManager\ButtonClick\AddChangeCostsType.cs" />
@@ -306,8 +312,8 @@
     <Compile Include="strategiesForManager\MenuClick\WorkCoeffMenu.cs" />
     <Compile Include="strategiesForManager\OtherMethods\HideAll.cs" />
     <Compile Include="strategiesForManager\OtherMethods\ShowLearningSchedule.cs" />
-    <Compile Include="strategiesForManager\SelectedChanged\ControlButtonState.cs" />
-    <Compile Include="strategiesForManager\SelectedChanged\ISelectedChanged.cs" />
+    <Compile Include="strategiesForManager\SelectedCellsChanged\ControlButtonState.cs" />
+    <Compile Include="strategiesForManager\SelectedCellsChanged\ISelectedChanged.cs" />
     <Compile Include="strategiesForManager\SelectionChanged\ChangeGroopFromAddCabinetSchedule.cs" />
     <Compile Include="strategiesForManager\SelectionChanged\ChangeGroopFromAddTeacherSchedule.cs" />
     <Compile Include="strategiesForManager\SelectionChanged\ChangeGroopFromChangeCabinetSchedule.cs" />
@@ -317,7 +323,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="BuhgalterWindow.xaml">
+    <Page Include="BookkeeperWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -325,7 +331,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="DirectorWindow.xaml">
+    <Page Include="ManagerWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

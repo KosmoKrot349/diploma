@@ -10,9 +10,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 {
     class AddEmployeeToStaff:IButtonClick
     {
-        DirectorWindow windowObj;
+        ManagerWindow windowObj;
 
-        public AddEmployeeToStaff(DirectorWindow windowObj)
+        public AddEmployeeToStaff(ManagerWindow windowObj)
         {
             this.windowObj = windowObj;
         }
@@ -24,16 +24,16 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             string states = "'{ ";
             string stavki = "'{ ";
             bool b = false;
-            for (int i = 0; i < windowObj.chbxMas_obslwork.Length; i++)
+            for (int i = 0; i < windowObj.checkBoxArrServiceWorks.Length; i++)
             {
-                if (windowObj.chbxMas_obslwork[i].IsChecked == true && windowObj.tbxMas_obem[i].Text == "") { System.Windows.Forms.MessageBox.Show("Обьём работ не заполнен"); return; }
-                else { if (windowObj.chbxMas_obslwork[i].IsChecked == true) { b = true; oblswork += windowObj.chbxMas_obslwork[i].Name.Split('_')[2] + ","; obem += windowObj.tbxMas_obem[i].Text.Replace(',', '.') + ","; } }
+                if (windowObj.checkBoxArrServiceWorks[i].IsChecked == true && windowObj.textBoxArrVolumeWork[i].Text == "") { System.Windows.Forms.MessageBox.Show("Обьём работ не заполнен"); return; }
+                else { if (windowObj.checkBoxArrServiceWorks[i].IsChecked == true) { b = true; oblswork += windowObj.checkBoxArrServiceWorks[i].Name.Split('_')[2] + ","; obem += windowObj.textBoxArrVolumeWork[i].Text.Replace(',', '.') + ","; } }
             }
-            for (int i = 0; i < windowObj.chbxMas_state.Length; i++)
+            for (int i = 0; i < windowObj.checkBoxArrPositions.Length; i++)
             {
-                if (windowObj.chbxMas_state[i].IsChecked == true && windowObj.tbxMas_stavki[i].Text == "") { System.Windows.Forms.MessageBox.Show("Ставки не указаны"); return; }
+                if (windowObj.checkBoxArrPositions[i].IsChecked == true && windowObj.textBoxArrRate[i].Text == "") { System.Windows.Forms.MessageBox.Show("Ставки не указаны"); return; }
                 else
-                { if (windowObj.chbxMas_state[i].IsChecked == true) { b = true; states += windowObj.chbxMas_state[i].Name.Split('_')[2] + ","; stavki += windowObj.tbxMas_stavki[i].Text.Replace(',', '.') + ","; } }
+                { if (windowObj.checkBoxArrPositions[i].IsChecked == true) { b = true; states += windowObj.checkBoxArrPositions[i].Name.Split('_')[2] + ","; stavki += windowObj.textBoxArrRate[i].Text.Replace(',', '.') + ","; } }
             }
             if (b == false) { MessageBox.Show("Выберите хотя бы одну должность или работу для сотрудника"); return; }
 
@@ -47,7 +47,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             {
                 NpgsqlConnection con = new NpgsqlConnection(windowObj.connectionString);
                 con.Open();
-                string sql = "INSERT INTO shtat( sotrid, states, stavky, obslwork, obem) VALUES ( " + windowObj.sotrID + ", " + states + ", " + stavki + ", " + oblswork + ", " + obem + ")";
+                string sql = "INSERT INTO shtat( sotrid, states, stavky, obslwork, obem) VALUES ( " + windowObj.employeeID + ", " + states + ", " + stavki + ", " + oblswork + ", " + obem + ")";
                 NpgsqlCommand com = new NpgsqlCommand(sql, con);
                 com.ExecuteNonQuery();
                 con.Close();
@@ -59,7 +59,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             {
                 NpgsqlConnection con = new NpgsqlConnection(windowObj.connectionString);
                 con.Open();
-                string sql = "UPDATE shtatrasp SET  shtatid=array_append(shtatid," + windowObj.sotrID + ") WHERE extract(Month from date)=" + DateTime.Now.Month;
+                string sql = "UPDATE shtatrasp SET  shtatid=array_append(shtatid," + windowObj.employeeID + ") WHERE extract(Month from date)=" + DateTime.Now.Month;
                 NpgsqlCommand com = new NpgsqlCommand(sql, con);
                 com.ExecuteNonQuery();
                 con.Close();
@@ -68,7 +68,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 
 
             MessageBox.Show("Сотрудник определён как штатный работник");
-            DataGridUpdater.updateDataGridSotr(windowObj.connectionString, windowObj.sqlAllSotr, windowObj.ShtatDataGrid);
+            DataGridUpdater.updateDataGridSotr(windowObj.connectionString, windowObj.sqlForAllEmployees, windowObj.ShtatDataGrid);
             windowObj.HideAll();
             windowObj.allSotrGrid.Visibility = Visibility.Visible;
         }

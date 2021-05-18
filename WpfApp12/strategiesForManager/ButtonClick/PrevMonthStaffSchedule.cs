@@ -8,9 +8,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 {
     class PrevMonthStaffSchedule:IButtonClick
     {
-        DirectorWindow windowObj;
+        ManagerWindow windowObj;
 
-        public PrevMonthStaffSchedule(DirectorWindow windowObj)
+        public PrevMonthStaffSchedule(ManagerWindow windowObj)
         {
             this.windowObj = windowObj;
         }
@@ -23,12 +23,12 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             {
                 for (int j = 0; j < 7; j++)
                 {
-                    windowObj.lbmas_shtatRasp[i, j].Content = "";
+                    windowObj.labelArrForStaffSchedule[i, j].Content = "";
 
                 }
             }
 
-            DataGridUpdater.updateGridShtatRasp(windowObj.connectionString, windowObj.MonthGrid, windowObj.ShtatRaspSotrpGrid, windowObj.lbmas_shtatRasp, windowObj.chbxMas_stateRasp, windowObj.ShtatRaspMonthYearLabel, windowObj.date);
+            DataGridUpdater.updateGridShtatRasp(windowObj.connectionString, windowObj.MonthGrid, windowObj.ShtatRaspSotrpGrid, windowObj.labelArrForStaffSchedule, windowObj.checkBoxArrForStaffSchedule, windowObj.ShtatRaspMonthYearLabel, windowObj.date);
         }
     }
 }

@@ -11,9 +11,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 {
     class GoToChangeTeacher : IButtonClick
     {
-        DirectorWindow windowObj;
+        ManagerWindow windowObj;
 
-        public GoToChangeTeacher(DirectorWindow windowObj)
+        public GoToChangeTeacher(ManagerWindow windowObj)
         {
             this.windowObj = windowObj;
         }
@@ -24,7 +24,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             if (DRV == null) { MessageBox.Show("Вы не можете перейти к изменению не выбрав запись."); return; }
             DataRow DR = DRV.Row;
             object[] arr = DR.ItemArray;
-            windowObj.prepID = Convert.ToInt32(arr[0]);
+            windowObj.teacherID = Convert.ToInt32(arr[0]);
             windowObj.prepFio.Text = arr[2].ToString();
             windowObj.prepCom.Text = arr[4].ToString();
             string[] date1 = arr[3].ToString().Split(' ');

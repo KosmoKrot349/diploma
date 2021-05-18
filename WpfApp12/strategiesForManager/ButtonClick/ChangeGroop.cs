@@ -10,9 +10,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 {
     class ChangeGroop:IButtonClick
     {
-        DirectorWindow windowObj;
+        ManagerWindow windowObj;
 
-        public ChangeGroop(DirectorWindow windowObj)
+        public ChangeGroop(ManagerWindow windowObj)
         {
             this.windowObj = windowObj;
         }
@@ -21,7 +21,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
         {
             if (windowObj.grTitleCh.Text == "" || windowObj.payToYearCh.Content.ToString() == "") { MessageBox.Show("Поле названия или оплаты не заполнено"); return; }
             //проверка существования группы
-            if (windowObj.grTitleCh.Text != windowObj.dontChGName)
+            if (windowObj.grTitleCh.Text != windowObj.dontChangeGroopName)
             {
                 try
                 {
@@ -129,7 +129,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             {
                 NpgsqlConnection con = new NpgsqlConnection(windowObj.connectionString);
                 con.Open();
-                string sql = "UPDATE groups SET date_start='" + dateStartAdd.ToShortDateString().Replace('.', '-') + "',date_end='" + dateEndAdd.ToShortDateString().Replace('.', '-') + "',courseid =" + courseID + ", nazvanie ='" + windowObj.grTitleCh.Text + "', comment ='" + windowObj.grCommCh.Text + "', payment ='{" + montPay[0].ToString().Replace(',', '.') + "," + montPay[1].ToString().Replace(',', '.') + "," + montPay[2].ToString().Replace(',', '.') + "," + montPay[3].ToString().Replace(',', '.') + "," + montPay[4].ToString().Replace(',', '.') + "," + montPay[5].ToString().Replace(',', '.') + "," + montPay[6].ToString().Replace(',', '.') + "," + montPay[7].ToString().Replace(',', '.') + "," + montPay[8].ToString().Replace(',', '.') + "," + montPay[9].ToString().Replace(',', '.') + "," + montPay[10].ToString().Replace(',', '.') + "," + montPay[11].ToString().Replace(',', '.') + "}' WHERE grid=" + windowObj.grID;
+                string sql = "UPDATE groups SET date_start='" + dateStartAdd.ToShortDateString().Replace('.', '-') + "',date_end='" + dateEndAdd.ToShortDateString().Replace('.', '-') + "',courseid =" + courseID + ", nazvanie ='" + windowObj.grTitleCh.Text + "', comment ='" + windowObj.grCommCh.Text + "', payment ='{" + montPay[0].ToString().Replace(',', '.') + "," + montPay[1].ToString().Replace(',', '.') + "," + montPay[2].ToString().Replace(',', '.') + "," + montPay[3].ToString().Replace(',', '.') + "," + montPay[4].ToString().Replace(',', '.') + "," + montPay[5].ToString().Replace(',', '.') + "," + montPay[6].ToString().Replace(',', '.') + "," + montPay[7].ToString().Replace(',', '.') + "," + montPay[8].ToString().Replace(',', '.') + "," + montPay[9].ToString().Replace(',', '.') + "," + montPay[10].ToString().Replace(',', '.') + "," + montPay[11].ToString().Replace(',', '.') + "}' WHERE grid=" + windowObj.groopID;
                 NpgsqlCommand command = new NpgsqlCommand(sql, con);
                 command.ExecuteNonQuery();
                 con.Close();

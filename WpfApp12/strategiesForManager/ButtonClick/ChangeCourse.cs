@@ -10,9 +10,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 {
     class ChangeCourse:IButtonClick
     {
-        DirectorWindow windowObj;
+        ManagerWindow windowObj;
 
-        public ChangeCourse(DirectorWindow windowObj)
+        public ChangeCourse(ManagerWindow windowObj)
         {
             this.windowObj = windowObj;
         }
@@ -32,7 +32,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             subsMas = subsMas.Substring(0, subsMas.Length - 1);
             subsMas += "}'";
             if (b == false || windowObj.courseChangeTitle.Text == "") { MessageBox.Show("Название курса или предметы не добавлены"); return; }
-            if (windowObj.dontChCName != windowObj.courseChangeTitle.Text)
+            if (windowObj.dontChangeCourseName != windowObj.courseChangeTitle.Text)
             {
                 try
                 {

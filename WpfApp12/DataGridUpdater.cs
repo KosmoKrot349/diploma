@@ -800,7 +800,6 @@ namespace WpfApp12
                 string sql = "select nachisl.nachid ,sotrudniki.fio,nachisl.prepzp,nachisl.shtatzp,nachisl.obslzp,nachisl.vs,nachisl.fss,nachisl.ndfl,nachisl.viplacheno from nachisl inner join sotrudniki using(sotrid) where EXTRACT(Year FROM nachisl.payday)=" + dateNuch.Year+" and  EXTRACT(Month FROM nachisl.payday)=" + dateNuch.Month;
                 NpgsqlCommand com = new NpgsqlCommand(sql, con);
                 NpgsqlDataReader reader = com.ExecuteReader();
-                int i = 0;
                 if (reader.HasRows)
                 {
                     while (reader.Read())

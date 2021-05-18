@@ -11,9 +11,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 {
     class DeleteEmployee:IButtonClick
     {
-        DirectorWindow windowObj;
+        ManagerWindow windowObj;
 
-        public DeleteEmployee(DirectorWindow windowObj)
+        public DeleteEmployee(ManagerWindow windowObj)
         {
             this.windowObj = windowObj;
         }
@@ -117,7 +117,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                 }
                 catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
             }
-            DataGridUpdater.updateDataGridSotr(windowObj.connectionString, windowObj.sqlAllSotr, windowObj.allSotrDataGrid);
+            DataGridUpdater.updateDataGridSotr(windowObj.connectionString, windowObj.sqlForAllEmployees, windowObj.allSotrDataGrid);
 
             windowObj.allSotrDataGrid.SelectedItem = null;
             //все сотрудники

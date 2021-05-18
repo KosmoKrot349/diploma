@@ -10,9 +10,9 @@ namespace WpfApp12.strategiesForManager.SelectionChanged
 {
     class ChangeGroopFromAddTeacherSchedule:ISelectionChaged
     {
-        DirectorWindow window;
+        ManagerWindow window;
 
-        public ChangeGroopFromAddTeacherSchedule(DirectorWindow window)
+        public ChangeGroopFromAddTeacherSchedule(ManagerWindow window)
         {
             this.window = window;
         }

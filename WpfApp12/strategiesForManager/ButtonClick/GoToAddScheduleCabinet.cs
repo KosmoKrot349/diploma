@@ -10,21 +10,21 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 {
     class GoToAddScheduleCabinet:IButtonClick
     {
-        DirectorWindow windowObj;
+        ManagerWindow windowObj;
 
-        public GoToAddScheduleCabinet(DirectorWindow windowObj)
+        public GoToAddScheduleCabinet(ManagerWindow windowObj)
         {
             this.windowObj = windowObj;
         }
 
         public void ButtonClick()
         {
-            int kab = Convert.ToInt32(windowObj.lbmas[0, windowObj.jRaspLebale].Name.Split('_')[1]);
-            int lesNum = Convert.ToInt32(windowObj.lbmas[windowObj.iRaspLebale, 1].Content.ToString().Split('\n')[0]);
+            int kab = Convert.ToInt32(windowObj.labelArr[0, windowObj.jCoordScheduleLabel].Name.Split('_')[1]);
+            int lesNum = Convert.ToInt32(windowObj.labelArr[windowObj.iCoordScheduleLabel, 1].Content.ToString().Split('\n')[0]);
             int day = 0;
             for (int ii = 1; ii <= 7; ii++)
             {
-                if (ii * windowObj.m < windowObj.iRaspLebale) { day++; } else break;
+                if (ii * windowObj.quanLessonsInDay < windowObj.iCoordScheduleLabel) { day++; } else break;
             }
             //добавление
             windowObj.raspAddSubsK.Items.Clear();
@@ -90,7 +90,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 
             windowObj.raspAddDateK.Text = windowObj.dateMonday.AddDays(day).ToShortDateString();
             windowObj.raspAddLesNumK.Text = "" + lesNum;
-            windowObj.raspAddKabK.Text = windowObj.lbmas[0, windowObj.jRaspLebale].Content.ToString();
+            windowObj.raspAddKabK.Text = windowObj.labelArr[0, windowObj.jCoordScheduleLabel].Content.ToString();
             windowObj.HideAll();
             windowObj.addRaspGridKab.Visibility = Visibility.Visible;
         }

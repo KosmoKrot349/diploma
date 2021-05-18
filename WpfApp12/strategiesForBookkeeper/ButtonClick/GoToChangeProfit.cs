@@ -7,13 +7,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace WpfApp12.strategiesForBuhgalter.strategiesForBuhgalterWindButtonClick
+namespace WpfApp12.strategiesForBookkeeper.ButtonClick
 {
     class GoToChangeProfit:IButtonClick
     {
-        BuhgalterWindow windowObj;
+        BookkeeperWindow windowObj;
 
-        public GoToChangeProfit(BuhgalterWindow windowObj)
+        public GoToChangeProfit(BookkeeperWindow windowObj)
         {
             this.windowObj = windowObj;
         }
@@ -26,7 +26,7 @@ namespace WpfApp12.strategiesForBuhgalter.strategiesForBuhgalterWindButtonClick
             object[] arr = DR.ItemArray;
             windowObj.DohodyChangeSum.Text = arr[2].ToString();
             windowObj.DohodyChangeDate.Text = arr[3].ToString().Replace('/', '.');
-            windowObj.DohodID = (int)arr[0];
+            windowObj.profitID = (int)arr[0];
             windowObj.DohodyChangeType.Items.Clear();
 
             try
@@ -50,17 +50,17 @@ namespace WpfApp12.strategiesForBuhgalter.strategiesForBuhgalterWindButtonClick
                 }
                 con.Close();
             }
-            catch { System.Windows.Forms.MessageBox.Show("Не удалось подключиться к базе данных"); return; }
+            catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
 
 
 
-            windowObj.strrr = arr[4].ToString();
+            windowObj.personForProfit = arr[4].ToString();
             bool a = false, b = false;
             try
             {
                 NpgsqlConnection con = new NpgsqlConnection(windowObj.connectionString);
                 con.Open();
-                string sql = "select fio from listeners where fio = '" + windowObj.strrr + "'";
+                string sql = "select fio from listeners where fio = '" + windowObj.personForProfit + "'";
                 NpgsqlCommand com = new NpgsqlCommand(sql, con);
                 NpgsqlDataReader reader = com.ExecuteReader();
                 if (reader.HasRows)
@@ -70,14 +70,14 @@ namespace WpfApp12.strategiesForBuhgalter.strategiesForBuhgalterWindButtonClick
                 }
                 con.Close();
             }
-            catch { System.Windows.Forms.MessageBox.Show("Не удалось подключиться к базе данных"); return; }
+            catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
 
 
             try
             {
                 NpgsqlConnection con = new NpgsqlConnection(windowObj.connectionString);
                 con.Open();
-                string sql = "select fio from sotrudniki where fio='" + windowObj.strrr + "'";
+                string sql = "select fio from sotrudniki where fio='" + windowObj.personForProfit + "'";
                 NpgsqlCommand com = new NpgsqlCommand(sql, con);
                 NpgsqlDataReader reader = com.ExecuteReader();
                 if (reader.HasRows)

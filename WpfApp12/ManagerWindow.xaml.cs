@@ -5,25 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using System.IO;
-using Npgsql;
-using System.Data;
 using System.Collections;
-using Microsoft;
-using OxyPlot;
-using OxyPlot.Series;
-using OxyPlot.Axes;
 using WpfApp12.strategiesForManager.ButtonClick;
 using WpfApp12.strategiesForManager.MenuClick;
 using WpfApp12.strategiesForManager.LabelMousDown;
 using WpfApp12.strategiesForManager.SelectedChanged;
-using WpfApp12.strategiesForManager.OtherMethods;
 using WpfApp12.strategiesForManager.SelectionChanged;
 
 namespace WpfApp12
@@ -31,56 +19,56 @@ namespace WpfApp12
     /// <summary>
     /// Логика взаимодействия для DirectorWindow.xaml
     /// </summary>
-    public partial class DirectorWindow : Window
+    public partial class ManagerWindow : Window
     {
         
 public int logUser;
-        public int prepID = -1;
-        public int grID = -1;
+        public int teacherID = -1;
+        public int groopID = -1;
         public int courseID = -1;
-        public int sotrID = -1;
-        public string dontChCName = "";
-        public string dontChGName = "";
+        public int employeeID = -1;
+        public string dontChangeCourseName = "";
+        public string dontChangeGroopName = "";
 
         //массивы дял слушателей
-        public CheckBox[] chbxMas_gr_lg;
-        public TextBox[] tbxMas_gr_lg;
-
+        public CheckBox[] checkBoxArrForListeners;
+        public TextBox[] textBoxArrForListeners;
+        
         public CheckBox[] chbxMas;
         public string FIO = "";
-        public Label[,] lbmas;
-        public int m = 0;//число зантий в дне
-        public int n = 0;//число групп
-        public int iRaspLebale;
-        public int jRaspLebale;
+        public Label[,] labelArr;
+        public int quanLessonsInDay = 0;//число зантий в дне
+        public int quanGroops = 0;//число групп
+        public int iCoordScheduleLabel;
+        public int jCoordScheduleLabel;
         public DateTime dateMonday;
         public int listenerID = -1;
-        public int stateID = -1;
-        public int ShtatID = -1;
+        public int positionID = -1;
+        public int staffID = -1;
         public bool selectd = false;
         //массивы для штата 
-        public TextBox[] tbxMas_stavki;
-        public CheckBox[] chbxMas_state;
-        public TextBox[] tbxMas_obem;
-        public CheckBox[] chbxMas_obslwork;
+        public TextBox[] textBoxArrRate;
+        public CheckBox[] checkBoxArrPositions;
+        public TextBox[] textBoxArrVolumeWork;
+        public CheckBox[] checkBoxArrServiceWorks;
 
         //массивы для штатного расписания
-        public CheckBox[] chbxMas_stateRasp;
-        public Label[,] lbmas_shtatRasp = new Label[7, 7];
+        public CheckBox[] checkBoxArrForStaffSchedule;
+        public Label[,] labelArrForStaffSchedule = new Label[7, 7];
         public DateTime date = DateTime.Now;
 
 
         public filtr filtr = new filtr();
 
-        public filtr fda = new filtr();
-        public filtr fdb = new filtr();
+        public filtr PeopleFromCashboxFilter = new filtr();
+        public filtr ProfitTypesFromCashboxFilter = new filtr();
 
-        public filtr fra = new filtr();
-        public filtr frb = new filtr();
+        public filtr StaffFromCashboxFiltr = new filtr();
+        public filtr CostsTypesFromCashboxFilter = new filtr();
 
 
         //фильтр для всех сотрудников
-        public string sqlAllSotr = "";
+        public string sqlForAllEmployees = "";
 
 
 
@@ -89,7 +77,7 @@ public int logUser;
     
 
        //+
-        public DirectorWindow()
+        public ManagerWindow()
         {
             InitializeComponent();
             StreamReader reader = new StreamReader(@"setting.txt");
@@ -101,10 +89,10 @@ public int logUser;
             object[] mas = ls.ToArray();
             connectionString = "Server=" + mas[0].ToString().Split(':')[1] + ";Port=" + mas[2].ToString().Split(':')[1] + ";User Id=postgres;Password=" + mas[1].ToString().Split(':')[1] + ";Database=db";
             filtr.connectionString = connectionString;
-            fda.connectionString = connectionString;
-                fra.connectionString = connectionString;
-            fdb.connectionString = connectionString;
-            frb.connectionString = connectionString;
+            PeopleFromCashboxFilter.connectionString = connectionString;
+            StaffFromCashboxFiltr.connectionString = connectionString;
+            ProfitTypesFromCashboxFilter.connectionString = connectionString;
+            CostsTypesFromCashboxFilter.connectionString = connectionString;
             MenuRolesD.BorderBrush = null;
             raspMenu.BorderBrush = null;
             sotrMenu.BorderBrush = null;
@@ -115,7 +103,7 @@ public int logUser;
         //+
         public void HideAll()
         {
-            WpfApp12.strategiesForManager.OtherMethods.HideAll.HideAllGrids(this);
+            strategiesForManager.OtherMethods.HideAll.Hide(this);
 
         }
         //переход из меню директора в меню админа+
@@ -370,11 +358,11 @@ public int logUser;
             CheckBox cb = sender as CheckBox;
             if (cb.Name.Split('_')[3] == "state")
             {
-                tbxMas_stavki[Convert.ToInt32(cb.Name.Split('_')[1])].IsEnabled = true;
+                textBoxArrRate[Convert.ToInt32(cb.Name.Split('_')[1])].IsEnabled = true;
             }
             if (cb.Name.Split('_')[3] == "obsl")
             {
-                tbxMas_obem[Convert.ToInt32(cb.Name.Split('_')[1])].IsEnabled = true;
+                textBoxArrVolumeWork[Convert.ToInt32(cb.Name.Split('_')[1])].IsEnabled = true;
             }
         }
         public void Shtat_UnChecked(object sender, RoutedEventArgs e)
@@ -382,11 +370,11 @@ public int logUser;
             CheckBox cb = sender as CheckBox;
             if (cb.Name.Split('_')[3] == "state")
             {
-                tbxMas_stavki[Convert.ToInt32(cb.Name.Split('_')[1])].IsEnabled = false;
+                textBoxArrRate[Convert.ToInt32(cb.Name.Split('_')[1])].IsEnabled = false;
             }
             if (cb.Name.Split('_')[3] == "obsl")
             {
-                tbxMas_obem[Convert.ToInt32(cb.Name.Split('_')[1])].IsEnabled = false;
+                textBoxArrVolumeWork[Convert.ToInt32(cb.Name.Split('_')[1])].IsEnabled = false;
             }
         }
         //добавление сотрудника в таблицу преподавателей +
@@ -674,7 +662,7 @@ public int logUser;
         {
             CheckBox chb = sender as CheckBox;
             int indexText = Convert.ToInt32(chb.Name.Split('_')[1]);
-            tbxMas_gr_lg[indexText].IsEnabled = true;
+            textBoxArrForListeners[indexText].IsEnabled = true;
 
         }
         //чекбокс (анчек) для выбора групп +
@@ -682,8 +670,8 @@ public int logUser;
         {
             CheckBox chb = sender as CheckBox;
             int indexText = Convert.ToInt32(chb.Name.Split('_')[1]);
-            tbxMas_gr_lg[indexText].IsEnabled = false;
-            tbxMas_gr_lg[indexText].Text = "";
+            textBoxArrForListeners[indexText].IsEnabled = false;
+            textBoxArrForListeners[indexText].Text = "";
 
         }
         //переход к скидкам +
@@ -897,66 +885,7 @@ public int logUser;
         //применение фильтров+
         private void FiltrGroupsButton_Click(object sender, RoutedEventArgs e)
         {
-            Button but = sender as Button;
-            if (but.Name == "FiltrGroupsButton")
-            {
-                filtr.ApplyListFiltr();
-                DataGridUpdater.updateDataGridListener(connectionString, filtr.sql, listenerDataGrid);
-            }
-
-
-            if (but.Name == "FiltrCourseButton")
-            {
-                filtr.ApplyGroupsFiltr();
-                DataGridUpdater.updateDataGridGroups(connectionString, filtr.sql, groupsDataGrid);
-            }
-
-            if (but.Name == "FiltrSubsButton")
-            {
-                filtr.ApplyCourseFiltr();
-                DataGridUpdater.updateDataGridСourses(connectionString, filtr.sql, coursDataGrid);
-            }
-
-
-            if (but.Name == "FiltrPrepButton")
-            {
-                filtr.ApplyPrepFiltr();
-                DataGridUpdater.updateDataGridPrep(connectionString, filtr.sql, prepDataGrid);
-            }
-
-            if (but.Name == "FiltrAllSotrButton")
-            {
-                sqlAllSotr = "SELECT * FROM sotrudniki";
-                if (DatePickAllSotr.Text == "") { System.Windows.Forms.MessageBox.Show("Неоюходимо выбрать месяц"); return; }
-
-                if (FirstMethodFiltr.IsChecked == true)
-                {
-                    sqlAllSotr = "select * from sotrudniki inner join nachisl using(sotrid) where extract(Month from payday) = " + DatePickAllSotr.Text.Split('.')[1] + " and extract(Year from payday)=" + DatePickAllSotr.Text.Split('.')[2] + " and (prepzp+shtatzp+obslzp)-viplacheno!=0";
-
-                }
-                if (SecondMethodFiltr.IsChecked == true)
-                {
-
-                    sqlAllSotr = "select * from sotrudniki where sotrid not in (select sotrid from nachisl where extract(Month from payday) = " + DatePickAllSotr.Text.Split('.')[1] + " and extract(Year from payday)=" + DatePickAllSotr.Text.Split('.')[2] + ")";
-
-                }
-
-                DataGridUpdater.updateDataGridSotr(connectionString, sqlAllSotr, allSotrDataGrid);
-            }
-
-            if (but.Name == "FiltrShtatButton")
-            {
-                if (ShtatFiltrCmbx.SelectedIndex == 0)
-                {
-                    filtr.ApplyShtatFiltrFirst();
-                }
-                else
-                {
-
-                    filtr.ApplyShtatFiltrSecond();
-                }
-                DataGridUpdater.updateDataGridShtat(connectionString, filtr.sql, ShtatDataGrid);
-            }
+            ApplyFiltersButtonClick.ApplyForManager(this, sender);
         }
         //выбор варианта фильтрации всех сотрудников+
         private void CheckBox_Checked_1(object sender, RoutedEventArgs e)
@@ -1011,14 +940,14 @@ public int logUser;
             Button bt = sender as Button;
             if (bt.Name == "PrimFKD") 
             {
-                fda.ApplyDohFiltr(fdb);
-                DataGridUpdater.updateGridKassa(connectionString, KassaDodohGrid, KassaRashodGrid, kassaTitleLabel, KassaItogoDohod, KassaItogoRashod, kassaAllDohodLabel, fda.sql, fra.sql);
+                PeopleFromCashboxFilter.ApplyDohFiltr(ProfitTypesFromCashboxFilter);
+                DataGridUpdater.updateGridKassa(connectionString, KassaDodohGrid, KassaRashodGrid, kassaTitleLabel, KassaItogoDohod, KassaItogoRashod, kassaAllDohodLabel, PeopleFromCashboxFilter.sql, StaffFromCashboxFiltr.sql);
             }
             if (bt.Name == "PrimFKR") 
             {
 
-                fra.ApplyRashFiltr(frb);
-                DataGridUpdater.updateGridKassa(connectionString, KassaDodohGrid, KassaRashodGrid, kassaTitleLabel, KassaItogoDohod, KassaItogoRashod, kassaAllDohodLabel, fda.sql, fra.sql);
+                StaffFromCashboxFiltr.ApplyRashFiltr(CostsTypesFromCashboxFilter);
+                DataGridUpdater.updateGridKassa(connectionString, KassaDodohGrid, KassaRashodGrid, kassaTitleLabel, KassaItogoDohod, KassaItogoRashod, kassaAllDohodLabel, PeopleFromCashboxFilter.sql, StaffFromCashboxFiltr.sql);
             }
         }
     }

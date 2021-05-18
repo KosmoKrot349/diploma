@@ -8,9 +8,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 {
     class UnLogin:IButtonClick
     {
-        DirectorWindow windowObj;
+        ManagerWindow windowObj;
 
-        public UnLogin(DirectorWindow windowObj)
+        public UnLogin(ManagerWindow windowObj)
         {
             this.windowObj = windowObj;
         }

@@ -8,9 +8,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 {
     class SelectAllPersonalInStaffSchedule:IButtonClick
     {
-        DirectorWindow windowObj;
+        ManagerWindow windowObj;
 
-        public SelectAllPersonalInStaffSchedule(DirectorWindow windowObj)
+        public SelectAllPersonalInStaffSchedule(ManagerWindow windowObj)
         {
             this.windowObj = windowObj;
         }
@@ -19,9 +19,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
         {
             if (windowObj.selectd == false)
             {
-                for (int i = 0; i < windowObj.chbxMas_stateRasp.Length; i++)
+                for (int i = 0; i < windowObj.checkBoxArrForStaffSchedule.Length; i++)
                 {
-                    windowObj.chbxMas_stateRasp[i].IsChecked = true;
+                    windowObj.checkBoxArrForStaffSchedule[i].IsChecked = true;
                 }
                 windowObj.selectd = true;
                 return;
@@ -29,9 +29,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             else
             {
 
-                for (int i = 0; i < windowObj.chbxMas_stateRasp.Length; i++)
+                for (int i = 0; i < windowObj.checkBoxArrForStaffSchedule.Length; i++)
                 {
-                    windowObj.chbxMas_stateRasp[i].IsChecked = false;
+                    windowObj.checkBoxArrForStaffSchedule[i].IsChecked = false;
                 }
                 windowObj.selectd = false;
                 return;

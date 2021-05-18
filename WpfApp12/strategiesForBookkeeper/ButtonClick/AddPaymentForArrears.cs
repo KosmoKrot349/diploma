@@ -6,14 +6,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using WpfApp12.strategiesForBookkeeper.OtherMethods;
 
-namespace WpfApp12.strategiesForBuhgalter.strategiesForBuhgalterWindButtonClick
+namespace WpfApp12.strategiesForBookkeeper.ButtonClick
 {
     class AddPaymentForArrears:IButtonClick
     {
-        BuhgalterWindow windowObj;
+        BookkeeperWindow windowObj;
 
-        public AddPaymentForArrears(BuhgalterWindow windowObj)
+        public AddPaymentForArrears(BookkeeperWindow windowObj)
         {
             this.windowObj = windowObj;
         }
@@ -63,8 +64,8 @@ namespace WpfApp12.strategiesForBuhgalter.strategiesForBuhgalterWindButtonClick
                             if (payformonthMasDouble[i] != 0)
                             {
 
-                                if (windowObj.masTbx2[j].Text == "") oplMas[i] = 0;
-                                else { oplMas[i] = Convert.ToDouble(windowObj.masTbx2[j].Text); }
+                                if (windowObj.textBoxArrForArrearsDefreyment[j].Text == "") oplMas[i] = 0;
+                                else { oplMas[i] = Convert.ToDouble(windowObj.textBoxArrForArrearsDefreyment[j].Text); }
                                 j++;
                                 continue;
 
@@ -163,7 +164,7 @@ namespace WpfApp12.strategiesForBuhgalter.strategiesForBuhgalterWindButtonClick
                 con.Close();
             }
             catch { MessageBox.Show("Не удалось подклюситься к базе данных"); return; }
-            windowObj.updateOplataTable(2);
+            updateDefraymentTable.Update(windowObj,2);
         }
     }
 }

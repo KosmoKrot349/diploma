@@ -7,18 +7,18 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 
-namespace WpfApp12.strategiesForBuhgalter.strategiesForBuhgalterWindButtonClick
+namespace WpfApp12.strategiesForBookkeeper.MenuClick
 {
-    class GoToTax:IButtonClick
+    class TaxMenu:IMenuClick
     {
-        BuhgalterWindow windowObj;
+        BookkeeperWindow windowObj;
 
-        public GoToTax(BuhgalterWindow windowObj)
+        public TaxMenu(BookkeeperWindow windowObj)
         {
             this.windowObj = windowObj;
         }
 
-        public void ButtonClick()
+        public void MenuClick()
         {
             windowObj.MenuRolesB.BorderBrush = null;
             windowObj.Dohody.BorderBrush = null;
@@ -47,7 +47,7 @@ namespace WpfApp12.strategiesForBuhgalter.strategiesForBuhgalterWindButtonClick
                 con.Close();
 
             }
-            catch { System.Windows.Forms.MessageBox.Show("Не удалось подключиться к базе данных"); return; }
+            catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
         }
     }
 }

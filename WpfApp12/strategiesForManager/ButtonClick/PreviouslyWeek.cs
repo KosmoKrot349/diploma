@@ -12,10 +12,10 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 {
     class PreviouslyWeek:IButtonClick
     {
-        DirectorWindow windowObj;
+        ManagerWindow windowObj;
         object sender;
 
-        public PreviouslyWeek(DirectorWindow windowObj,object sender)
+        public PreviouslyWeek(ManagerWindow windowObj,object sender)
         {
             this.windowObj = windowObj;
             this.sender = sender;
@@ -48,12 +48,12 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             if (but.Name == "PrevRaspButP") ShowLearningSchedule.ShowForTeachers(windowObj.dateMonday, windowObj.dateMonday.AddDays(6),windowObj);
             if (but.Name == "PrevRaspButС") ShowLearningSchedule.ShowForCabinets(windowObj.dateMonday, windowObj.dateMonday.AddDays(6),windowObj);
 
-            for (int i = 0; i < (windowObj.m * 7) + 1; i++)
+            for (int i = 0; i < (windowObj.quanLessonsInDay * 7) + 1; i++)
             {
-                for (int j = 1; j < windowObj.n + 2; j++)
+                for (int j = 1; j < windowObj.quanGroops + 2; j++)
                 {
                     if (i != 0 && j != 1)
-                        windowObj.lbmas[i, j].MouseDown += windowObj.Label_MouseDown;
+                        windowObj.labelArr[i, j].MouseDown += windowObj.Label_MouseDown;
                 }
 
             }

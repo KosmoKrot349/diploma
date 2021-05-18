@@ -776,8 +776,7 @@ namespace WpfApp12
 
         }
 
-        public void ApplyDohFiltr(filtr fdb)
-        {
+        public void ApplyDohFiltr(filtr fdb) { 
             sql = "SELECT data,title,sum,fio  FROM dodhody inner join typedohod using(idtype) where (";
             bool change = false;
             for (int i = 0; i < chbxMas.Length; i++)

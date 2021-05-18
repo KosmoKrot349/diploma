@@ -11,9 +11,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 {
     class DeleteCost:IButtonClick
     {
-        DirectorWindow windowObj;
+        ManagerWindow windowObj;
 
-        public DeleteCost(DirectorWindow windowObj)
+        public DeleteCost(ManagerWindow windowObj)
         {
             this.windowObj = windowObj;
         }

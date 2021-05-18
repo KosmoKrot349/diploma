@@ -11,9 +11,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 {
     class DeleteServiceWork:IButtonClick
     {
-        DirectorWindow windowObj;
+        ManagerWindow windowObj;
 
-        public DeleteServiceWork(DirectorWindow windowObj)
+        public DeleteServiceWork(ManagerWindow windowObj)
         {
             this.windowObj = windowObj;
         }

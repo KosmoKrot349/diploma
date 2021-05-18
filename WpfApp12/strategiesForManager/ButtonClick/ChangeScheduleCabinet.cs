@@ -11,9 +11,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 {
     class ChangeScheduleCabinet:IButtonClick
     {
-        DirectorWindow windowObj;
+        ManagerWindow windowObj;
 
-        public ChangeScheduleCabinet(DirectorWindow windowObj)
+        public ChangeScheduleCabinet(ManagerWindow windowObj)
         {
             this.windowObj = windowObj;
         }
@@ -81,7 +81,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
 
-            int cabid = Convert.ToInt32(windowObj.lbmas[0, windowObj.jRaspLebale].Name.Split('_')[1]);
+            int cabid = Convert.ToInt32(windowObj.labelArr[0, windowObj.jCoordScheduleLabel].Name.Split('_')[1]);
             int day = 0;
 
             switch (windowObj.raspChangeDayOfWeekK.Text)

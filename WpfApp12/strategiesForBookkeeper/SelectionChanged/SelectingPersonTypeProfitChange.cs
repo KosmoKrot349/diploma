@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace WpfApp12.strategiesForBuhgalter.strategiesForBuhgalterSelectionChanged
+namespace WpfApp12.strategiesForBookkeeper.SelectionChanged
 {
-    class SelectingPersonProfitChange:ISelectionChanged
+    class SelectingPersonTypeProfitChange:ISelectionChanged
     {
-        BuhgalterWindow windowObj;
+        BookkeeperWindow windowObj;
         ComboBox cmb;
 
-        public SelectingPersonProfitChange(BuhgalterWindow windowObj,ComboBox cmb)
+        public SelectingPersonTypeProfitChange(BookkeeperWindow windowObj,ComboBox cmb)
         {
             this.windowObj = windowObj;
             this.cmb = cmb;
@@ -40,7 +40,7 @@ namespace WpfApp12.strategiesForBuhgalter.strategiesForBuhgalterSelectionChanged
                         {
                             windowObj.dohChKtoVnesCm.Items.Add(reader.GetString(0));
 
-                            if (reader.GetString(0) == windowObj.strrr) {windowObj.dohChKtoVnesCm.SelectedIndex = i; }
+                            if (reader.GetString(0) == windowObj.personForProfit) {windowObj.dohChKtoVnesCm.SelectedIndex = i; }
                             i++;
                         }
                     }
@@ -66,7 +66,7 @@ namespace WpfApp12.strategiesForBuhgalter.strategiesForBuhgalterSelectionChanged
                         while (reader.Read())
                         {
                             windowObj.dohChKtoVnesCm.Items.Add(reader.GetString(0));
-                            if (reader.GetString(0) == windowObj.strrr) { windowObj.dohChKtoVnesCm.SelectedIndex = i; }
+                            if (reader.GetString(0) == windowObj.personForProfit) { windowObj.dohChKtoVnesCm.SelectedIndex = i; }
                             i++;
                         }
                     }
