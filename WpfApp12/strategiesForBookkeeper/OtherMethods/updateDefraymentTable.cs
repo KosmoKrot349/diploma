@@ -51,7 +51,7 @@ namespace WpfApp12.strategiesForBookkeeper.OtherMethods
                 }
                 catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
 
-                DataGridUpdater.updateDataGridOpat(window.connectionString, window.MonthOplGrid, window.Groups, window.Listener, window.textBoxArrForDefreyment, window.isClose, window.isStop, window.Closeing, window.Open, window.StopLern, window.RestartLern);
+                DataGridUpdater.updatePaymentDataGrid(window);
             }
 
 
@@ -94,7 +94,7 @@ namespace WpfApp12.strategiesForBookkeeper.OtherMethods
                 }
                 catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
 
-                DataGridUpdater.updateDataGridDolg(window.connectionString, window.MonthOplGridDolg, window.GroupsDolg, window.ListenerDolg, window.textBoxArrForArrearsDefreyment, window.DataPerehoda, window.isStopDolg);
+                DataGridUpdater.updateDebtDataGrid(window);
             }
 
         }

@@ -1,28 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using Npgsql;
-using Microsoft;
 
 namespace WpfApp12
 {
    public class filtr
     {
-    public CheckBox[] chbxMas;
+    public CheckBox[] checkBoxVariantsArr;
     public string sql = "";
         public string connectionString;
 
-        public void CreatePrepFiltr(Grid FiltrGridPrep)
+        public void CreateTeacherFilter(Grid FilterGridTeacher)
         {
             try
             {
@@ -35,13 +23,13 @@ namespace WpfApp12
                 {
                     while (reader.Read())
                     {
-                        chbxMas = new CheckBox[reader.GetInt32(0)];
+                        checkBoxVariantsArr = new CheckBox[reader.GetInt32(0)];
                     }
 
                 }
                 con.Close();
             }
-            catch { System.Windows.Forms.MessageBox.Show("Не удалось подключиться к базе данных"); return; }
+            catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
             try
             {
                 NpgsqlConnection con1 = new NpgsqlConnection(connectionString);
@@ -54,22 +42,22 @@ namespace WpfApp12
                     int i = 0;
                     while (reader1.Read())
                     {
-                        chbxMas[i] = new CheckBox();
-                        chbxMas[i].Content = reader1.GetString(0);
-                        chbxMas[i].Name = "id_" + reader1.GetInt32(1);
+                        checkBoxVariantsArr[i] = new CheckBox();
+                        checkBoxVariantsArr[i].Content = reader1.GetString(0);
+                        checkBoxVariantsArr[i].Name = "id_" + reader1.GetInt32(1);
                         ColumnDefinition cmd = new ColumnDefinition();
-                        FiltrGridPrep.ColumnDefinitions.Add(cmd);
-                        Grid.SetColumn(chbxMas[i], i);
-                        FiltrGridPrep.Children.Add(chbxMas[i]);
+                        FilterGridTeacher.ColumnDefinitions.Add(cmd);
+                        Grid.SetColumn(checkBoxVariantsArr[i], i);
+                        FilterGridTeacher.Children.Add(checkBoxVariantsArr[i]);
                         i++;
                     }
 
                 }
                 con1.Close();
             }
-            catch { System.Windows.Forms.MessageBox.Show("Не удалось подключиться к базе данных"); return; }
+            catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
         }
-        public void CreateGroupFiltr(Grid FiltrGridCourse)
+        public void CreateGroupFilter(Grid FilterGridCourse)
         {
             try
             {
@@ -82,13 +70,13 @@ namespace WpfApp12
                 {
                     while (reader.Read())
                     {
-                        chbxMas = new CheckBox[reader.GetInt32(0)];
+                        checkBoxVariantsArr = new CheckBox[reader.GetInt32(0)];
                     }
 
                 }
                 con.Close();
             }
-            catch { System.Windows.Forms.MessageBox.Show("Не удалось подклюситься к базе данных"); return; }
+            catch { MessageBox.Show("Не удалось подклюситься к базе данных"); return; }
             try
             {
                 NpgsqlConnection con = new NpgsqlConnection(connectionString);
@@ -101,23 +89,23 @@ namespace WpfApp12
                     int i = 0;
                     while (reader.Read())
                     {
-                        chbxMas[i] = new CheckBox();
-                        chbxMas[i].Content = reader.GetString(0);
-                        chbxMas[i].Name = "id_" + reader.GetInt32(1);
+                        checkBoxVariantsArr[i] = new CheckBox();
+                        checkBoxVariantsArr[i].Content = reader.GetString(0);
+                        checkBoxVariantsArr[i].Name = "id_" + reader.GetInt32(1);
                         ColumnDefinition cmd = new ColumnDefinition();
-                        FiltrGridCourse.ColumnDefinitions.Add(cmd);
-                        Grid.SetColumn(chbxMas[i], i);
-                        FiltrGridCourse.Children.Add(chbxMas[i]);
+                        FilterGridCourse.ColumnDefinitions.Add(cmd);
+                        Grid.SetColumn(checkBoxVariantsArr[i], i);
+                        FilterGridCourse.Children.Add(checkBoxVariantsArr[i]);
                         i++;
                     }
 
                 }
                 con.Close();
             }
-            catch { System.Windows.Forms.MessageBox.Show("Не удалось подключиться к базе данных"); return; }
+            catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
 
         }
-        public void CreateCourseFiltr(Grid FiltrGridSubs)
+        public void CreateCourseFilter(Grid FilterGridSubjects)
         {
             try
             {
@@ -130,13 +118,13 @@ namespace WpfApp12
                 {
                     while (reader.Read())
                     {
-                        chbxMas = new CheckBox[reader.GetInt32(0)];
+                        checkBoxVariantsArr = new CheckBox[reader.GetInt32(0)];
                     }
 
                 }
                 con.Close();
             }
-            catch { System.Windows.Forms.MessageBox.Show("Не удалось подключиться к базе данных"); return; }
+            catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
             try
             {
                 NpgsqlConnection con = new NpgsqlConnection(connectionString);
@@ -149,22 +137,22 @@ namespace WpfApp12
                     int i = 0;
                     while (reader.Read())
                     {
-                        chbxMas[i] = new CheckBox();
-                        chbxMas[i].Content = reader.GetString(0);
-                        chbxMas[i].Name = "id_" + reader.GetInt32(1);
+                        checkBoxVariantsArr[i] = new CheckBox();
+                        checkBoxVariantsArr[i].Content = reader.GetString(0);
+                        checkBoxVariantsArr[i].Name = "id_" + reader.GetInt32(1);
                         ColumnDefinition cmd = new ColumnDefinition();
-                        FiltrGridSubs.ColumnDefinitions.Add(cmd);
-                        Grid.SetColumn(chbxMas[i], i);
-                        FiltrGridSubs.Children.Add(chbxMas[i]);
+                        FilterGridSubjects.ColumnDefinitions.Add(cmd);
+                        Grid.SetColumn(checkBoxVariantsArr[i], i);
+                        FilterGridSubjects.Children.Add(checkBoxVariantsArr[i]);
                         i++;
                     }
 
                 }
                 con.Close();
             }
-            catch { System.Windows.Forms.MessageBox.Show("Не удалось подключиться к базе данных"); return; }
+            catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
         }
-        public void CreateListenersFiltr(Grid FiltrGridGroups)
+        public void CreateListenersFilter(Grid FilterGridGroups)
         {
             try
             {
@@ -177,13 +165,13 @@ namespace WpfApp12
                 {
                     while (reader.Read())
                     {
-                        chbxMas = new CheckBox[reader.GetInt32(0)];
+                        checkBoxVariantsArr = new CheckBox[reader.GetInt32(0)];
                     }
 
                 }
                 con.Close();
             }
-            catch { System.Windows.Forms.MessageBox.Show("Не удалось подключиться к базе данных"); return; }
+            catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
             try
             {
                 NpgsqlConnection con = new NpgsqlConnection(connectionString);
@@ -196,23 +184,23 @@ namespace WpfApp12
                     int i = 0;
                     while (reader.Read())
                     {
-                        chbxMas[i] = new CheckBox();
-                        chbxMas[i].Content = reader.GetString(0);
-                        chbxMas[i].Name = "id_" + reader.GetInt32(1);
+                        checkBoxVariantsArr[i] = new CheckBox();
+                        checkBoxVariantsArr[i].Content = reader.GetString(0);
+                        checkBoxVariantsArr[i].Name = "id_" + reader.GetInt32(1);
                         ColumnDefinition cmd = new ColumnDefinition();
-                        FiltrGridGroups.ColumnDefinitions.Add(cmd);
-                        Grid.SetColumn(chbxMas[i], i);
-                        FiltrGridGroups.Children.Add(chbxMas[i]);
+                        FilterGridGroups.ColumnDefinitions.Add(cmd);
+                        Grid.SetColumn(checkBoxVariantsArr[i], i);
+                        FilterGridGroups.Children.Add(checkBoxVariantsArr[i]);
                         i++;
                     }
 
                 }
                 con.Close();
             }
-            catch { System.Windows.Forms.MessageBox.Show("Не удалось подключиться к базе данных"); return; }
+            catch {MessageBox.Show("Не удалось подключиться к базе данных"); return; }
 
         }
-        public void CreateShtatFiltrFirst(Grid FiltrShtatSotr)
+        public void CreateStaffFirstFilter(Grid FilterStaffGrid)
         {
             try
             {
@@ -225,13 +213,13 @@ namespace WpfApp12
                 {
                     while (reader.Read())
                     {
-                        chbxMas = new CheckBox[reader.GetInt32(0)];
+                        checkBoxVariantsArr = new CheckBox[reader.GetInt32(0)];
                     }
 
                 }
                 con.Close();
             }
-            catch { System.Windows.Forms.MessageBox.Show("Не удалось подключиться к базе данных"); return; }
+            catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
             try
             {
                 NpgsqlConnection con = new NpgsqlConnection(connectionString);
@@ -244,22 +232,22 @@ namespace WpfApp12
                     int i = 0;
                     while (reader.Read())
                     {
-                        chbxMas[i] = new CheckBox();
-                        chbxMas[i].Content = reader.GetString(0);
-                        chbxMas[i].Name = "id_" + reader.GetInt32(1);
+                        checkBoxVariantsArr[i] = new CheckBox();
+                        checkBoxVariantsArr[i].Content = reader.GetString(0);
+                        checkBoxVariantsArr[i].Name = "id_" + reader.GetInt32(1);
                         ColumnDefinition cmd = new ColumnDefinition();
-                        FiltrShtatSotr.ColumnDefinitions.Add(cmd);
-                        Grid.SetColumn(chbxMas[i], i);
-                        FiltrShtatSotr.Children.Add(chbxMas[i]);
+                        FilterStaffGrid.ColumnDefinitions.Add(cmd);
+                        Grid.SetColumn(checkBoxVariantsArr[i], i);
+                        FilterStaffGrid.Children.Add(checkBoxVariantsArr[i]);
                         i++;
                     }
 
                 }
                 con.Close();
             }
-            catch { System.Windows.Forms.MessageBox.Show("Не удалось подключиться к базе данных"); return; }
+            catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
         }
-        public void CreateShtatFiltrSecond(Grid FiltrShtatSotr)
+        public void CreateStaffSecondFilter(Grid FilterStaffGrid)
         {
             try
             {
@@ -272,13 +260,13 @@ namespace WpfApp12
                 {
                     while (reader.Read())
                     {
-                        chbxMas = new CheckBox[reader.GetInt32(0)];
+                        checkBoxVariantsArr = new CheckBox[reader.GetInt32(0)];
                     }
 
                 }
                 con.Close();
             }
-            catch { System.Windows.Forms.MessageBox.Show("Не удалось подключиться к базе данных"); return; }
+            catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
             try
             {
                 NpgsqlConnection con = new NpgsqlConnection(connectionString);
@@ -291,23 +279,23 @@ namespace WpfApp12
                     int i = 0;
                     while (reader.Read())
                     {
-                        chbxMas[i] = new CheckBox();
-                        chbxMas[i].Content = reader.GetString(0);
-                        chbxMas[i].Name = "id_" + reader.GetInt32(1);
+                        checkBoxVariantsArr[i] = new CheckBox();
+                        checkBoxVariantsArr[i].Content = reader.GetString(0);
+                        checkBoxVariantsArr[i].Name = "id_" + reader.GetInt32(1);
                         ColumnDefinition cmd = new ColumnDefinition();
-                        FiltrShtatSotr.ColumnDefinitions.Add(cmd);
-                        Grid.SetColumn(chbxMas[i], i);
-                        FiltrShtatSotr.Children.Add(chbxMas[i]);
+                        FilterStaffGrid.ColumnDefinitions.Add(cmd);
+                        Grid.SetColumn(checkBoxVariantsArr[i], i);
+                        FilterStaffGrid.Children.Add(checkBoxVariantsArr[i]);
                         i++;
                     }
 
                 }
                 con.Close();
             }
-            catch { System.Windows.Forms.MessageBox.Show("Не удалось подключиться к базе данных"); return; }
+            catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
 
         }
-        public void CreateFiltrDohody(Grid FiltrGridDohody)
+        public void CreateProfitFilter(Grid FilterProfitGrid)
         {
             try
             {
@@ -320,13 +308,13 @@ namespace WpfApp12
                 {
                     while (reader.Read())
                     {
-                        chbxMas = new CheckBox[reader.GetInt32(0)];
+                        checkBoxVariantsArr = new CheckBox[reader.GetInt32(0)];
                     }
 
                 }
                 con.Close();
             }
-            catch { System.Windows.Forms.MessageBox.Show("Не удалось подключиться к базе данных"); return; }
+            catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
             try
             {
                 NpgsqlConnection con = new NpgsqlConnection(connectionString);
@@ -339,22 +327,22 @@ namespace WpfApp12
                     int i = 0;
                     while (reader.Read())
                     {
-                        chbxMas[i] = new CheckBox();
-                        chbxMas[i].Content = reader.GetString(0);
-                        chbxMas[i].Name = "id_" + reader.GetInt32(1);
+                        checkBoxVariantsArr[i] = new CheckBox();
+                        checkBoxVariantsArr[i].Content = reader.GetString(0);
+                        checkBoxVariantsArr[i].Name = "id_" + reader.GetInt32(1);
                         ColumnDefinition cmd = new ColumnDefinition();
-                        FiltrGridDohody.ColumnDefinitions.Add(cmd);
-                        Grid.SetColumn(chbxMas[i], i);
-                        FiltrGridDohody.Children.Add(chbxMas[i]);
+                        FilterProfitGrid.ColumnDefinitions.Add(cmd);
+                        Grid.SetColumn(checkBoxVariantsArr[i], i);
+                        FilterProfitGrid.Children.Add(checkBoxVariantsArr[i]);
                         i++;
                     }
 
                 }
                 con.Close();
             }
-            catch { System.Windows.Forms.MessageBox.Show("Не удалось подключиться к базе данных"); return; }
+            catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
         }
-        public void CreateFiltrRashody(Grid FiltrGridRashody)
+        public void CreateCostsFilter(Grid FilterCostsGrid)
         {
             try
             {
@@ -367,13 +355,13 @@ namespace WpfApp12
                 {
                     while (reader.Read())
                     {
-                        chbxMas = new CheckBox[reader.GetInt32(0)];
+                        checkBoxVariantsArr = new CheckBox[reader.GetInt32(0)];
                     }
 
                 }
                 con.Close();
             }
-            catch { System.Windows.Forms.MessageBox.Show("Не удалось подключиться к базе данных"); return; }
+            catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
             try
             {
                 NpgsqlConnection con = new NpgsqlConnection(connectionString);
@@ -386,47 +374,46 @@ namespace WpfApp12
                     int i = 0;
                     while (reader.Read())
                     {
-                        chbxMas[i] = new CheckBox();
-                        chbxMas[i].Content = reader.GetString(0);
-                        chbxMas[i].Name = "id_" + reader.GetInt32(1);
+                        checkBoxVariantsArr[i] = new CheckBox();
+                        checkBoxVariantsArr[i].Content = reader.GetString(0);
+                        checkBoxVariantsArr[i].Name = "id_" + reader.GetInt32(1);
                         ColumnDefinition cmd = new ColumnDefinition();
-                        FiltrGridRashody.ColumnDefinitions.Add(cmd);
-                        Grid.SetColumn(chbxMas[i], i);
-                        FiltrGridRashody.Children.Add(chbxMas[i]);
+                        FilterCostsGrid.ColumnDefinitions.Add(cmd);
+                        Grid.SetColumn(checkBoxVariantsArr[i], i);
+                        FilterCostsGrid.Children.Add(checkBoxVariantsArr[i]);
                         i++;
                     }
 
                 }
                 con.Close();
             }
-            catch { System.Windows.Forms.MessageBox.Show("Не удалось подключиться к базе данных"); return; }
+            catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
         }
-        public void CreateUsersFiltr(Grid FiltrGridRoles)
+        public void CreateUsersFilter(Grid FilterRolesGrid)
         {
-            FiltrGridRoles.Children.Clear();
-            FiltrGridRoles.ColumnDefinitions.Clear();
-            chbxMas = new CheckBox[3];
+            FilterRolesGrid.Children.Clear();
+            FilterRolesGrid.ColumnDefinitions.Clear();
+            checkBoxVariantsArr = new CheckBox[3];
             for (int i = 0; i < 3; i++)
             {
-                chbxMas[i] = new CheckBox();
+                checkBoxVariantsArr[i] = new CheckBox();
                 switch (i)
                 {
-                    case 0: { chbxMas[i].Content = "Админ"; chbxMas[i].Name = "id_admin"; break; }
-                    case 1: { chbxMas[i].Content = "Директор"; chbxMas[i].Name = "id_dir"; break; }
-                    case 2: { chbxMas[i].Content = "Бухгалтер"; chbxMas[i].Name = "id_buhg"; break; }
+                    case 0: { checkBoxVariantsArr[i].Content = "Админ"; checkBoxVariantsArr[i].Name = "id_admin"; break; }
+                    case 1: { checkBoxVariantsArr[i].Content = "Директор"; checkBoxVariantsArr[i].Name = "id_dir"; break; }
+                    case 2: { checkBoxVariantsArr[i].Content = "Бухгалтер"; checkBoxVariantsArr[i].Name = "id_buhg"; break; }
                 }
                 ColumnDefinition cmd = new ColumnDefinition();
-                FiltrGridRoles.ColumnDefinitions.Add(cmd);
-                Grid.SetColumn(chbxMas[i], i);
-                FiltrGridRoles.Children.Add(chbxMas[i]);
+                FilterRolesGrid.ColumnDefinitions.Add(cmd);
+                Grid.SetColumn(checkBoxVariantsArr[i], i);
+                FilterRolesGrid.Children.Add(checkBoxVariantsArr[i]);
 
             }
         }
-
-        public void CreateKassaDAFiltr(Grid FiltrGridPeople)
+        public void CreateCashboxProfitPersonFilter(Grid FilterPeopleGrid)
         {
-            FiltrGridPeople.Children.Clear();
-            FiltrGridPeople.RowDefinitions.Clear();
+            FilterPeopleGrid.Children.Clear();
+            FilterPeopleGrid.RowDefinitions.Clear();
 
             try
             {
@@ -439,13 +426,13 @@ namespace WpfApp12
                 {
                     while (reader.Read())
                     {
-                        chbxMas = new CheckBox[reader.GetInt32(0)];
+                        checkBoxVariantsArr = new CheckBox[reader.GetInt32(0)];
                     }
 
                 }
                 con.Close();
             }
-            catch { System.Windows.Forms.MessageBox.Show("Не удалось подключиться к базе данных"); return; }
+            catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
 
             try
             {
@@ -459,27 +446,27 @@ namespace WpfApp12
                     int i = 0;
                     while (reader.Read())
                     {
-                        chbxMas[i] = new CheckBox();
-                        chbxMas[i].Content = reader.GetString(0);
+                        checkBoxVariantsArr[i] = new CheckBox();
+                        checkBoxVariantsArr[i].Content = reader.GetString(0);
                         RowDefinition rwd = new RowDefinition();
                         rwd.Height = new GridLength(30);
-                        FiltrGridPeople.RowDefinitions.Add(rwd);
-                        Grid.SetRow(chbxMas[i], i);
-                        FiltrGridPeople.Children.Add(chbxMas[i]);
+                        FilterPeopleGrid.RowDefinitions.Add(rwd);
+                        Grid.SetRow(checkBoxVariantsArr[i], i);
+                        FilterPeopleGrid.Children.Add(checkBoxVariantsArr[i]);
                         i++;
                     }
 
                 }
                 con.Close();
             }
-            catch { System.Windows.Forms.MessageBox.Show("Не удалось подключиться к базе данных"); return; }
+            catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
 
             
         }
-        public void CreateKassaDBFiltr(Grid FiltrGridType)
+        public void CreateCashboxProfitTypesFilter(Grid FilterTypeGrid)
         {
-            FiltrGridType.Children.Clear();
-            FiltrGridType.RowDefinitions.Clear();
+            FilterTypeGrid.Children.Clear();
+            FilterTypeGrid.RowDefinitions.Clear();
 
             try
             {
@@ -492,13 +479,13 @@ namespace WpfApp12
                 {
                     while (reader1.Read())
                     {
-                        chbxMas = new CheckBox[reader1.GetInt32(0)];
+                        checkBoxVariantsArr = new CheckBox[reader1.GetInt32(0)];
                     }
 
                 }
                 con1.Close();
             }
-            catch { System.Windows.Forms.MessageBox.Show("Не удалось подключиться к базе данных"); return; }
+            catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
 
             try
             {
@@ -512,27 +499,27 @@ namespace WpfApp12
                     int i = 0;
                     while (reader.Read())
                     {
-                        chbxMas[i] = new CheckBox();
-                        chbxMas[i].Content = reader.GetString(0);
-                        chbxMas[i].Name = "N_" + reader.GetInt32(1);
+                        checkBoxVariantsArr[i] = new CheckBox();
+                        checkBoxVariantsArr[i].Content = reader.GetString(0);
+                        checkBoxVariantsArr[i].Name = "N_" + reader.GetInt32(1);
                         RowDefinition rwd = new RowDefinition();
                         rwd.Height = new GridLength(30);
-                        FiltrGridType.RowDefinitions.Add(rwd);
-                        Grid.SetRow(chbxMas[i], i);
-                        FiltrGridType.Children.Add(chbxMas[i]);
+                        FilterTypeGrid.RowDefinitions.Add(rwd);
+                        Grid.SetRow(checkBoxVariantsArr[i], i);
+                        FilterTypeGrid.Children.Add(checkBoxVariantsArr[i]);
                         i++;
                     }
 
                 }
                 con.Close();
             }
-            catch { System.Windows.Forms.MessageBox.Show("Не удалось подключиться к базе данных1"); return; }
+            catch { MessageBox.Show("Не удалось подключиться к базе данных1"); return; }
 
         }
-        public void CreateKassaRAFiltr(Grid FiltrGridPeople)
+        public void CreateCashboxCostsPersonFilter(Grid FilterPeopleGrid)
         {
-            FiltrGridPeople.Children.Clear();
-            FiltrGridPeople.RowDefinitions.Clear();
+            FilterPeopleGrid.Children.Clear();
+            FilterPeopleGrid.RowDefinitions.Clear();
 
             try
             {
@@ -545,13 +532,13 @@ namespace WpfApp12
                 {
                     while (reader.Read())
                     {
-                        chbxMas = new CheckBox[reader.GetInt32(0)];
+                        checkBoxVariantsArr = new CheckBox[reader.GetInt32(0)];
                     }
 
                 }
                 con.Close();
             }
-            catch { System.Windows.Forms.MessageBox.Show("Не удалось подключиться к базе данных"); return; }
+            catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
 
             try
             {
@@ -565,28 +552,28 @@ namespace WpfApp12
                     int i = 0;
                     while (reader.Read())
                     {
-                        chbxMas[i] = new CheckBox();
-                        chbxMas[i].Content = reader.GetString(0);
-                        chbxMas[i].Name = "N2_" + reader.GetInt32(1);
+                        checkBoxVariantsArr[i] = new CheckBox();
+                        checkBoxVariantsArr[i].Content = reader.GetString(0);
+                        checkBoxVariantsArr[i].Name = "N2_" + reader.GetInt32(1);
                         RowDefinition rwd = new RowDefinition();
                         rwd.Height = new GridLength(30);
-                        FiltrGridPeople.RowDefinitions.Add(rwd);
-                        Grid.SetRow(chbxMas[i], i);
-                        FiltrGridPeople.Children.Add(chbxMas[i]);
+                        FilterPeopleGrid.RowDefinitions.Add(rwd);
+                        Grid.SetRow(checkBoxVariantsArr[i], i);
+                        FilterPeopleGrid.Children.Add(checkBoxVariantsArr[i]);
                         i++;
                     }
 
                 }
                 con.Close();
             }
-            catch { System.Windows.Forms.MessageBox.Show("Не удалось подключиться к базе данных"); return; }
+            catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
 
 
         }
-        public void CreateKassaRBFiltr(Grid FiltrGridType)
+        public void CreateCashboxCostsTypesFilter(Grid FilterTypeGrid)
         {
-            FiltrGridType.Children.Clear();
-            FiltrGridType.RowDefinitions.Clear();
+            FilterTypeGrid.Children.Clear();
+            FilterTypeGrid.RowDefinitions.Clear();
 
             try
             {
@@ -599,7 +586,7 @@ namespace WpfApp12
                 {
                     while (reader1.Read())
                     {
-                        chbxMas = new CheckBox[reader1.GetInt32(0)];
+                        checkBoxVariantsArr = new CheckBox[reader1.GetInt32(0)];
                     }
 
                 }
@@ -619,14 +606,14 @@ namespace WpfApp12
                     int i = 0;
                     while (reader.Read())
                     {
-                        chbxMas[i] = new CheckBox();
-                        chbxMas[i].Content = reader.GetString(0);
-                        chbxMas[i].Name = "N3_" + reader.GetInt32(1);
+                        checkBoxVariantsArr[i] = new CheckBox();
+                        checkBoxVariantsArr[i].Content = reader.GetString(0);
+                        checkBoxVariantsArr[i].Name = "N3_" + reader.GetInt32(1);
                         RowDefinition rwd = new RowDefinition();
                         rwd.Height = new GridLength(30);
-                        FiltrGridType.RowDefinitions.Add(rwd);
-                        Grid.SetRow(chbxMas[i], i);
-                        FiltrGridType.Children.Add(chbxMas[i]);
+                        FilterTypeGrid.RowDefinitions.Add(rwd);
+                        Grid.SetRow(checkBoxVariantsArr[i], i);
+                        FilterTypeGrid.Children.Add(checkBoxVariantsArr[i]);
                         i++;
                     }
 
@@ -638,15 +625,13 @@ namespace WpfApp12
         }
 
 
-
-
-        public void ApplyListFiltr() {
+        public void ApplyListenerFilter() {
 
             sql = "SELECT listenerid,  fio,  phones, comment,array_length(grid, 1) as grid FROM listeners  where grid @> ARRAY[ ";
             bool change = false;
-            for (int i = 0; i < chbxMas.Length; i++)
+            for (int i = 0; i < checkBoxVariantsArr.Length; i++)
             {
-                if (chbxMas[i].IsChecked == true) { change = true; sql += chbxMas[i].Name.Split('_')[1] + ","; }
+                if (checkBoxVariantsArr[i].IsChecked == true) { change = true; sql += checkBoxVariantsArr[i].Name.Split('_')[1] + ","; }
 
             }
             if (change == true)
@@ -655,13 +640,13 @@ namespace WpfApp12
                 sql = sql.Substring(0, sql.Length - 21) + "order by listenerid";
 
         }
-        public void ApplyGroupsFiltr()
+        public void ApplyGroupsFilter()
         {
             sql = "SELECT groups.grid as grid,  groups.nazvanie as gtitle,courses.title as ctitle, groups.comment as comment ,groups.payment[1],groups.payment[2],groups.payment[3],groups.payment[4],groups.payment[5],groups.payment[6],groups.payment[7],groups.payment[8],groups.payment[9],groups.payment[10],groups.payment[11],groups.payment[12],date_start,date_end FROM groups inner join courses using (courseid) where ";
             bool change = false;
-            for (int i = 0; i < chbxMas.Length; i++)
+            for (int i = 0; i < checkBoxVariantsArr.Length; i++)
             {
-                if (chbxMas[i].IsChecked == true) { change = true; sql += "courseid =" + chbxMas[i].Name.Split('_')[1] + " or "; }
+                if (checkBoxVariantsArr[i].IsChecked == true) { change = true; sql += "courseid =" + checkBoxVariantsArr[i].Name.Split('_')[1] + " or "; }
 
             }
             if (change == true)
@@ -669,13 +654,13 @@ namespace WpfApp12
             else
                 sql = sql.Substring(0, sql.Length - 7);
         }
-        public void ApplyCourseFiltr()
+        public void ApplyCourseFilter()
         {
             sql = "select courseid,title,comment FROM courses where subs @> ARRAY[";
             bool change = false;
-            for (int i = 0; i < chbxMas.Length; i++)
+            for (int i = 0; i < checkBoxVariantsArr.Length; i++)
             {
-                if (chbxMas[i].IsChecked == true) { change = true; sql += chbxMas[i].Name.Split('_')[1] + ","; }
+                if (checkBoxVariantsArr[i].IsChecked == true) { change = true; sql += checkBoxVariantsArr[i].Name.Split('_')[1] + ","; }
 
             }
             if (change == true)
@@ -683,13 +668,13 @@ namespace WpfApp12
             else
                 sql = sql.Substring(0, sql.Length - 20);
         }
-        public void ApplyPrepFiltr()
+        public void ApplyTeachersFilter()
         {
             sql = "SELECT  prep.prepid as prid,kategorii.title as nazva ,sotrudniki.fio as name ,prep.date_start as date,sotrudniki.comment as comm FROM sotrudniki inner join prep using(sotrid) inner join kategorii using(kategid) where ";
             bool change = false;
-            for (int i = 0; i < chbxMas.Length; i++)
+            for (int i = 0; i < checkBoxVariantsArr.Length; i++)
             {
-                if (chbxMas[i].IsChecked == true) { change = true; sql += "kategid =" + chbxMas[i].Name.Split('_')[1] + " or "; }
+                if (checkBoxVariantsArr[i].IsChecked == true) { change = true; sql += "kategid =" + checkBoxVariantsArr[i].Name.Split('_')[1] + " or "; }
 
             }
             if (change == true)
@@ -697,14 +682,14 @@ namespace WpfApp12
             else
                 sql = sql.Substring(0, sql.Length - 7);
         }
-        public void ApplyShtatFiltrFirst()
+        public void ApplyStaffFirstFilter()
         {
             sql = "SELECT shtat.shtatid, sotrudniki.fio, array_to_string(stavky,'_') as stavky,array_to_string(obem,'_') as obem   FROM shtat inner join sotrudniki using(sotrid) where states @> ARRAY [";
 
             bool change = false;
-            for (int i = 0; i < chbxMas.Length; i++)
+            for (int i = 0; i < checkBoxVariantsArr.Length; i++)
             {
-                if (chbxMas[i].IsChecked == true) { change = true; sql += chbxMas[i].Name.Split('_')[1] + ","; }
+                if (checkBoxVariantsArr[i].IsChecked == true) { change = true; sql += checkBoxVariantsArr[i].Name.Split('_')[1] + ","; }
 
             }
 
@@ -714,14 +699,14 @@ namespace WpfApp12
                 sql = sql.Substring(0, sql.Length - 23);
 
         }
-        public void ApplyShtatFiltrSecond()
+        public void ApplyStaffSecondFilter()
         {
             sql = "SELECT shtat.shtatid, sotrudniki.fio, array_to_string(stavky,'_') as stavky,array_to_string(obem,'_') as obem   FROM shtat inner join sotrudniki using(sotrid) where obslwork @> ARRAY [";
 
             bool change = false;
-            for (int i = 0; i < chbxMas.Length; i++)
+            for (int i = 0; i < checkBoxVariantsArr.Length; i++)
             {
-                if (chbxMas[i].IsChecked == true) { change = true; sql += chbxMas[i].Name.Split('_')[1] + ","; }
+                if (checkBoxVariantsArr[i].IsChecked == true) { change = true; sql += checkBoxVariantsArr[i].Name.Split('_')[1] + ","; }
 
             }
 
@@ -730,13 +715,13 @@ namespace WpfApp12
             else
                 sql = sql.Substring(0, sql.Length - 25);
         }
-        public void ApplyRashodyFiltr()
+        public void ApplyCostsFilter()
         {
             sql = "SELECT rashody.rashid as rashid, typerash.title as title, sotrudniki.fio as fio, rashody.summ as summ , rashody.data as data, rashody.description as description FROM rashody inner join typerash using(typeid) inner join sotrudniki using(sotrid) where ";
             bool change = false;
-            for (int i = 0; i < chbxMas.Length; i++)
+            for (int i = 0; i < checkBoxVariantsArr.Length; i++)
             {
-                if (chbxMas[i].IsChecked == true) { change = true; sql += "rashody.typeid = " + chbxMas[i].Name.Split('_')[1] + " or "; }
+                if (checkBoxVariantsArr[i].IsChecked == true) { change = true; sql += "rashody.typeid = " + checkBoxVariantsArr[i].Name.Split('_')[1] + " or "; }
 
             }
             if (change == true)
@@ -744,13 +729,13 @@ namespace WpfApp12
             else
                 sql = sql.Substring(0, sql.Length - 7);
         }
-        public void ApplyDohodyFiltr()
+        public void ApplyProfitFilter()
         {
             sql = "SELECT dodhody.dohid as dohid, typedohod.title as title, dodhody.sum as sum, dodhody.data as data, dodhody.fio as fio FROM dodhody inner join typedohod using(idtype) where ";
             bool change = false;
-            for (int i = 0; i < chbxMas.Length; i++)
+            for (int i = 0; i < checkBoxVariantsArr.Length; i++)
             {
-                if (chbxMas[i].IsChecked == true) { change = true; sql += "dodhody.idtype = " + chbxMas[i].Name.Split('_')[1] + " or "; }
+                if (checkBoxVariantsArr[i].IsChecked == true) { change = true; sql += "dodhody.idtype = " + checkBoxVariantsArr[i].Name.Split('_')[1] + " or "; }
 
             }
             if (change == true)
@@ -758,30 +743,29 @@ namespace WpfApp12
             else
                 sql = sql.Substring(0, sql.Length - 7);
         }
-        public void ApplyUsersFiltr()
+        public void ApplyUsersFilter()
         {
             sql = "select * from users where uid != -1 ";
-            if (chbxMas[0].IsChecked == true)
+            if (checkBoxVariantsArr[0].IsChecked == true)
             {
                 sql += "and admin = 1 ";
             }
-            if (chbxMas[2].IsChecked == true)
+            if (checkBoxVariantsArr[2].IsChecked == true)
             {
                 sql += "and buhgalter = 1 ";
             }
-            if (chbxMas[1].IsChecked == true)
+            if (checkBoxVariantsArr[1].IsChecked == true)
             {
                 sql += "and director = 1 ";
             }
 
         }
-
-        public void ApplyDohFiltr(filtr fdb) { 
+        public void ApplyProfitFilterForCashboxReport(filtr filterProfitTypes) { 
             sql = "SELECT data,title,sum,fio  FROM dodhody inner join typedohod using(idtype) where (";
             bool change = false;
-            for (int i = 0; i < chbxMas.Length; i++)
+            for (int i = 0; i < checkBoxVariantsArr.Length; i++)
             {
-                if (chbxMas[i].IsChecked == true) { change = true; sql += "dodhody.fio = " + "'"+chbxMas[i].Content + "' or "; }
+                if (checkBoxVariantsArr[i].IsChecked == true) { change = true; sql += "dodhody.fio = " + "'"+checkBoxVariantsArr[i].Content + "' or "; }
 
             }
             if (change == true)
@@ -792,9 +776,9 @@ namespace WpfApp12
            string sql2 = "(";
 
             bool change2 = false;
-            for (int i = 0; i < fdb.chbxMas.Length; i++)
+            for (int i = 0; i < filterProfitTypes.checkBoxVariantsArr.Length; i++)
             {
-                if (fdb.chbxMas[i].IsChecked == true) { change2 = true; sql2 += "dodhody.idtype = " + fdb.chbxMas[i].Name.Split('_')[1] + " or "; }
+                if (filterProfitTypes.checkBoxVariantsArr[i].IsChecked == true) { change2 = true; sql2 += "dodhody.idtype = " + filterProfitTypes.checkBoxVariantsArr[i].Name.Split('_')[1] + " or "; }
 
             }
             if (change2 == true)
@@ -804,14 +788,13 @@ namespace WpfApp12
 
             if (change == true && change2==true) { sql += " and " + sql2; } if(change == false && change2 == true) { sql += " where " + sql2; }
         }
-
-        public void ApplyRashFiltr(filtr frb)
+        public void ApplyCostsFilterForCashboxReport(filtr filterCostsTypes)
         {
             sql = "SELECT data,title,fio,summ  FROM rashody inner join typerash using(typeid) inner join sotrudniki using(sotrid) where (";
             bool change = false;
-            for (int i = 0; i < chbxMas.Length; i++)
+            for (int i = 0; i < checkBoxVariantsArr.Length; i++)
             {
-                if (chbxMas[i].IsChecked == true) { change = true; sql += "rashody.sotrid = "  + chbxMas[i].Name.Split('_')[1] + " or "; }
+                if (checkBoxVariantsArr[i].IsChecked == true) { change = true; sql += "rashody.sotrid = "  + checkBoxVariantsArr[i].Name.Split('_')[1] + " or "; }
 
             }
             if (change == true)
@@ -822,9 +805,9 @@ namespace WpfApp12
           string sql2 = "(";
 
             bool change2 = false;
-            for (int i = 0; i < frb.chbxMas.Length; i++)
+            for (int i = 0; i < filterCostsTypes.checkBoxVariantsArr.Length; i++)
             {
-                if (frb.chbxMas[i].IsChecked == true) { change2 = true; sql2 += "rashody.typeid = " + frb.chbxMas[i].Name.Split('_')[1] + " or "; }
+                if (filterCostsTypes.checkBoxVariantsArr[i].IsChecked == true) { change2 = true; sql2 += "rashody.typeid = " + filterCostsTypes.checkBoxVariantsArr[i].Name.Split('_')[1] + " or "; }
 
             }
             if (change2 == true)

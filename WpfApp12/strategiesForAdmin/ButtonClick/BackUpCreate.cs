@@ -23,46 +23,46 @@ namespace WpfApp12.strategiesForAdmin
         {
             if (windowObj.bckpName.Text != "")
             {
-                string bckpname = windowObj.bckpName.Text;
-                for (int i = 0; i < bckpname.Length; i++)
+                string backUpName = windowObj.bckpName.Text;
+                for (int i = 0; i < backUpName.Length; i++)
                 {
-                    if ((bckpname[i] >= 'а' && bckpname[i] <= 'я') || (bckpname[i] >= 'А' && bckpname[i] <= 'Я')) { MessageBox.Show("В имени копии не должно быть русскких символов"); return; }
+                    if ((backUpName[i] >= 'а' && backUpName[i] <= 'я') || (backUpName[i] >= 'А' && backUpName[i] <= 'Я')) { MessageBox.Show("В имени копии не должно быть русскких символов"); return; }
                 }
 
             }
             StreamReader StreamReader = new StreamReader(@"crDump.bat");
-            ArrayList arLs = new ArrayList();
+            ArrayList createBackUpList = new ArrayList();
             while (!StreamReader.EndOfStream)
             {
-                arLs.Add(StreamReader.ReadLine());
+                createBackUpList.Add(StreamReader.ReadLine());
             }
-            object[] batStrMas = arLs.ToArray();
+            object[] stringArrFromBatFile = createBackUpList.ToArray();
             StreamReader.Close();
             StreamReader StreamReader2 = new StreamReader(@"setting.txt");
-            ArrayList arLs2 = new ArrayList();
+            ArrayList settingList = new ArrayList();
             while (!StreamReader2.EndOfStream)
             {
-                arLs2.Add(StreamReader2.ReadLine());
+                settingList.Add(StreamReader2.ReadLine());
             }
             StreamReader2.Close();
-            object[] batStrMas2 = arLs2.ToArray();
+            object[] stringArrFromSettingFile = settingList.ToArray();
 
-            string batLastStr = "pg_dump -d postgresql://postgres:" + batStrMas2[1].ToString().Split(':')[1] + "@" + batStrMas2[0].ToString().Split(':')[1] + ":" + batStrMas2[2].ToString().Split(':')[1] + "/db > ";
+            string lastStringForBatFile = "pg_dump -d postgresql://postgres:" + stringArrFromSettingFile[1].ToString().Split(':')[1] + "@" + stringArrFromSettingFile[0].ToString().Split(':')[1] + ":" + stringArrFromSettingFile[2].ToString().Split(':')[1] + "/db > ";
             if (windowObj.bckpName.Text == "")
             {
-                DateTime a = DateTime.Now;
-                batLastStr += windowObj.bckpPyt.Text + "" + a.Day + "_" + a.Month + "_" + a.Year + "_" + a.Hour + "_" + a.Minute + "_" + a.Second + ".sql";
+                DateTime dateNow = DateTime.Now;
+                lastStringForBatFile += windowObj.bckpPyt.Text + "" + dateNow.Day + "_" + dateNow.Month + "_" + dateNow.Year + "_" + dateNow.Hour + "_" + dateNow.Minute + "_" + dateNow.Second + ".sql";
             }
             else
             {
-                batLastStr += windowObj.bckpPyt.Text + windowObj.bckpName.Text + ".sql";
+                lastStringForBatFile += windowObj.bckpPyt.Text + windowObj.bckpName.Text + ".sql";
 
             }
-            batStrMas[2] = batLastStr;
+            stringArrFromBatFile[2] = lastStringForBatFile;
             StreamWriter StreamWriter = new StreamWriter(@"crDump.bat");
-            for (int i = 0; i < batStrMas.Length; i++)
+            for (int i = 0; i < stringArrFromBatFile.Length; i++)
             {
-                StreamWriter.WriteLine(batStrMas[i]);
+                StreamWriter.WriteLine(stringArrFromBatFile[i]);
             }
 
             StreamWriter.Close();

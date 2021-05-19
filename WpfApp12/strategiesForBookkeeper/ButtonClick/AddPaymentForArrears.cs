@@ -32,74 +32,74 @@ namespace WpfApp12.strategiesForBookkeeper.ButtonClick
                 {
                     while (reader.Read())
                     {
-                        string payedlist = reader.GetString(0);
-                        string[] payedlistMas = payedlist.Split('_');
-                        double[] payedlistMasDouble = new double[12];
+                        string payedByListener = reader.GetString(0);
+                        string[] payedByListenerStringArr = payedByListener.Split('_');
+                        double[] payedByListenerDoubleArr = new double[12];
 
-                        string topay = reader.GetString(1);
-                        string[] topayMas = topay.Split('_');
-                        double[] topayMasDouble = new double[12];
+                        string toPay = reader.GetString(1);
+                        string[] toPayStringArr = toPay.Split('_');
+                        double[] toPayDoubleArr = new double[12];
 
-                        string payformonth = reader.GetString(2);
-                        string[] payformonthMas = payformonth.Split('_');
-                        double[] payformonthMasDouble = new double[12];
+                        string payForMonth = reader.GetString(2);
+                        string[] payForMonthStringArr = payForMonth.Split('_');
+                        double[] payForMonthDobuleArr = new double[12];
 
-                        string skidkiforpay = reader.GetString(3);
-                        string[] skidkiforpayMas = skidkiforpay.Split('_');
-                        double[] skidkiforpayMasDouble = new double[12];
+                        string dicount = reader.GetString(3);
+                        string[] dicountStringArr = dicount.Split('_');
+                        double[] dicountDoubleArr = new double[12];
                         for (int i = 0; i < 12; i++)
                         {
 
-                            payedlistMasDouble[i] = Convert.ToDouble(payedlistMas[i].Replace('.', ','));
-                            topayMasDouble[i] = Convert.ToDouble(topayMas[i].Replace('.', ','));
-                            payformonthMasDouble[i] = Convert.ToDouble(payformonthMas[i].Replace('.', ','));
-                            skidkiforpayMasDouble[i] = Convert.ToDouble(skidkiforpayMas[i].Replace('.', ','));
+                            payedByListenerDoubleArr[i] = Convert.ToDouble(payedByListenerStringArr[i].Replace('.', ','));
+                            toPayDoubleArr[i] = Convert.ToDouble(toPayStringArr[i].Replace('.', ','));
+                            payForMonthDobuleArr[i] = Convert.ToDouble(payForMonthStringArr[i].Replace('.', ','));
+                            dicountDoubleArr[i] = Convert.ToDouble(dicountStringArr[i].Replace('.', ','));
 
                         }
 
-                        double[] oplMas = new double[12];
+                        double[] payArr = new double[12];
                         int j = 0;
-                        for (int i = 0; i < payformonthMas.Length; i++)
+                        for (int i = 0; i < payForMonthStringArr.Length; i++)
                         {
-                            if (payformonthMasDouble[i] != 0)
+                            if (payForMonthDobuleArr[i] != 0)
                             {
 
-                                if (windowObj.textBoxArrForArrearsDefreyment[j].Text == "") oplMas[i] = 0;
-                                else { oplMas[i] = Convert.ToDouble(windowObj.textBoxArrForArrearsDefreyment[j].Text); }
+                                if (windowObj.textBoxArrForArrearsDefreyment[j].Text == "") payArr[i] = 0;
+                                else { payArr[i] = Convert.ToDouble(windowObj.textBoxArrForArrearsDefreyment[j].Text); }
                                 j++;
                                 continue;
 
                             }
-                            oplMas[i] = 0;
+                            payArr[i] = 0;
                         }
 
-                        ArrayList monthSkidkoy = new ArrayList();
-                        for (int i = 0; i < payedlistMas.Length; i++)
+                        ArrayList monthWithDiscountList = new ArrayList();
+                        for (int i = 0; i < payedByListenerStringArr.Length; i++)
                         {
-                            if (payformonthMasDouble[i] != 0)
+                            if (payForMonthDobuleArr[i] != 0)
                             {
-                                if (topayMasDouble[i] < oplMas[i]) { System.Windows.Forms.MessageBox.Show("Невозможно принять оплаты больше чем необходимо заплатить"); return; }
-                                if (payedlistMasDouble[i] == 0 && topayMasDouble[i] != 0 && topayMasDouble[i] == oplMas[i]) { monthSkidkoy.Add(i); }
+                                if (toPayDoubleArr[i] < payArr[i]) { System.Windows.Forms.MessageBox.Show("Невозможно принять оплаты больше чем необходимо заплатить"); return; }
+                                if (payedByListenerDoubleArr[i] == 0 && toPayDoubleArr[i] != 0 && toPayDoubleArr[i] == payArr[i]) { monthWithDiscountList.Add(i); }
 
                             }
                         }
-                        double skidka = 0;
+                        double dicountPercent = 0;
 
                         //получение процента скидки 
-                        if (monthSkidkoy.Count > 1)
+                        if (monthWithDiscountList.Count > 1)
                         {
                             try
                             {
                                 NpgsqlConnection con1 = new NpgsqlConnection(windowObj.connectionString);
                                 con1.Open();
-                                string sql1 = "SELECT skidka FROM skidki where kol_month=" + monthSkidkoy.Count + "";
+                                string sql1 = "SELECT skidka FROM skidki where kol_month=" + monthWithDiscountList.Count + "";
                                 NpgsqlCommand com1 = new NpgsqlCommand(sql1, con1);
                                 NpgsqlDataReader reader1 = com1.ExecuteReader();
                                 if (reader1.HasRows)
                                 {
                                     while (reader1.Read())
                                     {
-                                        skidka = reader1.GetDouble(0);
+                                        dicountPercent = reader1.GetDouble(0);
                                     }
 
                                 }
@@ -107,35 +107,35 @@ namespace WpfApp12.strategiesForBookkeeper.ButtonClick
                             }
                             catch { MessageBox.Show("Не удалось подклюситься к базе данных"); return; }
                         }
-                        payedlist = "'{";
-                        topay = "'{";
-                        skidkiforpay = "'{";
-                        double zdacha = 0;
+                        payedByListener = "'{";
+                        toPay = "'{";
+                        dicount = "'{";
+                        double surplus = 0;
                         double allSum = 0;
 
-                        for (int i = 0; i < oplMas.Length; i++)
+                        for (int i = 0; i < payArr.Length; i++)
                         {
-                            if (payformonthMasDouble[i] != 0)
+                            if (payForMonthDobuleArr[i] != 0)
                             {
-                                if (monthSkidkoy.IndexOf(i) != -1) { topayMasDouble[i] -= oplMas[i]; payedlistMasDouble[i] += oplMas[i] - (oplMas[i] * skidka / 100); skidkiforpayMasDouble[i] = skidka; zdacha += oplMas[i] * skidka / 100; }
-                                else { topayMasDouble[i] -= oplMas[i]; payedlistMasDouble[i] += oplMas[i]; }
+                                if (monthWithDiscountList.IndexOf(i) != -1) { toPayDoubleArr[i] -= payArr[i]; payedByListenerDoubleArr[i] += payArr[i] - (payArr[i] * dicountPercent / 100); dicountDoubleArr[i] = dicountPercent; surplus += payArr[i] * dicountPercent / 100; }
+                                else { toPayDoubleArr[i] -= payArr[i]; payedByListenerDoubleArr[i] += payArr[i]; }
 
                             }
-                            allSum += oplMas[i];
-                            payedlist += payedlistMasDouble[i].ToString().Replace(',', '.') + ",";
-                            topay += topayMasDouble[i].ToString().Replace(',', '.') + ",";
-                            skidkiforpay += skidkiforpayMasDouble[i].ToString().Replace(',', '.') + ",";
+                            allSum += payArr[i];
+                            payedByListener += payedByListenerDoubleArr[i].ToString().Replace(',', '.') + ",";
+                            toPay += toPayDoubleArr[i].ToString().Replace(',', '.') + ",";
+                            dicount += dicountDoubleArr[i].ToString().Replace(',', '.') + ",";
                         }
 
-                        payedlist = payedlist.Substring(0, payedlist.Length - 1) + "}'";
-                        topay = topay.Substring(0, topay.Length - 1) + "}'";
-                        skidkiforpay = skidkiforpay.Substring(0, skidkiforpay.Length - 1) + "}'";
+                        payedByListener = payedByListener.Substring(0, payedByListener.Length - 1) + "}'";
+                        toPay = toPay.Substring(0, toPay.Length - 1) + "}'";
+                        dicount = dicount.Substring(0, dicount.Length - 1) + "}'";
                         //обновление записи
                         try
                         {
                             NpgsqlConnection con1 = new NpgsqlConnection(windowObj.connectionString);
                             con1.Open();
-                            string sql1 = "UPDATE listdolg SET payedlist=" + payedlist + ", skidkiforpay=" + skidkiforpay + ", topay=" + topay + "  WHERE listenerid = (select listenerid from listeners where fio='" + windowObj.ListenerDolg.SelectedItem + "') and grid = (select grid from groups where nazvanie ='" + windowObj.GroupsDolg.SelectedItem + "')";
+                            string sql1 = "UPDATE listdolg SET payedlist=" + payedByListener + ", skidkiforpay=" + dicount + ", topay=" + toPay + "  WHERE listenerid = (select listenerid from listeners where fio='" + windowObj.ListenerDolg.SelectedItem + "') and grid = (select grid from groups where nazvanie ='" + windowObj.GroupsDolg.SelectedItem + "')";
                             NpgsqlCommand com1 = new NpgsqlCommand(sql1, con1);
                             com1.ExecuteNonQuery();
                             con1.Close();
@@ -147,7 +147,7 @@ namespace WpfApp12.strategiesForBookkeeper.ButtonClick
                         {
                             try
                             {
-                                allSum -= zdacha;
+                                allSum -= surplus;
                                 NpgsqlConnection con1 = new NpgsqlConnection(windowObj.connectionString);
                                 con1.Open();
                                 string sql1 = "INSERT INTO dodhody(idtype, sum, data,fio)VALUES ( 1, " + allSum.ToString().Replace(',', '.') + ", now(),'" + windowObj.ListenerDolg.SelectedItem + "');";
@@ -158,7 +158,7 @@ namespace WpfApp12.strategiesForBookkeeper.ButtonClick
                             catch { MessageBox.Show("Не удалось подклюситься к базе данных"); return; }
                         }
 
-                        System.Windows.Forms.MessageBox.Show("Остаток от суммы оплаты из-за скидок при оплате на перед: " + zdacha);
+                        MessageBox.Show("Остаток от суммы оплаты из-за скидок при оплате на перед: " + surplus);
                     }
                 }
                 con.Close();

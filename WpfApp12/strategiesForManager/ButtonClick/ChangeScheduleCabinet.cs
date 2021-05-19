@@ -20,9 +20,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 
         public void ButtonClick()
         {
-            int subid = -1;
-            int grid = -1;
-            int prepid = -1;
+            int subjectID = -1;
+            int groopID = -1;
+            int teacherID = -1;
 
             //получение id предмета
             try
@@ -36,7 +36,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                 {
                     while (reader.Read())
                     {
-                        subid = reader.GetInt32(0);
+                        subjectID = reader.GetInt32(0);
                     }
                 }
                 con.Close();
@@ -55,7 +55,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                 {
                     while (reader.Read())
                     {
-                        grid = reader.GetInt32(0);
+                        groopID = reader.GetInt32(0);
                     }
                 }
                 con.Close();
@@ -74,14 +74,14 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                 {
                     while (reader.Read())
                     {
-                        prepid = reader.GetInt32(0);
+                        teacherID = reader.GetInt32(0);
                     }
                 }
                 con.Close();
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
 
-            int cabid = Convert.ToInt32(windowObj.labelArr[0, windowObj.jCoordScheduleLabel].Name.Split('_')[1]);
+            int cabinetID = Convert.ToInt32(windowObj.labelArr[0, windowObj.jCoordScheduleLabel].Name.Split('_')[1]);
             int day = 0;
 
             switch (windowObj.raspChangeDayOfWeekK.Text)
@@ -100,7 +100,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             {
                 NpgsqlConnection con = new NpgsqlConnection(windowObj.connectionString);
                 con.Open();
-                string sql = "UPDATE raspisanie SET subid=" + subid + ", grid=" + grid + ",prepid = " + prepid + " WHERE cabid=" + cabid + " and  lesson_number=" + windowObj.raspChangeLesNumK.Text + " and date='" + windowObj.raspChangeDateK.Text.Replace('.', '-') + "' and day=" + day;
+                string sql = "UPDATE raspisanie SET subid=" + subjectID + ", grid=" + groopID + ",prepid = " + teacherID + " WHERE cabid=" + cabinetID + " and  lesson_number=" + windowObj.raspChangeLesNumK.Text + " and date='" + windowObj.raspChangeDateK.Text.Replace('.', '-') + "' and day=" + day;
                 NpgsqlCommand command = new NpgsqlCommand(sql, con);
                 command.ExecuteNonQuery();
                 con.Close();

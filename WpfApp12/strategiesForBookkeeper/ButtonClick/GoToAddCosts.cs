@@ -43,7 +43,7 @@ namespace WpfApp12.strategiesForBookkeeper.ButtonClick
                 }
                 con.Close();
             }
-            catch { System.Windows.Forms.MessageBox.Show("Не удалось подключиться к базе данных"); return; }
+            catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
 
             try
             {

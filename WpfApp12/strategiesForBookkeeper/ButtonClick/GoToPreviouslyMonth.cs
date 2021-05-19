@@ -18,7 +18,7 @@ namespace WpfApp12.strategiesForBookkeeper.ButtonClick
         public void ButtonClick()
         {
             windowObj.dateAccrual = windowObj.dateAccrual.AddMonths(-1);
-            DataGridUpdater.updateGridNachZp(windowObj.connectionString, windowObj.NachMonthLabel, windowObj.checkBoxArrStaffForAccrual, windowObj.NachSotrGrid, windowObj.NachDataGrid, windowObj.dateAccrual);
+            DataGridUpdater.updateAccrualsSalaryDataGrid(windowObj);
         }
     }
 }

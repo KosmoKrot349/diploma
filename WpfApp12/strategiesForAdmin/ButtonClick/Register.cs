@@ -58,7 +58,7 @@ namespace WpfApp12.strategiesForAdmin
 
                 windowObj.changeUser.IsEnabled = false;
                 windowObj.dellUser.IsEnabled = false;
-                DataGridUpdater.updateDataGridUsers(windowObj.connectionString, windowObj.filter.sql, windowObj.usersDGrid);
+                DataGridUpdater.updateUsersDataGrid(windowObj);
             }
         }
     }

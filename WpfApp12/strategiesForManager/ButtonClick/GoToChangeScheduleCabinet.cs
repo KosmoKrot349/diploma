@@ -1,9 +1,5 @@
 ﻿using Npgsql;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace WpfApp12.strategiesForManager.ButtonClick
@@ -19,8 +15,8 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 
         public void ButtonClick()
         {
-            int kab = Convert.ToInt32(windowObj.labelArr[0, windowObj.jCoordScheduleLabel].Name.Split('_')[1]);
-            int lesNum = Convert.ToInt32(windowObj.labelArr[windowObj.iCoordScheduleLabel, 1].Content.ToString().Split('\n')[0]);
+            int cabinetID = Convert.ToInt32(windowObj.labelArr[0, windowObj.jCoordScheduleLabel].Name.Split('_')[1]);
+            int lessonNumber = Convert.ToInt32(windowObj.labelArr[windowObj.iCoordScheduleLabel, 1].Content.ToString().Split('\n')[0]);
             int day = 0;
             for (int ii = 1; ii <= 7; ii++)
             {
@@ -29,15 +25,15 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             windowObj.raspChangeSubsK.Items.Clear();
             windowObj.raspChangePrepK.Items.Clear();
             windowObj.raspChangeGroupK.Items.Clear();
-            int grid = -1;
+            int groopId = -1;
 
             //вывод групп
             try
             {
                 NpgsqlConnection con = new NpgsqlConnection(windowObj.connectionString);
                 con.Open();
-                DateTime dayRasp = windowObj.dateMonday.AddDays(day);
-                string sql = "select nazvanie,grid from groups where grid not in (select grid from raspisanie where lesson_number = " + lesNum + " and day= " + (day + 1) + " and EXTRACT(day FROM date)=" + dayRasp.Day + " and EXTRACT(Month FROM date)=" + dayRasp.Month + " and EXTRACT(Year FROM date)=" + dayRasp.Year + ")";
+                DateTime scheduleDay = windowObj.dateMonday.AddDays(day);
+                string sql = "select nazvanie,grid from groups where grid not in (select grid from raspisanie where lesson_number = " + lessonNumber + " and day= " + (day + 1) + " and EXTRACT(day FROM date)=" + scheduleDay.Day + " and EXTRACT(Month FROM date)=" + scheduleDay.Month + " and EXTRACT(Year FROM date)=" + scheduleDay.Year + ")";
                 NpgsqlCommand command = new NpgsqlCommand(sql, con);
                 NpgsqlDataReader reader = command.ExecuteReader();
                 if (reader.HasRows == false)
@@ -53,7 +49,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                     while (reader.Read())
                     {
                         windowObj.raspChangeGroupK.Items.Add(reader.GetString(0));
-                        if (reader.GetString(0) == windowObj.labelArr[windowObj.iCoordScheduleLabel, windowObj.jCoordScheduleLabel].Content.ToString().Split('\n')[2]) { windowObj.raspChangeGroupK.SelectedIndex = i; grid = reader.GetInt32(1); b = true; }
+                        if (reader.GetString(0) == windowObj.labelArr[windowObj.iCoordScheduleLabel, windowObj.jCoordScheduleLabel].Content.ToString().Split('\n')[2]) { windowObj.raspChangeGroupK.SelectedIndex = i; groopId = reader.GetInt32(1); b = true; }
                     }
                     if (b == false) { windowObj.raspChangeGroupK.SelectedIndex = 0; }
                 }
@@ -67,7 +63,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                 NpgsqlConnection con = new NpgsqlConnection(windowObj.connectionString);
                 con.Open();
                 DateTime dayRasp = windowObj.dateMonday.AddDays(day);
-                string sql = "select fio from sotrudniki inner join prep using(sotrid) where sotrid in (select sotrid from prep) and prepid not in(select prepid from raspisanie where lesson_number = " + lesNum + " and day= " + (day + 1) + " and EXTRACT(day FROM date)=" + dayRasp.Day + " and EXTRACT(Month FROM date)=" + dayRasp.Month + " and EXTRACT(Year FROM date)=" + dayRasp.Year + ")";
+                string sql = "select fio from sotrudniki inner join prep using(sotrid) where sotrid in (select sotrid from prep) and prepid not in(select prepid from raspisanie where lesson_number = " + lessonNumber + " and day= " + (day + 1) + " and EXTRACT(day FROM date)=" + dayRasp.Day + " and EXTRACT(Month FROM date)=" + dayRasp.Month + " and EXTRACT(Year FROM date)=" + dayRasp.Year + ")";
                 NpgsqlCommand command = new NpgsqlCommand(sql, con);
                 NpgsqlDataReader reader = command.ExecuteReader();
 
@@ -104,7 +100,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                 case 6: { windowObj.raspChangeDayOfWeekK.Text = "Суббота"; } break;
             }
             windowObj.raspChangeDateK.Text = windowObj.dateMonday.AddDays(day).ToShortDateString();
-            windowObj.raspChangeLesNumK.Text = "" + lesNum;
+            windowObj.raspChangeLesNumK.Text = "" + lessonNumber;
             windowObj.raspChangeKabK.Text = windowObj.labelArr[0, windowObj.jCoordScheduleLabel].Content.ToString();
             windowObj.HideAll();
             windowObj.changeRaspGridKab.Visibility = Visibility.Visible;

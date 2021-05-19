@@ -8,23 +8,23 @@ using System.Windows;
 
 namespace WpfApp12.strategiesForAdmin
 {
-    class ToDirector : IButtonClick
+
+    class ToBookkeeper:IButtonClick
     {
         private AdminWindow windowObj;
 
-        public ToDirector(AdminWindow windowObj)
+        public ToBookkeeper(AdminWindow windowObj)
         {
             this.windowObj = windowObj;
         }
 
         public void buttonClick()
         {
-            int d = 0;
-            if (windowObj.logUser != -1) d = Checker.dirCheck(windowObj.logUser, windowObj.connectionString);
-
-            if (d == 1 || windowObj.logUser == -1)
+            int b = 0;
+            if (windowObj.logUser != -1) b = Checker.buhgCheck(windowObj.logUser, windowObj.connectionString);
+            if (b == 1 || windowObj.logUser == -1)
             {
-                ManagerWindow wind = new ManagerWindow();
+                BookkeeperWindow wind = new BookkeeperWindow();
                 try
                 {
                     NpgsqlConnection connection = new NpgsqlConnection(windowObj.connectionString);
@@ -37,9 +37,9 @@ namespace WpfApp12.strategiesForAdmin
                     {
                         while (dReader.Read())
                         {
-                            if (dReader.GetInt32(0) == 0) { wind.AdminRoleD.IsEnabled = false; }
-                            if (dReader.GetInt32(1) == 0) { wind.BuhgRoleD.IsEnabled = false; }
-                            if (dReader.GetInt32(2) == 0) { wind.DirectorRoleD.IsEnabled = false; }
+                            if (dReader.GetInt32(0) == 0) { wind.AdminRoleB.IsEnabled = false; }
+                            if (dReader.GetInt32(1) == 0) { wind.BuhgRoleB.IsEnabled = false; }
+                            if (dReader.GetInt32(2) == 0) { wind.DirectorRoleB.IsEnabled = false; }
 
                         }
                     }
@@ -47,15 +47,14 @@ namespace WpfApp12.strategiesForAdmin
                 catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
                 wind.logUser = windowObj.logUser;
                 wind.FIO = windowObj.FIO;
-                wind.Title = windowObj.FIO + " - Директор";
-                wind.hello_label.Text = "Здравствуйте, Ваша текущая роль директор. Для начала роботы выберите один из пунктов меню.";
+                wind.Title = windowObj.FIO + " - Бухгалтер";
+                wind.hello_label.Text = "Здравствуйте, Ваша текущая роль бухгалтер. Для начала роботы выберите один из пунктов меню.";
                 wind.Width = windowObj.Width;
                 wind.Height = windowObj.Height;
                 wind.Left = windowObj.Left;
                 wind.Top = windowObj.Top;
                 wind.Show();
                 windowObj.Close();
-
 
             }
             else { MessageBox.Show("Вы не имете доступа к этой роли"); }

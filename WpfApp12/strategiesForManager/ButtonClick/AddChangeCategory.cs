@@ -31,11 +31,11 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 
                 DataRowView DRV = windowObj.kategDataGrid.Items[i] as DataRowView;
                 DataRow row = DRV.Row;
-                object[] rMas = row.ItemArray;
-                if (rMas[1].ToString() == "") { MessageBox.Show("В " + (i + 1) + " строке не указано название категории"); return; }
-                if (rMas[2].ToString() == "") { MessageBox.Show("В " + (i + 1) + " строке не указана оплата"); return; }
-                if (list.IndexOf(rMas[1]) != -1) { MessageBox.Show("Повторяется название категории " + rMas[1]); return; }
-                list.Add(rMas[1]);
+                object[] recordArr = row.ItemArray;
+                if (recordArr[1].ToString() == "") { MessageBox.Show("В " + (i + 1) + " строке не указано название категории"); return; }
+                if (recordArr[2].ToString() == "") { MessageBox.Show("В " + (i + 1) + " строке не указана оплата"); return; }
+                if (list.IndexOf(recordArr[1]) != -1) { MessageBox.Show("Повторяется название категории " + recordArr[1]); return; }
+                list.Add(recordArr[1]);
                 table.ImportRow(row);
 
                 string sql = "select * from kategorii";
@@ -51,7 +51,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             //категории
             windowObj.kategDeleteButton.IsEnabled = false;
 
-            DataGridUpdater.updateDataGridKateg(windowObj.connectionString, windowObj.kategDataGrid);
+            DataGridUpdater.updateCategoriesDataGrid(windowObj);
         }
     }
 }

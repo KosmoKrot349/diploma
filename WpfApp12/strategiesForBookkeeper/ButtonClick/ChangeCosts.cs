@@ -29,7 +29,7 @@ namespace WpfApp12.strategiesForBookkeeper.ButtonClick
                 com.ExecuteNonQuery();
                 con.Close();
             }
-            catch { System.Windows.Forms.MessageBox.Show("Не удалось подключиться к базе данных"); return; }
+            catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
 
             windowObj.HideAll();
             windowObj.RoshodyGrid.Visibility = Visibility.Visible;
@@ -37,7 +37,7 @@ namespace WpfApp12.strategiesForBookkeeper.ButtonClick
             windowObj.RoshodyDataGrid.SelectedItem = null;
             windowObj.RashDeleteButton.IsEnabled = false;
             windowObj.RashChangeButton.IsEnabled = false;
-            DataGridUpdater.updateDataGridRashody(windowObj.connectionString, windowObj.filter.sql, windowObj.RoshodyDataGrid);
+            DataGridUpdater.updateCostsDataGrid(windowObj);
         }
     }
 }

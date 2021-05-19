@@ -33,12 +33,12 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 
                 DataRowView DRV = windowObj.ObslWorkDataGrid.Items[i] as DataRowView;
                 DataRow row = DRV.Row;
-                object[] rMas = row.ItemArray;
-                if (rMas[1].ToString() == "") { MessageBox.Show("В " + (i + 1) + " строке не указано название"); return; }
-                if (rMas[2].ToString() == "") { MessageBox.Show("В " + (i + 1) + " строке не указана оплата"); return; }
-                if (rMas[3].ToString() == "") { MessageBox.Show("В " + (i + 1) + " строке не указаны единицы измерения"); return; }
-                if (list.IndexOf(rMas[1]) != -1) { MessageBox.Show("Название " + rMas[1] + " повторяется"); return; }
-                list.Add(rMas[1]);
+                object[] recordArr = row.ItemArray;
+                if (recordArr[1].ToString() == "") { MessageBox.Show("В " + (i + 1) + " строке не указано название"); return; }
+                if (recordArr[2].ToString() == "") { MessageBox.Show("В " + (i + 1) + " строке не указана оплата"); return; }
+                if (recordArr[3].ToString() == "") { MessageBox.Show("В " + (i + 1) + " строке не указаны единицы измерения"); return; }
+                if (list.IndexOf(recordArr[1]) != -1) { MessageBox.Show("Название " + recordArr[1] + " повторяется"); return; }
+                list.Add(recordArr[1]);
                 table.ImportRow(row);
             }
             string sql = "select * from raboty_obsl";
@@ -47,7 +47,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(comm);
             NpgsqlCommandBuilder comandbuilder = new NpgsqlCommandBuilder(adapter);
             adapter.Update(table);
-            DataGridUpdater.updateDataGridRaboty(windowObj.connectionString, windowObj.ObslWorkDataGrid);
+            DataGridUpdater.updateServiceWorksDataGrid(windowObj);
             windowObj.ObslWorkDataGrid.SelectedItem = null;
             windowObj.ObslWorkDeleteButton.IsEnabled = false;
         }

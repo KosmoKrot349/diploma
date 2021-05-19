@@ -100,7 +100,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 
 
             }
-            catch { System.Windows.Forms.MessageBox.Show("Не удалось подключиться к базе данных"); return; }
+            catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
 
             try
             {
@@ -136,7 +136,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                 }
                 con1.Close();
             }
-            catch { System.Windows.Forms.MessageBox.Show("Не удалось подключиться к базе данных"); return; }
+            catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
         }
     }
 }

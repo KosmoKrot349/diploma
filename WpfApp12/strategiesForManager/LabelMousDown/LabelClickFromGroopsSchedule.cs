@@ -21,9 +21,9 @@ namespace WpfApp12.strategiesForManager.LabelMousDown
 
         public void MousDown()
         {
-            Label l = sender as Label;
-            window.iCoordScheduleLabel = Convert.ToInt32(l.Name.Split('_')[1]);
-            window.jCoordScheduleLabel = Convert.ToInt32(l.Name.Split('_')[2]);
+            Label label = sender as Label;
+            window.iCoordScheduleLabel = Convert.ToInt32(label.Name.Split('_')[1]);
+            window.jCoordScheduleLabel = Convert.ToInt32(label.Name.Split('_')[2]);
             for (int i = 0; i < (window.quanLessonsInDay * 7) + 1; i++)
             {
                 for (int j = 1; j < window.quanGroops + 2; j++)

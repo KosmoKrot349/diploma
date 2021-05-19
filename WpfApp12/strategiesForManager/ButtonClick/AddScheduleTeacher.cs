@@ -20,9 +20,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 
         public void ButtonClick()
         {
-            int subid = -1;
-            int grid = -1;
-            int cabid = -1;
+            int subjectID = -1;
+            int groopID = -1;
+            int cabinetID = -1;
             //получение id кабинета
             try
             {
@@ -35,7 +35,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                 {
                     while (reader.Read())
                     {
-                        cabid = reader.GetInt32(0);
+                        cabinetID = reader.GetInt32(0);
                     }
                 }
                 con.Close();
@@ -53,7 +53,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                 {
                     while (reader.Read())
                     {
-                        subid = reader.GetInt32(0);
+                        subjectID = reader.GetInt32(0);
                     }
                 }
                 con.Close();
@@ -71,13 +71,13 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                 {
                     while (reader.Read())
                     {
-                        grid = reader.GetInt32(0);
+                        groopID = reader.GetInt32(0);
                     }
                 }
                 con.Close();
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
-            int prep = Convert.ToInt32(windowObj.labelArr[0, windowObj.jCoordScheduleLabel].Name.Split('_')[1]);
+            int teacherID = Convert.ToInt32(windowObj.labelArr[0, windowObj.jCoordScheduleLabel].Name.Split('_')[1]);
             int day = 0;
 
             switch (windowObj.raspAddDayOfWeekP.Text)
@@ -96,7 +96,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             {
                 NpgsqlConnection con = new NpgsqlConnection(windowObj.connectionString);
                 con.Open();
-                string sql = "INSERT INTO raspisanie(grid, lesson_number, subid, prepid, date, day,cabid) VALUES(" + grid + ", " + windowObj.raspAddLesNumP.Text + ", " + subid + ", " + prep + ", '" + windowObj.raspAddDateP.Text.Replace('.', '-') + "', " + day + "," + cabid + "); ";
+                string sql = "INSERT INTO raspisanie(grid, lesson_number, subid, prepid, date, day,cabid) VALUES(" + groopID + ", " + windowObj.raspAddLesNumP.Text + ", " + subjectID + ", " + teacherID + ", '" + windowObj.raspAddDateP.Text.Replace('.', '-') + "', " + day + "," + cabinetID + "); ";
                 NpgsqlCommand command = new NpgsqlCommand(sql, con);
                 command.ExecuteNonQuery();
                 con.Close();

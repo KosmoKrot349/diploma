@@ -21,7 +21,7 @@ namespace WpfApp12.strategiesForManager.MenuClick
             windowObj.HideAll();
             windowObj.allSotrGrid.Visibility = Visibility.Visible;
             windowObj.sqlForAllEmployees = "SELECT * FROM sotrudniki";
-            DataGridUpdater.updateDataGridSotr(windowObj.connectionString, windowObj.sqlForAllEmployees, windowObj.allSotrDataGrid);
+            DataGridUpdater.updateEmploeesDataGrid(windowObj);
         }
     }
 }

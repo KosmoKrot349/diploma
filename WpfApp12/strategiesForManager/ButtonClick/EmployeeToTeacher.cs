@@ -20,7 +20,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
         public void ButtonClick()
         {
             if (windowObj.dateStart.Text == "") { MessageBox.Show("Дата начала работы не выбрана"); return; }
-            int kategID = -1;
+            int categoryID = -1;
             try
             {
                 NpgsqlConnection con = new NpgsqlConnection(windowObj.connectionString);
@@ -32,7 +32,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                 {
                     while (reader.Read())
                     {
-                        kategID = reader.GetInt32(0);
+                        categoryID = reader.GetInt32(0);
                     }
 
                 }
@@ -46,7 +46,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 
                 NpgsqlConnection con = new NpgsqlConnection(windowObj.connectionString);
                 con.Open();
-                string sql = "INSERT INTO prep(kategid, date_start, sotrid) VALUES(" + kategID + ", '" + windowObj.dateStart.Text + "', " + windowObj.employeeID + ")";
+                string sql = "INSERT INTO prep(kategid, date_start, sotrid) VALUES(" + categoryID + ", '" + windowObj.dateStart.Text + "', " + windowObj.employeeID + ")";
                 NpgsqlCommand command = new NpgsqlCommand(sql, con);
                 NpgsqlDataReader reader = command.ExecuteReader();
                 con.Close();
@@ -54,7 +54,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
             MessageBox.Show("Сотрудник определён как преподаватель");
-            DataGridUpdater.updateDataGridSotr(windowObj.connectionString, windowObj.sqlForAllEmployees, windowObj.allSotrDataGrid);
+            DataGridUpdater.updateEmploeesDataGrid(windowObj);
             windowObj.HideAll();
             windowObj.allSotrGrid.Visibility = Visibility.Visible;
         }

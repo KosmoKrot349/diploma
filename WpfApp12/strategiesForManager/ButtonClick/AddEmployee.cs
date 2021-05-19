@@ -33,10 +33,10 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             {
                 DataRowView DRV = windoObj.allSotrDataGrid.Items[i] as DataRowView;
                 DataRow row = DRV.Row;
-                object[] rMas = row.ItemArray;
-                if (rMas[1].ToString() == "" || rMas[2].ToString() == "" || rMas[3].ToString() == "") { MessageBox.Show("В " + (i + 1) + " строке не указано одно из обязательных значений"); return; }
-                if (list.IndexOf(rMas[1]) != -1) { MessageBox.Show("Повторяется имя сотрудника " + rMas[1]); return; }
-                list.Add(rMas[1]);
+                object[] recordArr = row.ItemArray;
+                if (recordArr[1].ToString() == "" || recordArr[2].ToString() == "" || recordArr[3].ToString() == "") { MessageBox.Show("В " + (i + 1) + " строке не указано одно из обязательных значений"); return; }
+                if (list.IndexOf(recordArr[1]) != -1) { MessageBox.Show("Повторяется имя сотрудника " + recordArr[1]); return; }
+                list.Add(recordArr[1]);
                 table.ImportRow(row);
 
             }
@@ -53,7 +53,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             windoObj.allSotrDeleteButton.IsEnabled = false;
             windoObj.allSotrToPrepBtton.IsEnabled = false;
             windoObj.allSotrToShtatBtton.IsEnabled = false;
-            DataGridUpdater.updateDataGridSotr(windoObj.connectionString, windoObj.sqlForAllEmployees, windoObj.allSotrDataGrid);
+            DataGridUpdater.updateEmploeesDataGrid(windoObj);
         }
     }
 }

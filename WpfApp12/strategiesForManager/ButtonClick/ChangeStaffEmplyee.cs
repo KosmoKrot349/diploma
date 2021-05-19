@@ -20,35 +20,35 @@ namespace WpfApp12.strategiesForManager.ButtonClick
         public void ButtonClick()
         {
             if (windowObj.fioChangeShtat.Text == "") { System.Windows.Forms.MessageBox.Show("Поля не заполнены"); return; }
-            string oblswork = "'{ ";
-            string obem = "'{ ";
-            string states = "'{ ";
-            string stavki = "'{ ";
+            string serviceWorkArr = "'{ ";
+            string workVolumeArr = "'{ ";
+            string positionsArr = "'{ ";
+            string ratesArr = "'{ ";
             bool b = false;
             for (int i = 0; i < windowObj.checkBoxArrServiceWorks.Length; i++)
             {
                 if (windowObj.checkBoxArrServiceWorks[i].IsChecked == true && windowObj.textBoxArrVolumeWork[i].Text == "") { System.Windows.Forms.MessageBox.Show("Объём работ не заполнен"); return; }
-                else { if (windowObj.checkBoxArrServiceWorks[i].IsChecked == true) { b = true; oblswork += windowObj.checkBoxArrServiceWorks[i].Name.Split('_')[2] + ","; obem += windowObj.textBoxArrVolumeWork[i].Text.Replace(',', '.') + ","; } }
+                else { if (windowObj.checkBoxArrServiceWorks[i].IsChecked == true) { b = true; serviceWorkArr += windowObj.checkBoxArrServiceWorks[i].Name.Split('_')[2] + ","; workVolumeArr += windowObj.textBoxArrVolumeWork[i].Text.Replace(',', '.') + ","; } }
             }
             for (int i = 0; i < windowObj.checkBoxArrPositions.Length; i++)
             {
                 if (windowObj.checkBoxArrPositions[i].IsChecked == true && windowObj.textBoxArrRate[i].Text == "") { System.Windows.Forms.MessageBox.Show("Ставки не указаны"); return; }
                 else
-                { if (windowObj.checkBoxArrPositions[i].IsChecked == true) { b = true; states += windowObj.checkBoxArrPositions[i].Name.Split('_')[2] + ","; stavki += windowObj.textBoxArrRate[i].Text.Replace(',', '.') + ","; } }
+                { if (windowObj.checkBoxArrPositions[i].IsChecked == true) { b = true; positionsArr += windowObj.checkBoxArrPositions[i].Name.Split('_')[2] + ","; ratesArr += windowObj.textBoxArrRate[i].Text.Replace(',', '.') + ","; } }
             }
             if (b == false) { MessageBox.Show("Выберите хотя бы одну должность или работу для сотрудника"); return; }
 
 
-            states = states.Substring(0, states.Length - 1) + "}'";
-            stavki = stavki.Substring(0, stavki.Length - 1) + "}'";
-            oblswork = oblswork.Substring(0, oblswork.Length - 1) + "}'";
-            obem = obem.Substring(0, obem.Length - 1) + "}'";
+            positionsArr = positionsArr.Substring(0, positionsArr.Length - 1) + "}'";
+            ratesArr = ratesArr.Substring(0, ratesArr.Length - 1) + "}'";
+            serviceWorkArr = serviceWorkArr.Substring(0, serviceWorkArr.Length - 1) + "}'";
+            workVolumeArr = workVolumeArr.Substring(0, workVolumeArr.Length - 1) + "}'";
 
             try
             {
                 NpgsqlConnection con = new NpgsqlConnection(windowObj.connectionString);
                 con.Open();
-                string sql = "UPDATE shtat SET  states=" + states + ", stavky=" + stavki + ", obslwork=" + oblswork + ", obem=" + obem + " WHERE shtatid = " + windowObj.staffID;
+                string sql = "UPDATE shtat SET  states=" + positionsArr + ", stavky=" + ratesArr + ", obslwork=" + serviceWorkArr + ", obem=" + workVolumeArr + " WHERE shtatid = " + windowObj.staffID;
                 NpgsqlCommand com = new NpgsqlCommand(sql, con);
                 com.ExecuteNonQuery();
                 con.Close();
@@ -65,7 +65,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                 con.Close();
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
-            DataGridUpdater.updateDataGridShtat(windowObj.connectionString, windowObj.filtr.sql, windowObj.ShtatDataGrid);
+            DataGridUpdater.updateStaffDataGrid(windowObj);
             windowObj.HideAll();
             windowObj.ShtatGrid.Visibility = Visibility.Visible;
         }

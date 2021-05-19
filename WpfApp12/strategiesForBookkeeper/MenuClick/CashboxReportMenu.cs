@@ -20,13 +20,13 @@ namespace WpfApp12.strategiesForBookkeeper.MenuClick
         {
             windowObj.HideAll();
             windowObj.kassaGrid.Visibility = Visibility.Visible;
-            windowObj.PeopleFromCashboxFilter.CreateKassaDAFiltr(windowObj.pD);
-            windowObj.ProfitTypesFromCashboxFilter.CreateKassaDBFiltr(windowObj.tD);
-            windowObj.StaffFromCashboxFiltr.CreateKassaRAFiltr(windowObj.pR);
-            windowObj.CostsTypesFromCashboxFilter.CreateKassaRBFiltr(windowObj.tR);
+            windowObj.PeopleFromCashboxFilter.CreateCashboxProfitPersonFilter(windowObj.pD);
+            windowObj.ProfitTypesFromCashboxFilter.CreateCashboxProfitTypesFilter(windowObj.tD);
+            windowObj.StaffFromCashboxFiltr.CreateCashboxCostsPersonFilter(windowObj.pR);
+            windowObj.CostsTypesFromCashboxFilter.CreateCashboxCostsTypesFilter(windowObj.tR);
             windowObj.PeopleFromCashboxFilter.sql = "SELECT data,title,sum,fio  FROM dodhody inner join typedohod using(idtype)";
             windowObj.StaffFromCashboxFiltr.sql = "SELECT data,title,fio,summ  FROM rashody inner join typerash using(typeid) inner join sotrudniki using(sotrid)";
-            DataGridUpdater.updateGridKassa(windowObj.connectionString, windowObj.KassaDodohGrid, windowObj.KassaRashodGrid, windowObj.kassaTitleLabel, windowObj.KassaItogoDohod, windowObj.KassaItogoRashod, windowObj.kassaAllDohodLabel, windowObj.PeopleFromCashboxFilter.sql, windowObj.StaffFromCashboxFiltr.sql);
+            DataGridUpdater.updateCashBoxGrid(windowObj.connectionString, windowObj.KassaDodohGrid, windowObj.KassaRashodGrid, windowObj.kassaTitleLabel, windowObj.KassaItogoDohod, windowObj.KassaItogoRashod, windowObj.kassaAllDohodLabel, windowObj.PeopleFromCashboxFilter.sql, windowObj.StaffFromCashboxFiltr.sql);
         }
     }
 }

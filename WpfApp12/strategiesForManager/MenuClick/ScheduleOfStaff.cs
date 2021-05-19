@@ -56,9 +56,9 @@ namespace WpfApp12.strategiesForManager.MenuClick
                 }
                 con.Close();
             }
-            catch { System.Windows.Forms.MessageBox.Show("Не удалось подключиться к базе данных"); return; }
+            catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
 
-            DataGridUpdater.updateGridShtatRasp(window.connectionString, window.MonthGrid, window.ShtatRaspSotrpGrid, window.labelArrForStaffSchedule, window.checkBoxArrForStaffSchedule, window.ShtatRaspMonthYearLabel, window.date);
+            DataGridUpdater.updateStaffScheduleGrid(window);
         }
     }
 }

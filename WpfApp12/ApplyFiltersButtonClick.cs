@@ -15,28 +15,28 @@ namespace WpfApp12
             Button but = sender as Button;
             if (but.Name == "FiltrGroupsButton")
             {
-                window.filtr.ApplyListFiltr();
-                DataGridUpdater.updateDataGridListener(window.connectionString, window.filtr.sql, window.listenerDataGrid);
+                window.filter.ApplyListenerFilter();
+                DataGridUpdater.updateListenerDataGrid(window);
             }
 
 
             if (but.Name == "FiltrCourseButton")
             {
-                window.filtr.ApplyGroupsFiltr();
-                DataGridUpdater.updateDataGridGroups(window.connectionString, window.filtr.sql, window.groupsDataGrid);
+                window.filter.ApplyGroupsFilter();
+                DataGridUpdater.updateGroopsDataGrid(window);
             }
 
             if (but.Name == "FiltrSubsButton")
             {
-                window.filtr.ApplyCourseFiltr();
-                DataGridUpdater.updateDataGridСourses(window.connectionString, window.filtr.sql, window.coursDataGrid);
+                window.filter.ApplyCourseFilter();
+                DataGridUpdater.updateСoursesDataGrid(window);
             }
 
 
             if (but.Name == "FiltrPrepButton")
             {
-                window.filtr.ApplyPrepFiltr();
-                DataGridUpdater.updateDataGridPrep(window.connectionString, window.filtr.sql, window.prepDataGrid);
+                window.filter.ApplyTeachersFilter();
+                DataGridUpdater.updateTeachersDataGrid(window);
             }
 
             if (but.Name == "FiltrAllSotrButton")
@@ -56,21 +56,21 @@ namespace WpfApp12
 
                 }
 
-                DataGridUpdater.updateDataGridSotr(window.connectionString, window.sqlForAllEmployees, window.allSotrDataGrid);
+                DataGridUpdater.updateEmploeesDataGrid(window);
             }
 
             if (but.Name == "FiltrShtatButton")
             {
                 if (window.ShtatFiltrCmbx.SelectedIndex == 0)
                 {
-                    window.filtr.ApplyShtatFiltrFirst();
+                    window.filter.ApplyStaffFirstFilter();
                 }
                 else
                 {
 
-                    window.filtr.ApplyShtatFiltrSecond();
+                    window.filter.ApplyStaffSecondFilter();
                 }
-                DataGridUpdater.updateDataGridShtat(window.connectionString, window.filtr.sql, window.ShtatDataGrid);
+                DataGridUpdater.updateStaffDataGrid(window);
             }
 
         }
@@ -79,24 +79,24 @@ namespace WpfApp12
             Button but = sender as Button;
             if (but.Name == "FiltrRashodyButton")
             {
-                window.filter.ApplyRashodyFiltr();
-                DataGridUpdater.updateDataGridRashody(window.connectionString, window.filter.sql, window.RoshodyDataGrid);
+                window.filter.ApplyCostsFilter();
+                DataGridUpdater.updateCostsDataGrid(window);
             }
 
             if (but.Name == "FiltrDohodyButton")
             {
-                window.filter.ApplyDohodyFiltr();
-                DataGridUpdater.updateDataGridDohody(window.connectionString, window.filter.sql, window.RoshodyDataGrid);
+                window.filter.ApplyProfitFilter();
+                DataGridUpdater.updateProfitDataGrid(window);
             }
             if (but.Name == "PrimFKD")
             {
-                window.PeopleFromCashboxFilter.ApplyDohFiltr(window.ProfitTypesFromCashboxFilter);
-                DataGridUpdater.updateGridKassa(window.connectionString, window.KassaDodohGrid, window.KassaRashodGrid, window.kassaTitleLabel, window.KassaItogoDohod, window.KassaItogoRashod, window.kassaAllDohodLabel, window.PeopleFromCashboxFilter.sql, window.StaffFromCashboxFiltr.sql);
+                window.PeopleFromCashboxFilter.ApplyProfitFilterForCashboxReport(window.ProfitTypesFromCashboxFilter);
+                DataGridUpdater.updateCashBoxGrid(window.connectionString, window.KassaDodohGrid, window.KassaRashodGrid, window.kassaTitleLabel, window.KassaItogoDohod, window.KassaItogoRashod, window.kassaAllDohodLabel, window.PeopleFromCashboxFilter.sql, window.StaffFromCashboxFiltr.sql);
             }
             if (but.Name == "PrimFKR")
             {
-                window.StaffFromCashboxFiltr.ApplyRashFiltr(window.CostsTypesFromCashboxFilter);
-                DataGridUpdater.updateGridKassa(window.connectionString, window.KassaDodohGrid, window.KassaRashodGrid, window.kassaTitleLabel, window.KassaItogoDohod, window.KassaItogoRashod, window.kassaAllDohodLabel, window.PeopleFromCashboxFilter.sql, window.StaffFromCashboxFiltr.sql);
+                window.StaffFromCashboxFiltr.ApplyCostsFilterForCashboxReport(window.CostsTypesFromCashboxFilter);
+                DataGridUpdater.updateCashBoxGrid(window.connectionString, window.KassaDodohGrid, window.KassaRashodGrid, window.kassaTitleLabel, window.KassaItogoDohod, window.KassaItogoRashod, window.kassaAllDohodLabel, window.PeopleFromCashboxFilter.sql, window.StaffFromCashboxFiltr.sql);
             }
         }
     }

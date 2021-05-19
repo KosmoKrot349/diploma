@@ -49,7 +49,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                 con.Close();
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
-            DataGridUpdater.updateDataGridRaboty(windowObj.connectionString, windowObj.ObslWorkDataGrid);
+            DataGridUpdater.updateServiceWorksDataGrid(windowObj);
             windowObj.ObslWorkDataGrid.SelectedItem = null;
             windowObj.ObslWorkDeleteButton.IsEnabled = false;
         }

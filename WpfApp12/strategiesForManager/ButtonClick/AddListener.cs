@@ -22,7 +22,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
         {
             if (windowObj.listenerFIO.Text == "" || windowObj.listenerPhones.Text == "") { MessageBox.Show("Поля не заполнены или заполнены не правильно."); return; }
             bool b = false;
-            string grLgMas = "'{";
+            string groopsOfListenerArr = "'{";
             ArrayList ls = new ArrayList();
             string sql = "select grid from groups where ";
             for (int i = 0; i < windowObj.checkBoxArrForListeners.Length; i++)
@@ -32,16 +32,16 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                     b = true;
                     sql += "nazvanie='" + windowObj.checkBoxArrForListeners[i].Content.ToString().Substring(0, windowObj.checkBoxArrForListeners[i].Content.ToString().Length - 9) + "' or ";
                     if (windowObj.textBoxArrForListeners[i].Text != "" && Convert.ToDouble(windowObj.textBoxArrForListeners[i].Text) > 100) { MessageBox.Show("Процент не может быть больше 100"); return; }
-                    if (windowObj.textBoxArrForListeners[i].Text != "") grLgMas += Convert.ToDouble(windowObj.textBoxArrForListeners[i].Text).ToString().Replace(',', '.') + ",";
+                    if (windowObj.textBoxArrForListeners[i].Text != "") groopsOfListenerArr += Convert.ToDouble(windowObj.textBoxArrForListeners[i].Text).ToString().Replace(',', '.') + ",";
                     else
-                        grLgMas += "0,";
+                        groopsOfListenerArr += "0,";
                 }
 
             }
-            grLgMas = grLgMas.Substring(0, grLgMas.Length - 1) + "}'";
+            groopsOfListenerArr = groopsOfListenerArr.Substring(0, groopsOfListenerArr.Length - 1) + "}'";
             sql = sql.Substring(0, sql.Length - 3) + " order by grid";
             if (b == false) { MessageBox.Show("Группа не выбрана"); return; }
-            string grMasId = "'{";
+            string groopsIdArr = "'{";
             ArrayList GroupList = new ArrayList();
             try
             {
@@ -55,29 +55,29 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 
                     while (reader.Read())
                     {
-                        grMasId += reader.GetInt32(0).ToString() + ",";
+                        groopsIdArr += reader.GetInt32(0).ToString() + ",";
                         GroupList.Add(reader.GetInt32(0));
                     }
 
                 }
                 con.Close();
-                grMasId = grMasId.Substring(0, grMasId.Length - 1) + "}'";
+                groopsIdArr = groopsIdArr.Substring(0, groopsIdArr.Length - 1) + "}'";
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
-            int listid = -1;
+            int listenerID = -1;
             try
             {
 
                 NpgsqlConnection con = new NpgsqlConnection(windowObj.connectionString);
                 con.Open();
-                string sql2 = "INSERT INTO listeners(fio, phones, grid, lgt, comment)VALUES ('" + windowObj.listenerFIO.Text + "', '" + windowObj.listenerPhones.Text + "', " + grMasId + ", " + grLgMas + ", '" + windowObj.listenerComm.Text + "') returning listenerid";
+                string sql2 = "INSERT INTO listeners(fio, phones, grid, lgt, comment)VALUES ('" + windowObj.listenerFIO.Text + "', '" + windowObj.listenerPhones.Text + "', " + groopsIdArr + ", " + groopsOfListenerArr + ", '" + windowObj.listenerComm.Text + "') returning listenerid";
                 NpgsqlCommand com = new NpgsqlCommand(sql2, con);
                 NpgsqlDataReader reader = com.ExecuteReader();
                 if (reader.HasRows)
                 {
                     while (reader.Read())
                     {
-                        listid = reader.GetInt32(0);
+                        listenerID = reader.GetInt32(0);
                     }
 
                 }
@@ -125,7 +125,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                 {
                     NpgsqlConnection con = new NpgsqlConnection(windowObj.connectionString);
                     con.Open();
-                    string sqll = "select lgt[array_position(grid,'" + GroupList[i] + "')] from listeners where listenerid= " + listid;
+                    string sqll = "select lgt[array_position(grid,'" + GroupList[i] + "')] from listeners where listenerid= " + listenerID;
 
                     NpgsqlCommand com = new NpgsqlCommand(sqll, con);
                     NpgsqlDataReader reader = com.ExecuteReader();
@@ -150,19 +150,19 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                     con.Close();
                 }
                 catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
-                string masPay = "'{";
+                string PayArr = "'{";
                 for (int i2 = 0; i2 < 12; i2++)
                 {
-                    masPay += payMonth[i2].ToString().Replace(',', '.') + ",";
+                    PayArr += payMonth[i2].ToString().Replace(',', '.') + ",";
                 }
-                masPay = masPay.Substring(0, masPay.Length - 1) + "}'";
+                PayArr = PayArr.Substring(0, PayArr.Length - 1) + "}'";
                 //добавление записи в таблицу
                 try
                 {
 
                     NpgsqlConnection con = new NpgsqlConnection(windowObj.connectionString);
                     con.Open();
-                    string sql2 = "INSERT INTO listnuch(listenerid, grid, payformonth, payedlist, skidkiforpay, topay, penya, date_stop, isclose) VALUES(" + listid + ", " + GroupList[i] + ", " + masPay + ", '{0,0,0,0,0,0,0,0,0,0,0,0}', '{0,0,0,0,0,0,0,0,0,0,0,0}', " + masPay + ", '{0,0,0,0,0,0,0,0,0,0,0,0}', null, 0)";
+                    string sql2 = "INSERT INTO listnuch(listenerid, grid, payformonth, payedlist, skidkiforpay, topay, penya, date_stop, isclose) VALUES(" + listenerID + ", " + GroupList[i] + ", " + PayArr + ", '{0,0,0,0,0,0,0,0,0,0,0,0}', '{0,0,0,0,0,0,0,0,0,0,0,0}', " + PayArr + ", '{0,0,0,0,0,0,0,0,0,0,0,0}', null, 0)";
                     NpgsqlCommand com = new NpgsqlCommand(sql2, con);
                     com.ExecuteNonQuery();
                     con.Close();
@@ -190,7 +190,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                 windowObj.listenerDeleteButton.IsEnabled = false;
                 windowObj.listenerChangeButton.IsEnabled = false;
 
-                DataGridUpdater.updateDataGridListener(windowObj.connectionString, windowObj.filtr.sql, windowObj.listenerDataGrid);
+                DataGridUpdater.updateListenerDataGrid(windowObj);
                 windowObj.ListenerGrid.Visibility = Visibility.Visible;
 
             }

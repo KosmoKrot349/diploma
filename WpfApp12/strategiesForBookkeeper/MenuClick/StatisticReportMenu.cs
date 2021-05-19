@@ -18,7 +18,7 @@ namespace WpfApp12.strategiesForBookkeeper.MenuClick
 
         public void MenuClick()
         {
-            DataGridUpdater.updateGridStatistica(windowObj.connectionString, windowObj.statGraf);
+            DataGridUpdater.updateStatisticGrid(windowObj.connectionString, windowObj.statGraf);
             windowObj.HideAll();
             windowObj.StatisticaGrid.Visibility = Visibility.Visible;
         }

@@ -49,7 +49,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                 con.Close();
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); }
-            DataGridUpdater.updateDataGridShtat(windowObj.connectionString, windowObj.filtr.sql, windowObj.ShtatDataGrid);
+            DataGridUpdater.updateStaffDataGrid(windowObj);
 
             windowObj.ShtatDataGrid.SelectedItem = null;
 

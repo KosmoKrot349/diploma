@@ -89,23 +89,23 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                     }
 
                     for (int i = 0; i <= dateEndAdd.Month - 1; i++)
-                    { if (montPay[i] == 0) { System.Windows.Forms.MessageBox.Show("В месяце " + (i + 1) + "не стоит оплата, хотя он отмечен как месяц обучения"); return; } }
+                    { if (montPay[i] == 0) { MessageBox.Show("В месяце " + (i + 1) + "не стоит оплата, хотя он отмечен как месяц обучения"); return; } }
 
                     for (int i = dateEndAdd.Month; i < dateStartAdd.Month - 1; i++)
-                    { if (montPay[i] != 0) { System.Windows.Forms.MessageBox.Show("В месяце " + (i + 1) + " стоит оплата, хотя он не отмечен как месяц обучения"); return; } }
+                    { if (montPay[i] != 0) {MessageBox.Show("В месяце " + (i + 1) + " стоит оплата, хотя он не отмечен как месяц обучения"); return; } }
                 }
 
                 if (dateStartAdd.Month < dateEndAdd.Month)
                 {
                     if (dateStartAdd.Year != dateEndAdd.Year) { MessageBox.Show("Дата введена не корректно"); return; }
                     for (int i = 0; i < dateStartAdd.Month - 1; i++)
-                    { if (montPay[i] != 0) { System.Windows.Forms.MessageBox.Show("В месяце " + (i + 1) + " стоит оплата, хотя он не отмечен как месяц обучения"); return; } }
+                    { if (montPay[i] != 0) { MessageBox.Show("В месяце " + (i + 1) + " стоит оплата, хотя он не отмечен как месяц обучения"); return; } }
 
                     for (int i = dateEndAdd.Month; i < 12; i++)
-                    { if (montPay[i] != 0) { System.Windows.Forms.MessageBox.Show("В месяце " + (i + 1) + " стоит оплата, хотя он не отмечен как месяц обучения"); return; } }
+                    { if (montPay[i] != 0) { MessageBox.Show("В месяце " + (i + 1) + " стоит оплата, хотя он не отмечен как месяц обучения"); return; } }
 
                     for (int i = dateStartAdd.Month - 1; i <= dateEndAdd.Month - 1; i++)
-                    { if (montPay[i] == 0) { System.Windows.Forms.MessageBox.Show("В месяце " + (i + 1) + " не стоит оплата, хотя он отмечен как месяц обучения"); return; } }
+                    { if (montPay[i] == 0) { MessageBox.Show("В месяце " + (i + 1) + " не стоит оплата, хотя он отмечен как месяц обучения"); return; } }
                 }
 
                 if (dateStartAdd.Month == dateEndAdd.Month)
@@ -113,10 +113,10 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                     if (dateStartAdd.Year == dateEndAdd.Year)
                     {
                         for (int i = 0; i < dateStartAdd.Month - 1; i++)
-                        { if (montPay[i] != 0) { System.Windows.Forms.MessageBox.Show("В месяце " + (i + 1) + " стоит оплата, хотя он не отмечен как месяц обучения"); return; } }
+                        { if (montPay[i] != 0) {MessageBox.Show("В месяце " + (i + 1) + " стоит оплата, хотя он не отмечен как месяц обучения"); return; } }
 
                         for (int i = dateEndAdd.Month; i < 12; i++)
-                        { if (montPay[i] != 0) { System.Windows.Forms.MessageBox.Show("В месяце " + (i + 1) + " стоит оплата, хотя он не отмечен как месяц обучения"); return; } }
+                        { if (montPay[i] != 0) {MessageBox.Show("В месяце " + (i + 1) + " стоит оплата, хотя он не отмечен как месяц обучения"); return; } }
                     }
                     else
                     { MessageBox.Show("Дата введена не корректно"); return; }
@@ -137,7 +137,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
             windowObj.HideAll();
             windowObj.groupsGrid.Visibility = Visibility.Visible;
-            DataGridUpdater.updateDataGridGroups(windowObj.connectionString, windowObj.filtr.sql, windowObj.groupsDataGrid);
+            DataGridUpdater.updateGroopsDataGrid(windowObj);
         }
     }
 }

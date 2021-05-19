@@ -19,18 +19,18 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 
         public void ButtonClick()
         {
-            string subsMas = "'{";
+            string subjectMass = "'{";
             bool b = false;
-            for (int i = 0; i < windowObj.chbxMas.Length; i++)
+            for (int i = 0; i < windowObj.checkBoxArr.Length; i++)
             {
-                if (windowObj.chbxMas[i].IsChecked == true)
+                if (windowObj.checkBoxArr[i].IsChecked == true)
                 {
                     b = true;
-                    subsMas += windowObj.chbxMas[i].Name.Substring(2) + ",";
+                    subjectMass += windowObj.checkBoxArr[i].Name.Substring(2) + ",";
                 }
             }
-            subsMas = subsMas.Substring(0, subsMas.Length - 1);
-            subsMas += "}'";
+            subjectMass = subjectMass.Substring(0, subjectMass.Length - 1);
+            subjectMass += "}'";
             if (b == false || windowObj.courseChangeTitle.Text == "") { MessageBox.Show("Название курса или предметы не добавлены"); return; }
             if (windowObj.dontChangeCourseName != windowObj.courseChangeTitle.Text)
             {
@@ -59,7 +59,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             {
                 NpgsqlConnection con1 = new NpgsqlConnection(windowObj.connectionString);
                 con1.Open();
-                string sql1 = "UPDATE courses SET title ='" + windowObj.courseChangeTitle.Text + "', subs =" + subsMas + ", comment ='" + windowObj.courseChangeComm.Text + "' WHERE courseid=" + windowObj.courseID;
+                string sql1 = "UPDATE courses SET title ='" + windowObj.courseChangeTitle.Text + "', subs =" + subjectMass + ", comment ='" + windowObj.courseChangeComm.Text + "' WHERE courseid=" + windowObj.courseID;
                 NpgsqlCommand command1 = new NpgsqlCommand(sql1, con1);
                 command1.ExecuteNonQuery();
                 con1.Close();
@@ -68,7 +68,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 
             windowObj.HideAll();
             windowObj.courseGrid.Visibility = Visibility.Visible;
-            DataGridUpdater.updateDataGridСourses(windowObj.connectionString, windowObj.filtr.sql, windowObj.coursDataGrid);
+            DataGridUpdater.updateСoursesDataGrid(windowObj);
         }
     }
 }

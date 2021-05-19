@@ -23,19 +23,19 @@ namespace WpfApp12.strategiesForManager.ButtonClick
         {
             DateTime dateNow = DateTime.Now;
             windowObj.dateMonday = new DateTime();
-            int day_razn = 0;
+            int dayDifference = 0;
             switch (dateNow.DayOfWeek.ToString())
             {
-                case "Monday": { day_razn = 0; } break;
-                case "Tuesday": { day_razn = -1; } break;
-                case "Wednesday": { day_razn = -2; } break;
-                case "Thursday": { day_razn = -3; } break;
-                case "Friday": { day_razn = -4; } break;
-                case "Saturday": { day_razn = -5; } break;
-                case "Sunday": { day_razn = -6; } break;
+                case "Monday": { dayDifference = 0; } break;
+                case "Tuesday": { dayDifference = -1; } break;
+                case "Wednesday": { dayDifference = -2; } break;
+                case "Thursday": { dayDifference = -3; } break;
+                case "Friday": { dayDifference = -4; } break;
+                case "Saturday": { dayDifference = -5; } break;
+                case "Sunday": { dayDifference = -6; } break;
             }
 
-            windowObj.dateMonday = dateNow.AddDays(day_razn);
+            windowObj.dateMonday = dateNow.AddDays(dayDifference);
             Button but = sender as Button;
             if (but.Name == "NuwRaspBut") { ShowLearningSchedule.ShowForGroops(windowObj.dateMonday, windowObj.dateMonday.AddDays(6),windowObj); }
             if (but.Name == "NuwRaspButP") { ShowLearningSchedule.ShowForTeachers(windowObj.dateMonday, windowObj.dateMonday.AddDays(6),windowObj); }

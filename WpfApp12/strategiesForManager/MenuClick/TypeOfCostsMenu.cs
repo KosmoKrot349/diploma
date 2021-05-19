@@ -20,7 +20,7 @@ namespace WpfApp12.strategiesForManager.MenuClick
         {
            window.HideAll();
             window.TypeRashGrid.Visibility = Visibility.Visible;
-            DataGridUpdater.updateDataGriTypeRash(window.connectionString, window.TypeRashDataGrid);
+            DataGridUpdater.updateTypeCostsDataGrid(window);
         }
     }
 }

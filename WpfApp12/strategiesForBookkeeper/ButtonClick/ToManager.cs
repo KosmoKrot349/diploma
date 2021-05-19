@@ -19,10 +19,10 @@ namespace WpfApp12.strategiesForBookkeeper.ButtonClick
 
         public void ButtonClick()
         {
-            int d = 0;
-            if (windowObj.logUser != -1) d = Checker.dirCheck(windowObj.logUser, windowObj.connectionString);
+            int checkerResult = 0;
+            if (windowObj.logUser != -1) checkerResult = Checker.dirCheck(windowObj.logUser, windowObj.connectionString);
 
-            if (d == 1 || windowObj.logUser == -1)
+            if (checkerResult == 1 || windowObj.logUser == -1)
             {
                 ManagerWindow wind = new ManagerWindow();
                 try

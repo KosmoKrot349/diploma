@@ -1,11 +1,7 @@
 ﻿using Npgsql;
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 
 namespace WpfApp12.strategiesForManager.ButtonClick
@@ -31,12 +27,12 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 
                 DataRowView DRV = windowObj.TypeRashDataGrid.Items[i] as DataRowView;
                 DataRow row = DRV.Row;
-                object[] rMas = row.ItemArray;
-                if (rMas[0].GetType() == typeof(int))
-                    if (Convert.ToInt32(rMas[0]) >= 1 && Convert.ToInt32(rMas[0]) <= 4) continue;
-                if (rMas[1].ToString() == "") { MessageBox.Show("В " + (i + 1) + " строке не указано название расхода"); return; }
-                if (list.IndexOf(rMas[1]) != -1) { MessageBox.Show("Повторяется название расхода " + rMas[1]); return; }
-                list.Add(rMas[1]);
+                object[] recordArr = row.ItemArray;
+                if (recordArr[0].GetType() == typeof(int))
+                    if (Convert.ToInt32(recordArr[0]) >= 1 && Convert.ToInt32(recordArr[0]) <= 4) continue;
+                if (recordArr[1].ToString() == "") { MessageBox.Show("В " + (i + 1) + " строке не указано название расхода"); return; }
+                if (list.IndexOf(recordArr[1]) != -1) { MessageBox.Show("Повторяется название расхода " + recordArr[1]); return; }
+                list.Add(recordArr[1]);
                 table.ImportRow(row);
             }
             string sql = "select * from typerash";
@@ -45,7 +41,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(comm);
             NpgsqlCommandBuilder comandbuilder = new NpgsqlCommandBuilder(adapter);
             adapter.Update(table);
-            DataGridUpdater.updateDataGriTypeRash(windowObj.connectionString, windowObj.TypeRashDataGrid);
+            DataGridUpdater.updateTypeCostsDataGrid(windowObj);
             windowObj.TypeRashDataGrid.SelectedItem = null;
             windowObj.TypeRashDeleteButton.IsEnabled = false;
         }

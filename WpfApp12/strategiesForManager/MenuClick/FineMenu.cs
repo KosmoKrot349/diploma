@@ -27,7 +27,7 @@ namespace WpfApp12.strategiesForManager.MenuClick
                 NpgsqlCommand com = new NpgsqlCommand(sql, con);
                 DateIn wind = new DateIn();
                 wind.gridProcentPeni.Visibility = Visibility.Visible;
-                wind.constr = window.connectionString;
+                wind.connectionString = window.connectionString;
                 NpgsqlDataReader reader = com.ExecuteReader();
                 if (reader.HasRows)
                 {

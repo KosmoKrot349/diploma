@@ -21,8 +21,8 @@ namespace WpfApp12.strategiesForManager.MenuClick
             window.HideAll();
             window.ShtatGrid.Visibility = Visibility.Visible;
             window.ShtatFiltrCmbx.SelectedIndex = 0;
-            window.filtr.sql = "SELECT shtat.shtatid, sotrudniki.fio, array_to_string(stavky,'_') as stavky,array_to_string(obem,'_') as obem   FROM shtat inner join sotrudniki using(sotrid)";
-            DataGridUpdater.updateDataGridShtat(window.connectionString, window.filtr.sql, window.ShtatDataGrid);
+            window.filter.sql = "SELECT shtat.shtatid, sotrudniki.fio, array_to_string(stavky,'_') as stavky,array_to_string(obem,'_') as obem   FROM shtat inner join sotrudniki using(sotrid)";
+            DataGridUpdater.updateStaffDataGrid(window);
         }
     }
 }

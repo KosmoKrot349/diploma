@@ -20,8 +20,8 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 
         public void ButtonClick()
         {
-            int cab = Convert.ToInt32(windowObj.labelArr[0, windowObj.jCoordScheduleLabel].Name.Split('_')[1]);
-            int lesNum = Convert.ToInt32(windowObj.labelArr[windowObj.iCoordScheduleLabel, 1].Content.ToString().Split('\n')[0]);
+            int CabinetID = Convert.ToInt32(windowObj.labelArr[0, windowObj.jCoordScheduleLabel].Name.Split('_')[1]);
+            int lessonNumber = Convert.ToInt32(windowObj.labelArr[windowObj.iCoordScheduleLabel, 1].Content.ToString().Split('\n')[0]);
             int day = 0;
             for (int ii = 1; ii <= 7; ii++)
             {
@@ -32,7 +32,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             {
                 NpgsqlConnection con = new NpgsqlConnection(windowObj.connectionString);
                 con.Open();
-                string sql = "delete from raspisanie where cabid =" + cab + " and lesson_number = " + lesNum + " and day=" + (day + 1) + " and date='" + windowObj.dateMonday.AddDays(day).ToShortDateString().Replace('.', '-') + "'";
+                string sql = "delete from raspisanie where cabid =" + CabinetID + " and lesson_number = " + lessonNumber + " and day=" + (day + 1) + " and date='" + windowObj.dateMonday.AddDays(day).ToShortDateString().Replace('.', '-') + "'";
                 NpgsqlCommand comand = new NpgsqlCommand(sql, con);
                 comand.ExecuteNonQuery();
                 con.Close();

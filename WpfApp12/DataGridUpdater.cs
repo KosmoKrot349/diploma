@@ -1,30 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Npgsql;
+using OxyPlot;
+using OxyPlot.Axes;
+using OxyPlot.Series;
+using System;
 using System.Collections;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using Npgsql;
-using System.Data;
-using OxyPlot;
-using OxyPlot.Series;
-using OxyPlot.Axes;
 
 namespace WpfApp12
 {
     class DataGridUpdater
     {
 
-
-        public static void updateGridSpisciVyplat(string connectionString, DateTime payday,ArrayList sotrlist,Grid grid)
+        //списки выплат обновление грида+
+        public static void updatePaymentListGrid(string connectionString, DateTime payday,ArrayList employeesList,Grid grid)
         {
             RowDefinition rwd1 = new RowDefinition();
             rwd1.Height = new GridLength(50);
@@ -33,71 +24,71 @@ namespace WpfApp12
             grid.RowDefinitions.Add(rwd1);
             grid.RowDefinitions.Add(rwd2);
 
-            Label lbmes = new Label();
-            lbmes.VerticalContentAlignment = System.Windows.VerticalAlignment.Center;
-            lbmes.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center;
-            lbmes.BorderBrush = Brushes.Black;
-            lbmes.BorderThickness = new Thickness(2);
+            Label monthLabelArr = new Label();
+            monthLabelArr.VerticalContentAlignment = System.Windows.VerticalAlignment.Center;
+            monthLabelArr.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center;
+            monthLabelArr.BorderBrush = Brushes.Black;
+            monthLabelArr.BorderThickness = new Thickness(2);
             switch (payday.Month)
             {
-                case 1: { lbmes.Content = "Январь " + payday.Year; break; }
-                case 2: { lbmes.Content = "Февраль " + payday.Year; break; }
-                case 3: { lbmes.Content = "Март " + payday.Year; break; }
-                case 4: { lbmes.Content = "Апрель " + payday.Year; break; }
-                case 5: { lbmes.Content = "Май " + payday.Year; break; }
-                case 6: { lbmes.Content = "Июнь " + payday.Year; break; }
-                case 7: { lbmes.Content = "Июль " + payday.Year; break; }
-                case 8: { lbmes.Content = "Август " + payday.Year; break; }
-                case 9: { lbmes.Content = "Сентябрь " + payday.Year; break; }
-                case 10: { lbmes.Content = "Октябрь " + payday.Year; break; }
-                case 11: { lbmes.Content = "Ноябрь " + payday.Year; break; }
-                case 12: { lbmes.Content = "Декабрь " + payday.Year; break; }
+                case 1: { monthLabelArr.Content = "Январь " + payday.Year; break; }
+                case 2: { monthLabelArr.Content = "Февраль " + payday.Year; break; }
+                case 3: { monthLabelArr.Content = "Март " + payday.Year; break; }
+                case 4: { monthLabelArr.Content = "Апрель " + payday.Year; break; }
+                case 5: { monthLabelArr.Content = "Май " + payday.Year; break; }
+                case 6: { monthLabelArr.Content = "Июнь " + payday.Year; break; }
+                case 7: { monthLabelArr.Content = "Июль " + payday.Year; break; }
+                case 8: { monthLabelArr.Content = "Август " + payday.Year; break; }
+                case 9: { monthLabelArr.Content = "Сентябрь " + payday.Year; break; }
+                case 10: { monthLabelArr.Content = "Октябрь " + payday.Year; break; }
+                case 11: { monthLabelArr.Content = "Ноябрь " + payday.Year; break; }
+                case 12: { monthLabelArr.Content = "Декабрь " + payday.Year; break; }
             }
-            Grid.SetColumnSpan(lbmes, 5);
-            Grid.SetRow(lbmes, 0);
-            grid.Children.Add(lbmes);
+            Grid.SetColumnSpan(monthLabelArr, 5);
+            Grid.SetRow(monthLabelArr, 0);
+            grid.Children.Add(monthLabelArr);
 
-            Label prepzpLb = new Label();
-            prepzpLb.VerticalContentAlignment = System.Windows.VerticalAlignment.Center;
-            prepzpLb.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center;
-            prepzpLb.Content = "ЗП преподавателя";
-            prepzpLb.BorderBrush = Brushes.Black;
-            prepzpLb.BorderThickness = new Thickness(2);
+            Label teacherSalaryLabel = new Label();
+            teacherSalaryLabel.VerticalContentAlignment = System.Windows.VerticalAlignment.Center;
+            teacherSalaryLabel.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center;
+            teacherSalaryLabel.Content = "ЗП преподавателя";
+            teacherSalaryLabel.BorderBrush = Brushes.Black;
+            teacherSalaryLabel.BorderThickness = new Thickness(2);
 
-            Label shtatzpLb = new Label();
-            shtatzpLb.VerticalContentAlignment = System.Windows.VerticalAlignment.Center;
-            shtatzpLb.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center;
-            shtatzpLb.Content = "ЗП штатная";
-            shtatzpLb.BorderBrush = Brushes.Black;
-            shtatzpLb.BorderThickness = new Thickness(2);
+            Label staffSalaryLabel = new Label();
+            staffSalaryLabel.VerticalContentAlignment = System.Windows.VerticalAlignment.Center;
+            staffSalaryLabel.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center;
+            staffSalaryLabel.Content = "ЗП штатная";
+            staffSalaryLabel.BorderBrush = Brushes.Black;
+            staffSalaryLabel.BorderThickness = new Thickness(2);
 
 
-            Label allzpLb = new Label();
-            allzpLb.VerticalContentAlignment = System.Windows.VerticalAlignment.Center;
-            allzpLb.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center;
-            allzpLb.Content = "ЗП вся";
-            allzpLb.BorderBrush = Brushes.Black;
-            allzpLb.BorderThickness = new Thickness(2);
+            Label allSalaryLabel = new Label();
+            allSalaryLabel.VerticalContentAlignment = System.Windows.VerticalAlignment.Center;
+            allSalaryLabel.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center;
+            allSalaryLabel.Content = "ЗП вся";
+            allSalaryLabel.BorderBrush = Brushes.Black;
+            allSalaryLabel.BorderThickness = new Thickness(2);
 
-            Label viplzpLb = new Label();
-            viplzpLb.VerticalContentAlignment = System.Windows.VerticalAlignment.Center;
-            viplzpLb.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center;
-            viplzpLb.Content = "Выплачено";
-            viplzpLb.BorderBrush = Brushes.Black;
-            viplzpLb.BorderThickness = new Thickness(2);
+            Label payOutSalaryLabel = new Label();
+            payOutSalaryLabel.VerticalContentAlignment = System.Windows.VerticalAlignment.Center;
+            payOutSalaryLabel.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center;
+            payOutSalaryLabel.Content = "Выплачено";
+            payOutSalaryLabel.BorderBrush = Brushes.Black;
+            payOutSalaryLabel.BorderThickness = new Thickness(2);
 
-            Grid.SetRow(prepzpLb, 1); Grid.SetRow(shtatzpLb, 1);  Grid.SetRow(allzpLb, 1); Grid.SetRow(viplzpLb, 1);
-            Grid.SetColumn(prepzpLb, 0); Grid.SetColumn(shtatzpLb, 1); Grid.SetColumn(allzpLb, 2); Grid.SetColumn(viplzpLb, 3);
-            grid.Children.Add(prepzpLb); grid.Children.Add(shtatzpLb);  grid.Children.Add(allzpLb); grid.Children.Add(viplzpLb);
+            Grid.SetRow(teacherSalaryLabel, 1); Grid.SetRow(staffSalaryLabel, 1);  Grid.SetRow(allSalaryLabel, 1); Grid.SetRow(payOutSalaryLabel, 1);
+            Grid.SetColumn(teacherSalaryLabel, 0); Grid.SetColumn(staffSalaryLabel, 1); Grid.SetColumn(allSalaryLabel, 2); Grid.SetColumn(payOutSalaryLabel, 3);
+            grid.Children.Add(teacherSalaryLabel); grid.Children.Add(staffSalaryLabel);  grid.Children.Add(allSalaryLabel); grid.Children.Add(payOutSalaryLabel);
 
-            double allprep = 0, allshtat = 0, allobsl = 0, allvipl = 0;
-            for (int i = 0; i < sotrlist.Count; i++)
+            double allTeacherSalary = 0, allStaffSalary = 0, allSalaryForServiceWork = 0, allPayoutSalary = 0;
+            for (int i = 0; i < employeesList.Count; i++)
             {
                 try
                 {
                     NpgsqlConnection con1 = new NpgsqlConnection(connectionString);
                     con1.Open();
-                    string sql1 = "SELECT prepzp, shtatzp, obslzp,viplacheno FROM nachisl where sotrid = "+sotrlist[i]+" and extract(Month from payday)="+payday.Month+ " and extract(Year from payday)=" + payday.Year;
+                    string sql1 = "SELECT prepzp, shtatzp, obslzp,viplacheno FROM nachisl where sotrid = "+employeesList[i]+" and extract(Month from payday)="+payday.Month+ " and extract(Year from payday)=" + payday.Year;
                     NpgsqlCommand com1 = new NpgsqlCommand(sql1, con1);
                     NpgsqlDataReader reader1 = com1.ExecuteReader();
                     if (reader1.HasRows)
@@ -109,46 +100,46 @@ namespace WpfApp12
                             rwd3.Height = new GridLength(50);
                             grid.RowDefinitions.Add(rwd3);
 
-                            Label prepzpLb2 = new Label();
-                            prepzpLb2.VerticalContentAlignment = System.Windows.VerticalAlignment.Center;
-                            prepzpLb2.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center;
-                            prepzpLb2.Content = reader1.GetDouble(0);
-                            prepzpLb2.BorderBrush = Brushes.Black;
-                            prepzpLb2.BorderThickness = new Thickness(2);
+                            Label teacherSalaryLabelForValue = new Label();
+                            teacherSalaryLabelForValue.VerticalContentAlignment = System.Windows.VerticalAlignment.Center;
+                            teacherSalaryLabelForValue.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center;
+                            teacherSalaryLabelForValue.Content = reader1.GetDouble(0);
+                            teacherSalaryLabelForValue.BorderBrush = Brushes.Black;
+                            teacherSalaryLabelForValue.BorderThickness = new Thickness(2);
 
-                            Label shtatzpLb2 = new Label();
-                            shtatzpLb2.VerticalContentAlignment = System.Windows.VerticalAlignment.Center;
-                            shtatzpLb2.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center;
-                            shtatzpLb2.Content = reader1.GetDouble(1)+reader1.GetDouble(2);
-                            shtatzpLb2.BorderBrush = Brushes.Black;
-                            shtatzpLb2.BorderThickness = new Thickness(2);
+                            Label staffSalaryLabelForValue = new Label();
+                            staffSalaryLabelForValue.VerticalContentAlignment = System.Windows.VerticalAlignment.Center;
+                            staffSalaryLabelForValue.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center;
+                            staffSalaryLabelForValue.Content = reader1.GetDouble(1)+reader1.GetDouble(2);
+                            staffSalaryLabelForValue.BorderBrush = Brushes.Black;
+                            staffSalaryLabelForValue.BorderThickness = new Thickness(2);
 
                            
 
-                            Label allzpLb2 = new Label();
+                            Label allSalaryLabelForValue = new Label();
 
-                            allzpLb2.VerticalContentAlignment = System.Windows.VerticalAlignment.Center;
-                            allzpLb2.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center;
+                            allSalaryLabelForValue.VerticalContentAlignment = System.Windows.VerticalAlignment.Center;
+                            allSalaryLabelForValue.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center;
 
-                            allzpLb2.Content = reader1.GetDouble(1)+ reader1.GetDouble(2)+ reader1.GetDouble(0); ;
-                            allzpLb2.BorderBrush = Brushes.Black;
-                            allzpLb2.BorderThickness = new Thickness(2);
+                            allSalaryLabelForValue.Content = reader1.GetDouble(1)+ reader1.GetDouble(2)+ reader1.GetDouble(0); ;
+                            allSalaryLabelForValue.BorderBrush = Brushes.Black;
+                            allSalaryLabelForValue.BorderThickness = new Thickness(2);
 
-                            Label viplzpLb2 = new Label();
+                            Label payoutSalaryLabelForValue = new Label();
 
-                            viplzpLb2.VerticalContentAlignment = System.Windows.VerticalAlignment.Center;
-                            viplzpLb2.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center;
-                            viplzpLb2.Content = reader1.GetDouble(3);
-                            viplzpLb2.BorderBrush = Brushes.Black;
-                            viplzpLb2.BorderThickness = new Thickness(2);
+                            payoutSalaryLabelForValue.VerticalContentAlignment = System.Windows.VerticalAlignment.Center;
+                            payoutSalaryLabelForValue.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center;
+                            payoutSalaryLabelForValue.Content = reader1.GetDouble(3);
+                            payoutSalaryLabelForValue.BorderBrush = Brushes.Black;
+                            payoutSalaryLabelForValue.BorderThickness = new Thickness(2);
 
-                            allprep += reader1.GetDouble(0);
-                            allshtat += reader1.GetDouble(1)+ reader1.GetDouble(2);
-                            allvipl += reader1.GetDouble(3);
+                            allTeacherSalary += reader1.GetDouble(0);
+                            allStaffSalary += reader1.GetDouble(1)+ reader1.GetDouble(2);
+                            allPayoutSalary += reader1.GetDouble(3);
 
-                            Grid.SetRow(prepzpLb2, i+2); Grid.SetRow(shtatzpLb2, i + 2);  Grid.SetRow(allzpLb2, i + 2); Grid.SetRow(viplzpLb2, i + 2);
-                            Grid.SetColumn(prepzpLb2, 0); Grid.SetColumn(shtatzpLb2, 1);  Grid.SetColumn(allzpLb2,2); Grid.SetColumn(viplzpLb2, 3);
-                            grid.Children.Add(prepzpLb2); grid.Children.Add(shtatzpLb2);  grid.Children.Add(allzpLb2); grid.Children.Add(viplzpLb2);
+                            Grid.SetRow(teacherSalaryLabelForValue, i+2); Grid.SetRow(staffSalaryLabelForValue, i + 2);  Grid.SetRow(allSalaryLabelForValue, i + 2); Grid.SetRow(payoutSalaryLabelForValue, i + 2);
+                            Grid.SetColumn(teacherSalaryLabelForValue, 0); Grid.SetColumn(staffSalaryLabelForValue, 1);  Grid.SetColumn(allSalaryLabelForValue,2); Grid.SetColumn(payoutSalaryLabelForValue, 3);
+                            grid.Children.Add(teacherSalaryLabelForValue); grid.Children.Add(staffSalaryLabelForValue);  grid.Children.Add(allSalaryLabelForValue); grid.Children.Add(payoutSalaryLabelForValue);
                        
                         }
 
@@ -161,51 +152,51 @@ namespace WpfApp12
                             rwd3.Height = new GridLength(50);
                             grid.RowDefinitions.Add(rwd3);
 
-                            Label prepzpLb2 = new Label();
+                            Label teacherSalaryLabelForValue = new Label();
 
-                        prepzpLb2.VerticalContentAlignment = System.Windows.VerticalAlignment.Center;
-                        prepzpLb2.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center;
+                        teacherSalaryLabelForValue.VerticalContentAlignment = System.Windows.VerticalAlignment.Center;
+                        teacherSalaryLabelForValue.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center;
 
-                        prepzpLb2.Content = "-";
-                            prepzpLb2.BorderBrush = Brushes.Black;
-                            prepzpLb2.BorderThickness = new Thickness(2);
+                        teacherSalaryLabelForValue.Content = "-";
+                            teacherSalaryLabelForValue.BorderBrush = Brushes.Black;
+                            teacherSalaryLabelForValue.BorderThickness = new Thickness(2);
 
-                            Label shtatzpLb2 = new Label();
+                            Label staffSalaryLabelForValue = new Label();
 
-                        shtatzpLb2.VerticalContentAlignment = System.Windows.VerticalAlignment.Center;
-                        shtatzpLb2.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center;
+                        staffSalaryLabelForValue.VerticalContentAlignment = System.Windows.VerticalAlignment.Center;
+                        staffSalaryLabelForValue.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center;
 
-                        shtatzpLb2.Content = "-";
-                            shtatzpLb2.BorderBrush = Brushes.Black;
-                            shtatzpLb2.BorderThickness = new Thickness(2);
-
-
-                            Label allzpLb2 = new Label();
+                        staffSalaryLabelForValue.Content = "-";
+                            staffSalaryLabelForValue.BorderBrush = Brushes.Black;
+                            staffSalaryLabelForValue.BorderThickness = new Thickness(2);
 
 
-                        allzpLb2.VerticalContentAlignment = System.Windows.VerticalAlignment.Center;
-                        allzpLb2.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center;
+                            Label allSalaryLabelForValue = new Label();
 
-                        allzpLb2.Content = "-";
-                            allzpLb2.BorderBrush = Brushes.Black;
-                            allzpLb2.BorderThickness = new Thickness(2);
 
-                            Label viplzpLb2 = new Label();
+                        allSalaryLabelForValue.VerticalContentAlignment = System.Windows.VerticalAlignment.Center;
+                        allSalaryLabelForValue.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center;
 
-                        viplzpLb2.VerticalContentAlignment = System.Windows.VerticalAlignment.Center;
-                        viplzpLb2.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center;
+                        allSalaryLabelForValue.Content = "-";
+                            allSalaryLabelForValue.BorderBrush = Brushes.Black;
+                            allSalaryLabelForValue.BorderThickness = new Thickness(2);
 
-                        viplzpLb2.Content = "-";
-                            viplzpLb2.BorderBrush = Brushes.Black;
-                            viplzpLb2.BorderThickness = new Thickness(2);
+                            Label payoutSalaryLabelForValue = new Label();
 
-                            allprep += 0;
-                            allshtat += 0;
-                            allvipl += 0;
+                        payoutSalaryLabelForValue.VerticalContentAlignment = System.Windows.VerticalAlignment.Center;
+                        payoutSalaryLabelForValue.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center;
 
-                            Grid.SetRow(prepzpLb2, i + 2); Grid.SetRow(shtatzpLb2, i + 2);  Grid.SetRow(allzpLb2, i + 2); Grid.SetRow(viplzpLb2, i + 2);
-                            Grid.SetColumn(prepzpLb2, 0); Grid.SetColumn(shtatzpLb2, 1);  Grid.SetColumn(allzpLb2, 2); Grid.SetColumn(viplzpLb2, 3);
-                            grid.Children.Add(prepzpLb2); grid.Children.Add(shtatzpLb2);  grid.Children.Add(allzpLb2); grid.Children.Add(viplzpLb2);
+                        payoutSalaryLabelForValue.Content = "-";
+                            payoutSalaryLabelForValue.BorderBrush = Brushes.Black;
+                            payoutSalaryLabelForValue.BorderThickness = new Thickness(2);
+
+                            allTeacherSalary += 0;
+                            allStaffSalary += 0;
+                            allPayoutSalary += 0;
+
+                            Grid.SetRow(teacherSalaryLabelForValue, i + 2); Grid.SetRow(staffSalaryLabelForValue, i + 2);  Grid.SetRow(allSalaryLabelForValue, i + 2); Grid.SetRow(payoutSalaryLabelForValue, i + 2);
+                            Grid.SetColumn(teacherSalaryLabelForValue, 0); Grid.SetColumn(staffSalaryLabelForValue, 1);  Grid.SetColumn(allSalaryLabelForValue, 2); Grid.SetColumn(payoutSalaryLabelForValue, 3);
+                            grid.Children.Add(teacherSalaryLabelForValue); grid.Children.Add(staffSalaryLabelForValue);  grid.Children.Add(allSalaryLabelForValue); grid.Children.Add(payoutSalaryLabelForValue);
                     }
                     con1.Close();
 
@@ -217,47 +208,45 @@ namespace WpfApp12
             rwd4.Height = new GridLength(50);
             grid.RowDefinitions.Add(rwd4);
 
-            Label prepzpLb3 = new Label();
+            Label teacherSalaryLabelForSum = new Label();
 
-            prepzpLb3.VerticalContentAlignment = System.Windows.VerticalAlignment.Center;
-            prepzpLb3.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center;
+            teacherSalaryLabelForSum.VerticalContentAlignment = System.Windows.VerticalAlignment.Center;
+            teacherSalaryLabelForSum.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center;
 
-            prepzpLb3.Content = Math.Round(allprep,2);
-            prepzpLb3.BorderBrush = Brushes.Black;
-            prepzpLb3.BorderThickness = new Thickness(2);
+            teacherSalaryLabelForSum.Content = Math.Round(allTeacherSalary,2);
+            teacherSalaryLabelForSum.BorderBrush = Brushes.Black;
+            teacherSalaryLabelForSum.BorderThickness = new Thickness(2);
 
-            Label shtatzpLb3 = new Label();
+            Label staffSalaryLabelForSum = new Label();
 
-            shtatzpLb3.VerticalContentAlignment = System.Windows.VerticalAlignment.Center;
-            shtatzpLb3.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center;
-            shtatzpLb3.Content = Math.Round(allshtat, 2);
-            shtatzpLb3.BorderBrush = Brushes.Black;
-            shtatzpLb3.BorderThickness = new Thickness(2);
-            Label allzpLb3 = new Label();
+            staffSalaryLabelForSum.VerticalContentAlignment = System.Windows.VerticalAlignment.Center;
+            staffSalaryLabelForSum.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center;
+            staffSalaryLabelForSum.Content = Math.Round(allStaffSalary, 2);
+            staffSalaryLabelForSum.BorderBrush = Brushes.Black;
+            staffSalaryLabelForSum.BorderThickness = new Thickness(2);
+            Label allSalaryLabelForSum = new Label();
 
-            allzpLb3.VerticalContentAlignment = System.Windows.VerticalAlignment.Center;
-            allzpLb3.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center;
-            allzpLb3.Content = Math.Round(allobsl + allprep + allshtat, 2);
-            allzpLb3.BorderBrush = Brushes.Black;
-            allzpLb3.BorderThickness = new Thickness(2);
+            allSalaryLabelForSum.VerticalContentAlignment = System.Windows.VerticalAlignment.Center;
+            allSalaryLabelForSum.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center;
+            allSalaryLabelForSum.Content = Math.Round(allSalaryForServiceWork + allTeacherSalary + allStaffSalary, 2);
+            allSalaryLabelForSum.BorderBrush = Brushes.Black;
+            allSalaryLabelForSum.BorderThickness = new Thickness(2);
 
-            Label viplzpLb3 = new Label();
+            Label payoutSalaryLabelForSum = new Label();
 
-            viplzpLb3.VerticalContentAlignment = System.Windows.VerticalAlignment.Center;
-            viplzpLb3.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center;
-            viplzpLb3.Content = Math.Round(allvipl, 2);
-            viplzpLb3.BorderBrush = Brushes.Black;
-            viplzpLb3.BorderThickness = new Thickness(2);
+            payoutSalaryLabelForSum.VerticalContentAlignment = System.Windows.VerticalAlignment.Center;
+            payoutSalaryLabelForSum.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center;
+            payoutSalaryLabelForSum.Content = Math.Round(allPayoutSalary, 2);
+            payoutSalaryLabelForSum.BorderBrush = Brushes.Black;
+            payoutSalaryLabelForSum.BorderThickness = new Thickness(2);
 
-            Grid.SetRow(prepzpLb3, grid.RowDefinitions.Count - 1); Grid.SetRow(shtatzpLb3, grid.RowDefinitions.Count - 1);  Grid.SetRow(allzpLb3, grid.RowDefinitions.Count - 1); Grid.SetRow(viplzpLb3, grid.RowDefinitions.Count - 1);
-            Grid.SetColumn(prepzpLb3, 0); Grid.SetColumn(shtatzpLb3, 1);  Grid.SetColumn(allzpLb3, 2); Grid.SetColumn(viplzpLb3, 3);
-            grid.Children.Add(prepzpLb3); grid.Children.Add(shtatzpLb3);  grid.Children.Add(allzpLb3); grid.Children.Add(viplzpLb3);
+            Grid.SetRow(teacherSalaryLabelForSum, grid.RowDefinitions.Count - 1); Grid.SetRow(staffSalaryLabelForSum, grid.RowDefinitions.Count - 1);  Grid.SetRow(allSalaryLabelForSum, grid.RowDefinitions.Count - 1); Grid.SetRow(payoutSalaryLabelForSum, grid.RowDefinitions.Count - 1);
+            Grid.SetColumn(teacherSalaryLabelForSum, 0); Grid.SetColumn(staffSalaryLabelForSum, 1);  Grid.SetColumn(allSalaryLabelForSum, 2); Grid.SetColumn(payoutSalaryLabelForSum, 3);
+            grid.Children.Add(teacherSalaryLabelForSum); grid.Children.Add(staffSalaryLabelForSum);  grid.Children.Add(allSalaryLabelForSum); grid.Children.Add(payoutSalaryLabelForSum);
         }
 
-
-
-        //обновление грида отчтёа ститистики 
-        public static void updateGridStatistica(string connectionString, OxyPlot.Wpf.PlotView plot)
+        //обновление грида отчтёа ститистики+
+        public static void updateStatisticGrid(string connectionString, OxyPlot.Wpf.PlotView plot)
         {
             PlotModel model = new PlotModel();
             Axis ax = new DateTimeAxis();
@@ -274,7 +263,7 @@ namespace WpfApp12
 
                     while (reader1.Read())
                     {
-                    if (reader1.GetDateTime(1) == reader1.GetDateTime(0)) { System.Windows.Forms.MessageBox.Show("Невозможно построить график"); return; }
+                    if (reader1.GetDateTime(1) == reader1.GetDateTime(0)) { MessageBox.Show("Невозможно построить график"); return; }
                         ax.AbsoluteMinimum = DateTimeAxis.ToDouble(reader1.GetDateTime(1));
                         ax.AbsoluteMaximum = DateTimeAxis.ToDouble(reader1.GetDateTime(0));
                         ax.Zoom(DateTimeAxis.ToDouble(reader1.GetDateTime(1)), DateTimeAxis.ToDouble(reader1.GetDateTime(0)));
@@ -291,7 +280,7 @@ namespace WpfApp12
 
 
     Axis ax2 = new LinearAxis();
-            ArrayList ls = new ArrayList();
+            ArrayList List = new ArrayList();
             try
             {
                 NpgsqlConnection con = new NpgsqlConnection(connectionString);
@@ -304,33 +293,33 @@ namespace WpfApp12
 
                     while (reader.Read())
                     {
-                        ls.Add(reader.GetDouble(0));
-                        ls.Add(reader.GetDouble(1));
-                        ls.Add(reader.GetDouble(2));
-                        ls.Add(reader.GetDouble(3));
+                        List.Add(reader.GetDouble(0));
+                        List.Add(reader.GetDouble(1));
+                        List.Add(reader.GetDouble(2));
+                        List.Add(reader.GetDouble(3));
                     }
 
                 }
-                if (reader.HasRows == false) { System.Windows.Forms.MessageBox.Show("Невозможно построить график"); return;  }
+                if (reader.HasRows == false) { MessageBox.Show("Невозможно построить график"); return;  }
                 con.Close();
 
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
-            ls.Sort();
+            List.Sort();
 
-            if (Convert.ToDouble(ls[0]) == Convert.ToDouble(ls[3])) { System.Windows.Forms.MessageBox.Show("Невозможно построить график"); return; }
+            if (Convert.ToDouble(List[0]) == Convert.ToDouble(List[3])) { MessageBox.Show("Невозможно построить график"); return; }
 
-            ax2.AbsoluteMinimum = Convert.ToDouble(ls[0]);
-            ax2.AbsoluteMaximum = Convert.ToDouble(ls[3]);
-            ax2.Zoom(Convert.ToDouble(ls[0]), Convert.ToDouble(ls[3]));
+            ax2.AbsoluteMinimum = Convert.ToDouble(List[0]);
+            ax2.AbsoluteMaximum = Convert.ToDouble(List[3]);
+            ax2.Zoom(Convert.ToDouble(List[0]), Convert.ToDouble(List[3]));
 
             model.Axes.Add(ax2);
 
 
-            LineSeries ls1 = new LineSeries();
-            ls1.Color = OxyColor.FromRgb(0, 255, 0);
-            LineSeries ls2 = new LineSeries();
-            ls2.Color = OxyColor.FromRgb(255, 0, 0);
+            LineSeries LineSeriesForProfit = new LineSeries();
+            LineSeriesForProfit.Color = OxyColor.FromRgb(0, 255, 0);
+            LineSeries LineSeriesForCosts = new LineSeries();
+            LineSeriesForCosts.Color = OxyColor.FromRgb(255, 0, 0);
 
             try
             {
@@ -344,8 +333,8 @@ namespace WpfApp12
 
                     while (reader.Read())
                     {
-                        ls1.Points.Add(new DataPoint(DateTimeAxis.ToDouble(reader.GetDateTime(2)), reader.GetDouble(0)));
-                        ls2.Points.Add(new DataPoint(DateTimeAxis.ToDouble(reader.GetDateTime(2)), reader.GetDouble(1)));
+                        LineSeriesForProfit.Points.Add(new DataPoint(DateTimeAxis.ToDouble(reader.GetDateTime(2)), reader.GetDouble(0)));
+                        LineSeriesForCosts.Points.Add(new DataPoint(DateTimeAxis.ToDouble(reader.GetDateTime(2)), reader.GetDouble(1)));
                     }
 
                 }
@@ -354,23 +343,23 @@ namespace WpfApp12
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
 
-            model.Series.Add(ls1);
-            model.Series.Add(ls2);
+            model.Series.Add(LineSeriesForProfit);
+            model.Series.Add(LineSeriesForCosts);
             model.Title = "Отчёт 'Статистика доходов\\расходов' на "+DateTime.Now.ToShortDateString();
             plot.Model = model;
         }
 
-        //обновление грида кассы
-        public static void updateGridKassa(string connectionString, Grid KassaDodohGrid, Grid KassaRashodGrid, Label kassaTitleLabel, Label KassaItogoDohod, Label KassaItogoRashod, Label kassaAllDohodLabel,string sqld,string sqlr)
+        //обновление грида кассы+
+        public static void updateCashBoxGrid(string connectionString, Grid cashboxProfitGrid, Grid cashboxCostsGrid, Label cashboxTitleLabel, Label cashboxTotalProfit, Label cashboxTotalCosts, Label totalProfitLabel,string sqlProfit,string sqlCosts)
         {
-            kassaTitleLabel.Content = "Отчёт 'Касса' на " + DateTime.Now.ToShortDateString();
-            double sum_ras = 0;
-            double sum_doh = 0;
-            KassaDodohGrid.RowDefinitions.Clear();
-            KassaDodohGrid.Children.Clear();
+            cashboxTitleLabel.Content = "Отчёт 'Касса' на " + DateTime.Now.ToShortDateString();
+            double sumCosts = 0;
+            double sumProfit = 0;
+            cashboxProfitGrid.RowDefinitions.Clear();
+            cashboxProfitGrid.Children.Clear();
 
-            KassaRashodGrid.RowDefinitions.Clear();
-            KassaRashodGrid.Children.Clear();
+            cashboxCostsGrid.RowDefinitions.Clear();
+            cashboxCostsGrid.Children.Clear();
 
             RowDefinition rwd = new RowDefinition();
             rwd.Height = new GridLength(50);
@@ -378,81 +367,81 @@ namespace WpfApp12
             RowDefinition rwdd = new RowDefinition();
             rwdd.Height = new GridLength(50);
 
-            KassaDodohGrid.RowDefinitions.Add(rwd);
-            Label l11 = new Label();
-            Label l12 = new Label();
-            Label l13 = new Label();
-            Label l14 = new Label();
-            l11.Content = "Дата";
-            l12.Content = "Тип";
-            l13.Content = "Кто внес";
-            l14.Content = "Сумма";
+            cashboxProfitGrid.RowDefinitions.Add(rwd);
+            Label LabelForProfitDate = new Label();
+            Label LabelForProfitType = new Label();
+            Label LabelForProfitPerson = new Label();
+            Label LabelForProfitSum = new Label();
+            LabelForProfitDate.Content = "Дата";
+            LabelForProfitType.Content = "Тип";
+            LabelForProfitPerson.Content = "Кто внес";
+            LabelForProfitSum.Content = "Сумма";
 
-            l11.BorderThickness = new Thickness(2);
-            l11.BorderBrush = Brushes.Black;
-            l12.BorderThickness = new Thickness(2);
-            l12.BorderBrush = Brushes.Black;
-            l13.BorderThickness = new Thickness(2);
-            l13.BorderBrush = Brushes.Black;
-            l14.BorderThickness = new Thickness(2);
-            l14.BorderBrush = Brushes.Black;
+            LabelForProfitDate.BorderThickness = new Thickness(2);
+            LabelForProfitDate.BorderBrush = Brushes.Black;
+            LabelForProfitType.BorderThickness = new Thickness(2);
+            LabelForProfitType.BorderBrush = Brushes.Black;
+            LabelForProfitPerson.BorderThickness = new Thickness(2);
+            LabelForProfitPerson.BorderBrush = Brushes.Black;
+            LabelForProfitSum.BorderThickness = new Thickness(2);
+            LabelForProfitSum.BorderBrush = Brushes.Black;
 
-            KassaRashodGrid.RowDefinitions.Add(rwdd);
-            Label l21 = new Label();
-            Label l22 = new Label();
-            Label l23 = new Label();
-            Label l24 = new Label();
-
-
-            l21.Content = "Дата";
-            l22.Content = "Тип";
-            l23.Content = "Кому";
-            l24.Content = "Сумма";
-
-            l21.BorderThickness = new Thickness(2);
-            l21.BorderBrush = Brushes.Black;
-            l22.BorderThickness = new Thickness(2);
-            l22.BorderBrush = Brushes.Black;
-            l23.BorderThickness = new Thickness(2);
-            l23.BorderBrush = Brushes.Black;
-            l24.BorderThickness = new Thickness(2);
-            l24.BorderBrush = Brushes.Black;
+            cashboxCostsGrid.RowDefinitions.Add(rwdd);
+            Label LabelForCostsDate = new Label();
+            Label LabelForCostsType = new Label();
+            Label LabelForCostsPerson = new Label();
+            Label LabelForCostsSum = new Label();
 
 
-            Grid.SetRow(l11,0);
-            Grid.SetRow(l12, 0);
-            Grid.SetRow(l13, 0);
-            Grid.SetRow(l14, 0);
-            Grid.SetRow(l21, 0);
-            Grid.SetRow(l22, 0);
-            Grid.SetRow(l23, 0);
-            Grid.SetRow(l24, 0);
+            LabelForCostsDate.Content = "Дата";
+            LabelForCostsType.Content = "Тип";
+            LabelForCostsPerson.Content = "Кому";
+            LabelForCostsSum.Content = "Сумма";
 
-            Grid.SetColumn(l11, 0);
-            Grid.SetColumn(l12, 1);
-            Grid.SetColumn(l13, 2);
-            Grid.SetColumn(l14, 3);
-            Grid.SetColumn(l21, 0);
-            Grid.SetColumn(l22, 1);
-            Grid.SetColumn(l23, 2);
-            Grid.SetColumn(l24, 3);
+            LabelForCostsDate.BorderThickness = new Thickness(2);
+            LabelForCostsDate.BorderBrush = Brushes.Black;
+            LabelForCostsType.BorderThickness = new Thickness(2);
+            LabelForCostsType.BorderBrush = Brushes.Black;
+            LabelForCostsPerson.BorderThickness = new Thickness(2);
+            LabelForCostsPerson.BorderBrush = Brushes.Black;
+            LabelForCostsSum.BorderThickness = new Thickness(2);
+            LabelForCostsSum.BorderBrush = Brushes.Black;
 
-            KassaDodohGrid.Children.Add(l11);
-            KassaDodohGrid.Children.Add(l12);
-            KassaDodohGrid.Children.Add(l13);
-            KassaDodohGrid.Children.Add(l14);
 
-            KassaRashodGrid.Children.Add(l21);
-            KassaRashodGrid.Children.Add(l22);
-            KassaRashodGrid.Children.Add(l23);
-            KassaRashodGrid.Children.Add(l24);
+            Grid.SetRow(LabelForProfitDate,0);
+            Grid.SetRow(LabelForProfitType, 0);
+            Grid.SetRow(LabelForProfitPerson, 0);
+            Grid.SetRow(LabelForProfitSum, 0);
+            Grid.SetRow(LabelForCostsDate, 0);
+            Grid.SetRow(LabelForCostsType, 0);
+            Grid.SetRow(LabelForCostsPerson, 0);
+            Grid.SetRow(LabelForCostsSum, 0);
+
+            Grid.SetColumn(LabelForProfitDate, 0);
+            Grid.SetColumn(LabelForProfitType, 1);
+            Grid.SetColumn(LabelForProfitPerson, 2);
+            Grid.SetColumn(LabelForProfitSum, 3);
+            Grid.SetColumn(LabelForCostsDate, 0);
+            Grid.SetColumn(LabelForCostsType, 1);
+            Grid.SetColumn(LabelForCostsPerson, 2);
+            Grid.SetColumn(LabelForCostsSum, 3);
+
+            cashboxProfitGrid.Children.Add(LabelForProfitDate);
+            cashboxProfitGrid.Children.Add(LabelForProfitType);
+            cashboxProfitGrid.Children.Add(LabelForProfitPerson);
+            cashboxProfitGrid.Children.Add(LabelForProfitSum);
+
+            cashboxCostsGrid.Children.Add(LabelForCostsDate);
+            cashboxCostsGrid.Children.Add(LabelForCostsType);
+            cashboxCostsGrid.Children.Add(LabelForCostsPerson);
+            cashboxCostsGrid.Children.Add(LabelForCostsSum);
 
             try
             {
                 NpgsqlConnection con = new NpgsqlConnection(connectionString);
                 con.Open();
                 
-                NpgsqlCommand com = new NpgsqlCommand(sqld, con);
+                NpgsqlCommand com = new NpgsqlCommand(sqlProfit, con);
                 NpgsqlDataReader reader = com.ExecuteReader();
                 if (reader.HasRows)
                 {
@@ -462,13 +451,13 @@ namespace WpfApp12
                         Label date = new Label();
                         Label type = new Label();
                         Label sum = new Label();
-                        Label fio = new Label();
+                        Label name = new Label();
                         date.Content = reader.GetDateTime(0).ToShortDateString();
                         type.Content = reader.GetString(1);
                         sum.Content = reader.GetDouble(2);
-                        fio.Content = reader.GetString(3);
+                        name.Content = reader.GetString(3);
 
-                        sum_doh += reader.GetDouble(2);
+                        sumProfit += reader.GetDouble(2);
 
                         date.BorderThickness = new Thickness(2);
                         date.BorderBrush = Brushes.Black;
@@ -476,26 +465,26 @@ namespace WpfApp12
                         type.BorderBrush = Brushes.Black;
                         sum.BorderThickness = new Thickness(2);
                         sum.BorderBrush = Brushes.Black;
-                        fio.BorderThickness = new Thickness(2);
-                        fio.BorderBrush = Brushes.Black;
+                        name.BorderThickness = new Thickness(2);
+                        name.BorderBrush = Brushes.Black;
 
                         RowDefinition rwd1= new RowDefinition();
                         rwd1.Height = new GridLength(50);
-                        KassaDodohGrid.RowDefinitions.Add(rwd1);
+                        cashboxProfitGrid.RowDefinitions.Add(rwd1);
 
                         Grid.SetRow(date, i);
                         Grid.SetRow(type, i);
                         Grid.SetRow(sum, i);
-                        Grid.SetRow(fio, i);
+                        Grid.SetRow(name, i);
 
                         Grid.SetColumn(date, 0);
                         Grid.SetColumn(type, 1);
-                        Grid.SetColumn(fio, 2);
+                        Grid.SetColumn(name, 2);
                         Grid.SetColumn(sum, 3);
-                        KassaDodohGrid.Children.Add(date);
-                        KassaDodohGrid.Children.Add(type);
-                        KassaDodohGrid.Children.Add(sum);
-                        KassaDodohGrid.Children.Add(fio);
+                        cashboxProfitGrid.Children.Add(date);
+                        cashboxProfitGrid.Children.Add(type);
+                        cashboxProfitGrid.Children.Add(sum);
+                        cashboxProfitGrid.Children.Add(name);
                         i++;
                     }
 
@@ -511,7 +500,7 @@ namespace WpfApp12
                 NpgsqlConnection con = new NpgsqlConnection(connectionString);
                 con.Open();
                
-                NpgsqlCommand com = new NpgsqlCommand(sqlr, con);
+                NpgsqlCommand com = new NpgsqlCommand(sqlCosts, con);
                 NpgsqlDataReader reader = com.ExecuteReader();
                 if (reader.HasRows)
                 {
@@ -520,14 +509,14 @@ namespace WpfApp12
                     {
                         Label date = new Label();
                         Label type = new Label();
-                        Label fio = new Label();
+                        Label name = new Label();
                         Label sum = new Label();
                         date.Content = reader.GetDateTime(0).ToShortDateString();
                         type.Content = reader.GetString(1);
-                        fio.Content = reader.GetString(2);
+                        name.Content = reader.GetString(2);
                         sum.Content = reader.GetDouble(3);
 
-                        sum_ras += reader.GetDouble(3);
+                        sumCosts += reader.GetDouble(3);
 
                         date.BorderThickness = new Thickness(2);
                         date.BorderBrush = Brushes.Black;
@@ -535,26 +524,26 @@ namespace WpfApp12
                         type.BorderBrush = Brushes.Black;
                         sum.BorderThickness = new Thickness(2);
                         sum.BorderBrush = Brushes.Black;
-                        fio.BorderThickness = new Thickness(2);
-                        fio.BorderBrush = Brushes.Black;
+                        name.BorderThickness = new Thickness(2);
+                        name.BorderBrush = Brushes.Black;
 
                         RowDefinition rwd1 = new RowDefinition();
                         rwd1.Height = new GridLength(50);
-                        KassaRashodGrid.RowDefinitions.Add(rwd1);
+                        cashboxCostsGrid.RowDefinitions.Add(rwd1);
 
                         Grid.SetRow(date, i);
                         Grid.SetRow(type, i);
                         Grid.SetRow(sum, i);
-                        Grid.SetRow(fio, i);
+                        Grid.SetRow(name, i);
 
                         Grid.SetColumn(date, 0);
                         Grid.SetColumn(type, 1);
-                        Grid.SetColumn(fio, 2);
+                        Grid.SetColumn(name, 2);
                         Grid.SetColumn(sum, 3);
-                        KassaRashodGrid.Children.Add(date);
-                        KassaRashodGrid.Children.Add(type);
-                        KassaRashodGrid.Children.Add(sum);
-                        KassaRashodGrid.Children.Add(fio);
+                        cashboxCostsGrid.Children.Add(date);
+                        cashboxCostsGrid.Children.Add(type);
+                        cashboxCostsGrid.Children.Add(sum);
+                        cashboxCostsGrid.Children.Add(name);
                         i++;
                     }
 
@@ -564,56 +553,55 @@ namespace WpfApp12
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
 
-            KassaItogoDohod.Content = "Итого: " + sum_doh;
-            KassaItogoRashod.Content = "Итого: " + sum_ras;
-            kassaAllDohodLabel.Content = "Общий доход: " + (sum_doh - sum_ras);
+            cashboxTotalProfit.Content = "Итого: " + sumProfit;
+            cashboxTotalCosts.Content = "Итого: " + sumCosts;
+            totalProfitLabel.Content = "Общий доход: " + (sumProfit - sumCosts);
         }
 
-
-        //обновление грида оплат
-        public static void updateDataGridDolg(string connectionString, Grid MonthOplGridDolg, ComboBox GroupsDolg, ComboBox ListenerDolg, TextBox[] masTbx2, Label DataPerehoda, Label isStopDolg)
+        //обновление грида оплат(долг)+
+        public static void updateDebtDataGrid(BookkeeperWindow window)
         {
-            MonthOplGridDolg.ColumnDefinitions.Clear();
-            MonthOplGridDolg.Children.Clear();
+            window.MonthOplGridDolg.ColumnDefinitions.Clear();
+            window.MonthOplGridDolg.Children.Clear();
             //построение таблицы
-            int kol_Month = 0;
+            int quanMonth = 0;
             try
             {
-                NpgsqlConnection con = new NpgsqlConnection(connectionString);
+                NpgsqlConnection con = new NpgsqlConnection(window.connectionString);
                 con.Open();
-                string sql = "SELECT  array_to_string(payformonth,'_'), array_to_string(payedlist,'_'), array_to_string(skidkiforpay,'_'), array_to_string(topay,'_'), array_to_string(penya,'_'), date_stop,year  FROM listdolg where listenerid = (select listenerid from listeners where fio='" + ListenerDolg.SelectedItem + "') and grid = (select grid from groups where nazvanie ='" + GroupsDolg.SelectedItem + "')";
+                string sql = "SELECT  array_to_string(payformonth,'_'), array_to_string(payedlist,'_'), array_to_string(skidkiforpay,'_'), array_to_string(topay,'_'), array_to_string(penya,'_'), date_stop,year  FROM listdolg where listenerid = (select listenerid from listeners where fio='" + window.ListenerDolg.SelectedItem + "') and grid = (select grid from groups where nazvanie ='" + window.GroupsDolg.SelectedItem + "')";
                 NpgsqlCommand com = new NpgsqlCommand(sql, con);
                 NpgsqlDataReader reader = com.ExecuteReader();
                 if (reader.HasRows)
                 {
                     while (reader.Read())
                     {
-                        string payformonth = reader.GetString(0);
-                        string[] payformonthMas = payformonth.Split('_');
+                        string payForMonth = reader.GetString(0);
+                        string[] payForMonthArr = payForMonth.Split('_');
 
-                        string payedlist = reader.GetString(1);
-                        string[] payedlistMas = payedlist.Split('_');
+                        string payedByListener = reader.GetString(1);
+                        string[] payedByListenerArr = payedByListener.Split('_');
 
-                        string skidkiforpay = reader.GetString(2);
-                        string[] skidkiforpayMas = skidkiforpay.Split('_');
+                        string discount = reader.GetString(2);
+                        string[] discountArr = discount.Split('_');
 
-                        string topay = reader.GetString(3);
-                        string[] topayMas = topay.Split('_');
+                        string toPay = reader.GetString(3);
+                        string[] toPayArr = toPay.Split('_');
 
-                        string penya = reader.GetString(4);
-                        string[] penyaMas = penya.Split('_');
+                        string fine = reader.GetString(4);
+                        string[] fineArr = fine.Split('_');
 
                       
 
-                        if (!reader.IsDBNull(reader.GetOrdinal("date_stop"))) { isStopDolg.Content = "Обучение остановленно " + reader.GetDateTime(5).ToShortDateString(); }
-                        if (reader.IsDBNull(reader.GetOrdinal("date_stop"))) { isStopDolg.Content = "Обучение не остановленно"; }
-                        DataPerehoda.Content = "Дата добавления записи " + reader.GetDateTime(6).ToShortDateString(); ;
+                        if (!reader.IsDBNull(reader.GetOrdinal("date_stop"))) { window.isStopDolg.Content = "Обучение остановленно " + reader.GetDateTime(5).ToShortDateString(); }
+                        if (reader.IsDBNull(reader.GetOrdinal("date_stop"))) { window.isStopDolg.Content = "Обучение не остановленно"; }
+                        window.DataPerehoda.Content = "Дата добавления записи " + reader.GetDateTime(6).ToShortDateString(); ;
 
                         ArrayList Month = new ArrayList();
 
                         for (int i = 0; i < 12; i++)
                         {
-                            if (payformonthMas[i] != "0")
+                            if (payForMonthArr[i] != "0")
                             {
                                 switch (i)
                                 {
@@ -631,90 +619,90 @@ namespace WpfApp12
                                     case 11: { Month.Add("Декабрь"); break; }
 
                                 }
-                                kol_Month++;
+                                quanMonth++;
 
                             }
                         }
 
 
-                        Label[] Monthlabel = new Label[kol_Month];
-                        Label[] payformonthLabel = new Label[kol_Month];
-                        Label[] payedlistLabel = new Label[kol_Month];
-                        Label[] skidkiforpayLabel = new Label[kol_Month];
-                        Label[] topayLabel = new Label[kol_Month];
-                        Label[] penyalabel = new Label[kol_Month];
+                        Label[] monthLabelArr = new Label[quanMonth];
+                        Label[] payForMonthLabelArr = new Label[quanMonth];
+                        Label[] payedByListenerLabelArr = new Label[quanMonth];
+                        Label[] discountLabelArr = new Label[quanMonth];
+                        Label[] toPayLabelArr = new Label[quanMonth];
+                        Label[] fineLabelArr = new Label[quanMonth];
                         int j = 0;
 
 
 
-                        for (int i = 0; i < kol_Month; i++)
+                        for (int i = 0; i < quanMonth; i++)
                         {
 
-                            Monthlabel[i] = new Label();
-                            payformonthLabel[i] = new Label();
-                            payedlistLabel[i] = new Label();
-                            skidkiforpayLabel[i] = new Label();
-                            topayLabel[i] = new Label();
-                            penyalabel[i] = new Label();
+                            monthLabelArr[i] = new Label();
+                            payForMonthLabelArr[i] = new Label();
+                            payedByListenerLabelArr[i] = new Label();
+                            discountLabelArr[i] = new Label();
+                            toPayLabelArr[i] = new Label();
+                            fineLabelArr[i] = new Label();
 
-                            masTbx2[i].BorderThickness = new Thickness(2);
-                            Monthlabel[i].BorderThickness = new Thickness(2);
-                            payformonthLabel[i].BorderThickness = new Thickness(2);
-                            payedlistLabel[i].BorderThickness = new Thickness(2);
-                            skidkiforpayLabel[i].BorderThickness = new Thickness(2);
-                            topayLabel[i].BorderThickness = new Thickness(2);
-                            penyalabel[i].BorderThickness = new Thickness(2);
+                            window.textBoxArrForArrearsDefreyment[i].BorderThickness = new Thickness(2);
+                            monthLabelArr[i].BorderThickness = new Thickness(2);
+                            payForMonthLabelArr[i].BorderThickness = new Thickness(2);
+                            payedByListenerLabelArr[i].BorderThickness = new Thickness(2);
+                            discountLabelArr[i].BorderThickness = new Thickness(2);
+                            toPayLabelArr[i].BorderThickness = new Thickness(2);
+                            fineLabelArr[i].BorderThickness = new Thickness(2);
 
-                            masTbx2[i].BorderBrush = Brushes.Black;
-                            Monthlabel[i].BorderBrush = Brushes.Black;
-                            payformonthLabel[i].BorderBrush = Brushes.Black;
-                            payedlistLabel[i].BorderBrush = Brushes.Black;
-                            skidkiforpayLabel[i].BorderBrush = Brushes.Black;
-                            topayLabel[i].BorderBrush = Brushes.Black;
-                            penyalabel[i].BorderBrush = Brushes.Black;
+                            window.textBoxArrForArrearsDefreyment[i].BorderBrush = Brushes.Black;
+                            monthLabelArr[i].BorderBrush = Brushes.Black;
+                            payForMonthLabelArr[i].BorderBrush = Brushes.Black;
+                            payedByListenerLabelArr[i].BorderBrush = Brushes.Black;
+                            discountLabelArr[i].BorderBrush = Brushes.Black;
+                            toPayLabelArr[i].BorderBrush = Brushes.Black;
+                            fineLabelArr[i].BorderBrush = Brushes.Black;
 
 
-                            while (payformonthMas[j] == "0")
+                            while (payForMonthArr[j] == "0")
                             {
                                 j++;
                             }
 
-                            payformonthLabel[i].Content = payformonthMas[j];
-                            payedlistLabel[i].Content = payedlistMas[j];
-                            skidkiforpayLabel[i].Content = skidkiforpayMas[j];
-                            topayLabel[i].Content = topayMas[j];
-                            penyalabel[i].Content = penyaMas[j];
+                            payForMonthLabelArr[i].Content = payForMonthArr[j];
+                            payedByListenerLabelArr[i].Content = payedByListenerArr[j];
+                            discountLabelArr[i].Content = discountArr[j];
+                            toPayLabelArr[i].Content = toPayArr[j];
+                            fineLabelArr[i].Content = fineArr[j];
 
-                            Monthlabel[i].Content = Month[i];
+                            monthLabelArr[i].Content = Month[i];
 
                             ColumnDefinition cmd = new ColumnDefinition();
                             cmd.Width = new GridLength(100);
-                            MonthOplGridDolg.ColumnDefinitions.Add(cmd);
+                            window.MonthOplGridDolg.ColumnDefinitions.Add(cmd);
 
-                            Grid.SetColumn(masTbx2[i], (i));
-                            Grid.SetColumn(Monthlabel[i], (i));
-                            Grid.SetColumn(payformonthLabel[i], (i));
-                            Grid.SetColumn(payedlistLabel[i], (i));
-                            Grid.SetColumn(skidkiforpayLabel[i], (i));
-                            Grid.SetColumn(topayLabel[i], (i));
-                            Grid.SetColumn(penyalabel[i], (i));
+                            Grid.SetColumn(window.textBoxArrForArrearsDefreyment[i], (i));
+                            Grid.SetColumn(monthLabelArr[i], (i));
+                            Grid.SetColumn(payForMonthLabelArr[i], (i));
+                            Grid.SetColumn(payedByListenerLabelArr[i], (i));
+                            Grid.SetColumn(discountLabelArr[i], (i));
+                            Grid.SetColumn(toPayLabelArr[i], (i));
+                            Grid.SetColumn(fineLabelArr[i], (i));
 
 
-                            Grid.SetRow(masTbx2[i], 6);
-                            Grid.SetRow(Monthlabel[i], 0);
-                            Grid.SetRow(payformonthLabel[i], 1);
-                            Grid.SetRow(payedlistLabel[i], 2);
-                            Grid.SetRow(skidkiforpayLabel[i], 3);
-                            Grid.SetRow(topayLabel[i], 5);
-                            Grid.SetRow(penyalabel[i], 4);
+                            Grid.SetRow(window.textBoxArrForArrearsDefreyment[i], 6);
+                            Grid.SetRow(monthLabelArr[i], 0);
+                            Grid.SetRow(payForMonthLabelArr[i], 1);
+                            Grid.SetRow(payedByListenerLabelArr[i], 2);
+                            Grid.SetRow(discountLabelArr[i], 3);
+                            Grid.SetRow(toPayLabelArr[i], 5);
+                            Grid.SetRow(fineLabelArr[i], 4);
 
-                            MonthOplGridDolg.Children.Add(masTbx2[i]);
-                            MonthOplGridDolg.Children.Add(Monthlabel[i]);
-                            MonthOplGridDolg.Children.Add(payformonthLabel[i]);
-                            MonthOplGridDolg.Children.Add(payedlistLabel[i]);
-                            MonthOplGridDolg.Children.Add(skidkiforpayLabel[i]);
-                            MonthOplGridDolg.Children.Add(topayLabel[i]);
-                            MonthOplGridDolg.Children.Add(penyalabel[i]);
+                           window.MonthOplGridDolg.Children.Add(window.textBoxArrForArrearsDefreyment[i]);
+                            window.MonthOplGridDolg.Children.Add(monthLabelArr[i]);
+                            window.MonthOplGridDolg.Children.Add(payForMonthLabelArr[i]);
+                            window.MonthOplGridDolg.Children.Add(payedByListenerLabelArr[i]);
+                            window.MonthOplGridDolg.Children.Add(discountLabelArr[i]);
+                            window.MonthOplGridDolg.Children.Add(toPayLabelArr[i]);
+                            window.MonthOplGridDolg.Children.Add(fineLabelArr[i]);
                             j++;
                         }
                     }
@@ -725,33 +713,33 @@ namespace WpfApp12
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
         }
 
-        //обновление grid начислений зп
-        public static void updateGridNachZp(string connectionString, Label NachMonthLabel,CheckBox [] ChbxMas_SotrNuch, Grid NachSotrGrid,DataGrid NachDataGrid,DateTime dateNuch)
+        //обновление grid начислений зп+
+        public static void updateAccrualsSalaryDataGrid(BookkeeperWindow window)
         {
-            NachSotrGrid.Children.Clear();
-            NachSotrGrid.RowDefinitions.Clear();
-            NachMonthLabel.Content = "Начисления на ";
-            switch (dateNuch.Month)
+           window.NachSotrGrid.Children.Clear();
+            window.NachSotrGrid.RowDefinitions.Clear();
+            window.NachMonthLabel.Content = "Начисления на ";
+            switch (window.dateAccrual.Month)
             {
-                case 1: { NachMonthLabel.Content += "январь " + dateNuch.Year; break; }
-                case 2: { NachMonthLabel.Content += "февраль " + dateNuch.Year; break; }
-                case 3: { NachMonthLabel.Content += "март " + dateNuch.Year; break; }
-                case 4: { NachMonthLabel.Content += "апрель " + dateNuch.Year; break; }
-                case 5: { NachMonthLabel.Content += "май " + dateNuch.Year; break; }
-                case 6: { NachMonthLabel.Content += "июнь " + dateNuch.Year; break; }
-                case 7: { NachMonthLabel.Content += "июль " + dateNuch.Year; break; }
-                case 8: { NachMonthLabel.Content += "август " + dateNuch.Year; break; }
-                case 9: { NachMonthLabel.Content += "сентябрь " + dateNuch.Year; break; }
-                case 10: { NachMonthLabel.Content += "октябрь " + dateNuch.Year; break; }
-                case 11: { NachMonthLabel.Content += "ноябрь " + dateNuch.Year; break; }
-                case 12: { NachMonthLabel.Content += "декабрь " + dateNuch.Year; break; }
+                case 1: { window.NachMonthLabel.Content += "январь " + window.dateAccrual.Year; break; }
+                case 2: { window.NachMonthLabel.Content += "февраль " + window.dateAccrual.Year; break; }
+                case 3: { window.NachMonthLabel.Content += "март " + window.dateAccrual.Year; break; }
+                case 4: { window.NachMonthLabel.Content += "апрель " + window.dateAccrual.Year; break; }
+                case 5: { window.NachMonthLabel.Content += "май " + window.dateAccrual.Year; break; }
+                case 6: { window.NachMonthLabel.Content += "июнь " + window.dateAccrual.Year; break; }
+                case 7: { window.NachMonthLabel.Content += "июль " + window.dateAccrual.Year; break; }
+                case 8: { window.NachMonthLabel.Content += "август " + window.dateAccrual.Year; break; }
+                case 9: { window.NachMonthLabel.Content += "сентябрь " + window.dateAccrual.Year; break; }
+                case 10: { window.NachMonthLabel.Content += "октябрь " + window.dateAccrual.Year; break; }
+                case 11: { window.NachMonthLabel.Content += "ноябрь " + window.dateAccrual.Year; break; }
+                case 12: { window.NachMonthLabel.Content += "декабрь " + window.dateAccrual.Year; break; }
 
             }
           
             //заполнение грида сотрудников
             try
             {
-                NpgsqlConnection con = new NpgsqlConnection(connectionString);
+                NpgsqlConnection con = new NpgsqlConnection(window.connectionString);
                 con.Open();
                 string sql = "select fio,sotrid from sotrudniki where sotrid in (select sotrid from shtat) or sotrid in (select sotrid from prep)";
                 NpgsqlCommand com = new NpgsqlCommand(sql, con);
@@ -761,14 +749,14 @@ namespace WpfApp12
                 {
                     while (reader.Read())
                     {
-                        ChbxMas_SotrNuch[i] = new CheckBox();
-                        ChbxMas_SotrNuch[i].Name = "id_" + reader.GetInt32(1);
-                        ChbxMas_SotrNuch[i].Content = reader.GetString(0);
+                        window.checkBoxArrStaffForAccrual[i] = new CheckBox();
+                        window.checkBoxArrStaffForAccrual[i].Name = "id_" + reader.GetInt32(1);
+                        window.checkBoxArrStaffForAccrual[i].Content = reader.GetString(0);
                         RowDefinition cmd = new RowDefinition();
                         cmd.Height = new GridLength(20);
-                        NachSotrGrid.RowDefinitions.Add(cmd);
-                        Grid.SetRow(ChbxMas_SotrNuch[i], i);
-                        NachSotrGrid.Children.Add(ChbxMas_SotrNuch[i]);
+                        window.NachSotrGrid.RowDefinitions.Add(cmd);
+                        Grid.SetRow(window.checkBoxArrStaffForAccrual[i], i);
+                        window.NachSotrGrid.Children.Add(window.checkBoxArrStaffForAccrual[i]);
                         i++;
 
                     }
@@ -776,13 +764,13 @@ namespace WpfApp12
                 }
                 con.Close();
             }
-            catch { System.Windows.Forms.MessageBox.Show("Не удалось подключиться к базе данных"); return; }
+            catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
 
             //заполнение грида начислений
             try
             {
                 DataTable table = new DataTable();
-                object[] sql_mass = new object[10];
+                object[] sqlArr = new object[10];
                 table.Columns.Add("nachid", System.Type.GetType("System.Int32"));
                 table.Columns.Add("fio", System.Type.GetType("System.String"));
                 table.Columns.Add("prepzp", System.Type.GetType("System.Double"));
@@ -795,87 +783,87 @@ namespace WpfApp12
                 table.Columns.Add("allzp", System.Type.GetType("System.Double"));
                 table.Columns.Add("viplacheno", System.Type.GetType("System.Double"));
                 table.Columns.Add("topay", System.Type.GetType("System.Double"));
-                NpgsqlConnection con = new NpgsqlConnection(connectionString);
+                NpgsqlConnection con = new NpgsqlConnection(window.connectionString);
                 con.Open();
-                string sql = "select nachisl.nachid ,sotrudniki.fio,nachisl.prepzp,nachisl.shtatzp,nachisl.obslzp,nachisl.vs,nachisl.fss,nachisl.ndfl,nachisl.viplacheno from nachisl inner join sotrudniki using(sotrid) where EXTRACT(Year FROM nachisl.payday)=" + dateNuch.Year+" and  EXTRACT(Month FROM nachisl.payday)=" + dateNuch.Month;
+                string sql = "select nachisl.nachid ,sotrudniki.fio,nachisl.prepzp,nachisl.shtatzp,nachisl.obslzp,nachisl.vs,nachisl.fss,nachisl.ndfl,nachisl.viplacheno from nachisl inner join sotrudniki using(sotrid) where EXTRACT(Year FROM nachisl.payday)=" + window.dateAccrual.Year+" and  EXTRACT(Month FROM nachisl.payday)=" + window.dateAccrual.Month;
                 NpgsqlCommand com = new NpgsqlCommand(sql, con);
                 NpgsqlDataReader reader = com.ExecuteReader();
                 if (reader.HasRows)
                 {
                     while (reader.Read())
                     {
-                        sql_mass[0] = reader.GetInt32(0);
-                        sql_mass[1] = reader.GetString(1);
-                        sql_mass[2] = reader.GetDouble(2);
-                        sql_mass[3] = reader.GetDouble(3) + reader.GetDouble(4);
+                        sqlArr[0] = reader.GetInt32(0);
+                        sqlArr[1] = reader.GetString(1);
+                        sqlArr[2] = reader.GetDouble(2);
+                        sqlArr[3] = reader.GetDouble(3) + reader.GetDouble(4);
                      
 
-                        sql_mass[4] = reader.GetDouble(5);
-                        sql_mass[5] = reader.GetDouble(6);
-                        sql_mass[6] = reader.GetDouble(7);
+                        sqlArr[4] = reader.GetDouble(5);
+                        sqlArr[5] = reader.GetDouble(6);
+                        sqlArr[6] = reader.GetDouble(7);
 
-                        sql_mass[7] = Math.Round(reader.GetDouble(2)+ reader.GetDouble(3)+ reader.GetDouble(4),2);
-                        sql_mass[8] = reader.GetDouble(8);
+                        sqlArr[7] = Math.Round(reader.GetDouble(2)+ reader.GetDouble(3)+ reader.GetDouble(4),2);
+                        sqlArr[8] = reader.GetDouble(8);
 
                         
-                        sql_mass[9] = Math.Round((reader.GetDouble(2) + reader.GetDouble(3) + reader.GetDouble(4))- reader.GetDouble(8),2);
+                        sqlArr[9] = Math.Round((reader.GetDouble(2) + reader.GetDouble(3) + reader.GetDouble(4))- reader.GetDouble(8),2);
                         DataRow row;
                         row = table.NewRow();
-                        row.ItemArray = sql_mass;
+                        row.ItemArray = sqlArr;
                         table.Rows.Add(row);
                     }
 
 
                 }
                 con.Close();
-                NachDataGrid.ItemsSource = table.DefaultView;
+                window.NachDataGrid.ItemsSource = table.DefaultView;
             }
-            catch { System.Windows.Forms.MessageBox.Show("Не удалось подключиться к базе данных"); return; }
+            catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
         }
 
-        //обновление grid штатного расписания
-        public static void updateGridShtatRasp(string connectionString, Grid gridDate, Grid gridSotr,Label[,] lbmas,CheckBox []ChbxMas,Label ShtatRaspMonthYearLabel, DateTime date)
+        //обновление grid штатного расписания+
+        public static void updateStaffScheduleGrid(ManagerWindow window)
         {
-            gridDate.Children.Clear();
-            gridSotr.Children.Clear();
-            gridSotr.RowDefinitions.Clear();
-            ShtatRaspMonthYearLabel.Content = "Посещения на ";
-            switch (date.Month)
+            window.MonthGrid.Children.Clear();
+            window.ShtatRaspSotrpGrid.Children.Clear();
+            window.ShtatRaspSotrpGrid.RowDefinitions.Clear();
+            window.ShtatRaspMonthYearLabel.Content = "Посещения на ";
+            switch (window.date.Month)
             {
-                case 1: { ShtatRaspMonthYearLabel.Content += "январь " + date.Year; break; }
-                case 2: { ShtatRaspMonthYearLabel.Content += "февраль " + date.Year; break; }
-                case 3: { ShtatRaspMonthYearLabel.Content += "март " + date.Year; break; }
-                case 4: { ShtatRaspMonthYearLabel.Content += "апрель " + date.Year; break; }
-                case 5: { ShtatRaspMonthYearLabel.Content += "май " + date.Year; break; }
-                case 6: { ShtatRaspMonthYearLabel.Content += "июнь " + date.Year; break; }
-                case 7: { ShtatRaspMonthYearLabel.Content += "июль " + date.Year; break; }
-                case 8: { ShtatRaspMonthYearLabel.Content += "август " + date.Year; break; }
-                case 9: { ShtatRaspMonthYearLabel.Content += "сентябрь " + date.Year; break; }
-                case 10: { ShtatRaspMonthYearLabel.Content += "октябрь " + date.Year; break; }
-                case 11: { ShtatRaspMonthYearLabel.Content += "ноябрь " + date.Year; break; }
-                case 12: { ShtatRaspMonthYearLabel.Content += "декабрь " + date.Year; break; }
+                case 1: { window.ShtatRaspMonthYearLabel.Content += "январь " + window.date.Year; break; }
+                case 2: { window.ShtatRaspMonthYearLabel.Content += "февраль " + window.date.Year; break; }
+                case 3: { window.ShtatRaspMonthYearLabel.Content += "март " + window.date.Year; break; }
+                case 4: { window.ShtatRaspMonthYearLabel.Content += "апрель " + window.date.Year; break; }
+                case 5: { window.ShtatRaspMonthYearLabel.Content += "май " + window.date.Year; break; }
+                case 6: { window.ShtatRaspMonthYearLabel.Content += "июнь " + window.date.Year; break; }
+                case 7: { window.ShtatRaspMonthYearLabel.Content += "июль " + window.date.Year; break; }
+                case 8: { window.ShtatRaspMonthYearLabel.Content += "август " + window.date.Year; break; }
+                case 9: { window.ShtatRaspMonthYearLabel.Content += "сентябрь " + window.date.Year; break; }
+                case 10: { window.ShtatRaspMonthYearLabel.Content += "октябрь " + window.date.Year; break; }
+                case 11: { window.ShtatRaspMonthYearLabel.Content += "ноябрь " + window.date.Year; break; }
+                case 12: { window.ShtatRaspMonthYearLabel.Content += "декабрь " + window.date.Year; break; }
 
             }
-            DateTime newDate = new DateTime(date.Year, date.Month, 1);
+            DateTime newDate = new DateTime(window.date.Year, window.date.Month, 1);
             for (int i = 0; i < 7; i++)
             {
                 for (int j = 0; j < 7; j++)
                 {
-                    Grid.SetColumn(lbmas[i, j],j);
-                    Grid.SetRow(lbmas[i, j], i);
-                    gridDate.Children.Add(lbmas[i, j]);
+                    Grid.SetColumn(window.labelArrForStaffSchedule[i, j],j);
+                    Grid.SetRow(window.labelArrForStaffSchedule[i, j], i);
+                    window.MonthGrid.Children.Add(window.labelArrForStaffSchedule[i, j]);
 
                     if (i==0)
                     {
                         switch (j)
                         {
-                            case 0: { lbmas[i, j].Content = "ПН"; break; }
-                            case 1: { lbmas[i, j].Content = "ВТ"; break; }
-                            case 2: { lbmas[i, j].Content = "СР"; break; }
-                            case 3: { lbmas[i, j].Content = "ЧТ"; break; }
-                            case 4: { lbmas[i, j].Content = "ПТ"; break; }
-                            case 5: { lbmas[i, j].Content = "СБ"; break; }
-                            case 6: { lbmas[i, j].Content = "ВС"; break; }
+                            case 0: { window.labelArrForStaffSchedule[i, j].Content = "ПН"; break; }
+                            case 1: { window.labelArrForStaffSchedule[i, j].Content = "ВТ"; break; }
+                            case 2: { window.labelArrForStaffSchedule[i, j].Content = "СР"; break; }
+                            case 3: { window.labelArrForStaffSchedule[i, j].Content = "ЧТ"; break; }
+                            case 4: { window.labelArrForStaffSchedule[i, j].Content = "ПТ"; break; }
+                            case 5: { window.labelArrForStaffSchedule[i, j].Content = "СБ"; break; }
+                            case 6: { window.labelArrForStaffSchedule[i, j].Content = "ВС"; break; }
                         }
 
 
@@ -885,7 +873,7 @@ namespace WpfApp12
             }
             int index_j = 0;
             int index_i = 1;
-            while (newDate.Month == date.Month)
+            while (newDate.Month == window.date.Month)
             {
                 switch(newDate.DayOfWeek.ToString())
                 {
@@ -897,7 +885,7 @@ namespace WpfApp12
                     case "Saturday": { index_j = 5; break; }
                     case "Sunday": { index_j = 6; break; }
                 }
-                lbmas[index_i, index_j].Content = newDate.Day;
+                window.labelArrForStaffSchedule[index_i, index_j].Content = newDate.Day;
                 if (index_j == 6) index_i++;
                 newDate= newDate.AddDays(1);
 
@@ -905,7 +893,7 @@ namespace WpfApp12
            
 
             try {
-                NpgsqlConnection con = new NpgsqlConnection(connectionString);
+                NpgsqlConnection con = new NpgsqlConnection(window.connectionString);
                 con.Open();
                 string sql = "select fio,sotrid from shtat inner join sotrudniki using(sotrid)";
                 NpgsqlCommand com = new NpgsqlCommand(sql, con);
@@ -915,14 +903,14 @@ namespace WpfApp12
                 {
                     while (reader.Read())
                     {
-                        ChbxMas[i] = new CheckBox();
-                        ChbxMas[i].Name = "id_"+reader.GetInt32(1);
-                        ChbxMas[i].Content = reader.GetString(0);
+                        window.checkBoxArrForStaffSchedule[i] = new CheckBox();
+                        window.checkBoxArrForStaffSchedule[i].Name = "id_"+reader.GetInt32(1);
+                        window.checkBoxArrForStaffSchedule[i].Content = reader.GetString(0);
                         RowDefinition cmd = new RowDefinition();
                         cmd.Height = new GridLength(20);
-                        gridSotr.RowDefinitions.Add(cmd);
-                        Grid.SetRow(ChbxMas[i], i);
-                        gridSotr.Children.Add(ChbxMas[i]);
+                        window.ShtatRaspSotrpGrid.RowDefinitions.Add(cmd);
+                        Grid.SetRow(window.checkBoxArrForStaffSchedule[i], i);
+                        window.ShtatRaspSotrpGrid.Children.Add(window.checkBoxArrForStaffSchedule[i]);
                         i++;
 
                     }
@@ -931,47 +919,47 @@ namespace WpfApp12
                 }
                 con.Close();
             } 
-            catch { System.Windows.Forms.MessageBox.Show("Не удалось подключиться к базе данных"); return; }
+            catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
         }
 
-        //обновление DataGrid штата
-        public static void updateDataGridShtat(string connectionString, string sql ,DataGrid grid)
+        //обновление DataGrid штата+
+        public static void updateStaffDataGrid(ManagerWindow window)
         {
 
             try
             {
                 DataTable table = new DataTable();
-                object[] sql_mass = new object[4];
+                object[] sqlArr = new object[4];
                 table.Columns.Add("shtatid", System.Type.GetType("System.Int32"));
                 table.Columns.Add("fio", System.Type.GetType("System.String"));
                 table.Columns.Add("states", System.Type.GetType("System.String"));
                 table.Columns.Add("obslwork", System.Type.GetType("System.String"));
-                NpgsqlConnection con = new NpgsqlConnection(connectionString);
+                NpgsqlConnection con = new NpgsqlConnection(window.connectionString);
                 con.Open();
 
                 
-                NpgsqlCommand com = new NpgsqlCommand(sql, con);
+                NpgsqlCommand com = new NpgsqlCommand(window.filter.sql, con);
                 NpgsqlDataReader reader = com.ExecuteReader();
                 if (reader.HasRows)
                 {
 
                     while (reader.Read())
                     {
-                        sql_mass[0] = reader.GetInt32(0);
-                        sql_mass[1] = reader.GetString(1);
-                        sql_mass[2] = "Нет";
-                        sql_mass[3] = "Нет";
+                        sqlArr[0] = reader.GetInt32(0);
+                        sqlArr[1] = reader.GetString(1);
+                        sqlArr[2] = "Нет";
+                        sqlArr[3] = "Нет";
                         //вывод должностей
                         if (reader.GetString(2)!="")
                         {
-                            sql_mass[2]="";
-                            string[] stavky = reader.GetString(2).Split('_');
+                            sqlArr[2]="";
+                            string[] rate = reader.GetString(2).Split('_');
                             try
                             {
-                                NpgsqlConnection con1 = new NpgsqlConnection(connectionString);
+                                NpgsqlConnection con1 = new NpgsqlConnection(window.connectionString);
                                 con1.Open();
 
-                                string sql1 = "select title from states where ARRAY[statesid] <@ (select states from shtat where shtatid=" + sql_mass[0] + " ) order by statesid";
+                                string sql1 = "select title from states where ARRAY[statesid] <@ (select states from shtat where shtatid=" + sqlArr[0] + " ) order by statesid";
                                 NpgsqlCommand com1 = new NpgsqlCommand(sql1, con1);
                                 NpgsqlDataReader reader1 = com1.ExecuteReader();
                                 if (reader1.HasRows)
@@ -979,7 +967,7 @@ namespace WpfApp12
                                     int i = 0;
                                     while (reader1.Read())
                                     {
-                                        sql_mass[2] += reader1.GetString(0) + " - " + stavky[i] + "; ";
+                                        sqlArr[2] += reader1.GetString(0) + " - " + rate[i] + "; ";
                                         i++;
                                     }
                                 }
@@ -992,14 +980,14 @@ namespace WpfApp12
                         //вывод обслуживающих работ
                         if (reader.GetString(3) != "")
                         {
-                            sql_mass[3] = "";
-                            string[] obem = reader.GetString(3).Split('_');
+                            sqlArr[3] = "";
+                            string[] workVolume = reader.GetString(3).Split('_');
                         try
                         {
-                            NpgsqlConnection con1 = new NpgsqlConnection(connectionString);
+                            NpgsqlConnection con1 = new NpgsqlConnection(window.connectionString);
                                 con1.Open();
 
-                                string sql1 = "select title from raboty_obsl where ARRAY[rabotyid] <@ (select obslwork from shtat where shtatid=" + sql_mass[0] + " ) order by rabotyid";
+                                string sql1 = "select title from raboty_obsl where ARRAY[rabotyid] <@ (select obslwork from shtat where shtatid=" + sqlArr[0] + " ) order by rabotyid";
                                 NpgsqlCommand com1 = new NpgsqlCommand(sql1, con1);
                                 NpgsqlDataReader reader1 = com1.ExecuteReader();
                                 if (reader1.HasRows)
@@ -1007,7 +995,7 @@ namespace WpfApp12
                                     int i = 0;
                                     while (reader1.Read())
                                     {
-                                        sql_mass[3] += reader1.GetString(0) + " - " + obem[i] + "; ";
+                                        sqlArr[3] += reader1.GetString(0) + " - " + workVolume[i] + "; ";
                                         i++;
                                     }
                                 }
@@ -1018,33 +1006,33 @@ namespace WpfApp12
 
                         DataRow row;
                         row = table.NewRow();
-                        row.ItemArray = sql_mass;
+                        row.ItemArray = sqlArr;
                         table.Rows.Add(row);
                     }
 
                 }
                 con.Close();
-                grid.ItemsSource = table.DefaultView;
+                window.ShtatDataGrid.ItemsSource = table.DefaultView;
 
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); }
         }
 
 
-        //обновление DataGrid должностей
-        public static void updateDataGridStates(string connectionString, DataGrid grid)
+        //обновление DataGrid должностей+
+        public static void updatePositionsDataGrid(ManagerWindow window)
         {
 
             try
             {
                 DataTable table = new DataTable();
-                object[] sql_mass = new object[5];
+                object[] sqlArr = new object[5];
                 table.Columns.Add("statesid", System.Type.GetType("System.Int32"));
                 table.Columns.Add("title", System.Type.GetType("System.String"));
                 table.Columns.Add("kol_work_day", System.Type.GetType("System.String"));
                 table.Columns.Add("zp", System.Type.GetType("System.Double"));
                 table.Columns.Add("comment", System.Type.GetType("System.String"));
-                NpgsqlConnection con = new NpgsqlConnection(connectionString);
+                NpgsqlConnection con = new NpgsqlConnection(window.connectionString);
                 con.Open();
                 string sql = "SELECT statesid, title, array_to_string(kol_work_day,'_'), zp, comment FROM states";
                 NpgsqlCommand com = new NpgsqlCommand(sql, con);
@@ -1054,152 +1042,151 @@ namespace WpfApp12
     
                     while (reader.Read())
                     {
-                        sql_mass[0] = reader.GetInt32(0);
-                        sql_mass[1] = reader.GetString(1);
-                        sql_mass[3] = reader.GetDouble(3);
-                        sql_mass[4] = reader.GetString(4);
-                        string[] daysMas = reader.GetString(2).Split('_');
-                    string workday = "Январь - " + daysMas[0] + " Февраль - " + daysMas[1] + " Март - " + daysMas[2] + " Апрель - " + daysMas[3] + " Май - " + daysMas[4] + "Июнь - " + daysMas[5] + " Июль - " + daysMas[6] + " Август - " + daysMas[7] + " Сентябрь - " + daysMas[8] + " Октябрь - " + daysMas[9] + " Ноябрь - " + daysMas[10] + " Декабрь - " + daysMas[11];
-                        sql_mass[2] = workday;
+                        sqlArr[0] = reader.GetInt32(0);
+                        sqlArr[1] = reader.GetString(1);
+                        sqlArr[3] = reader.GetDouble(3);
+                        sqlArr[4] = reader.GetString(4);
+                        string[] daysArr = reader.GetString(2).Split('_');
+                    string workDay = "Январь - " + daysArr[0] + " Февраль - " + daysArr[1] + " Март - " + daysArr[2] + " Апрель - " + daysArr[3] + " Май - " + daysArr[4] + "Июнь - " + daysArr[5] + " Июль - " + daysArr[6] + " Август - " + daysArr[7] + " Сентябрь - " + daysArr[8] + " Октябрь - " + daysArr[9] + " Ноябрь - " + daysArr[10] + " Декабрь - " + daysArr[11];
+                        sqlArr[2] = workDay;
                         DataRow row;
                         row = table.NewRow();
-                        row.ItemArray = sql_mass;
+                        row.ItemArray = sqlArr;
                         table.Rows.Add(row);
                     }
 
                 }
                 con.Close();
-                grid.ItemsSource = table.DefaultView;
+                window.StateDataGrid.ItemsSource = table.DefaultView;
 
         }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
 }
 
 
-        //обновление DataGrid работ обслуживания
-        public static void updateDataGridRaboty(string connectionString, DataGrid grid)
+        //обновление DataGrid работ обслуживания+
+        public static void updateServiceWorksDataGrid(ManagerWindow window)
         {
 
             try
             {
                 DataTable Table = new DataTable();
-                NpgsqlConnection con = new NpgsqlConnection(connectionString);
+                NpgsqlConnection con = new NpgsqlConnection(window.connectionString);
                 con.Open();
                 string sql = "SELECT rabotyid, title, pay,ed_izm, comment FROM raboty_obsl";
                 NpgsqlDataAdapter Adapter = new NpgsqlDataAdapter(sql, con);
                 Adapter.Fill(Table);
-                grid.ItemsSource = Table.DefaultView;
+                window.ObslWorkDataGrid.ItemsSource = Table.DefaultView;
                 con.Close();
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
 
         }
 
-        //обновление DataGrid коефициентов за выслугу лет
-        public static void updateDataGridKoef(string connectionString, DataGrid grid)
+        //обновление DataGrid коефициентов за выслугу лет+
+        public static void updateWorkCoeffDataGrid(ManagerWindow window)
         {
 
             try
             {
                 DataTable Table = new DataTable();
-                NpgsqlConnection con = new NpgsqlConnection(connectionString);
+                NpgsqlConnection con = new NpgsqlConnection(window.connectionString);
                 con.Open();
                 string sql = "SELECT * from koef_vislugi";
                 NpgsqlDataAdapter Adapter = new NpgsqlDataAdapter(sql, con);
                 Adapter.Fill(Table);
-                grid.ItemsSource = Table.DefaultView;
+                window.KoefDataGrid.ItemsSource = Table.DefaultView;
                 con.Close();
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
 
         }
 
-        //обновление DataGrid расходов
-        public static void updateDataGridRashody(string connectionString, string sql, DataGrid grid)
+        //обновление DataGrid расходов+
+        public static void updateCostsDataGrid(BookkeeperWindow window)
         {
 
             try
             {
                 DataTable Table = new DataTable();
-                NpgsqlConnection con = new NpgsqlConnection(connectionString);
+                NpgsqlConnection con = new NpgsqlConnection(window.connectionString);
                 con.Open();
-                NpgsqlDataAdapter Adapter = new NpgsqlDataAdapter(sql, con);
+                NpgsqlDataAdapter Adapter = new NpgsqlDataAdapter(window.filter.sql, con);
                 Adapter.Fill(Table);
-                grid.ItemsSource = Table.DefaultView;
+                window.RoshodyDataGrid.ItemsSource = Table.DefaultView;
                 con.Close();
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
 
         }
 
-        //обновление DataGrid доходов
-        public static void updateDataGridDohody(string connectionString,string sql ,DataGrid grid)
+        //обновление DataGrid доходов+
+        public static void updateProfitDataGrid(BookkeeperWindow window)
         {
 
             try
             {
                 DataTable Table = new DataTable();
-                NpgsqlConnection con = new NpgsqlConnection(connectionString);
+                NpgsqlConnection con = new NpgsqlConnection(window.connectionString);
                 con.Open();
-                NpgsqlDataAdapter Adapter = new NpgsqlDataAdapter(sql, con);
+                NpgsqlDataAdapter Adapter = new NpgsqlDataAdapter(window.filter.sql, con);
                 Adapter.Fill(Table);
-                grid.ItemsSource = Table.DefaultView;
+                window.DohodyDataGrid.ItemsSource = Table.DefaultView;
                 con.Close();
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
 
         }
 
-
-        //обновление грида оплат
-        public static void updateDataGridOpat(string connectionString, Grid MonthOplGrid, ComboBox Groups, ComboBox Listener,TextBox [] masTbx,Label isClose,Label isStop,Button Closeing, Button Open, Button StopLern, Button RestartLern)
+        //обновление грида оплат+              
+        public static void updatePaymentDataGrid(BookkeeperWindow window)
         {
-            MonthOplGrid.ColumnDefinitions.Clear();
-            MonthOplGrid.Children.Clear();
+            window.MonthOplGrid.ColumnDefinitions.Clear();
+            window.MonthOplGrid.Children.Clear();
             //построение таблицы
-            int kol_Month = 0;
+            int quanMonth = 0;
             try
             {
-                NpgsqlConnection con = new NpgsqlConnection(connectionString);
+                NpgsqlConnection con = new NpgsqlConnection(window.connectionString);
                 con.Open();
-                string sql = "SELECT  array_to_string(payformonth,'_'), array_to_string(payedlist,'_'), array_to_string(skidkiforpay,'_'), array_to_string(topay,'_'), array_to_string(penya,'_'), date_stop, isclose  FROM listnuch where listenerid = (select listenerid from listeners where fio='" + Listener.SelectedItem + "') and grid = (select grid from groups where nazvanie ='" + Groups.SelectedItem + "')";
+                string sql = "SELECT  array_to_string(payformonth,'_'), array_to_string(payedlist,'_'), array_to_string(skidkiforpay,'_'), array_to_string(topay,'_'), array_to_string(penya,'_'), date_stop, isclose  FROM listnuch where listenerid = (select listenerid from listeners where fio='" + window.Listener.SelectedItem + "') and grid = (select grid from groups where nazvanie ='" + window.Groups.SelectedItem + "')";
                 NpgsqlCommand com = new NpgsqlCommand(sql, con);
                 NpgsqlDataReader reader = com.ExecuteReader();
                 if (reader.HasRows)
                 {
                     while (reader.Read())
                     {
-                        string payformonth = reader.GetString(0);
-                        string[] payformonthMas = payformonth.Split('_');
+                        string payForMonth = reader.GetString(0);
+                        string[] payForMonthArr = payForMonth.Split('_');
 
-                        string payedlist = reader.GetString(1);
-                        string[] payedlistMas = payedlist.Split('_');
+                        string payedByListener = reader.GetString(1);
+                        string[] payedByListenerArr = payedByListener.Split('_');
 
-                        string skidkiforpay = reader.GetString(2);
-                        string[] skidkiforpayMas = skidkiforpay.Split('_');
+                        string discount = reader.GetString(2);
+                        string[] discountArr = discount.Split('_');
 
-                        string topay = reader.GetString(3);
-                        string[] topayMas = topay.Split('_');
+                        string toPay = reader.GetString(3);
+                        string[] toPayArr = toPay.Split('_');
 
-                        string penya = reader.GetString(4);
-                        string[] penyaMas = penya.Split('_');
+                        string fine = reader.GetString(4);
+                        string[] fineArr = fine.Split('_');
 
                         if (reader.GetInt32(6) == 1)
                         {
-                            isClose.Content = "Запись об оплате закрыта"; Closeing.Visibility = Visibility.Collapsed; Open.Visibility = Visibility.Visible;
+                            window.isClose.Content = "Запись об оплате закрыта"; window.Closeing.Visibility = Visibility.Collapsed; window.Open.Visibility = Visibility.Visible;
                             
                         }
-                        else { isClose.Content = "Запись об оплате открыта"; Closeing.Visibility = Visibility.Visible; Open.Visibility = Visibility.Collapsed; }
+                        else { window.isClose.Content = "Запись об оплате открыта"; window.Closeing.Visibility = Visibility.Visible; window.Open.Visibility = Visibility.Collapsed; }
 
-                        if (!reader.IsDBNull(reader.GetOrdinal("date_stop"))) { isStop.Content = "Обучение остановленно " + reader.GetDateTime(5).ToShortDateString(); RestartLern.Visibility = Visibility.Visible; StopLern.Visibility = Visibility.Collapsed; }
-                        if (reader.IsDBNull(reader.GetOrdinal("date_stop"))) { isStop.Content = "Обучение не остановленно"; RestartLern.Visibility = Visibility.Collapsed; StopLern.Visibility = Visibility.Visible; }
+                        if (!reader.IsDBNull(reader.GetOrdinal("date_stop"))) { window.isStop.Content = "Обучение остановленно " + reader.GetDateTime(5).ToShortDateString(); window.RestartLern.Visibility = Visibility.Visible; window.StopLern.Visibility = Visibility.Collapsed; }
+                        if (reader.IsDBNull(reader.GetOrdinal("date_stop"))) { window.isStop.Content = "Обучение не остановленно"; window.RestartLern.Visibility = Visibility.Collapsed; window.StopLern.Visibility = Visibility.Visible; }
 
 
                         ArrayList Month = new ArrayList();
 
                         for (int i = 0; i < 12; i++)
                         {
-                            if (payformonthMas[i] != "0")
+                            if (payForMonthArr[i] != "0")
                             {
                                 switch (i)
                                 {
@@ -1217,90 +1204,90 @@ namespace WpfApp12
                                     case 11: { Month.Add("Декабрь"); break; }
 
                                 }
-                                kol_Month++;
+                                quanMonth++;
 
                             }
                         }
 
 
-                        Label[] Monthlabel = new Label[kol_Month];
-                        Label[] payformonthLabel = new Label[kol_Month];
-                        Label[] payedlistLabel = new Label[kol_Month];
-                        Label[] skidkiforpayLabel = new Label[kol_Month];
-                        Label[] topayLabel = new Label[kol_Month];
-                        Label[] penyalabel = new Label[kol_Month];
+                        Label[] monthLabelArr = new Label[quanMonth];
+                        Label[] payForMonthLabelArr = new Label[quanMonth];
+                        Label[] payedByListenerLabelAdd = new Label[quanMonth];
+                        Label[] discountLabelArr = new Label[quanMonth];
+                        Label[] toPayLabelArr = new Label[quanMonth];
+                        Label[] fineLabelArr = new Label[quanMonth];
                         int j = 0;
 
 
 
-                        for (int i = 0; i < kol_Month; i++)
+                        for (int i = 0; i < quanMonth; i++)
                         {
 
-                            Monthlabel[i] = new Label();
-                            payformonthLabel[i] = new Label();
-                            payedlistLabel[i] = new Label();
-                            skidkiforpayLabel[i] = new Label();
-                            topayLabel[i] = new Label();
-                            penyalabel[i] = new Label();
+                            monthLabelArr[i] = new Label();
+                            payForMonthLabelArr[i] = new Label();
+                            payedByListenerLabelAdd[i] = new Label();
+                            discountLabelArr[i] = new Label();
+                            toPayLabelArr[i] = new Label();
+                            fineLabelArr[i] = new Label();
 
-                            masTbx[i].BorderThickness = new Thickness(2);
-                            Monthlabel[i].BorderThickness = new Thickness(2);
-                            payformonthLabel[i].BorderThickness = new Thickness(2);
-                            payedlistLabel[i].BorderThickness = new Thickness(2);
-                            skidkiforpayLabel[i].BorderThickness = new Thickness(2);
-                            topayLabel[i].BorderThickness = new Thickness(2);
-                            penyalabel[i].BorderThickness = new Thickness(2);
+                            window.textBoxArrForDefreyment[i].BorderThickness = new Thickness(2);
+                            monthLabelArr[i].BorderThickness = new Thickness(2);
+                            payForMonthLabelArr[i].BorderThickness = new Thickness(2);
+                            payedByListenerLabelAdd[i].BorderThickness = new Thickness(2);
+                            discountLabelArr[i].BorderThickness = new Thickness(2);
+                            toPayLabelArr[i].BorderThickness = new Thickness(2);
+                            fineLabelArr[i].BorderThickness = new Thickness(2);
 
-                            masTbx[i].BorderBrush = Brushes.Black;
-                            Monthlabel[i].BorderBrush = Brushes.Black;
-                            payformonthLabel[i].BorderBrush = Brushes.Black;
-                            payedlistLabel[i].BorderBrush = Brushes.Black;
-                            skidkiforpayLabel[i].BorderBrush = Brushes.Black;
-                            topayLabel[i].BorderBrush = Brushes.Black;
-                            penyalabel[i].BorderBrush = Brushes.Black;
+                            window.textBoxArrForDefreyment[i].BorderBrush = Brushes.Black;
+                            monthLabelArr[i].BorderBrush = Brushes.Black;
+                            payForMonthLabelArr[i].BorderBrush = Brushes.Black;
+                            payedByListenerLabelAdd[i].BorderBrush = Brushes.Black;
+                            discountLabelArr[i].BorderBrush = Brushes.Black;
+                            toPayLabelArr[i].BorderBrush = Brushes.Black;
+                            fineLabelArr[i].BorderBrush = Brushes.Black;
                            
 
-                            while (payformonthMas[j] == "0")
+                            while (payForMonthArr[j] == "0")
                             {
                                 j++;
                             }
 
-                            payformonthLabel[i].Content = payformonthMas[j];
-                            payedlistLabel[i].Content = payedlistMas[j];
-                            skidkiforpayLabel[i].Content = skidkiforpayMas[j];
-                            topayLabel[i].Content = topayMas[j];
-                            penyalabel[i].Content = penyaMas[j];
+                            payForMonthLabelArr[i].Content = payForMonthArr[j];
+                            payedByListenerLabelAdd[i].Content = payedByListenerArr[j];
+                            discountLabelArr[i].Content = discountArr[j];
+                            toPayLabelArr[i].Content = toPayArr[j];
+                            fineLabelArr[i].Content = fineArr[j];
 
-                            Monthlabel[i].Content = Month[i];
+                            monthLabelArr[i].Content = Month[i];
 
                             ColumnDefinition cmd = new ColumnDefinition();
                             cmd.Width = new GridLength(100);
-                            MonthOplGrid.ColumnDefinitions.Add(cmd);
+                            window.MonthOplGrid.ColumnDefinitions.Add(cmd);
 
-                            Grid.SetColumn(masTbx[i], (i));
-                            Grid.SetColumn(Monthlabel[i], (i));
-                            Grid.SetColumn(payformonthLabel[i], (i));
-                            Grid.SetColumn(payedlistLabel[i], (i));
-                            Grid.SetColumn(skidkiforpayLabel[i], (i));
-                            Grid.SetColumn(topayLabel[i], (i));
-                            Grid.SetColumn(penyalabel[i], (i));
+                            Grid.SetColumn(window.textBoxArrForDefreyment[i], (i));
+                            Grid.SetColumn(monthLabelArr[i], (i));
+                            Grid.SetColumn(payForMonthLabelArr[i], (i));
+                            Grid.SetColumn(payedByListenerLabelAdd[i], (i));
+                            Grid.SetColumn(discountLabelArr[i], (i));
+                            Grid.SetColumn(toPayLabelArr[i], (i));
+                            Grid.SetColumn(fineLabelArr[i], (i));
 
 
-                            Grid.SetRow(masTbx[i], 6);
-                            Grid.SetRow(Monthlabel[i], 0);
-                            Grid.SetRow(payformonthLabel[i], 1);
-                            Grid.SetRow(payedlistLabel[i], 2);
-                            Grid.SetRow(skidkiforpayLabel[i], 3);
-                            Grid.SetRow(topayLabel[i], 5);
-                            Grid.SetRow(penyalabel[i], 4);
+                            Grid.SetRow(window.textBoxArrForDefreyment[i], 6);
+                            Grid.SetRow(monthLabelArr[i], 0);
+                            Grid.SetRow(payForMonthLabelArr[i], 1);
+                            Grid.SetRow(payedByListenerLabelAdd[i], 2);
+                            Grid.SetRow(discountLabelArr[i], 3);
+                            Grid.SetRow(toPayLabelArr[i], 5);
+                            Grid.SetRow(fineLabelArr[i], 4);
 
-                            MonthOplGrid.Children.Add(masTbx[i]);
-                            MonthOplGrid.Children.Add(Monthlabel[i]);
-                            MonthOplGrid.Children.Add(payformonthLabel[i]);
-                            MonthOplGrid.Children.Add(payedlistLabel[i]);
-                            MonthOplGrid.Children.Add(skidkiforpayLabel[i]);
-                            MonthOplGrid.Children.Add(topayLabel[i]);
-                            MonthOplGrid.Children.Add(penyalabel[i]);
+                            window.MonthOplGrid.Children.Add(window.textBoxArrForDefreyment[i]);
+                            window.MonthOplGrid.Children.Add(monthLabelArr[i]);
+                            window.MonthOplGrid.Children.Add(payForMonthLabelArr[i]);
+                            window.MonthOplGrid.Children.Add(payedByListenerLabelAdd[i]);
+                            window.MonthOplGrid.Children.Add(discountLabelArr[i]);
+                            window.MonthOplGrid.Children.Add(toPayLabelArr[i]);
+                            window.MonthOplGrid.Children.Add(fineLabelArr[i]);
                             j++;
                         }
                     }
@@ -1311,98 +1298,97 @@ namespace WpfApp12
             catch { MessageBox.Show("Не удалось подклюситься к базе данных"); return; }
         }
 
-        //обновление грида типов расходов
-        public static void updateDataGriTypeRash(string connectionString, DataGrid grid)
+        //обновление грида типов расходов+ 
+        public static void updateTypeCostsDataGrid(ManagerWindow window)
         {
             try
             {
                 DataTable Table = new DataTable();
-                NpgsqlConnection con = new NpgsqlConnection(connectionString);
+                NpgsqlConnection con = new NpgsqlConnection(window.connectionString);
                 con.Open();
                 string sql = "SELECT * from typerash";
                 NpgsqlDataAdapter Adapter = new NpgsqlDataAdapter(sql, con);
                 Adapter.Fill(Table);
-                grid.ItemsSource = Table.DefaultView;
+                window.TypeRashDataGrid.ItemsSource = Table.DefaultView;
                 con.Close();
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
 
         }
 
-        //обновление грида типов доходов
-        public static void updateDataGriTypeDoh(string connectionString, DataGrid grid)
+        //обновление грида типов доходов+
+        public static void updateProfitTypeDataGri(ManagerWindow window)
         {
             try
             {
                 DataTable Table = new DataTable();
-                NpgsqlConnection con = new NpgsqlConnection(connectionString);
+                NpgsqlConnection con = new NpgsqlConnection(window.connectionString);
                 con.Open();
                 string sql = "SELECT * from typedohod";
                 NpgsqlDataAdapter Adapter = new NpgsqlDataAdapter(sql, con);
                 Adapter.Fill(Table);
-                grid.ItemsSource = Table.DefaultView;
+                window.TypeDohDataGrid.ItemsSource = Table.DefaultView;
                 con.Close();
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
 
         }
 
-        //обновление грида кабинетов
-        public static void updateDataGridСab(string connectionString, DataGrid grid)
+        //обновление грида кабинетов+
+        public static void updateCabinetDataGrid(ManagerWindow window)
         {
             try
             {
                 DataTable Table = new DataTable();
-                NpgsqlConnection con = new NpgsqlConnection(connectionString);
+                NpgsqlConnection con = new NpgsqlConnection(window.connectionString);
                 con.Open();
                 string sql = "SELECT * from cabinet";
                 NpgsqlDataAdapter Adapter = new NpgsqlDataAdapter(sql, con);
                 Adapter.Fill(Table);
-                grid.ItemsSource = Table.DefaultView;
+                window.cabDataGrid.ItemsSource = Table.DefaultView;
                 con.Close();
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
 
         }
 
-        //обновление DataGrid слушателей
-        public static void updateDataGridListener(string connectionString, string sql ,DataGrid grid)
+        //обновление DataGrid слушателей+
+        public static void updateListenerDataGrid(ManagerWindow window)
         {
-
             try
             {
                 DataTable table = new DataTable();
-                object[] sql_mass = new object[5];
+                object[] sqlArr = new object[5];
                 table.Columns.Add("listenerid", System.Type.GetType("System.Int32"));
                 table.Columns.Add("fio", System.Type.GetType("System.String"));
                 table.Columns.Add("phones", System.Type.GetType("System.String"));
                 table.Columns.Add("gr_lg", System.Type.GetType("System.String"));
                 table.Columns.Add("comment", System.Type.GetType("System.String"));
-                NpgsqlConnection con = new NpgsqlConnection(connectionString);
+                NpgsqlConnection con = new NpgsqlConnection(window.connectionString);
                 con.Open();
                 
-                NpgsqlCommand com = new NpgsqlCommand(sql,con);
+                NpgsqlCommand com = new NpgsqlCommand(window.filter.sql,con);
                 NpgsqlDataReader reader = com.ExecuteReader();
             if (reader.HasRows)
             {
                 int arrLeng = 0;
-                string[] grMas;
+                string[] groopArr;
 
                 while (reader.Read())
                 {
-                    sql_mass[0] = reader.GetInt32(0);
-                    sql_mass[1] = reader.GetString(1);
-                    sql_mass[2] = reader.GetString(2);
-                    sql_mass[4] = reader.GetString(3);
+                    sqlArr[0] = reader.GetInt32(0);
+                    sqlArr[1] = reader.GetString(1);
+                    sqlArr[2] = reader.GetString(2);
+                    sqlArr[4] = reader.GetString(3);
                     if (!reader.IsDBNull(reader.GetOrdinal("grid")))
                     {
                         arrLeng = reader.GetInt32(4);
-                        grMas = new string[arrLeng];
+                        groopArr = new string[arrLeng];
                         try
                         {
-                            NpgsqlConnection con2 = new NpgsqlConnection(connectionString);
+                            NpgsqlConnection con2 = new NpgsqlConnection(window.connectionString);
                             con2.Open();
-                            string sql2 = "select nazvanie from groups where ARRAY[grid] <@ (select grid from listeners where listenerid =" + sql_mass[0] + ") order by grid";
+                            string sql2 = "select nazvanie from groups where ARRAY[grid] <@ (select grid from listeners where listenerid =" + sqlArr[0] + ") order by grid";
                             NpgsqlCommand com2 = new NpgsqlCommand(sql2, con2);
                             NpgsqlDataReader reader2 = com2.ExecuteReader();
                             if (reader2.HasRows)
@@ -1410,7 +1396,7 @@ namespace WpfApp12
                                 int i = 0;
                                 while (reader2.Read())
                                 {
-                                    grMas[i] = reader2.GetString(0);
+                                    groopArr[i] = reader2.GetString(0);
                                     i++;
                                 }
                             }
@@ -1424,10 +1410,10 @@ namespace WpfApp12
                             sql3 += "lgt[" + (ii + 1) + "],";
                         }
                         sql3 = sql3.Substring(0, sql3.Length - 1);
-                        sql3 += " from listeners where listenerid =" + sql_mass[0];
+                        sql3 += " from listeners where listenerid =" + sqlArr[0];
                         try
                         {
-                            NpgsqlConnection con3 = new NpgsqlConnection(connectionString);
+                            NpgsqlConnection con3 = new NpgsqlConnection(window.connectionString);
                             con3.Open();
                             NpgsqlCommand com3 = new NpgsqlCommand(sql3, con3);
                             NpgsqlDataReader reader3 = com3.ExecuteReader();
@@ -1436,20 +1422,20 @@ namespace WpfApp12
                             {
                                 while (reader3.Read())
                                 {
-                                    for (int i = 0; i < arrLeng; i++) { srtGr_Lg += "Группа: " + grMas[i] + " Процент " + reader3.GetDouble(i) + " "; }
+                                    for (int i = 0; i < arrLeng; i++) { srtGr_Lg += "Группа: " + groopArr[i] + " Процент " + reader3.GetDouble(i) + " "; }
                                 }
 
-                                sql_mass[3] = srtGr_Lg;
+                                sqlArr[3] = srtGr_Lg;
                             }
                             con3.Close();
 
                         }
                         catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
                         }
-                        else sql_mass[3] = "нет";
+                        else sqlArr[3] = "нет";
                         DataRow row;
                         row = table.NewRow();
-                        row.ItemArray = sql_mass;
+                        row.ItemArray = sqlArr;
                         table.Rows.Add(row);
 
 
@@ -1458,19 +1444,20 @@ namespace WpfApp12
             }
                 
                 con.Close();
-                grid.ItemsSource = table.DefaultView;
+                window.listenerDataGrid.ItemsSource = table.DefaultView;
 
         }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
 }
 
-        //обновление грида расписания (по кабинетам)
-        public static void updateGridRaspС(string connectionString, Grid tG, int m, int n, Label[,] lbmas, DateTime dateMonday, DateTime dateSunday)
+        //обновление грида расписания (по кабинетам)+
+        public static void updateScheduleCabinetGrid(ManagerWindow window)
         {
-            Array.Clear(lbmas, 0, lbmas.Length);
-            tG.Children.Clear();
-            tG.RowDefinitions.Clear();
-            tG.ColumnDefinitions.Clear();
+            DateTime dateSunday = window.dateMonday.AddDays(6);
+            Array.Clear(window.labelArr, 0, window.labelArr.Length);
+            window.tGс.Children.Clear();
+            window.tGс.RowDefinitions.Clear();
+            window.tGс.ColumnDefinitions.Clear();
             Label[] day = new Label[7];
             for (int i = 0; i < 7; i++)
             {
@@ -1487,48 +1474,46 @@ namespace WpfApp12
             day[4].Content = "Пятница";
             day[5].Content = "Суббота";
             day[6].Content = "Воскресенье";
-            DateTime dm = dateMonday;
+            DateTime dm = window.dateMonday;
             for (int i = 0; i < 7; i++)
             {
                 day[i].Content += "\n" + dm.AddDays(i).ToShortDateString();
             }
 
 
-            for (int i = 0; i < n + 2; i++)
+            for (int i = 0; i < window.quanGroops + 2; i++)
             {
                 ColumnDefinition cmd1 = new ColumnDefinition();
                 cmd1.Width = new GridLength(100);
-                tG.ColumnDefinitions.Add(cmd1);
+                window.tGс.ColumnDefinitions.Add(cmd1);
             }
 
-            for (int i = 0; i < (m * 7) + 1; i++)
+            for (int i = 0; i < (window.quanLessonsInDay * 7) + 1; i++)
             {
                 RowDefinition cmd1 = new RowDefinition();
                 cmd1.Height = new GridLength(100);
-                tG.RowDefinitions.Add(cmd1);
+                window.tGс.RowDefinitions.Add(cmd1);
             }
-            for (int i = 0; i < (m * 7) + 1; i++)
+            for (int i = 0; i < (window.quanLessonsInDay * 7) + 1; i++)
             {
-                for (int j = 1; j < n + 2; j++)
+                for (int j = 1; j < window.quanGroops + 2; j++)
                 {
                     if (i == 0 && j == 1)
                     {
                         continue;
                     }
 
-                    lbmas[i, j] = new Label();
-                    lbmas[i, j].FontSize = 16;
-                    lbmas[i, j].VerticalContentAlignment = System.Windows.VerticalAlignment.Center;
-                    lbmas[i, j].HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center;
-                    lbmas[i, j].Name = "_" + i + "_" + j;
-                    lbmas[i, j].Content = "";
-                    Thickness thk = new Thickness(2);
-                    Brush brsh = Brushes.Black;
-                    lbmas[i, j].BorderThickness = thk;
-                    lbmas[i, j].BorderBrush = brsh;
-                    tG.Children.Add(lbmas[i, j]);
-                    Grid.SetRow(lbmas[i, j], i);
-                    Grid.SetColumn(lbmas[i, j], j);
+                    window.labelArr[i, j] = new Label();
+                    window.labelArr[i, j].FontSize = 16;
+                    window.labelArr[i, j].VerticalContentAlignment = System.Windows.VerticalAlignment.Center;
+                    window.labelArr[i, j].HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center;
+                    window.labelArr[i, j].Name = "_" + i + "_" + j;
+                    window.labelArr[i, j].Content = "";
+                    window.labelArr[i, j].BorderThickness = new Thickness(2);
+                    window.labelArr[i, j].BorderBrush = Brushes.Black;
+                    window.tGс.Children.Add(window.labelArr[i, j]);
+                    Grid.SetRow(window.labelArr[i, j], i);
+                    Grid.SetColumn(window.labelArr[i, j], j);
 
 
                 }
@@ -1536,13 +1521,11 @@ namespace WpfApp12
             }
             for (int i = 1; i <= 7; i++)
             {
-                tG.Children.Add(day[i - 1]);
-                Thickness thk = new Thickness(2);
-                Brush brsh = Brushes.Black;
-                day[i - 1].BorderThickness = thk;
-                day[i - 1].BorderBrush = brsh;
-                Grid.SetRowSpan(day[i - 1], m);
-                Grid.SetRow(day[i - 1], (i * m) - (m - 1));
+                window.tGс.Children.Add(day[i - 1]);
+                day[i - 1].BorderThickness = new Thickness(2);
+                day[i - 1].BorderBrush = Brushes.Black;
+                Grid.SetRowSpan(day[i - 1], window.quanLessonsInDay);
+                Grid.SetRow(day[i - 1], (i * window.quanLessonsInDay) - (window.quanLessonsInDay - 1));
                 Grid.SetColumn(day[i - 1], 0);
 
             }
@@ -1550,7 +1533,7 @@ namespace WpfApp12
             try
             {
 
-                NpgsqlConnection con = new NpgsqlConnection(connectionString);
+                NpgsqlConnection con = new NpgsqlConnection(window.connectionString);
                 con.Open();
                 string sql = "select * from lessons_time order by lesson_number";
                 NpgsqlCommand command = new NpgsqlCommand(sql, con);
@@ -1562,9 +1545,9 @@ namespace WpfApp12
                     {
                         int number = reader.GetInt32(1);
                         string s = "" + number + "\n" + reader.GetTimeSpan(2).ToString() + "\n" + reader.GetTimeSpan(3).ToString();
-                        for (int i = number; i <= m * 7; i += m)
+                        for (int i = number; i <= window.quanLessonsInDay * 7; i += window.quanLessonsInDay)
                         {
-                            lbmas[i, 1].Content = s;
+                            window.labelArr[i, 1].Content = s;
                         }
                     }
                 }
@@ -1577,7 +1560,7 @@ namespace WpfApp12
             try
             {
 
-                NpgsqlConnection con = new NpgsqlConnection(connectionString);
+                NpgsqlConnection con = new NpgsqlConnection(window.connectionString);
                 con.Open();
                 string sql = "select num,cabid from cabinet order by num";
                 NpgsqlCommand command = new NpgsqlCommand(sql, con);
@@ -1588,8 +1571,8 @@ namespace WpfApp12
                     while (reader.Read())
                     {
 
-                        lbmas[0, j].Content = reader.GetString(0);
-                        lbmas[0, j].Name = "name_" + reader.GetString(1);
+                        window.labelArr[0, j].Content = reader.GetString(0);
+                        window.labelArr[0, j].Name = "name_" + reader.GetString(1);
                         j++;
                     }
 
@@ -1603,9 +1586,9 @@ namespace WpfApp12
             try
             {
 
-                NpgsqlConnection con1 = new NpgsqlConnection(connectionString);
+                NpgsqlConnection con1 = new NpgsqlConnection(window.connectionString);
                 con1.Open();
-                string sql1 = "SELECT raspisanie.day,groups.nazvanie,lessons_time.lesson_number,subject.title,sotrudniki.fio,cabinet.num FROM raspisanie inner join groups using (grid) inner join lessons_time using (lesson_number) inner join subject using (subid) inner join prep using (prepid) inner join sotrudniki using(sotrid) inner join cabinet using(cabid) where date <= '" + dateSunday.Day + "-" + dateSunday.Month + "-" + dateSunday.Year + "' and date >= '" + dateMonday.Day + "-" + dateMonday.Month + "-" + dateMonday.Year + "' order by raspisanie.day,cabinet.num,lessons_time.lesson_number";
+                string sql1 = "SELECT raspisanie.day,groups.nazvanie,lessons_time.lesson_number,subject.title,sotrudniki.fio,cabinet.num FROM raspisanie inner join groups using (grid) inner join lessons_time using (lesson_number) inner join subject using (subid) inner join prep using (prepid) inner join sotrudniki using(sotrid) inner join cabinet using(cabid) where date <= '" + dateSunday.Day + "-" + dateSunday.Month + "-" + dateSunday.Year + "' and date >= '" + window.dateMonday.Day + "-" + window.dateMonday.Month + "-" + window.dateMonday.Year + "' order by raspisanie.day,cabinet.num,lessons_time.lesson_number";
 
 
                 NpgsqlCommand command1 = new NpgsqlCommand(sql1, con1);
@@ -1615,20 +1598,20 @@ namespace WpfApp12
 
                     while (reader1.Read())
                     {
-                        int dayWeek = reader1.GetInt32(0);
-                        string grTitle = reader1.GetString(1);
-                        int lesNum = reader1.GetInt32(2);
-                        string subTitle = reader1.GetString(3);
-                        string prepFio = reader1.GetString(4);
-                        string cab = reader1.GetString(5);
-                        int i = (((dayWeek * m) - m)) + lesNum;
+                        int dayOfWeek = reader1.GetInt32(0);
+                        string groopTitle = reader1.GetString(1);
+                        int lessonNumber = reader1.GetInt32(2);
+                        string subjectTitle = reader1.GetString(3);
+                        string teacherName = reader1.GetString(4);
+                        string cabinet = reader1.GetString(5);
+                        int i = (((dayOfWeek * window.quanLessonsInDay) - window.quanLessonsInDay)) + lessonNumber;
                         int jj = 0;
-                        for (int j = 2; j < n + 2; j++)
+                        for (int j = 2; j < window.quanGroops + 2; j++)
                         {
-                            if (lbmas[0, j].Content.ToString() == cab) { jj = j; break; }
+                            if (window.labelArr[0, j].Content.ToString() == cabinet) { jj = j; break; }
 
                         }
-                        lbmas[i, jj].Content = "" + subTitle + "\n" + prepFio + "\n" + grTitle;
+                        window.labelArr[i, jj].Content = "" + subjectTitle + "\n" + teacherName + "\n" + groopTitle;
                     }
 
                 }
@@ -1638,13 +1621,14 @@ namespace WpfApp12
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
         }
 
-        //обновление грида расписания (по преподавателям)
-        public static void updateGridRaspP(string connectionString, Grid tG, int m, int n, Label[,] lbmas, DateTime dateMonday, DateTime dateSunday)
+        //обновление грида расписания (по преподавателям)+
+        public static void updateTeacherScheduleGrid(ManagerWindow window)
         {
-            Array.Clear(lbmas, 0, lbmas.Length);
-            tG.Children.Clear();
-            tG.RowDefinitions.Clear();
-            tG.ColumnDefinitions.Clear();
+           DateTime dateSunday = window.dateMonday.AddDays(6);
+            Array.Clear(window.labelArr, 0, window.labelArr.Length);
+            window.tGp.Children.Clear();
+            window.tGp.RowDefinitions.Clear();
+            window.tGp.ColumnDefinitions.Clear();
             Label[] day = new Label[7];
             for (int i = 0; i < 7; i++)
             {
@@ -1661,47 +1645,45 @@ namespace WpfApp12
             day[4].Content = "Пятница";
             day[5].Content = "Суббота";
             day[6].Content = "Воскресенье";
-            DateTime dm = dateMonday;
+            DateTime dm = window.dateMonday;
             for (int i = 0; i < 7; i++)
             {
                 day[i].Content += "\n" + dm.AddDays(i).ToShortDateString();
             }
 
-            for (int i = 0; i < n + 2; i++)
+            for (int i = 0; i < window.quanGroops + 2; i++)
             {
                 ColumnDefinition cmd1 = new ColumnDefinition();
                 cmd1.Width = new GridLength(100);
-                tG.ColumnDefinitions.Add(cmd1);
+                window.tGp.ColumnDefinitions.Add(cmd1);
             }
 
-            for (int i = 0; i < (m * 7) + 1; i++)
+            for (int i = 0; i < (window.quanLessonsInDay * 7) + 1; i++)
             {
                 RowDefinition cmd1 = new RowDefinition();
                 cmd1.Height = new GridLength(100);
-                tG.RowDefinitions.Add(cmd1);
+                window.tGp.RowDefinitions.Add(cmd1);
             }
-            for (int i = 0; i < (m * 7) + 1; i++)
+            for (int i = 0; i < (window.quanLessonsInDay * 7) + 1; i++)
             {
-                for (int j = 1; j < n + 2; j++)
+                for (int j = 1; j < window.quanGroops + 2; j++)
                 {
                     if (i == 0 && j == 1)
                     {
                         continue;
                     }
 
-                    lbmas[i, j] = new Label();
-                    lbmas[i, j].FontSize = 16;
-                    lbmas[i, j].VerticalContentAlignment = System.Windows.VerticalAlignment.Center;
-                    lbmas[i, j].HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center;
-                    lbmas[i, j].Name = "_" + i + "_" + j;
-                    lbmas[i, j].Content = "";
-                    Thickness thk = new Thickness(2);
-                    Brush brsh = Brushes.Black;
-                    lbmas[i, j].BorderThickness = thk;
-                    lbmas[i, j].BorderBrush = brsh;
-                    tG.Children.Add(lbmas[i, j]);
-                    Grid.SetRow(lbmas[i, j], i);
-                    Grid.SetColumn(lbmas[i, j], j);
+                    window.labelArr[i, j] = new Label();
+                    window.labelArr[i, j].FontSize = 16;
+                    window.labelArr[i, j].VerticalContentAlignment = System.Windows.VerticalAlignment.Center;
+                    window.labelArr[i, j].HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center;
+                    window.labelArr[i, j].Name = "_" + i + "_" + j;
+                    window.labelArr[i, j].Content = "";
+                    window.labelArr[i, j].BorderThickness = new Thickness(2);
+                    window.labelArr[i, j].BorderBrush = Brushes.Black;
+                    window.tGp.Children.Add(window.labelArr[i, j]);
+                    Grid.SetRow(window.labelArr[i, j], i);
+                    Grid.SetColumn(window.labelArr[i, j], j);
 
 
                 }
@@ -1709,13 +1691,11 @@ namespace WpfApp12
             }
             for (int i = 1; i <= 7; i++)
             {
-                tG.Children.Add(day[i - 1]);
-                Thickness thk = new Thickness(2);
-                Brush brsh = Brushes.Black;
-                day[i - 1].BorderThickness = thk;
-                day[i - 1].BorderBrush = brsh;
-                Grid.SetRowSpan(day[i - 1], m);
-                Grid.SetRow(day[i - 1], (i * m) - (m - 1));
+              window.tGp.Children.Add(day[i - 1]);
+                day[i - 1].BorderThickness = new Thickness(2);
+                day[i - 1].BorderBrush = Brushes.Black;
+                Grid.SetRowSpan(day[i - 1], window.quanLessonsInDay);
+                Grid.SetRow(day[i - 1], (i * window.quanLessonsInDay) - (window.quanLessonsInDay - 1));
                 Grid.SetColumn(day[i - 1], 0);
 
             }
@@ -1723,7 +1703,7 @@ namespace WpfApp12
             try
             {
 
-                NpgsqlConnection con = new NpgsqlConnection(connectionString);
+                NpgsqlConnection con = new NpgsqlConnection(window.connectionString);
                 con.Open();
                 string sql = "select * from lessons_time order by lesson_number";
                 NpgsqlCommand command = new NpgsqlCommand(sql, con);
@@ -1735,9 +1715,9 @@ namespace WpfApp12
                     {
                         int number = reader.GetInt32(1);
                         string s = "" + number + "\n" + reader.GetTimeSpan(2).ToString() + "\n" + reader.GetTimeSpan(3).ToString();
-                        for (int i = number; i <= m * 7; i += m)
+                        for (int i = number; i <= window.quanLessonsInDay * 7; i += window.quanLessonsInDay)
                         {
-                            lbmas[i, 1].Content = s;
+                            window.labelArr[i, 1].Content = s;
                         }
                     }
                 }
@@ -1750,7 +1730,7 @@ namespace WpfApp12
             try
             {
 
-                NpgsqlConnection con = new NpgsqlConnection(connectionString);
+                NpgsqlConnection con = new NpgsqlConnection(window.connectionString);
                 con.Open();
                 string sql = "select sotrudniki.fio, prep.prepid from prep inner join sotrudniki using(sotrid) order by fio";
                 NpgsqlCommand command = new NpgsqlCommand(sql, con);
@@ -1761,8 +1741,8 @@ namespace WpfApp12
                     while (reader.Read())
                     {
 
-                        lbmas[0, j].Content = reader.GetString(0);
-                        lbmas[0, j].Name = "name_" + reader.GetString(1);
+                        window.labelArr[0, j].Content = reader.GetString(0);
+                        window.labelArr[0, j].Name = "name_" + reader.GetString(1);
                         j++;
                     }
 
@@ -1776,9 +1756,9 @@ namespace WpfApp12
             try
             {
 
-                NpgsqlConnection con1 = new NpgsqlConnection(connectionString);
+                NpgsqlConnection con1 = new NpgsqlConnection(window.connectionString);
                 con1.Open();
-                string sql1 = "SELECT raspisanie.day,groups.nazvanie,lessons_time.lesson_number,subject.title,sotrudniki.fio,cabinet.num FROM raspisanie inner join groups using (grid) inner join lessons_time using (lesson_number) inner join subject using (subid) inner join prep using (prepid) inner join sotrudniki using(sotrid) inner join cabinet using(cabid) where date <= '" + dateSunday.Day + "-" + dateSunday.Month + "-" + dateSunday.Year + "' and date >= '" + dateMonday.Day + "-" + dateMonday.Month + "-" + dateMonday.Year + "' order by raspisanie.day,sotrudniki.fio,lessons_time.lesson_number";
+                string sql1 = "SELECT raspisanie.day,groups.nazvanie,lessons_time.lesson_number,subject.title,sotrudniki.fio,cabinet.num FROM raspisanie inner join groups using (grid) inner join lessons_time using (lesson_number) inner join subject using (subid) inner join prep using (prepid) inner join sotrudniki using(sotrid) inner join cabinet using(cabid) where date <= '" + dateSunday.Day + "-" + dateSunday.Month + "-" + dateSunday.Year + "' and date >= '" + window.dateMonday.Day + "-" + window.dateMonday.Month + "-" + window.dateMonday.Year + "' order by raspisanie.day,sotrudniki.fio,lessons_time.lesson_number";
 
 
                 NpgsqlCommand command1 = new NpgsqlCommand(sql1, con1);
@@ -1788,20 +1768,20 @@ namespace WpfApp12
 
                     while (reader1.Read())
                     {
-                        int dayWeek = reader1.GetInt32(0);
-                        string grTitle = reader1.GetString(1);
-                        int lesNum = reader1.GetInt32(2);
-                        string subTitle = reader1.GetString(3);
-                        string prepFio = reader1.GetString(4);
-                        string cab = reader1.GetString(5);
-                        int i = (((dayWeek * m) - m)) + lesNum;
+                        int dayOfWeek = reader1.GetInt32(0);
+                        string groopTitle = reader1.GetString(1);
+                        int lessonNumber = reader1.GetInt32(2);
+                        string subjectTitle = reader1.GetString(3);
+                        string teacherName = reader1.GetString(4);
+                        string cabinet = reader1.GetString(5);
+                        int i = (((dayOfWeek * window.quanLessonsInDay) - window.quanLessonsInDay)) + lessonNumber;
                         int jj = 0;
-                        for (int j = 2; j < n + 2; j++)
+                        for (int j = 2; j < window.quanGroops + 2; j++)
                         {
-                            if (lbmas[0, j].Content.ToString() == prepFio) { jj = j; break; }
+                            if (window.labelArr[0, j].Content.ToString() == teacherName) { jj = j; break; }
 
                         }
-                        lbmas[i, jj].Content = "" + subTitle + "\n" + grTitle+"\n"+cab;
+                        window.labelArr[i, jj].Content = "" + subjectTitle + "\n" + groopTitle+"\n"+cabinet;
                     }
 
                 }
@@ -1810,14 +1790,14 @@ namespace WpfApp12
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
         }
-        //обновление грида расписания (по группам)
-
-        public static void updateGridRaspG(string connectionString, Grid tG, int m, int n, Label[,] lbmas, DateTime dateMonday, DateTime dateSunday)
+        //обновление грида расписания (по группам)+
+        public static void updateGroopScheduleGrid(ManagerWindow window)
         {
-            Array.Clear(lbmas, 0, lbmas.Length);
-            tG.Children.Clear();
-            tG.RowDefinitions.Clear();
-            tG.ColumnDefinitions.Clear();
+            DateTime dateSunday = window.dateMonday.AddDays(6);
+            Array.Clear(window.labelArr, 0, window.labelArr.Length);
+            window.tG.Children.Clear();
+            window.tG.RowDefinitions.Clear();
+            window.tG.ColumnDefinitions.Clear();
             Label[] day = new Label[7];
             for (int i = 0; i < 7; i++)
             {
@@ -1834,47 +1814,45 @@ namespace WpfApp12
             day[4].Content = "Пятница";
             day[5].Content = "Суббота";
             day[6].Content = "Воскресенье";
-            DateTime dm = dateMonday;
+            DateTime dm = window.dateMonday;
             for (int i = 0; i < 7; i++)
             {
                 day[i].Content += "\n"+dm.AddDays(i).ToShortDateString();
             }
 
-            for (int i = 0; i < n + 2; i++)
+            for (int i = 0; i < window.quanGroops + 2; i++)
             {
                 ColumnDefinition cmd1 = new ColumnDefinition();
                 cmd1.Width = new GridLength(100);
-                tG.ColumnDefinitions.Add(cmd1);
+                window.tG.ColumnDefinitions.Add(cmd1);
             }
 
-            for (int i = 0; i < (m * 7) + 1; i++)
+            for (int i = 0; i < (window.quanLessonsInDay * 7) + 1; i++)
             {
                 RowDefinition cmd1 = new RowDefinition();
                 cmd1.Height = new GridLength(100);
-                tG.RowDefinitions.Add(cmd1);
+                window.tG.RowDefinitions.Add(cmd1);
             }
-            for (int i = 0; i < (m * 7) + 1; i++)
+            for (int i = 0; i < (window.quanLessonsInDay * 7) + 1; i++)
             {
-                for (int j = 1; j < n + 2; j++)
+                for (int j = 1; j < window.quanGroops + 2; j++)
                 {
                     if (i == 0 && j == 1)
                     {
                         continue;
                     }
 
-                    lbmas[i, j] = new Label();
-                    lbmas[i, j].FontSize = 16;
-                    lbmas[i, j].VerticalContentAlignment = System.Windows.VerticalAlignment.Center;
-                    lbmas[i, j].HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center;
-                    lbmas[i, j].Name = "_" + i + "_" + j;
-                    lbmas[i, j].Content = "";
-                    Thickness thk = new Thickness(2);
-                    Brush brsh = Brushes.Black;
-                    lbmas[i, j].BorderThickness = thk;
-                    lbmas[i, j].BorderBrush = brsh;
-                    tG.Children.Add(lbmas[i, j]);
-                    Grid.SetRow(lbmas[i, j], i);
-                    Grid.SetColumn(lbmas[i, j], j);
+                    window.labelArr[i, j] = new Label();
+                    window.labelArr[i, j].FontSize = 16;
+                    window.labelArr[i, j].VerticalContentAlignment = System.Windows.VerticalAlignment.Center;
+                   window.labelArr[i, j].HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center;
+                    window.labelArr[i, j].Name = "_" + i + "_" + j;
+                    window.labelArr[i, j].Content = "";
+                    window.labelArr[i, j].BorderThickness = new Thickness(2);
+                    window.labelArr[i, j].BorderBrush = Brushes.Black;
+                    window.tG.Children.Add(window.labelArr[i, j]);
+                    Grid.SetRow(window.labelArr[i, j], i);
+                    Grid.SetColumn(window.labelArr[i, j], j);
 
 
                 }
@@ -1882,13 +1860,11 @@ namespace WpfApp12
             }
             for (int i = 1; i <= 7; i++)
             {
-                tG.Children.Add(day[i - 1]);
-                Thickness thk = new Thickness(2);
-                Brush brsh = Brushes.Black;
-                day[i - 1].BorderThickness = thk;
-                day[i - 1].BorderBrush = brsh;
-                Grid.SetRowSpan(day[i - 1], m);
-                Grid.SetRow(day[i - 1], (i * m) - (m - 1));
+                window.tG.Children.Add(day[i - 1]);
+                day[i - 1].BorderThickness = new Thickness(2);
+                day[i - 1].BorderBrush = Brushes.Black;
+                Grid.SetRowSpan(day[i - 1], window.quanLessonsInDay);
+                Grid.SetRow(day[i - 1], (i * window.quanLessonsInDay) - (window.quanLessonsInDay - 1));
                 Grid.SetColumn(day[i - 1], 0);
 
             }
@@ -1896,7 +1872,7 @@ namespace WpfApp12
             try
             {
 
-                NpgsqlConnection con = new NpgsqlConnection(connectionString);
+                NpgsqlConnection con = new NpgsqlConnection(window.connectionString);
                 con.Open();
                 string sql = "select * from lessons_time order by lesson_number";
                 NpgsqlCommand command = new NpgsqlCommand(sql, con);
@@ -1908,9 +1884,9 @@ namespace WpfApp12
                     {
                         int number = reader.GetInt32(1);
                         string s = "" + number + "\n" + reader.GetTimeSpan(2).ToString() + "\n" + reader.GetTimeSpan(3).ToString();
-                        for (int i = number; i <= m * 7; i += m)
+                        for (int i = number; i <= window.quanLessonsInDay * 7; i += window.quanLessonsInDay)
                         {
-                            lbmas[i, 1].Content = s;
+                            window.labelArr[i, 1].Content = s;
                         }
                     }
                 }
@@ -1923,7 +1899,7 @@ namespace WpfApp12
             try
             {
 
-                NpgsqlConnection con = new NpgsqlConnection(connectionString);
+                NpgsqlConnection con = new NpgsqlConnection(window.connectionString);
                 con.Open();
                 string sql = "select nazvanie,grid from groups order by nazvanie";
                 NpgsqlCommand command = new NpgsqlCommand(sql, con);
@@ -1934,8 +1910,8 @@ namespace WpfApp12
                     while (reader.Read())
                     {
 
-                        lbmas[0, j].Content = reader.GetString(0);
-                        lbmas[0, j].Name = "name_" + reader.GetString(1);
+                        window.labelArr[0, j].Content = reader.GetString(0);
+                        window.labelArr[0, j].Name = "name_" + reader.GetString(1);
                         j++;
                     }
 
@@ -1949,9 +1925,9 @@ namespace WpfApp12
             try
             {
 
-                NpgsqlConnection con1 = new NpgsqlConnection(connectionString);
+                NpgsqlConnection con1 = new NpgsqlConnection(window.connectionString);
                 con1.Open();
-                string sql1 = "SELECT raspisanie.day,groups.nazvanie,lessons_time.lesson_number,subject.title,sotrudniki.fio,cabinet.num FROM raspisanie inner join groups using (grid) inner join lessons_time using (lesson_number) inner join subject using (subid) inner join prep using (prepid) inner join sotrudniki using(sotrid) inner join cabinet using(cabid) where date <= '" + dateSunday.Day + "-" + dateSunday.Month + "-" + dateSunday.Year + "' and date >= '" + dateMonday.Day + "-" + dateMonday.Month + "-" + dateMonday.Year + "' order by raspisanie.day,groups.nazvanie,lessons_time.lesson_number";
+                string sql1 = "SELECT raspisanie.day,groups.nazvanie,lessons_time.lesson_number,subject.title,sotrudniki.fio,cabinet.num FROM raspisanie inner join groups using (grid) inner join lessons_time using (lesson_number) inner join subject using (subid) inner join prep using (prepid) inner join sotrudniki using(sotrid) inner join cabinet using(cabid) where date <= '" + dateSunday.Day + "-" + dateSunday.Month + "-" + dateSunday.Year + "' and date >= '" + window.dateMonday.Day + "-" + window.dateMonday.Month + "-" + window.dateMonday.Year + "' order by raspisanie.day,groups.nazvanie,lessons_time.lesson_number";
 
 
                 NpgsqlCommand command1 = new NpgsqlCommand(sql1, con1);
@@ -1961,20 +1937,20 @@ namespace WpfApp12
 
                     while (reader1.Read())
                     {
-                        int dayWeek = reader1.GetInt32(0);
-                        string grTitle = reader1.GetString(1);
-                        int lesNum = reader1.GetInt32(2);
-                        string subTitle = reader1.GetString(3);
-                        string prepFio = reader1.GetString(4);
-                        string cab= reader1.GetString(5);
-                        int i = (((dayWeek * m) - m)) + lesNum;
+                        int dayOfWeek = reader1.GetInt32(0);
+                        string groopTitle = reader1.GetString(1);
+                        int lessonNumber = reader1.GetInt32(2);
+                        string subjectTitle = reader1.GetString(3);
+                        string teacherName = reader1.GetString(4);
+                        string cabinet= reader1.GetString(5);
+                        int i = (((dayOfWeek * window.quanLessonsInDay) - window.quanLessonsInDay)) + lessonNumber;
                         int jj = 0;
-                        for (int j = 2; j < n + 2; j++)
+                        for (int j = 2; j < window.quanGroops + 2; j++)
                         {
-                            if (lbmas[0, j].Content.ToString() == grTitle) { jj = j; break; }
+                            if (window.labelArr[0, j].Content.ToString() == groopTitle) { jj = j; break; }
 
                         }
-                        lbmas[i, jj].Content = "" + subTitle + "\n" + prepFio+"\n"+cab;
+                        window.labelArr[i, jj].Content = "" + subjectTitle + "\n" + teacherName+"\n"+cabinet;
                     }
 
                 }
@@ -1984,8 +1960,8 @@ namespace WpfApp12
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
         }
 
-        //обновление грида курсов
-        public static void updateDataGridСourses(string connectionString, string sql ,DataGrid grid)
+        //обновление грида курсов+
+        public static void updateСoursesDataGrid(ManagerWindow window)
         {
                 DataTable table = new DataTable();
             table.Columns.Add("courseid", System.Type.GetType("System.Int32"));
@@ -1993,71 +1969,71 @@ namespace WpfApp12
             table.Columns.Add("subs", System.Type.GetType("System.String"));
             table.Columns.Add("comment", System.Type.GetType("System.String"));
             try { 
-            NpgsqlConnection con = new NpgsqlConnection(connectionString);
+            NpgsqlConnection con = new NpgsqlConnection(window.connectionString);
                 con.Open();
-                NpgsqlCommand command = new NpgsqlCommand(sql, con);
+                NpgsqlCommand command = new NpgsqlCommand(window.filter.sql, con);
                 NpgsqlDataReader reader = command.ExecuteReader();
 
                 if (reader.HasRows)
                 {
                     while (reader.Read())
                     {
-                        string predmets = "";
-                    object[] arr_sql= new object[4];
-                    arr_sql[0] = reader.GetInt32(0);
-                    arr_sql[1] = reader.GetString(1);
-                    arr_sql[3] = reader.GetString(2);
+                        string subjects = "";
+                    object[] sqlArr= new object[4];
+                    sqlArr[0] = reader.GetInt32(0);
+                    sqlArr[1] = reader.GetString(1);
+                    sqlArr[3] = reader.GetString(2);
                     try
                     {
-                        NpgsqlConnection con1 = new NpgsqlConnection(connectionString);
+                        NpgsqlConnection con1 = new NpgsqlConnection(window.connectionString);
                         con1.Open();
-                        string sql1 = "SELECT title FROM subject where(select courses.subs from courses where courseid = "+ arr_sql[0] + " )  @> ARRAY[subid]";
+                        string sql1 = "SELECT title FROM subject where(select courses.subs from courses where courseid = "+ sqlArr[0] + " )  @> ARRAY[subid]";
                         NpgsqlCommand command1 = new NpgsqlCommand(sql1, con1);
                         NpgsqlDataReader reader1 = command1.ExecuteReader();
                         if (reader1.HasRows)
                         {
                             while (reader1.Read())
                             {
-                                predmets += reader1.GetString(0)+", ";
+                                subjects += reader1.GetString(0)+", ";
                             }
                         }
                             con1.Close();
                     }
                     catch {MessageBox.Show("Не удалось подключиться к базе даных"); return; }
-                        arr_sql[2] = predmets.Substring(0,predmets.Length-2);
+                        sqlArr[2] = subjects.Substring(0,subjects.Length-2);
                     DataRow row;
                     row = table.NewRow();
-                    row.ItemArray = arr_sql;
+                    row.ItemArray = sqlArr;
                     table.Rows.Add(row);
                 }
                 }
-            grid.ItemsSource = table.DefaultView;
+                window.coursDataGrid.ItemsSource = table.DefaultView;
             con.Close();
             }
             catch { MessageBox.Show("Не удалось подключиться к базе даных"); return; }
 
         }
 
-        //обновление грида предметов
-        public static void updateDataGridSubjects(string connectionString ,DataGrid grid)
+        //обновление грида предметов+
+        public static void updateSubjectDataGrid(ManagerWindow window)
         {
            
             try
             {
                 DataTable Table = new DataTable();
-                NpgsqlConnection con = new NpgsqlConnection(connectionString);
+                NpgsqlConnection con = new NpgsqlConnection(window.connectionString);
                 con.Open();
                 string sql = "select * from subject";
                 NpgsqlDataAdapter Adapter = new NpgsqlDataAdapter(sql, con);
                 Adapter.Fill(Table);
-                grid.ItemsSource = Table.DefaultView;
+                window.subsDataGrid.ItemsSource = Table.DefaultView;
                 con.Close();
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); }
         }
 
-        //обновление грида пользователей
-        public static void updateDataGridUsers(string connectionString, string sql ,DataGrid grid)
+        //обновление грида пользователей+
+        public static void updateUsersDataGrid(AdminWindow window)
         {
 
             DataTable table = new DataTable();
@@ -2070,41 +2046,41 @@ namespace WpfApp12
             table.Columns.Add("director", System.Type.GetType("System.String"));
             try
             {
-                object[] arr_sql = new object[7];
+                object[] sqlArr = new object[7];
 
-                NpgsqlConnection con = new NpgsqlConnection(connectionString);
+                NpgsqlConnection con = new NpgsqlConnection(window.connectionString);
           
                 con.Open();
-                NpgsqlCommand com = new NpgsqlCommand(sql, con);
+                NpgsqlCommand com = new NpgsqlCommand(window.filter.sql, con);
                 NpgsqlDataReader reader = com.ExecuteReader();
                 if (reader.HasRows)
                 {
 
                     while (reader.Read())
                     {
-                        arr_sql[0] = reader.GetInt32(6);
-                        arr_sql[1] = reader.GetString(0);
-                        arr_sql[2] = reader.GetString(1);
-                        arr_sql[3] = reader.GetString(2);
-                        if (reader.GetInt32(3) == 1) arr_sql[4] = "Да"; else arr_sql[4] = "Нет";
-                        if (reader.GetInt32(4) == 1) arr_sql[5] = "Да"; else arr_sql[5] = "Нет";
-                        if (reader.GetInt32(5) == 1) arr_sql[6] = "Да"; else arr_sql[6] = "Нет";
+                        sqlArr[0] = reader.GetInt32(6);
+                        sqlArr[1] = reader.GetString(0);
+                        sqlArr[2] = reader.GetString(1);
+                        sqlArr[3] = reader.GetString(2);
+                        if (reader.GetInt32(3) == 1) sqlArr[4] = "Да"; else sqlArr[4] = "Нет";
+                        if (reader.GetInt32(4) == 1) sqlArr[5] = "Да"; else sqlArr[5] = "Нет";
+                        if (reader.GetInt32(5) == 1) sqlArr[6] = "Да"; else sqlArr[6] = "Нет";
                         DataRow row;
                         row = table.NewRow();
-                        row.ItemArray = arr_sql;
+                        row.ItemArray = sqlArr;
                         table.Rows.Add(row);
                     }
 
 
                 }
-                grid.ItemsSource = table.DefaultView;
+                window.usersDGrid.ItemsSource = table.DefaultView;
                 con.Close();
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); }
         }
 
-        //обновление DataGrid групп
-        public static void updateDataGridGroups(string connectionString, string sql ,DataGrid grid)
+        //обновление DataGrid групп+
+        public static void updateGroopsDataGrid(ManagerWindow window)
         {
             try
             {
@@ -2116,19 +2092,19 @@ namespace WpfApp12
                 table.Columns.Add("date_start", System.Type.GetType("System.DateTime"));
                 table.Columns.Add("date_end", System.Type.GetType("System.DateTime"));
                 table.Columns.Add("comment", System.Type.GetType("System.String"));
-                object[] arr_sql = new object[7];
-                NpgsqlConnection con = new NpgsqlConnection(connectionString);
+                object[] sqlArr = new object[7];
+                NpgsqlConnection con = new NpgsqlConnection(window.connectionString);
                 con.Open();
-                NpgsqlCommand com = new NpgsqlCommand(sql, con);
+                NpgsqlCommand com = new NpgsqlCommand(window.filter.sql, con);
                 NpgsqlDataReader reader = com.ExecuteReader();
                 if (reader.HasRows)
                 {
                     while (reader.Read())
                     {
-                        arr_sql[0] = reader.GetInt32(0);
-                        arr_sql[1] = reader.GetString(1);
-                        arr_sql[2] = reader.GetString(2);
-                        arr_sql[6] = reader.GetString(3);
+                        sqlArr[0] = reader.GetInt32(0);
+                        sqlArr[1] = reader.GetString(1);
+                        sqlArr[2] = reader.GetString(2);
+                        sqlArr[6] = reader.GetString(3);
                     double sum = 0;
                     sum = reader.GetDouble(4);
                     sum += reader.GetDouble(5);
@@ -2142,83 +2118,83 @@ namespace WpfApp12
                     sum += reader.GetDouble(13);
                     sum += reader.GetDouble(14);
                     sum += reader.GetDouble(15);
-                    arr_sql[3] = sum;
+                    sqlArr[3] = sum;
 
-                        arr_sql[4] = reader.GetDateTime(16);
-                        arr_sql[5] = reader.GetDateTime(17);
+                        sqlArr[4] = reader.GetDateTime(16);
+                        sqlArr[5] = reader.GetDateTime(17);
                         DataRow row;
                         row = table.NewRow();
-                        row.ItemArray = arr_sql;
+                        row.ItemArray = sqlArr;
                         table.Rows.Add(row);
                     }
                 
                 }
-                grid.ItemsSource = table.DefaultView;
+                window.groupsDataGrid.ItemsSource = table.DefaultView;
                 con.Close();
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); }
         }
 
-        //обновление DataGrid звонков
-        public static void updateDataGridZvonki(string connectionString, DataGrid grid)
+        //обновление DataGrid времени занятий+
+        public static void updateTimeScheduleDataGrid(ManagerWindow window)
         {
             try
             {
                 DataTable Table = new DataTable();
-                NpgsqlConnection con = new NpgsqlConnection(connectionString);
+                NpgsqlConnection con = new NpgsqlConnection(window.connectionString);
                 con.Open();
                 string sql = "SELECT * FROM lessons_time order by lesson_number";
                 NpgsqlDataAdapter Adapter = new NpgsqlDataAdapter(sql, con);
                 Adapter.Fill(Table);
-                grid.ItemsSource = Table.DefaultView;
+                window.zvonkiDataGrid.ItemsSource = Table.DefaultView;
                 con.Close();
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); }
         }
-        //обновление DataGrid преподавателей
-        public static void updateDataGridPrep(string connectionString, string sql ,DataGrid grid)
+        //обновление DataGrid преподавателей+
+        public static void updateTeachersDataGrid(ManagerWindow window)
         {
             try
             {
                 DataTable Table = new DataTable();
-                NpgsqlConnection con = new NpgsqlConnection(connectionString);
+                NpgsqlConnection con = new NpgsqlConnection(window.connectionString);
                 con.Open();
-                NpgsqlDataAdapter Adapter = new NpgsqlDataAdapter(sql, con);
+                NpgsqlDataAdapter Adapter = new NpgsqlDataAdapter(window.filter.sql, con);
                 Adapter.Fill(Table);
-                grid.ItemsSource = Table.DefaultView;
+                window.prepDataGrid.ItemsSource = Table.DefaultView;
                 con.Close();
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); }
         }
-        //обновление DataGrid сотрудников
-        public static void updateDataGridSotr(string connectionString, string sql ,DataGrid grid)
+        //обновление DataGrid сотрудников+
+        public static void updateEmploeesDataGrid(ManagerWindow window)
         {
             try
             {
                 DataTable Table = new DataTable();
-                NpgsqlConnection con = new NpgsqlConnection(connectionString);
+                NpgsqlConnection con = new NpgsqlConnection(window.connectionString);
                 con.Open();
              
-                NpgsqlDataAdapter Adapter = new NpgsqlDataAdapter(sql, con);
+                NpgsqlDataAdapter Adapter = new NpgsqlDataAdapter(window.filter.sql, con);
                 Adapter.Fill(Table);
-                grid.ItemsSource = Table.DefaultView;
+                window.allSotrDataGrid.ItemsSource = Table.DefaultView;
                 con.Close();
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); }
         }
 
-        //обновление DataGrid категорий
-        public static void updateDataGridKateg(string connectionString, DataGrid grid)
+        //обновление DataGrid категорий+
+        public static void updateCategoriesDataGrid(ManagerWindow window)
         {
             try
             {
                 DataTable Table = new DataTable();
-                NpgsqlConnection con = new NpgsqlConnection(connectionString);
+                NpgsqlConnection con = new NpgsqlConnection(window.connectionString);
                 con.Open();
                 string sql = "SELECT * FROM kategorii";
                 NpgsqlDataAdapter Adapter = new NpgsqlDataAdapter(sql, con);
                 Adapter.Fill(Table);
-                grid.ItemsSource = Table.DefaultView;
+                window.kategDataGrid.ItemsSource = Table.DefaultView;
                 con.Close();
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); }

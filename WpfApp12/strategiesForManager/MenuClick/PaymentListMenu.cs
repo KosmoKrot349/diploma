@@ -32,10 +32,10 @@ namespace WpfApp12.strategiesForManager.MenuClick
 
             ColumnDefinition cmd = new ColumnDefinition();
             cmd.Width = new GridLength(200);
-            Grid gr = new Grid();
-            Grid.SetColumn(gr, 0);
+            Grid grid = new Grid();
+            Grid.SetColumn(grid, 0);
             window.ZPOtchetVivodGrid.ColumnDefinitions.Add(cmd);
-            window.ZPOtchetVivodGrid.Children.Add(gr);
+            window.ZPOtchetVivodGrid.Children.Add(grid);
 
             try
             {
@@ -50,9 +50,9 @@ namespace WpfApp12.strategiesForManager.MenuClick
                     {
                         for (int i = 0; i < reader.GetInt32(0) + 3; i++)
                         {
-                            RowDefinition cmdGr = new RowDefinition();
-                            cmdGr.Height = new GridLength(50);
-                            gr.RowDefinitions.Add(cmdGr);
+                            RowDefinition rowDefinition = new RowDefinition();
+                            rowDefinition.Height = new GridLength(50);
+                            grid.RowDefinitions.Add(rowDefinition);
                         }
                     }
 
@@ -62,29 +62,29 @@ namespace WpfApp12.strategiesForManager.MenuClick
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
 
-            Label mesLb = new Label();
-            mesLb.Content = "Месяц";
-            mesLb.BorderBrush = Brushes.Black;
-            mesLb.BorderThickness = new Thickness(2);
+            Label monthLabel = new Label();
+            monthLabel.Content = "Месяц";
+            monthLabel.BorderBrush = Brushes.Black;
+            monthLabel.BorderThickness = new Thickness(2);
 
-            Label zpLb = new Label();
-            zpLb.Content = "ЗП";
-            zpLb.BorderBrush = Brushes.Black;
-            zpLb.BorderThickness = new Thickness(2);
+            Label salaryLabel = new Label();
+            salaryLabel.Content = "ЗП";
+            salaryLabel.BorderBrush = Brushes.Black;
+            salaryLabel.BorderThickness = new Thickness(2);
 
-            Label itogLb = new Label();
-            itogLb.Content = "Итого";
-            itogLb.BorderBrush = Brushes.Black;
-            itogLb.BorderThickness = new Thickness(2);
+            Label totalLabel = new Label();
+            totalLabel.Content = "Итого";
+            totalLabel.BorderBrush = Brushes.Black;
+            totalLabel.BorderThickness = new Thickness(2);
 
-            Grid.SetRow(mesLb, 0);
-            Grid.SetRow(zpLb, 1);
-            Grid.SetRow(itogLb, gr.RowDefinitions.Count - 1);
+            Grid.SetRow(monthLabel, 0);
+            Grid.SetRow(salaryLabel, 1);
+            Grid.SetRow(totalLabel, grid.RowDefinitions.Count - 1);
 
-            gr.Children.Add(mesLb); gr.Children.Add(zpLb); gr.Children.Add(itogLb);
+            grid.Children.Add(monthLabel); grid.Children.Add(salaryLabel); grid.Children.Add(totalLabel);
 
             //заполнение первого грида
-            ArrayList sotrList = new ArrayList();
+            ArrayList emploeesList = new ArrayList();
             try
             {
                 NpgsqlConnection con = new NpgsqlConnection(window.connectionString);
@@ -97,13 +97,13 @@ namespace WpfApp12.strategiesForManager.MenuClick
                     int i = 2;
                     while (reader.Read())
                     {
-                        Label sotrLb = new Label();
-                        sotrLb.Content = reader.GetString(0);
-                        sotrLb.BorderBrush = Brushes.Black;
-                        sotrLb.BorderThickness = new Thickness(2);
-                        Grid.SetRow(sotrLb, i);
-                        gr.Children.Add(sotrLb);
-                        sotrList.Add(reader.GetInt32(1));
+                        Label employeesLabel = new Label();
+                        employeesLabel.Content = reader.GetString(0);
+                        employeesLabel.BorderBrush = Brushes.Black;
+                        employeesLabel.BorderThickness = new Thickness(2);
+                        Grid.SetRow(employeesLabel, i);
+                        grid.Children.Add(employeesLabel);
+                        emploeesList.Add(reader.GetInt32(1));
                         i++;
                     }
 
@@ -153,7 +153,7 @@ namespace WpfApp12.strategiesForManager.MenuClick
                     ColumnDefinition cmdd2 = new ColumnDefinition();
                     monthGrid.ColumnDefinitions.Add(cmdd2);
                 }
-                DataGridUpdater.updateGridSpisciVyplat(window.connectionString, DateTimeAxis.ToDateTime(Convert.ToDouble(dateList[i])), sotrList, monthGrid);
+                DataGridUpdater.updatePaymentListGrid(window.connectionString, DateTimeAxis.ToDateTime(Convert.ToDouble(dateList[i])), emploeesList, monthGrid);
                 Grid.SetColumn(monthGrid, i + 1);
                 window.ZPOtchetVivodGrid.Children.Add(monthGrid);
             }

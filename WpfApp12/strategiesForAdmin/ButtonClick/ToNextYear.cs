@@ -36,38 +36,38 @@ namespace WpfApp12.strategiesForAdmin
 
                 }
                 StreamReader StreamReader = new StreamReader(@"crDump.bat");
-                ArrayList arLs = new ArrayList();
+                ArrayList ListFromBatFile = new ArrayList();
                 while (!StreamReader.EndOfStream)
                 {
-                    arLs.Add(StreamReader.ReadLine());
+                    ListFromBatFile.Add(StreamReader.ReadLine());
                 }
-                object[] batStrMas = arLs.ToArray();
+                object[] stringArrFromBatFile = ListFromBatFile.ToArray();
                 StreamReader.Close();
                 StreamReader StreamReader2 = new StreamReader(@"setting.txt");
-                ArrayList arLs2 = new ArrayList();
+                ArrayList ListFromSettingsFile = new ArrayList();
                 while (!StreamReader2.EndOfStream)
                 {
-                    arLs2.Add(StreamReader2.ReadLine());
+                    ListFromSettingsFile.Add(StreamReader2.ReadLine());
                 }
                 StreamReader2.Close();
-                object[] batStrMas2 = arLs2.ToArray();
+                object[] StringArrFromSettingsFile = ListFromSettingsFile.ToArray();
 
-                string batLastStr = "pg_dump -d postgresql://postgres:" + batStrMas2[1].ToString().Split(':')[1] + "@" + batStrMas2[0].ToString().Split(':')[1] + ":" + batStrMas2[2].ToString().Split(':')[1] + "/db > ";
+                string batLastStr = "pg_dump -d postgresql://postgres:" + StringArrFromSettingsFile[1].ToString().Split(':')[1] + "@" + StringArrFromSettingsFile[0].ToString().Split(':')[1] + ":" + StringArrFromSettingsFile[2].ToString().Split(':')[1] + "/db > ";
                 if (windowObj.bckpNameNextYear.Text == "")
                 {
-                    DateTime a = DateTime.Now;
-                    batLastStr += windowObj.bckpPytNextYear.Text + "" + a.Day + "_" + a.Month + "_" + a.Year + "_" + a.Hour + "_" + a.Minute + "_" + a.Second + "_stary_god.sql";
+                    DateTime dateNow = DateTime.Now;
+                    batLastStr += windowObj.bckpPytNextYear.Text + "" + dateNow.Day + "_" + dateNow.Month + "_" + dateNow.Year + "_" + dateNow.Hour + "_" + dateNow.Minute + "_" + dateNow.Second + "_stary_god.sql";
                 }
                 else
                 {
                     batLastStr += windowObj.bckpPytNextYear.Text + windowObj.bckpName.Text + "_stary_god.sql";
 
                 }
-                batStrMas[2] = batLastStr;
+                stringArrFromBatFile[2] = batLastStr;
                 StreamWriter StreamWriter = new StreamWriter(@"crDump.bat");
-                for (int i = 0; i < batStrMas.Length; i++)
+                for (int i = 0; i < stringArrFromBatFile.Length; i++)
                 {
-                    StreamWriter.WriteLine(batStrMas[i]);
+                    StreamWriter.WriteLine(stringArrFromBatFile[i]);
                 }
 
                 StreamWriter.Close();
@@ -138,14 +138,14 @@ namespace WpfApp12.strategiesForAdmin
                     {
 
 
-                        int listenerid = reader.GetInt32(0);
-                        int grid = reader.GetInt32(1);
+                        int listenerID = reader.GetInt32(0);
+                        int groopID = reader.GetInt32(1);
                         //полчуение массива скидок и групп слушателя из удаляемой записи
                         try
                         {
                             NpgsqlConnection con2 = new NpgsqlConnection(windowObj.connectionString);
                             con2.Open();
-                            string sql2 = "select array_to_string(grid,'_'),array_to_string(lgt,'_') from listeners where listenerid=" + listenerid;
+                            string sql2 = "select array_to_string(grid,'_'),array_to_string(lgt,'_') from listeners where listenerid=" + listenerID;
 
                             NpgsqlCommand com2 = new NpgsqlCommand(sql2, con2);
                             NpgsqlDataReader reader2 = com2.ExecuteReader();
@@ -153,38 +153,38 @@ namespace WpfApp12.strategiesForAdmin
                             {
                                 while (reader2.Read())
                                 {
-                                    string[] gridstr = reader2.GetString(0).Split('_');
-                                    string[] lgtstr = reader2.GetString(1).Split('_');
+                                    string[] GroopIDStrArr = reader2.GetString(0).Split('_');
+                                    string[] GroopsOfListenerStringArr = reader2.GetString(1).Split('_');
 
-                                    string gridstr2 = "'{";
-                                    string lgtstr2 = "'{";
+                                    string newArrGroopID = "'{";
+                                    string newArrGroopsOFListeners = "'{";
                                     //запись массивов без удаляемого елемента
-                                    for (int i = 0; i < gridstr.Length; i++)
+                                    for (int i = 0; i < GroopIDStrArr.Length; i++)
                                     {
 
-                                        if (Convert.ToInt32(gridstr[i]) != grid)
+                                        if (Convert.ToInt32(GroopIDStrArr[i]) != groopID)
                                         {
 
-                                            gridstr2 += gridstr[i] + ",";
-                                            lgtstr2 += lgtstr[i] + ",";
+                                            newArrGroopID += GroopIDStrArr[i] + ",";
+                                            newArrGroopsOFListeners += GroopsOfListenerStringArr[i] + ",";
                                         }
 
                                     }
-                                    if (gridstr2.Length != 2)
+                                    if (newArrGroopID.Length != 2)
                                     {
-                                        gridstr2 = gridstr2.Substring(0, gridstr2.Length - 1) + "}'";
-                                        lgtstr2 = lgtstr2.Substring(0, lgtstr2.Length - 1) + "}'";
+                                        newArrGroopID = newArrGroopID.Substring(0, newArrGroopID.Length - 1) + "}'";
+                                        newArrGroopsOFListeners = newArrGroopsOFListeners.Substring(0, newArrGroopsOFListeners.Length - 1) + "}'";
                                     }
                                     else
                                     {
-                                        gridstr2 += "}'";
-                                        lgtstr2 += "}'";
+                                        newArrGroopID += "}'";
+                                        newArrGroopsOFListeners += "}'";
                                     }
                                     try
                                     {
                                         NpgsqlConnection con3 = new NpgsqlConnection(windowObj.connectionString);
                                         con3.Open();
-                                        string sql3 = "UPDATE listeners SET  grid=" + gridstr2 + ", lgt=" + lgtstr2 + " WHERE listenerid = " + listenerid;
+                                        string sql3 = "UPDATE listeners SET  grid=" + newArrGroopID + ", lgt=" + newArrGroopsOFListeners + " WHERE listenerid = " + listenerID;
                                         NpgsqlCommand com3 = new NpgsqlCommand(sql3, con3);
                                         com3.ExecuteReader();
                                         con3.Close();
@@ -218,7 +218,7 @@ namespace WpfApp12.strategiesForAdmin
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
 
-            ArrayList list = new ArrayList();
+            ArrayList ListenersAccrualIDlist = new ArrayList();
             //получение id остановленных записей в которых всё оплачено 
             try
             {
@@ -229,83 +229,83 @@ namespace WpfApp12.strategiesForAdmin
                 NpgsqlDataReader reader = com.ExecuteReader();
                 if (reader.HasRows)
                 {
-                    string[] topay = reader.GetString(0).Split('_');
-                    DateTime dateStop = reader.GetDateTime(1);
-                    DateTime DatehStartLernG = reader.GetDateTime(2);
-                    DateTime DatehEndLernG = reader.GetDateTime(3);
-                    int listnuchid = reader.GetInt32(4);
+                    string[] toPayArr = reader.GetString(0).Split('_');
+                    DateTime dateStopLearn = reader.GetDateTime(1);
+                    DateTime dateStartLearnGroop = reader.GetDateTime(2);
+                    DateTime dateEndLearnGroop = reader.GetDateTime(3);
+                    int ListenersAccrualID = reader.GetInt32(4);
 
                     while (reader.Read())
                     {
 
                         //начало перерасчёта пени
-                        bool oplacheno = true;
-                        bool prosmotrenno = false;
-                        if (DatehStartLernG.Month > DatehEndLernG.Month)
+                        bool payed = true;
+                        bool checkedBool = false;
+                        if (dateStartLearnGroop.Month > dateEndLearnGroop.Month)
                         {
-                            if (DatehStartLernG.Month < dateStop.Month && DatehStartLernG.Year <= dateStop.Year && prosmotrenno == false)
+                            if (dateStartLearnGroop.Month < dateStopLearn.Month && dateStartLearnGroop.Year <= dateStopLearn.Year && checkedBool == false)
                             {
-                                for (int i = DatehStartLernG.Month - 1; i < dateStop.Month - 1; i++)
+                                for (int i = dateStartLearnGroop.Month - 1; i < dateStopLearn.Month - 1; i++)
                                 {
-                                    if (topay[i] != "0") { oplacheno = false; break; }
+                                    if (toPayArr[i] != "0") { payed = false; break; }
 
                                 }
-                                prosmotrenno = true;
+                                checkedBool = true;
                             }
 
 
-                            if (DatehEndLernG.Month >= dateStop.Month && DatehEndLernG.Year <= dateStop.Year && prosmotrenno == false)
+                            if (dateEndLearnGroop.Month >= dateStopLearn.Month && dateEndLearnGroop.Year <= dateStopLearn.Year && checkedBool == false)
                             {
-                                for (int i = DatehStartLernG.Month - 1; i < 12; i++)
+                                for (int i = dateStartLearnGroop.Month - 1; i < 12; i++)
                                 {
 
-                                    if (topay[i] != "0") { oplacheno = false; break; }
+                                    if (toPayArr[i] != "0") { payed = false; break; }
                                 }
-                                for (int i = 0; i < dateStop.Month - 1; i++)
+                                for (int i = 0; i < dateStopLearn.Month - 1; i++)
                                 {
-                                    if (topay[i] != "0") { oplacheno = false; break; }
+                                    if (toPayArr[i] != "0") { payed = false; break; }
                                 }
-                                prosmotrenno = true;
+                                checkedBool = true;
                             }
 
-                            if (DatehEndLernG.Month < dateStop.Month && DatehStartLernG.Month > dateStop.Month && DatehEndLernG.Year <= dateStop.Year && prosmotrenno == false)
+                            if (dateEndLearnGroop.Month < dateStopLearn.Month && dateStartLearnGroop.Month > dateStopLearn.Month && dateEndLearnGroop.Year <= dateStopLearn.Year && checkedBool == false)
                             {
-                                for (int i = DatehStartLernG.Month - 1; i < 12; i++)
+                                for (int i = dateStartLearnGroop.Month - 1; i < 12; i++)
                                 {
-                                    if (topay[i] != "0") { oplacheno = false; break; }
+                                    if (toPayArr[i] != "0") { payed = false; break; }
                                 }
-                                for (int i = 0; i <= DatehEndLernG.Month - 1; i++)
+                                for (int i = 0; i <= dateEndLearnGroop.Month - 1; i++)
                                 {
-                                    if (topay[i] != "0") { oplacheno = false; break; }
+                                    if (toPayArr[i] != "0") { payed = false; break; }
                                 }
-                                prosmotrenno = true;
+                                checkedBool = true;
                             }
                         }
 
-                        if (DatehStartLernG.Month < DatehEndLernG.Month && DatehStartLernG.Year <= dateStop.Year && DatehEndLernG.Year <= dateStop.Year && prosmotrenno == false)
+                        if (dateStartLearnGroop.Month < dateEndLearnGroop.Month && dateStartLearnGroop.Year <= dateStopLearn.Year && dateEndLearnGroop.Year <= dateStopLearn.Year && checkedBool == false)
                         {
-                            for (int i = DatehStartLernG.Month - 1; i < dateStop.Month - 1; i++)
+                            for (int i = dateStartLearnGroop.Month - 1; i < dateStopLearn.Month - 1; i++)
                             {
-                                if (topay[i] != "0") { oplacheno = false; break; }
+                                if (toPayArr[i] != "0") { payed = false; break; }
                             }
-                            prosmotrenno = true;
+                            checkedBool = true;
                         }
 
-                        if (DatehStartLernG.Month == DatehEndLernG.Month)
+                        if (dateStartLearnGroop.Month == dateEndLearnGroop.Month)
                         {
-                            if (DatehStartLernG.Year == DatehEndLernG.Year && DatehStartLernG.Year <= dateStop.Year && prosmotrenno == false)
+                            if (dateStartLearnGroop.Year == dateEndLearnGroop.Year && dateStartLearnGroop.Year <= dateStopLearn.Year && checkedBool == false)
                             {
-                                for (int i = DatehStartLernG.Month - 1; i < dateStop.Month - 1; i++)
+                                for (int i = dateStartLearnGroop.Month - 1; i < dateStopLearn.Month - 1; i++)
                                 {
-                                    if (topay[i] != "0") { oplacheno = false; break; }
+                                    if (toPayArr[i] != "0") { payed = false; break; }
                                 }
-                                prosmotrenno = true;
+                                checkedBool = true;
                             }
                         }
 
-                        if (oplacheno == true && prosmotrenno == true)
+                        if (payed == true && checkedBool == true)
                         {
-                            list.Add(listnuchid);
+                            ListenersAccrualIDlist.Add(ListenersAccrualID);
                         }
 
 
@@ -320,67 +320,65 @@ namespace WpfApp12.strategiesForAdmin
 
 
             //очитска остановленных записей об оплате где выплачена вся сумма
-            object[] listArr = list.ToArray();
-            for (int i = 0; i < listArr.Length; i++)
+            object[] ListenersAccrualIDArr = ListenersAccrualIDlist.ToArray();
+            for (int i = 0; i < ListenersAccrualIDArr.Length; i++)
             {
 
                 try
                 {
                     NpgsqlConnection con = new NpgsqlConnection(windowObj.connectionString);
                     con.Open();
-                    string sql = "select listenerid,grid from listnuch where listnuchid=" + listArr[i];
+                    string sql = "select listenerid,grid from listnuch where listnuchid=" + ListenersAccrualIDArr[i];
                     NpgsqlCommand com = new NpgsqlCommand(sql, con);
                     NpgsqlDataReader reader = com.ExecuteReader();
                     if (reader.HasRows)
                     {
                         while (reader.Read())
                         {
-
-
-                            int listenerid = reader.GetInt32(0);
-                            int grid = reader.GetInt32(1);
+                            int listenerID = reader.GetInt32(0);
+                            int groopID = reader.GetInt32(1);
                             //полчуение массива скидок и групп слушателя из удаляемой записи
                             try
                             {
                                 NpgsqlConnection con2 = new NpgsqlConnection(windowObj.connectionString);
                                 con2.Open();
-                                string sql2 = "select array_to_string(grid,'_'),array_to_string(lgt,'_') from listeners where listenerid=" + listenerid;
+                                string sql2 = "select array_to_string(grid,'_'),array_to_string(lgt,'_') from listeners where listenerid=" + listenerID;
                                 NpgsqlCommand com2 = new NpgsqlCommand(sql2, con2);
                                 NpgsqlDataReader reader2 = com2.ExecuteReader();
                                 if (reader2.HasRows)
                                 {
                                     while (reader2.Read())
                                     {
-                                        string[] gridstr = reader2.GetString(0).Split('_');
-                                        string[] lgtstr = reader2.GetString(1).Split('_');
+                                        string[] groopIDStringArr = reader2.GetString(0).Split('_');
+                                        string[] groopOfListenersStringArr = reader2.GetString(1).Split('_');
 
-                                        string gridstr2 = "'{";
-                                        string lgtstr2 = "'{";
+                                        string newGroopIDStringArr = "'{";
+                                        string newGroopOfListenersStringArr = "'{";
                                         //запись массивов без удаляемого елемента
-                                        for (int i2 = 0; i2 < gridstr.Length; i2++)
+                                        for (int i2 = 0; i2 < groopIDStringArr.Length; i2++)
                                         {
-                                            if (Convert.ToInt32(gridstr[i2]) != grid)
+                                            if (Convert.ToInt32(groopIDStringArr[i2]) != groopID)
                                             {
-                                                gridstr2 += gridstr[i2] + ",";
-                                                lgtstr2 += lgtstr[i2] + ",";
+                                                newGroopIDStringArr += groopIDStringArr[i2] + ",";
+                                                newGroopOfListenersStringArr += groopOfListenersStringArr[i2] + ",";
                                             }
 
                                         }
-                                        if (gridstr2.Length != 2)
+                                        if (newGroopIDStringArr.Length != 2)
                                         {
-                                            gridstr2 = gridstr2.Substring(0, gridstr2.Length - 1) + "}'";
-                                            lgtstr2 = lgtstr2.Substring(0, lgtstr2.Length - 1) + "}'";
+                                            newGroopIDStringArr = newGroopIDStringArr.Substring(0, newGroopIDStringArr.Length - 1) + "}'";
+                                            newGroopOfListenersStringArr = newGroopOfListenersStringArr.Substring(0, newGroopOfListenersStringArr.Length - 1) + "}'";
                                         }
                                         else
                                         {
-                                            gridstr2 += "}'";
-                                            lgtstr2 += "}'";
+                                            newGroopIDStringArr += "}'";
+                                            newGroopOfListenersStringArr += "}'";
                                         }
                                         try
                                         {
                                             NpgsqlConnection con3 = new NpgsqlConnection(windowObj.connectionString);
                                             con3.Open();
-                                            string sql3 = "UPDATE listeners SET  grid=" + gridstr2 + ", lgt=" + lgtstr2 + " WHERE listenerid = " + listenerid;
+                                            string sql3 = "UPDATE listeners SET  grid=" + newGroopIDStringArr + ", lgt=" + newGroopOfListenersStringArr + " WHERE listenerid = " + listenerID;
                                             NpgsqlCommand com3 = new NpgsqlCommand(sql3, con3);
                                             com3.ExecuteReader();
                                             con3.Close();
@@ -405,7 +403,7 @@ namespace WpfApp12.strategiesForAdmin
                 {
                     NpgsqlConnection con = new NpgsqlConnection(windowObj.connectionString);
                     con.Open();
-                    string sql = "delete from listnuch where  listnuchid=" + listArr[i];
+                    string sql = "delete from listnuch where  listnuchid=" + ListenersAccrualIDArr[i];
                     NpgsqlCommand com = new NpgsqlCommand(sql, con);
                     com.ExecuteNonQuery();
                     con.Close();

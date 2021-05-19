@@ -83,7 +83,7 @@ namespace WpfApp12
         //переход из меню бухаглтера в меню бухглатера +
         private void BuhgRoleB_Click(object sender, RoutedEventArgs e)
         {
-            IButtonClick actionReact = new ToBuhg();
+            IButtonClick actionReact = new ToBookkeeper();
             actionReact.ButtonClick();
         }
         //переход из меню бухаглтера в меню директора + 

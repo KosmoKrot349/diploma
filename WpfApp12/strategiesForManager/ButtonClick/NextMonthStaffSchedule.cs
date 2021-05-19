@@ -27,7 +27,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 
                 }
             }
-            DataGridUpdater.updateGridShtatRasp(windowObj.connectionString, windowObj.MonthGrid, windowObj.ShtatRaspSotrpGrid, windowObj.labelArrForStaffSchedule, windowObj.checkBoxArrForStaffSchedule, windowObj.ShtatRaspMonthYearLabel, windowObj.date);
+            DataGridUpdater.updateStaffScheduleGrid(windowObj);
         }
     }
 }

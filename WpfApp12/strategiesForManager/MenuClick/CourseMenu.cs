@@ -26,11 +26,11 @@ namespace WpfApp12.strategiesForManager.MenuClick
             windowObj.FiltrGridCourse.ColumnDefinitions.Clear();
 
 
-            windowObj.filtr.CreateCourseFiltr(windowObj.FiltrGridSubs);
+            windowObj.filter.CreateCourseFilter(windowObj.FiltrGridSubs);
 
-            windowObj.filtr.sql = "select courseid,title,comment FROM courses";
+            windowObj.filter.sql = "select courseid,title,comment FROM courses";
 
-            DataGridUpdater.updateDataGridСourses(windowObj.connectionString, windowObj.filtr.sql, windowObj.coursDataGrid);
+            DataGridUpdater.updateСoursesDataGrid(windowObj);
         }
     }
 }

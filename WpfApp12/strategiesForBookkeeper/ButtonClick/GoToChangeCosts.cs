@@ -69,7 +69,7 @@ namespace WpfApp12.strategiesForBookkeeper.ButtonClick
                 }
                 con.Close();
             }
-            catch { System.Windows.Forms.MessageBox.Show("Не удалось подклюситься к базе данных"); return; }
+            catch { MessageBox.Show("Не удалось подклюситься к базе данных"); return; }
             windowObj.costID = (int)arr[0];
             windowObj.RashodyChangeSum.Text = arr[3].ToString();
             windowObj.RashodyChangeDate.Text = arr[4].ToString().Replace('/', '.');

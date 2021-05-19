@@ -25,33 +25,33 @@ namespace WpfApp12.strategiesForAdmin
         public void buttonClick()
         {
             Button but = sender as Button;
-            WinForms.FolderBrowserDialog FBD = new WinForms.FolderBrowserDialog();
-            if (FBD.ShowDialog() == WinForms.DialogResult.OK)
+            WinForms.FolderBrowserDialog FolderBrowserDialog = new WinForms.FolderBrowserDialog();
+            if (FolderBrowserDialog.ShowDialog() == WinForms.DialogResult.OK)
             {
-                for (int i = 0; i < FBD.SelectedPath.Length; i++)
+                for (int i = 0; i < FolderBrowserDialog.SelectedPath.Length; i++)
                 {
-                    if ((FBD.SelectedPath[i] >= 'а' && FBD.SelectedPath[i] <= 'я') || (FBD.SelectedPath[i] >= 'А' && FBD.SelectedPath[i] <= 'Я')) { MessageBox.Show("В пути не должно быть русскких символов"); return; }
+                    if ((FolderBrowserDialog.SelectedPath[i] >= 'а' && FolderBrowserDialog.SelectedPath[i] <= 'я') || (FolderBrowserDialog.SelectedPath[i] >= 'А' && FolderBrowserDialog.SelectedPath[i] <= 'Я')) { MessageBox.Show("В пути не должно быть русскких символов"); return; }
                 }
 
-                if (but.Name == "selectBinNextYear") windowObj.sybdPytNextYear.Text = FBD.SelectedPath + "\\";
+                if (but.Name == "selectBinNextYear") windowObj.sybdPytNextYear.Text = FolderBrowserDialog.SelectedPath + "\\";
                 else
-                    windowObj.sybdPyt.Text = FBD.SelectedPath + "\\";
+                    windowObj.sybdPyt.Text = FolderBrowserDialog.SelectedPath + "\\";
             }
             StreamReader StreamReader = new StreamReader(@"crDump.bat");
-            ArrayList arLs = new ArrayList();
+            ArrayList ListFromBatFile = new ArrayList();
             while (!StreamReader.EndOfStream)
             {
-                arLs.Add(StreamReader.ReadLine());
+                ListFromBatFile.Add(StreamReader.ReadLine());
             }
-            object[] batStrMas = arLs.ToArray();
-            string[] disk = FBD.SelectedPath.Split('\\');
-            batStrMas[0] = disk[0];
-            batStrMas[1] = "cd " + FBD.SelectedPath;
+            object[] StringArrFrombatFile = ListFromBatFile.ToArray();
+            string[] disk = FolderBrowserDialog.SelectedPath.Split('\\');
+            StringArrFrombatFile[0] = disk[0];
+            StringArrFrombatFile[1] = "cd " + FolderBrowserDialog.SelectedPath;
             StreamReader.Close();
             StreamWriter StreamWriter = new StreamWriter(@"crDump.bat");
-            for (int i = 0; i < batStrMas.Length; i++)
+            for (int i = 0; i < StringArrFrombatFile.Length; i++)
             {
-                StreamWriter.WriteLine(batStrMas[i]);
+                StreamWriter.WriteLine(StringArrFrombatFile[i]);
             }
 
             StreamWriter.Close();

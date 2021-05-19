@@ -27,9 +27,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             windowObj.teacherID = Convert.ToInt32(arr[0]);
             windowObj.prepFio.Text = arr[2].ToString();
             windowObj.prepCom.Text = arr[4].ToString();
-            string[] date1 = arr[3].ToString().Split(' ');
-            string date2 = date1[0];
-            windowObj.dateStartAdd.Text = date2;
+            string[] dateStart = arr[3].ToString().Split(' ');
+            string parsedDateStart = dateStart[0];
+            windowObj.dateStartAdd.Text = parsedDateStart;
             try
             {
                 NpgsqlConnection con = new NpgsqlConnection(windowObj.connectionString);

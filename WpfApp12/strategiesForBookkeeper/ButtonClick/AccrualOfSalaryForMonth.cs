@@ -35,10 +35,10 @@ namespace WpfApp12.strategiesForBookkeeper.ButtonClick
                         if (reader.HasRows)
                         {
                             //подсчёт за преподавателя
-                            double prep_zp = 0;
-                            double prep_zp_kateg = 0;
-                            double prep_zp_kol_chas = 0;
-                            double prep_zp_koefVislugi = 1;
+                            double teacherSalary = 0;
+                            double teaceherSalaryWithCategory = 0;
+                            double teacherSalaryForHour = 0;
+                            double teacherSalaryWithWorkCoeff = 1;
                             DateTime DateStartWork = DateTime.Now;
                             //получение оплаты за категорию
                             try
@@ -51,7 +51,7 @@ namespace WpfApp12.strategiesForBookkeeper.ButtonClick
                                 if (reader1.HasRows)
                                 {
                                     while (reader1.Read())
-                                    { prep_zp_kateg = reader1.GetDouble(0); }
+                                    { teaceherSalaryWithCategory = reader1.GetDouble(0); }
                                 }
                                 con1.Close();
                             }
@@ -67,7 +67,7 @@ namespace WpfApp12.strategiesForBookkeeper.ButtonClick
                                 if (reader1.HasRows)
                                 {
                                     while (reader1.Read())
-                                    { prep_zp_kol_chas = reader1.GetInt32(0); }
+                                    { teacherSalaryForHour = reader1.GetInt32(0); }
                                 }
                                 con1.Close();
                             }
@@ -83,22 +83,22 @@ namespace WpfApp12.strategiesForBookkeeper.ButtonClick
                                 if (reader1.HasRows)
                                 {
                                     while (reader1.Read())
-                                    { prep_zp_koefVislugi = reader1.GetDouble(0); }
+                                    { teacherSalaryWithWorkCoeff = reader1.GetDouble(0); }
                                 }
                                 con1.Close();
                             }
                             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
-                            prep_zp = prep_zp_kateg * prep_zp_kol_chas * prep_zp_koefVislugi;
+                            teacherSalary = teaceherSalaryWithCategory * teacherSalaryForHour * teacherSalaryWithWorkCoeff;
 
                             //подсчёт за штат
-                            string[] statesStr;
-                            string[] stavkyStr;
-                            string[] obslworkStr;
-                            string[] obemStr;
-                            double payShtat = 0;
-                            double payObsl = 0;
+                            string[] postionsArr;
+                            string[] ratesArr;
+                            string[] serviceWorkArr;
+                            string[] workVolumeArr;
+                            double StaffSalary = 0;
+                            double SalaryForServiceWork = 0;
                             //получение кол-ва отработаных дней в месяце
-                            int kol_work_day = 0;
+                            int quanWorkDay = 0;
                             try
                             {
                                 NpgsqlConnection con1 = new NpgsqlConnection(windowObj.connectionString);
@@ -110,7 +110,7 @@ namespace WpfApp12.strategiesForBookkeeper.ButtonClick
                                 {
                                     while (reader1.Read())
                                     {
-                                        kol_work_day = reader1.GetInt32(0);
+                                        quanWorkDay = reader1.GetInt32(0);
                                     }
                                 }
                                 con1.Close();
@@ -128,27 +128,27 @@ namespace WpfApp12.strategiesForBookkeeper.ButtonClick
                                 {
                                     while (reader13.Read())
                                     {
-                                        statesStr = reader13.GetString(0).Split('_');
-                                        stavkyStr = reader13.GetString(1).Split('_');
-                                        obslworkStr = reader13.GetString(2).Split('_');
-                                        obemStr = reader13.GetString(3).Split('_');
+                                        postionsArr = reader13.GetString(0).Split('_');
+                                        ratesArr = reader13.GetString(1).Split('_');
+                                        serviceWorkArr = reader13.GetString(2).Split('_');
+                                        workVolumeArr = reader13.GetString(3).Split('_');
 
                                         //подсчёт зп штата
-                                        for (int j = 0; j < statesStr.Length; j++)
+                                        for (int j = 0; j < postionsArr.Length; j++)
                                         {
-                                            if (statesStr[j] == "") continue;
+                                            if (postionsArr[j] == "") continue;
                                             try
                                             {
                                                 NpgsqlConnection con2 = new NpgsqlConnection(windowObj.connectionString);
                                                 con2.Open();
-                                                string sql2 = "select zp, kol_work_day[" + windowObj.dateAccrual.Month + "] from states where statesid =" + statesStr[j];
+                                                string sql2 = "select zp, kol_work_day[" + windowObj.dateAccrual.Month + "] from states where statesid =" + postionsArr[j];
                                                 NpgsqlCommand com2 = new NpgsqlCommand(sql2, con2);
                                                 NpgsqlDataReader reader2 = com2.ExecuteReader();
                                                 if (reader2.HasRows)
                                                 {
                                                     while (reader2.Read())
                                                     {
-                                                        payShtat += reader2.GetDouble(0) * Convert.ToDouble(stavkyStr[j].Replace('.', ',')) * (kol_work_day / reader2.GetInt32(1));
+                                                        StaffSalary += reader2.GetDouble(0) * Convert.ToDouble(ratesArr[j].Replace('.', ',')) * (quanWorkDay / reader2.GetInt32(1));
                                                     }
                                                 }
                                                 con2.Close();
@@ -157,21 +157,21 @@ namespace WpfApp12.strategiesForBookkeeper.ButtonClick
 
                                         }
                                         //подсчёт зп сдельной
-                                        for (int j = 0; j < obslworkStr.Length; j++)
+                                        for (int j = 0; j < serviceWorkArr.Length; j++)
                                         {
-                                            if (obslworkStr[j] == "") continue;
+                                            if (serviceWorkArr[j] == "") continue;
                                             try
                                             {
                                                 NpgsqlConnection con2 = new NpgsqlConnection(windowObj.connectionString);
                                                 con2.Open();
-                                                string sql2 = "select pay from raboty_obsl where rabotyid =" + obslworkStr[j];
+                                                string sql2 = "select pay from raboty_obsl where rabotyid =" + serviceWorkArr[j];
                                                 NpgsqlCommand com2 = new NpgsqlCommand(sql2, con2);
                                                 NpgsqlDataReader reader2 = com2.ExecuteReader();
                                                 if (reader2.HasRows)
                                                 {
                                                     while (reader2.Read())
                                                     {
-                                                        payObsl += reader2.GetDouble(0) * Convert.ToDouble(obemStr[j].Replace('.', ','));
+                                                        SalaryForServiceWork += reader2.GetDouble(0) * Convert.ToDouble(workVolumeArr[j].Replace('.', ','));
                                                     }
                                                 }
                                                 con2.Close();
@@ -197,13 +197,13 @@ namespace WpfApp12.strategiesForBookkeeper.ButtonClick
                                 {
                                     while (reader1.Read())
                                     {
-                                        vs = Math.Round((prep_zp * reader1.GetDouble(1) / 100) + (payShtat * reader1.GetDouble(1) / 100) + (payObsl * reader1.GetDouble(1) / 100), 2);
-                                        fss = Math.Round((prep_zp * reader1.GetDouble(0) / 100) + (payShtat * reader1.GetDouble(0) / 100) + (payObsl * reader1.GetDouble(0) / 100), 2);
-                                        ndfl = Math.Round((prep_zp * reader1.GetDouble(2) / 100) + (payShtat * reader1.GetDouble(2) / 100) + (payObsl * reader1.GetDouble(2) / 100), 2);
+                                        vs = Math.Round((teacherSalary * reader1.GetDouble(1) / 100) + (StaffSalary * reader1.GetDouble(1) / 100) + (SalaryForServiceWork * reader1.GetDouble(1) / 100), 2);
+                                        fss = Math.Round((teacherSalary * reader1.GetDouble(0) / 100) + (StaffSalary * reader1.GetDouble(0) / 100) + (SalaryForServiceWork * reader1.GetDouble(0) / 100), 2);
+                                        ndfl = Math.Round((teacherSalary * reader1.GetDouble(2) / 100) + (StaffSalary * reader1.GetDouble(2) / 100) + (SalaryForServiceWork * reader1.GetDouble(2) / 100), 2);
 
-                                        prep_zp = Math.Round(prep_zp - ((prep_zp * reader1.GetDouble(1) / 100) + (prep_zp * reader1.GetDouble(0) / 100) + (prep_zp * reader1.GetDouble(2) / 100)), 2);
-                                        payShtat = Math.Round(payShtat - ((payShtat * reader1.GetDouble(1) / 100) + (payShtat * reader1.GetDouble(0) / 100) + (payShtat * reader1.GetDouble(2) / 100)), 2);
-                                        payObsl = Math.Round(payObsl - ((payObsl * reader1.GetDouble(1) / 100) + (payObsl * reader1.GetDouble(0) / 100) + (payObsl * reader1.GetDouble(2) / 100)), 2);
+                                        teacherSalary = Math.Round(teacherSalary - ((teacherSalary * reader1.GetDouble(1) / 100) + (teacherSalary * reader1.GetDouble(0) / 100) + (teacherSalary * reader1.GetDouble(2) / 100)), 2);
+                                        StaffSalary = Math.Round(StaffSalary - ((StaffSalary * reader1.GetDouble(1) / 100) + (StaffSalary * reader1.GetDouble(0) / 100) + (StaffSalary * reader1.GetDouble(2) / 100)), 2);
+                                        SalaryForServiceWork = Math.Round(SalaryForServiceWork - ((SalaryForServiceWork * reader1.GetDouble(1) / 100) + (SalaryForServiceWork * reader1.GetDouble(0) / 100) + (SalaryForServiceWork * reader1.GetDouble(2) / 100)), 2);
                                     }
                                 }
                                 con1.Close();
@@ -214,7 +214,7 @@ namespace WpfApp12.strategiesForBookkeeper.ButtonClick
                             {
                                 NpgsqlConnection con12 = new NpgsqlConnection(windowObj.connectionString);
                                 con12.Open();
-                                string sql12 = "UPDATE nachisl SET  prepzp=" + prep_zp.ToString().Replace(',', '.') + ", shtatzp=" + payShtat.ToString().Replace(',', '.') + ", obslzp=" + payObsl.ToString().Replace(',', '.') + ", vs=" + vs.ToString().Replace(',', '.') + ", fss=" + fss.ToString().Replace(',', '.') + ", ndfl=" + ndfl.ToString().Replace(',', '.') + " WHERE sotrid=" + windowObj.checkBoxArrStaffForAccrual[i].Name.Split('_')[1] + " and extract(Year from payday)=" + windowObj.dateAccrual.Year + " and extract(month from payday)=" + windowObj.dateAccrual.Month;
+                                string sql12 = "UPDATE nachisl SET  prepzp=" + teacherSalary.ToString().Replace(',', '.') + ", shtatzp=" + StaffSalary.ToString().Replace(',', '.') + ", obslzp=" + SalaryForServiceWork.ToString().Replace(',', '.') + ", vs=" + vs.ToString().Replace(',', '.') + ", fss=" + fss.ToString().Replace(',', '.') + ", ndfl=" + ndfl.ToString().Replace(',', '.') + " WHERE sotrid=" + windowObj.checkBoxArrStaffForAccrual[i].Name.Split('_')[1] + " and extract(Year from payday)=" + windowObj.dateAccrual.Year + " and extract(month from payday)=" + windowObj.dateAccrual.Month;
                                 NpgsqlCommand com12 = new NpgsqlCommand(sql12, con12);
                                 com12.ExecuteNonQuery();
                                 con12.Close();
@@ -226,10 +226,10 @@ namespace WpfApp12.strategiesForBookkeeper.ButtonClick
                         if (reader.HasRows == false)
                         {
                             //подсчёт за преподавателя
-                            double prep_zp = 0;
-                            double prep_zp_kateg = 0;
-                            double prep_zp_kol_chas = 0;
-                            double prep_zp_koefVislugi = 1;
+                            double teacherSalary = 0;
+                            double teaceherSalaryWithCategory = 0;
+                            double teacherSalaryForHour = 0;
+                            double teacherSalaryWithWorkCoeff = 1;
                             DateTime DateStartWork = DateTime.Now;
                             //получение оплаты за категорию
                             try
@@ -242,7 +242,7 @@ namespace WpfApp12.strategiesForBookkeeper.ButtonClick
                                 if (reader1.HasRows)
                                 {
                                     while (reader1.Read())
-                                    { prep_zp_kateg = reader1.GetDouble(0); }
+                                    { teaceherSalaryWithCategory = reader1.GetDouble(0); }
                                 }
                                 con1.Close();
                             }
@@ -258,7 +258,7 @@ namespace WpfApp12.strategiesForBookkeeper.ButtonClick
                                 if (reader1.HasRows)
                                 {
                                     while (reader1.Read())
-                                    { prep_zp_kol_chas = reader1.GetInt32(0); }
+                                    { teacherSalaryForHour = reader1.GetInt32(0); }
                                 }
                                 con1.Close();
                             }
@@ -274,22 +274,22 @@ namespace WpfApp12.strategiesForBookkeeper.ButtonClick
                                 if (reader1.HasRows)
                                 {
                                     while (reader1.Read())
-                                    { prep_zp_koefVislugi = reader1.GetDouble(0); }
+                                    { teacherSalaryWithWorkCoeff = reader1.GetDouble(0); }
                                 }
                                 con1.Close();
                             }
                             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
-                            prep_zp = prep_zp_kateg * prep_zp_kol_chas * prep_zp_koefVislugi;
+                            teacherSalary = teaceherSalaryWithCategory * teacherSalaryForHour * teacherSalaryWithWorkCoeff;
 
                             //подсчёт за штат
-                            string[] statesStr;
-                            string[] stavkyStr;
-                            string[] obslworkStr;
-                            string[] obemStr;
-                            double payShtat = 0;
-                            double payObsl = 0;
+                            string[] postionsArr;
+                            string[] ratesArr;
+                            string[] serviceWorkArr;
+                            string[] workVolumeArr;
+                            double StaffSalary = 0;
+                            double SalaryForServiceWork = 0;
                             //получение кол-ва отработаных дней в месяце
-                            int kol_work_day = 0;
+                            int quanWorkDay = 0;
                             try
                             {
                                 NpgsqlConnection con1 = new NpgsqlConnection(windowObj.connectionString);
@@ -301,7 +301,7 @@ namespace WpfApp12.strategiesForBookkeeper.ButtonClick
                                 {
                                     while (reader1.Read())
                                     {
-                                        kol_work_day = reader1.GetInt32(0);
+                                        quanWorkDay = reader1.GetInt32(0);
                                     }
                                 }
                                 con1.Close();
@@ -319,27 +319,27 @@ namespace WpfApp12.strategiesForBookkeeper.ButtonClick
                                 {
                                     while (reader11.Read())
                                     {
-                                        statesStr = reader11.GetString(0).Split('_');
-                                        stavkyStr = reader11.GetString(1).Split('_');
-                                        obslworkStr = reader11.GetString(2).Split('_');
-                                        obemStr = reader11.GetString(3).Split('_');
+                                        postionsArr = reader11.GetString(0).Split('_');
+                                        ratesArr = reader11.GetString(1).Split('_');
+                                        serviceWorkArr = reader11.GetString(2).Split('_');
+                                        workVolumeArr = reader11.GetString(3).Split('_');
 
                                         //подсчёт зп штата
-                                        for (int j = 0; j < statesStr.Length; j++)
+                                        for (int j = 0; j < postionsArr.Length; j++)
                                         {
-                                            if (statesStr[j] == "") continue;
+                                            if (postionsArr[j] == "") continue;
                                             try
                                             {
                                                 NpgsqlConnection con2 = new NpgsqlConnection(windowObj.connectionString);
                                                 con2.Open();
-                                                string sql2 = "select zp, kol_work_day[" + windowObj.dateAccrual.Month + "] from states where statesid =" + statesStr[j];
+                                                string sql2 = "select zp, kol_work_day[" + windowObj.dateAccrual.Month + "] from states where statesid =" + postionsArr[j];
                                                 NpgsqlCommand com2 = new NpgsqlCommand(sql2, con2);
                                                 NpgsqlDataReader reader2 = com2.ExecuteReader();
                                                 if (reader2.HasRows)
                                                 {
                                                     while (reader2.Read())
                                                     {
-                                                        payShtat += reader2.GetDouble(0) * Convert.ToDouble(stavkyStr[j].Replace('.', ',')) * (kol_work_day / reader2.GetInt32(1));
+                                                        StaffSalary += reader2.GetDouble(0) * Convert.ToDouble(ratesArr[j].Replace('.', ',')) * (quanWorkDay / reader2.GetInt32(1));
                                                     }
                                                 }
                                                 con2.Close();
@@ -349,14 +349,14 @@ namespace WpfApp12.strategiesForBookkeeper.ButtonClick
                                         }
                                         //подсчёт зп сдельной
 
-                                        for (int j = 0; j < obslworkStr.Length; j++)
+                                        for (int j = 0; j < serviceWorkArr.Length; j++)
                                         {
-                                            if (obslworkStr[j] == "") continue;
+                                            if (serviceWorkArr[j] == "") continue;
                                             try
                                             {
                                                 NpgsqlConnection con2 = new NpgsqlConnection(windowObj.connectionString);
                                                 con2.Open();
-                                                string sql2 = "select pay from raboty_obsl where rabotyid =" + obslworkStr[j];
+                                                string sql2 = "select pay from raboty_obsl where rabotyid =" + serviceWorkArr[j];
 
                                                 NpgsqlCommand com2 = new NpgsqlCommand(sql2, con2);
                                                 NpgsqlDataReader reader2 = com2.ExecuteReader();
@@ -364,7 +364,7 @@ namespace WpfApp12.strategiesForBookkeeper.ButtonClick
                                                 {
                                                     while (reader2.Read())
                                                     {
-                                                        payObsl += reader2.GetDouble(0) * Convert.ToDouble(obemStr[j].Replace('.', ','));
+                                                        SalaryForServiceWork += reader2.GetDouble(0) * Convert.ToDouble(workVolumeArr[j].Replace('.', ','));
                                                     }
                                                 }
                                                 con2.Close();
@@ -390,13 +390,13 @@ namespace WpfApp12.strategiesForBookkeeper.ButtonClick
                                 {
                                     while (reader1.Read())
                                     {
-                                        vs = Math.Round((prep_zp * reader1.GetDouble(1) / 100) + (payShtat * reader1.GetDouble(1) / 100) + (payObsl * reader1.GetDouble(1) / 100), 2);
-                                        fss = Math.Round((prep_zp * reader1.GetDouble(0) / 100) + (payShtat * reader1.GetDouble(0) / 100) + (payObsl * reader1.GetDouble(0) / 100), 2);
-                                        ndfl = Math.Round((prep_zp * reader1.GetDouble(2) / 100) + (payShtat * reader1.GetDouble(2) / 100) + (payObsl * reader1.GetDouble(2) / 100), 2);
+                                        vs = Math.Round((teacherSalary * reader1.GetDouble(1) / 100) + (StaffSalary * reader1.GetDouble(1) / 100) + (SalaryForServiceWork * reader1.GetDouble(1) / 100), 2);
+                                        fss = Math.Round((teacherSalary * reader1.GetDouble(0) / 100) + (StaffSalary * reader1.GetDouble(0) / 100) + (SalaryForServiceWork * reader1.GetDouble(0) / 100), 2);
+                                        ndfl = Math.Round((teacherSalary * reader1.GetDouble(2) / 100) + (StaffSalary * reader1.GetDouble(2) / 100) + (SalaryForServiceWork * reader1.GetDouble(2) / 100), 2);
 
-                                        prep_zp = Math.Round(prep_zp - ((prep_zp * reader1.GetDouble(1) / 100) + (prep_zp * reader1.GetDouble(0) / 100) + (prep_zp * reader1.GetDouble(2) / 100)), 2);
-                                        payShtat = Math.Round(payShtat - ((payShtat * reader1.GetDouble(1) / 100) + (payShtat * reader1.GetDouble(0) / 100) + (payShtat * reader1.GetDouble(2) / 100)), 2);
-                                        payObsl = Math.Round(payObsl - ((payObsl * reader1.GetDouble(1) / 100) + (payObsl * reader1.GetDouble(0) / 100) + (payObsl * reader1.GetDouble(2) / 100)), 2);
+                                        teacherSalary = Math.Round(teacherSalary - ((teacherSalary * reader1.GetDouble(1) / 100) + (teacherSalary * reader1.GetDouble(0) / 100) + (teacherSalary * reader1.GetDouble(2) / 100)), 2);
+                                        StaffSalary = Math.Round(StaffSalary - ((StaffSalary * reader1.GetDouble(1) / 100) + (StaffSalary * reader1.GetDouble(0) / 100) + (StaffSalary * reader1.GetDouble(2) / 100)), 2);
+                                        SalaryForServiceWork = Math.Round(SalaryForServiceWork - ((SalaryForServiceWork * reader1.GetDouble(1) / 100) + (SalaryForServiceWork * reader1.GetDouble(0) / 100) + (SalaryForServiceWork * reader1.GetDouble(2) / 100)), 2);
                                     }
                                 }
                                 con1.Close();
@@ -407,7 +407,7 @@ namespace WpfApp12.strategiesForBookkeeper.ButtonClick
                             {
                                 NpgsqlConnection con1 = new NpgsqlConnection(windowObj.connectionString);
                                 con1.Open();
-                                string sql1 = "INSERT INTO nachisl(sotrid, prepzp, shtatzp, obslzp, viplacheno, payday,vs, fss, ndfl) VALUES (" + windowObj.checkBoxArrStaffForAccrual[i].Name.Split('_')[1] + ", " + prep_zp.ToString().Replace(',', '.') + " , " + payShtat.ToString().Replace(',', '.') + ", " + payObsl.ToString().Replace(',', '.') + ", 0, '" + windowObj.dateAccrual.ToShortDateString().Replace('.', '-') + "', " + vs.ToString().Replace(',', '.') + ", " + fss.ToString().Replace(',', '.') + ", " + ndfl.ToString().Replace(',', '.') + ")";
+                                string sql1 = "INSERT INTO nachisl(sotrid, prepzp, shtatzp, obslzp, viplacheno, payday,vs, fss, ndfl) VALUES (" + windowObj.checkBoxArrStaffForAccrual[i].Name.Split('_')[1] + ", " + teacherSalary.ToString().Replace(',', '.') + " , " + StaffSalary.ToString().Replace(',', '.') + ", " + SalaryForServiceWork.ToString().Replace(',', '.') + ", 0, '" + windowObj.dateAccrual.ToShortDateString().Replace('.', '-') + "', " + vs.ToString().Replace(',', '.') + ", " + fss.ToString().Replace(',', '.') + ", " + ndfl.ToString().Replace(',', '.') + ")";
                                 NpgsqlCommand com1 = new NpgsqlCommand(sql1, con1);
                                 com1.ExecuteNonQuery();
                                 con1.Close();
@@ -422,7 +422,7 @@ namespace WpfApp12.strategiesForBookkeeper.ButtonClick
             }
             windowObj.NachDataGrid.SelectedItem = null;
             windowObj.ViplataBut.IsEnabled = false;
-            DataGridUpdater.updateGridNachZp(windowObj.connectionString, windowObj.NachMonthLabel, windowObj.checkBoxArrStaffForAccrual, windowObj.NachSotrGrid, windowObj.NachDataGrid, windowObj.dateAccrual);
+            DataGridUpdater.updateAccrualsSalaryDataGrid(windowObj);
         }
     }
 }

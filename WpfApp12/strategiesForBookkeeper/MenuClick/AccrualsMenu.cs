@@ -41,7 +41,7 @@ namespace WpfApp12.strategiesForBookkeeper.MenuClick
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
 
-            DataGridUpdater.updateGridNachZp(windowObj.connectionString, windowObj.NachMonthLabel, windowObj.checkBoxArrStaffForAccrual, windowObj.NachSotrGrid, windowObj.NachDataGrid, windowObj.dateAccrual);
+            DataGridUpdater.updateAccrualsSalaryDataGrid(windowObj);
         }
     }
 }

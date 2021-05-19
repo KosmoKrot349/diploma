@@ -58,7 +58,7 @@ namespace WpfApp12.strategiesForManager.OtherMethods
             window.AddRaspBut.IsEnabled = false;
             window.raspGridG.Visibility = Visibility.Visible;
             window.labelArr = new Label[(window.quanLessonsInDay * 7) + 1, window.quanGroops + 2];
-            DataGridUpdater.updateGridRaspG(window.connectionString, window.tG, window.quanLessonsInDay, window.quanGroops, window.labelArr, dm, ds);
+            DataGridUpdater.updateGroopScheduleGrid(window);
             for (int i = 0; i < (window.quanLessonsInDay * 7) + 1; i++)
             {
                 for (int j = 1; j < window.quanGroops + 2; j++)
@@ -116,7 +116,7 @@ namespace WpfApp12.strategiesForManager.OtherMethods
             window.AddRaspButP.IsEnabled = false;
             window.raspGridP.Visibility = Visibility.Visible;
             window.labelArr = new Label[(window.quanLessonsInDay * 7) + 1, window.quanGroops + 2];
-            DataGridUpdater.updateGridRaspP(window.connectionString, window.tGp, window.quanLessonsInDay, window.quanGroops, window.labelArr, dm, ds);
+            DataGridUpdater.updateTeacherScheduleGrid(window);
             for (int i = 0; i < (window.quanLessonsInDay * 7) + 1; i++)
             {
                 for (int j = 1; j < window.quanGroops + 2; j++)
@@ -174,7 +174,7 @@ namespace WpfApp12.strategiesForManager.OtherMethods
             window.AddRaspButС.IsEnabled = false;
             window.raspGridС.Visibility = Visibility.Visible;
             window.labelArr = new Label[(window.quanLessonsInDay * 7) + 1, window.quanGroops + 2];
-            DataGridUpdater.updateGridRaspС(window.connectionString, window.tGс,window.quanLessonsInDay, window.quanGroops, window.labelArr, dm, ds);
+            DataGridUpdater.updateScheduleCabinetGrid(window);
             for (int i = 0; i < (window.quanLessonsInDay * 7) + 1; i++)
             {
                 for (int j = 1; j < window.quanGroops + 2; j++)

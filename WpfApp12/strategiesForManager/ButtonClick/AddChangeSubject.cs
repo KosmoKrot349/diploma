@@ -30,10 +30,10 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             {
                 DataRowView DRV = windowObj.subsDataGrid.Items[i] as DataRowView;
                 DataRow row = DRV.Row;
-                object[] rMas = row.ItemArray;
-                if (rMas[1].ToString() == "") { MessageBox.Show("В " + (i + 1) + " строке не указано название предмета"); return; }
-                if (list.IndexOf(rMas[1]) != -1) { MessageBox.Show("Повторяется название предмета " + rMas[1]); return; }
-                list.Add(rMas[1]);
+                object[] recordArr = row.ItemArray;
+                if (recordArr[1].ToString() == "") { MessageBox.Show("В " + (i + 1) + " строке не указано название предмета"); return; }
+                if (list.IndexOf(recordArr[1]) != -1) { MessageBox.Show("Повторяется название предмета " + recordArr[1]); return; }
+                list.Add(recordArr[1]);
                 table.ImportRow(row);
             }
             string sql = "select * from subject";
@@ -48,7 +48,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             windowObj.subDeleteButton.IsEnabled = false;
 
 
-            DataGridUpdater.updateDataGridSubjects(windowObj.connectionString, windowObj.subsDataGrid);
+            DataGridUpdater.updateSubjectDataGrid(windowObj);
         }
     }
 }

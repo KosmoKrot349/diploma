@@ -34,9 +34,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             windowObj.gr_lgCh.Children.Clear();
             windowObj.gr_lgCh.RowDefinitions.Clear();
 
-            ArrayList GrMas = new ArrayList();
-            String[] LGMas;
-            string lgmas = "";
+            ArrayList GroopList = new ArrayList();
+            String[] groopsOfListenerFinalArr;
+            string didntParsGroopsOfListenerArr = "";
 
             try
             {
@@ -49,7 +49,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                 {
                     while (reader1.Read())
                     {
-                        lgmas = reader1.GetString(0);
+                        didntParsGroopsOfListenerArr = reader1.GetString(0);
 
                     }
                 }
@@ -69,7 +69,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                 {
                     while (reader1.Read())
                     {
-                        GrMas.Add(reader1.GetString(0));
+                        GroopList.Add(reader1.GetString(0));
 
                     }
                 }
@@ -77,9 +77,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 
             }
             catch { System.Windows.Forms.MessageBox.Show("Не удалось подключиться к базе данных"); return; }
-            LGMas = lgmas.Split('_');
+            groopsOfListenerFinalArr = didntParsGroopsOfListenerArr.Split('_');
 
-            int countGr = 0;
+            int quanGroop = 0;
             try
             {
                 NpgsqlConnection con1 = new NpgsqlConnection(windowObj.connectionString);
@@ -91,15 +91,15 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                 {
                     while (reader1.Read())
                     {
-                        countGr = reader1.GetInt32(0);
+                        quanGroop = reader1.GetInt32(0);
                     }
                 }
                 con1.Close();
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
 
-            windowObj.checkBoxArrForListeners = new CheckBox[countGr];
-            windowObj.textBoxArrForListeners = new TextBox[countGr];
+            windowObj.checkBoxArrForListeners = new CheckBox[quanGroop];
+            windowObj.textBoxArrForListeners = new TextBox[quanGroop];
 
 
             try
@@ -126,7 +126,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                         windowObj.textBoxArrForListeners[i].IsEnabled = false;
                         windowObj.checkBoxArrForListeners[i].Content = reader.GetString(0) + "-льгота: ";
                         windowObj.checkBoxArrForListeners[i].Name = "chbxMasgrlg_" + i;
-                        if (GrMas.IndexOf(reader.GetString(0)) != -1) { windowObj.checkBoxArrForListeners[i].IsChecked = true; windowObj.textBoxArrForListeners[i].Text = LGMas[GrMas.IndexOf(reader.GetString(0))]; }
+                        if (GroopList.IndexOf(reader.GetString(0)) != -1) { windowObj.checkBoxArrForListeners[i].IsChecked = true; windowObj.textBoxArrForListeners[i].Text = groopsOfListenerFinalArr[GroopList.IndexOf(reader.GetString(0))]; }
 
                         Grid.SetRow(windowObj.checkBoxArrForListeners[i], i);
                         Grid.SetColumn(windowObj.checkBoxArrForListeners[i], 0);

@@ -1,11 +1,7 @@
 ﻿using Npgsql;
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -38,7 +34,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             windowObj.ChangeObslWorks.Children.Clear();
             windowObj.ChangeObslWorks.RowDefinitions.Clear();
 
-            int kol_states = -1, kol_obsWork = -1;
+            int quanPositions = -1, quanServiceWork = -1;
             //получени е кол-ва должностей
             try
             {
@@ -51,7 +47,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                 {
                     while (reader.Read())
                     {
-                        kol_states = reader.GetInt32(0);
+                        quanPositions = reader.GetInt32(0);
                     }
 
                 }
@@ -70,7 +66,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                 {
                     while (reader.Read())
                     {
-                        kol_obsWork = reader.GetInt32(0);
+                        quanServiceWork = reader.GetInt32(0);
                     }
 
                 }
@@ -78,15 +74,15 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
 
-            windowObj.textBoxArrRate = new TextBox[kol_states];
-            windowObj.checkBoxArrPositions = new CheckBox[kol_states];
-            windowObj.textBoxArrVolumeWork = new TextBox[kol_obsWork];
-            windowObj.checkBoxArrServiceWorks = new CheckBox[kol_obsWork];
+            windowObj.textBoxArrRate = new TextBox[quanPositions];
+            windowObj.checkBoxArrPositions = new CheckBox[quanPositions];
+            windowObj.textBoxArrVolumeWork = new TextBox[quanServiceWork];
+            windowObj.checkBoxArrServiceWorks = new CheckBox[quanServiceWork];
 
 
 
             //получение должностей 
-            ArrayList StatesLs = new ArrayList();
+            ArrayList positionsList = new ArrayList();
             try
             {
                 NpgsqlConnection con1 = new NpgsqlConnection(windowObj.connectionString);
@@ -99,7 +95,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                 {
                     while (reader1.Read())
                     {
-                        StatesLs.Add(reader1.GetString(0));
+                        positionsList.Add(reader1.GetString(0));
                     }
                 }
                 con1.Close();
@@ -107,7 +103,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
 
             //получение работ 
-            ArrayList WorkLs = new ArrayList();
+            ArrayList serviceWorkList = new ArrayList();
             try
             {
                 NpgsqlConnection con1 = new NpgsqlConnection(windowObj.connectionString);
@@ -120,15 +116,15 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                 {
                     while (reader1.Read())
                     {
-                        WorkLs.Add(reader1.GetString(0));
+                        serviceWorkList.Add(reader1.GetString(0));
                     }
                 }
                 con1.Close();
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
             //получение обёма работ и ставок
-            string stavki = "";
-            string obem = "";
+            string rates = "";
+            string workVolume = "";
             try
             {
                 NpgsqlConnection con12 = new NpgsqlConnection(windowObj.connectionString);
@@ -141,22 +137,22 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                 {
                     while (reader12.Read())
                     {
-                        stavki = reader12.GetString(0);
-                        obem = reader12.GetString(1);
+                        rates = reader12.GetString(0);
+                        workVolume = reader12.GetString(1);
                     }
                 }
                 con12.Close();
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
 
-            string[] stavkiMas = stavki.Split('_');
-            string[] obemMas = obem.Split('_'); ;
+            string[] rateArr = rates.Split('_');
+            string[] workVolumeArr = workVolume.Split('_'); ;
 
             //заполнение грида должностей 
-            Label l1 = new Label();
-            l1.Content = "Должность";
-            Label l2 = new Label();
-            l2.Content = "Ставка";
+            Label positionLabel = new Label();
+            positionLabel.Content = "Должность";
+            Label rateLabel = new Label();
+            rateLabel.Content = "Ставка";
 
 
             RowDefinition rwd1 = new RowDefinition();
@@ -164,16 +160,16 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 
             windowObj.ChangeStates.RowDefinitions.Add(rwd1);
 
-            Grid.SetRow(l1, 0);
-            Grid.SetRow(l2, 0);
+            Grid.SetRow(positionLabel, 0);
+            Grid.SetRow(rateLabel, 0);
 
 
-            Grid.SetColumn(l2, 1);
-            Grid.SetColumn(l1, 0);
+            Grid.SetColumn(rateLabel, 1);
+            Grid.SetColumn(positionLabel, 0);
 
 
-            windowObj.ChangeStates.Children.Add(l1);
-            windowObj.ChangeStates.Children.Add(l2);
+            windowObj.ChangeStates.Children.Add(positionLabel);
+            windowObj.ChangeStates.Children.Add(rateLabel);
 
             try
             {
@@ -201,7 +197,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                         windowObj.textBoxArrRate[i].IsEnabled = false;
                         windowObj.textBoxArrRate[i].PreviewTextInput += windowObj.grPayment_PreviewTextInput;
 
-                        if (StatesLs.IndexOf(reader.GetString(1)) != -1) { windowObj.checkBoxArrPositions[i].IsChecked = true; windowObj.textBoxArrRate[i].Text = stavkiMas[j]; j++; }
+                        if (positionsList.IndexOf(reader.GetString(1)) != -1) { windowObj.checkBoxArrPositions[i].IsChecked = true; windowObj.textBoxArrRate[i].Text = rateArr[j]; j++; }
 
                         RowDefinition rwd = new RowDefinition();
                         rwd.Height = new GridLength(40);
@@ -229,29 +225,29 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 
             //заполнение грида работ 
 
-            Label l11 = new Label();
-            l11.Content = "Работа";
-            Label l22 = new Label();
-            l22.Content = "Объём";
-            Label l33 = new Label();
-            l33.Content = "Еденицы измерения";
+            Label serviceWorkLabel = new Label();
+            serviceWorkLabel.Content = "Работа";
+            Label workVolumeLabel = new Label();
+            workVolumeLabel.Content = "Объём";
+            Label unitsLabel = new Label();
+            unitsLabel.Content = "Еденицы измерения";
 
             RowDefinition rwd11 = new RowDefinition();
             rwd11.Height = new GridLength(40);
 
             windowObj.ChangeObslWorks.RowDefinitions.Add(rwd11);
 
-            Grid.SetRow(l11, 0);
-            Grid.SetRow(l22, 0);
-            Grid.SetRow(l33, 0);
+            Grid.SetRow(serviceWorkLabel, 0);
+            Grid.SetRow(workVolumeLabel, 0);
+            Grid.SetRow(unitsLabel, 0);
 
-            Grid.SetColumn(l22, 1);
-            Grid.SetColumn(l11, 0);
-            Grid.SetColumn(l33, 2);
+            Grid.SetColumn(workVolumeLabel, 1);
+            Grid.SetColumn(serviceWorkLabel, 0);
+            Grid.SetColumn(unitsLabel, 2);
 
-            windowObj.ChangeObslWorks.Children.Add(l11);
-            windowObj.ChangeObslWorks.Children.Add(l22);
-            windowObj.ChangeObslWorks.Children.Add(l33);
+            windowObj.ChangeObslWorks.Children.Add(serviceWorkLabel);
+            windowObj.ChangeObslWorks.Children.Add(workVolumeLabel);
+            windowObj.ChangeObslWorks.Children.Add(unitsLabel);
 
             try
             {
@@ -279,7 +275,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                         windowObj.textBoxArrVolumeWork[i].IsEnabled = false;
                         windowObj.textBoxArrVolumeWork[i].PreviewTextInput += windowObj.grPayment_PreviewTextInput;
 
-                        if (WorkLs.IndexOf(reader.GetString(1)) != -1) { windowObj.checkBoxArrServiceWorks[i].IsChecked = true; windowObj.textBoxArrVolumeWork[i].Text = obemMas[j]; j++; }
+                        if (serviceWorkList.IndexOf(reader.GetString(1)) != -1) { windowObj.checkBoxArrServiceWorks[i].IsChecked = true; windowObj.textBoxArrVolumeWork[i].Text = workVolumeArr[j]; j++; }
 
                         RowDefinition rwd = new RowDefinition();
                         rwd.Height = new GridLength(40);

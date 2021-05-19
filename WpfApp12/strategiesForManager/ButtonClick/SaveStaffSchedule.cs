@@ -46,15 +46,15 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                 catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
 
 
-                string sotrMas = "'{-1,";
+                string employeesArr = "'{-1,";
                 for (int i = 0; i < windowObj.checkBoxArrForStaffSchedule.Length; i++)
                 {
                     if (windowObj.checkBoxArrForStaffSchedule[i].IsChecked == true)
                     {
-                        sotrMas += windowObj.checkBoxArrForStaffSchedule[i].Name.Split('_')[1] + ",";
+                        employeesArr += windowObj.checkBoxArrForStaffSchedule[i].Name.Split('_')[1] + ",";
                     }
                 }
-                sotrMas = sotrMas.Substring(0, sotrMas.Length - 1) + "}'";
+                employeesArr = employeesArr.Substring(0, employeesArr.Length - 1) + "}'";
 
                 if (b == false)
                 {
@@ -62,12 +62,12 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                     {
                         NpgsqlConnection con = new NpgsqlConnection(windowObj.connectionString);
                         con.Open();
-                        string sql = "INSERT INTO shtatrasp(shtatid, date)VALUES (" + sotrMas + ", '" + dateToAdd.ToShortDateString().Replace('.', '-') + "')";
+                        string sql = "INSERT INTO shtatrasp(shtatid, date)VALUES (" + employeesArr + ", '" + dateToAdd.ToShortDateString().Replace('.', '-') + "')";
                         NpgsqlCommand com = new NpgsqlCommand(sql, con);
                         com.ExecuteNonQuery();
                         con.Close();
                     }
-                    catch { System.Windows.Forms.MessageBox.Show("Не удалось подключиться к базе данных"); return; }
+                    catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
 
                 }
                 else
@@ -77,16 +77,16 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                     {
                         NpgsqlConnection con = new NpgsqlConnection(windowObj.connectionString);
                         con.Open();
-                        string sql = "update shtatrasp set shtatid=" + sotrMas + " where date ='" + dateToAdd.ToShortDateString().Replace('.', '-') + "'";
+                        string sql = "update shtatrasp set shtatid=" + employeesArr + " where date ='" + dateToAdd.ToShortDateString().Replace('.', '-') + "'";
                         NpgsqlCommand com = new NpgsqlCommand(sql, con);
                         com.ExecuteNonQuery();
                         con.Close();
                     }
-                    catch { System.Windows.Forms.MessageBox.Show("Не удалось подключиться к базе данных"); return; }
+                    catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
 
 
                 }
-                DataGridUpdater.updateGridShtatRasp(windowObj.connectionString, windowObj.MonthGrid, windowObj.ShtatRaspSotrpGrid, windowObj.labelArrForStaffSchedule, windowObj.checkBoxArrForStaffSchedule, windowObj.ShtatRaspMonthYearLabel, windowObj.date);
+                DataGridUpdater.updateStaffScheduleGrid(windowObj);
             windowObj.ShtatRaspSaveBut.IsEnabled = false;
          
 

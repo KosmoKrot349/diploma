@@ -22,27 +22,27 @@ namespace WpfApp12.strategiesForAdmin
 
         public void buttonClick()
         {
-            StreamReader a = new StreamReader(@"rsDump.bat");
-            while (!a.EndOfStream)
+            StreamReader StramReader = new StreamReader(@"rsDump.bat");
+            while (!StramReader.EndOfStream)
             {
-                string str = a.ReadLine();
+                string str = StramReader.ReadLine();
                 for (int i = 0; i < str.Length; i++)
                 {
                     if ((str[i] >= 'а' && str[i] <= 'я') || (str[i] >= 'А' && str[i] <= 'Я')) { MessageBox.Show("В пути не должно быть русских символов"); return; }
                 }
 
             }
-            a.Close();
+            StramReader.Close();
 
             if (windowObj.rsBckpPyt.Text == "") { MessageBox.Show("Укажите файл для восстановления"); return; }
             StreamReader reader = new StreamReader(@"setting.txt");
-            ArrayList ls = new ArrayList();
+            ArrayList ListFromSettingFile = new ArrayList();
             while (!reader.EndOfStream)
             {
-                ls.Add(reader.ReadLine());
+                ListFromSettingFile.Add(reader.ReadLine());
             }
-            object[] mas = ls.ToArray();
-            string newConnStr = "Server=" + mas[0].ToString().Split(':')[1] + ";Port=" + mas[2].ToString().Split(':')[1] + ";User Id=postgres;Password=" + mas[1].ToString().Split(':')[1] + ";";
+            object[] arr = ListFromSettingFile.ToArray();
+            string newConnStr = "Server=" + arr[0].ToString().Split(':')[1] + ";Port=" + arr[2].ToString().Split(':')[1] + ";User Id=postgres;Password=" + arr[1].ToString().Split(':')[1] + ";";
 
             NpgsqlConnection npgSqlConnection = new NpgsqlConnection(newConnStr);
             try
@@ -72,24 +72,24 @@ namespace WpfApp12.strategiesForAdmin
 
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
             StreamReader StreamReader = new StreamReader(@"rsDump.bat");
-            ArrayList arLs = new ArrayList();
+            ArrayList ListFromBatFile = new ArrayList();
             while (!StreamReader.EndOfStream)
             {
-                arLs.Add(StreamReader.ReadLine());
+                ListFromBatFile.Add(StreamReader.ReadLine());
             }
             StreamReader.Close();
-            object[] batStrMas = arLs.ToArray();
-            string lastStr = batStrMas[2].ToString();
-            int index_puti = 0;
+            object[] StringArrFromBatFile = ListFromBatFile.ToArray();
+            string lastStr = StringArrFromBatFile[2].ToString();
+            int PathFileIndex = 0;
             for (int i = 0; i < lastStr.Length; i++)
             {
-                if (lastStr[i] == '<') { index_puti = i; break; }
+                if (lastStr[i] == '<') { PathFileIndex = i; break; }
             }
-            batStrMas[2] = "psql -d postgresql://postgres:" + mas[1].ToString().Split(':')[1] + "@" + mas[0].ToString().Split(':')[1] + ":" + mas[2].ToString().Split(':')[1] + "/db < " + windowObj.rsBckpPyt.Text;
+            StringArrFromBatFile[2] = "psql -d postgresql://postgres:" + arr[1].ToString().Split(':')[1] + "@" + arr[0].ToString().Split(':')[1] + ":" + arr[2].ToString().Split(':')[1] + "/db < " + windowObj.rsBckpPyt.Text;
             StreamWriter StreamWriter = new StreamWriter(@"rsDump.bat");
-            for (int i = 0; i < batStrMas.Length; i++)
+            for (int i = 0; i < StringArrFromBatFile.Length; i++)
             {
-                StreamWriter.WriteLine(batStrMas[i]);
+                StreamWriter.WriteLine(StringArrFromBatFile[i]);
             }
             StreamWriter.Close();
             Process.Start("rsDump.bat");

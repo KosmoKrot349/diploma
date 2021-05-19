@@ -50,7 +50,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                 con.Close();
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
-            DataGridUpdater.updateDataGridСab(windowObj.connectionString, windowObj.cabDataGrid);
+            DataGridUpdater.updateCabinetDataGrid(windowObj);
             windowObj.cabDataGrid.SelectedItem = null;
 
             //кабинет

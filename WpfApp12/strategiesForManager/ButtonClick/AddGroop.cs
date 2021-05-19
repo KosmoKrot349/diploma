@@ -56,19 +56,19 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
             //добавление группы
-            double[] montPay = new double[12];
-            if (windowObj.grPayment1.Text != "") montPay[0] = Convert.ToDouble(windowObj.grPayment1.Text);
-            if (windowObj.grPayment2.Text != "") montPay[1] = Convert.ToDouble(windowObj.grPayment2.Text);
-            if (windowObj.grPayment3.Text != "") montPay[2] = Convert.ToDouble(windowObj.grPayment3.Text);
-            if (windowObj.grPayment4.Text != "") montPay[3] = Convert.ToDouble(windowObj.grPayment4.Text);
-            if (windowObj.grPayment5.Text != "") montPay[4] = Convert.ToDouble(windowObj.grPayment5.Text);
-            if (windowObj.grPayment6.Text != "") montPay[5] = Convert.ToDouble(windowObj.grPayment6.Text);
-            if (windowObj.grPayment7.Text != "") montPay[6] = Convert.ToDouble(windowObj.grPayment7.Text);
-            if (windowObj.grPayment8.Text != "") montPay[7] = Convert.ToDouble(windowObj.grPayment8.Text);
-            if (windowObj.grPayment9.Text != "") montPay[8] = Convert.ToDouble(windowObj.grPayment9.Text);
-            if (windowObj.grPayment10.Text != "") montPay[9] = Convert.ToDouble(windowObj.grPayment10.Text);
-            if (windowObj.grPayment11.Text != "") montPay[10] = Convert.ToDouble(windowObj.grPayment11.Text);
-            if (windowObj.grPayment12.Text != "") montPay[11] = Convert.ToDouble(windowObj.grPayment12.Text);
+            double[] payInMonth = new double[12];
+            if (windowObj.grPayment1.Text != "") payInMonth[0] = Convert.ToDouble(windowObj.grPayment1.Text);
+            if (windowObj.grPayment2.Text != "") payInMonth[1] = Convert.ToDouble(windowObj.grPayment2.Text);
+            if (windowObj.grPayment3.Text != "") payInMonth[2] = Convert.ToDouble(windowObj.grPayment3.Text);
+            if (windowObj.grPayment4.Text != "") payInMonth[3] = Convert.ToDouble(windowObj.grPayment4.Text);
+            if (windowObj.grPayment5.Text != "") payInMonth[4] = Convert.ToDouble(windowObj.grPayment5.Text);
+            if (windowObj.grPayment6.Text != "") payInMonth[5] = Convert.ToDouble(windowObj.grPayment6.Text);
+            if (windowObj.grPayment7.Text != "") payInMonth[6] = Convert.ToDouble(windowObj.grPayment7.Text);
+            if (windowObj.grPayment8.Text != "") payInMonth[7] = Convert.ToDouble(windowObj.grPayment8.Text);
+            if (windowObj.grPayment9.Text != "") payInMonth[8] = Convert.ToDouble(windowObj.grPayment9.Text);
+            if (windowObj.grPayment10.Text != "") payInMonth[9] = Convert.ToDouble(windowObj.grPayment10.Text);
+            if (windowObj.grPayment11.Text != "") payInMonth[10] = Convert.ToDouble(windowObj.grPayment11.Text);
+            if (windowObj.grPayment12.Text != "") payInMonth[11] = Convert.ToDouble(windowObj.grPayment12.Text);
             //проверка оплаты за нужные месяца
 
             DateTime dateStartAdd = Convert.ToDateTime(windowObj.DateStartGrAdd.Text);
@@ -81,30 +81,30 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 
                     for (int i = dateStartAdd.Month - 1; i < 12; i++)
                     {
-                        if (montPay[i] == 0)
+                        if (payInMonth[i] == 0)
                         {
                             System.Windows.Forms.MessageBox.Show("В месяце " + (i + 1) + " не стоит оплата, хотя он отмечен как месяц обучения"); return;
                         }
                     }
 
                     for (int i = 0; i <= dateEndAdd.Month - 1; i++)
-                    { if (montPay[i] == 0) { System.Windows.Forms.MessageBox.Show("В месяце " + (i + 1) + "не стоит оплата, хотя он отмечен как месяц обучения"); return; } }
+                    { if (payInMonth[i] == 0) {MessageBox.Show("В месяце " + (i + 1) + "не стоит оплата, хотя он отмечен как месяц обучения"); return; } }
 
                     for (int i = dateEndAdd.Month; i < dateStartAdd.Month - 1; i++)
-                    { if (montPay[i] != 0) { System.Windows.Forms.MessageBox.Show("В месяце " + (i + 1) + " стоит оплата, хотя он не отмечен как месяц обучения"); return; } }
+                    { if (payInMonth[i] != 0) {MessageBox.Show("В месяце " + (i + 1) + " стоит оплата, хотя он не отмечен как месяц обучения"); return; } }
                 }
 
                 if (dateStartAdd.Month < dateEndAdd.Month)
                 {
                     if (dateStartAdd.Year != dateEndAdd.Year) { MessageBox.Show("Дата введена не корректно"); return; }
                     for (int i = 0; i < dateStartAdd.Month - 1; i++)
-                    { if (montPay[i] != 0) { System.Windows.Forms.MessageBox.Show("В месяце " + (i + 1) + " стоит оплата, хотя он не отмечен как месяц обучения"); return; } }
+                    { if (payInMonth[i] != 0) { MessageBox.Show("В месяце " + (i + 1) + " стоит оплата, хотя он не отмечен как месяц обучения"); return; } }
 
                     for (int i = dateEndAdd.Month; i < 12; i++)
-                    { if (montPay[i] != 0) { System.Windows.Forms.MessageBox.Show("В месяце " + (i + 1) + " стоит оплата, хотя он не отмечен как месяц обучения"); return; } }
+                    { if (payInMonth[i] != 0) { MessageBox.Show("В месяце " + (i + 1) + " стоит оплата, хотя он не отмечен как месяц обучения"); return; } }
 
                     for (int i = dateStartAdd.Month - 1; i <= dateEndAdd.Month - 1; i++)
-                    { if (montPay[i] == 0) { System.Windows.Forms.MessageBox.Show("В месяце " + (i + 1) + " не стоит оплата, хотя он отмечен как месяц обучения"); return; } }
+                    { if (payInMonth[i] == 0) { MessageBox.Show("В месяце " + (i + 1) + " не стоит оплата, хотя он отмечен как месяц обучения"); return; } }
                 }
 
                 if (dateStartAdd.Month == dateEndAdd.Month)
@@ -112,10 +112,10 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                     if (dateStartAdd.Year == dateEndAdd.Year)
                     {
                         for (int i = 0; i < dateStartAdd.Month - 1; i++)
-                        { if (montPay[i] != 0) { System.Windows.Forms.MessageBox.Show("В месяце1 " + (i + 1) + " стоит оплата, хотя он не отмечен как месяц обучения"); return; } }
+                        { if (payInMonth[i] != 0) { MessageBox.Show("В месяце1 " + (i + 1) + " стоит оплата, хотя он не отмечен как месяц обучения"); return; } }
 
                         for (int i = dateEndAdd.Month; i < 12; i++)
-                        { if (montPay[i] != 0) { System.Windows.Forms.MessageBox.Show("В месяце2 " + (i + 1) + " стоит оплата, хотя он не отмечен как месяц обучения"); return; } }
+                        { if (payInMonth[i] != 0) { MessageBox.Show("В месяце2 " + (i + 1) + " стоит оплата, хотя он не отмечен как месяц обучения"); return; } }
                     }
                     else
                     { System.Windows.Forms.MessageBox.Show("Дата введена не корректно"); return; }
@@ -128,7 +128,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             {
                 NpgsqlConnection con = new NpgsqlConnection(windowObj.connectionString);
                 con.Open();
-                string sql = "INSERT INTO groups(courseid, nazvanie, comment, payment,date_start,date_end) VALUES(" + courseID + ",'" + windowObj.grTitle.Text + "' ,'" + windowObj.grComm.Text + "' , '{" + montPay[0].ToString().Replace(',', '.') + "," + montPay[1].ToString().Replace(',', '.') + "," + montPay[2].ToString().Replace(',', '.') + "," + montPay[3].ToString().Replace(',', '.') + "," + montPay[4].ToString().Replace(',', '.') + "," + montPay[5].ToString().Replace(',', '.') + "," + montPay[6].ToString().Replace(',', '.') + "," + montPay[7].ToString().Replace(',', '.') + "," + montPay[8].ToString().Replace(',', '.') + "," + montPay[9].ToString().Replace(',', '.') + "," + montPay[10].ToString().Replace(',', '.') + "," + montPay[11].ToString().Replace(',', '.') + "}','" + dateStartAdd.ToShortDateString().Replace('.', '-') + "','" + dateEndAdd.ToShortDateString().Replace('.', '-') + "' ); ";
+                string sql = "INSERT INTO groups(courseid, nazvanie, comment, payment,date_start,date_end) VALUES(" + courseID + ",'" + windowObj.grTitle.Text + "' ,'" + windowObj.grComm.Text + "' , '{" + payInMonth[0].ToString().Replace(',', '.') + "," + payInMonth[1].ToString().Replace(',', '.') + "," + payInMonth[2].ToString().Replace(',', '.') + "," + payInMonth[3].ToString().Replace(',', '.') + "," + payInMonth[4].ToString().Replace(',', '.') + "," + payInMonth[5].ToString().Replace(',', '.') + "," + payInMonth[6].ToString().Replace(',', '.') + "," + payInMonth[7].ToString().Replace(',', '.') + "," + payInMonth[8].ToString().Replace(',', '.') + "," + payInMonth[9].ToString().Replace(',', '.') + "," + payInMonth[10].ToString().Replace(',', '.') + "," + payInMonth[11].ToString().Replace(',', '.') + "}','" + dateStartAdd.ToShortDateString().Replace('.', '-') + "','" + dateEndAdd.ToShortDateString().Replace('.', '-') + "' ); ";
                 NpgsqlCommand command = new NpgsqlCommand(sql, con);
                 command.ExecuteNonQuery();
                 con.Close();
@@ -163,7 +163,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             {
                 windowObj.HideAll();
                 windowObj.groupsGrid.Visibility = Visibility.Visible;
-                DataGridUpdater.updateDataGridGroups(windowObj.connectionString, windowObj.filtr.sql, windowObj.groupsDataGrid);
+                DataGridUpdater.updateGroopsDataGrid(windowObj);
             }
         }
     }

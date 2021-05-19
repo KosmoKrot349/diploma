@@ -33,9 +33,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             windowObj.courseChangeTitle.Text = arr[1].ToString();
             windowObj.dontChangeCourseName = arr[1].ToString();
             windowObj.courseChangeComm.Text = arr[3].ToString();
-            object[] masSubjects = arr[2].ToString().Replace(" ", "").Split(',');
-            ArrayList list = new ArrayList(masSubjects);
-            int chbxMasLength = 0;
+            object[] subjectsArr = arr[2].ToString().Replace(" ", "").Split(',');
+            ArrayList list = new ArrayList(subjectsArr);
+            int checkBoxArrLength = 0;
             try
             {
                 NpgsqlConnection con1 = new NpgsqlConnection(windowObj.connectionString);
@@ -47,7 +47,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                 {
                     while (reader1.Read())
                     {
-                        chbxMasLength = reader1.GetInt32(0);
+                        checkBoxArrLength = reader1.GetInt32(0);
                     }
                 }
                 con1.Close();
@@ -61,20 +61,20 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                 string sql = "select title,subid from subject";
                 NpgsqlCommand command = new NpgsqlCommand(sql, con);
                 NpgsqlDataReader reader = command.ExecuteReader();
-                windowObj.chbxMas = new CheckBox[chbxMasLength];
+                windowObj.checkBoxArr = new CheckBox[checkBoxArrLength];
                 int i = 0;
                 if (reader.HasRows)
                 {
                     while (reader.Read())
                     {
 
-                        windowObj.chbxMas[i] = new CheckBox();
-                        windowObj.chbxMas[i].Name = "id" + reader.GetInt32(1).ToString();
-                        windowObj.chbxMas[i].Content = reader.GetString(0);
-                        if (list.IndexOf(reader.GetString(0)) != -1) { windowObj.chbxMas[i].IsChecked = true; }
-                        windowObj.subsChangeCanvas.Children.Add(windowObj.chbxMas[i]);
-                        Canvas.SetLeft(windowObj.chbxMas[i], 1);
-                        Canvas.SetTop(windowObj.chbxMas[i], i * 15);
+                        windowObj.checkBoxArr[i] = new CheckBox();
+                        windowObj.checkBoxArr[i].Name = "id" + reader.GetInt32(1).ToString();
+                        windowObj.checkBoxArr[i].Content = reader.GetString(0);
+                        if (list.IndexOf(reader.GetString(0)) != -1) { windowObj.checkBoxArr[i].IsChecked = true; }
+                        windowObj.subsChangeCanvas.Children.Add(windowObj.checkBoxArr[i]);
+                        Canvas.SetLeft(windowObj.checkBoxArr[i], 1);
+                        Canvas.SetTop(windowObj.checkBoxArr[i], i * 15);
                         i++;
 
                     }

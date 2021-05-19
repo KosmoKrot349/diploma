@@ -20,7 +20,7 @@ namespace WpfApp12.strategiesForManager.MenuClick
         {
             window.HideAll();
             window.cabGrid.Visibility = Visibility.Visible;
-            DataGridUpdater.updateDataGridСab(window.connectionString, window.cabDataGrid);
+            DataGridUpdater.updateCabinetDataGrid(window);
         }
     }
 }

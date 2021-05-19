@@ -34,7 +34,7 @@ public int logUser;
         public CheckBox[] checkBoxArrForListeners;
         public TextBox[] textBoxArrForListeners;
         
-        public CheckBox[] chbxMas;
+        public CheckBox[] checkBoxArr;
         public string FIO = "";
         public Label[,] labelArr;
         public int quanLessonsInDay = 0;//число зантий в дне
@@ -58,7 +58,7 @@ public int logUser;
         public DateTime date = DateTime.Now;
 
 
-        public filtr filtr = new filtr();
+        public filtr filter = new filtr();
 
         public filtr PeopleFromCashboxFilter = new filtr();
         public filtr ProfitTypesFromCashboxFilter = new filtr();
@@ -88,7 +88,7 @@ public int logUser;
             }
             object[] mas = ls.ToArray();
             connectionString = "Server=" + mas[0].ToString().Split(':')[1] + ";Port=" + mas[2].ToString().Split(':')[1] + ";User Id=postgres;Password=" + mas[1].ToString().Split(':')[1] + ";Database=db";
-            filtr.connectionString = connectionString;
+            filter.connectionString = connectionString;
             PeopleFromCashboxFilter.connectionString = connectionString;
             StaffFromCashboxFiltr.connectionString = connectionString;
             ProfitTypesFromCashboxFilter.connectionString = connectionString;
@@ -115,7 +115,7 @@ public int logUser;
         //переход из меню директора в меню бухгалтера+
         private void BuhgRoleD_Click(object sender, RoutedEventArgs e)
         {
-            IButtonClick actionReact = new GoToBuhgalter(this);
+            IButtonClick actionReact = new GoToBookkeeper(this);
             actionReact.ButtonClick();
         }
         //переход из меню директора в меню директора+
@@ -902,12 +902,12 @@ public int logUser;
 
                 FiltrShtatSotr.Children.Clear();
                 FiltrShtatSotr.ColumnDefinitions.Clear();
-                filtr.CreateShtatFiltrFirst(FiltrShtatSotr);
+                filter.CreateStaffFirstFilter(FiltrShtatSotr);
             }
             else {
                 FiltrShtatSotr.Children.Clear();
                 FiltrShtatSotr.ColumnDefinitions.Clear();
-                filtr.CreateShtatFiltrSecond(FiltrShtatSotr);
+                filter.CreateStaffSecondFilter(FiltrShtatSotr);
             }
         }
         //переход к гриду отчета кассы+
@@ -940,14 +940,14 @@ public int logUser;
             Button bt = sender as Button;
             if (bt.Name == "PrimFKD") 
             {
-                PeopleFromCashboxFilter.ApplyDohFiltr(ProfitTypesFromCashboxFilter);
-                DataGridUpdater.updateGridKassa(connectionString, KassaDodohGrid, KassaRashodGrid, kassaTitleLabel, KassaItogoDohod, KassaItogoRashod, kassaAllDohodLabel, PeopleFromCashboxFilter.sql, StaffFromCashboxFiltr.sql);
+                PeopleFromCashboxFilter.ApplyProfitFilterForCashboxReport(ProfitTypesFromCashboxFilter);
+                DataGridUpdater.updateCashBoxGrid(connectionString, KassaDodohGrid, KassaRashodGrid, kassaTitleLabel, KassaItogoDohod, KassaItogoRashod, kassaAllDohodLabel, PeopleFromCashboxFilter.sql, StaffFromCashboxFiltr.sql);
             }
             if (bt.Name == "PrimFKR") 
             {
 
-                StaffFromCashboxFiltr.ApplyRashFiltr(CostsTypesFromCashboxFilter);
-                DataGridUpdater.updateGridKassa(connectionString, KassaDodohGrid, KassaRashodGrid, kassaTitleLabel, KassaItogoDohod, KassaItogoRashod, kassaAllDohodLabel, PeopleFromCashboxFilter.sql, StaffFromCashboxFiltr.sql);
+                StaffFromCashboxFiltr.ApplyCostsFilterForCashboxReport(CostsTypesFromCashboxFilter);
+                DataGridUpdater.updateCashBoxGrid(connectionString, KassaDodohGrid, KassaRashodGrid, kassaTitleLabel, KassaItogoDohod, KassaItogoRashod, kassaAllDohodLabel, PeopleFromCashboxFilter.sql, StaffFromCashboxFiltr.sql);
             }
         }
     }

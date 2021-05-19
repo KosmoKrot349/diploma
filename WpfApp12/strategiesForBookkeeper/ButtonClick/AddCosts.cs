@@ -43,7 +43,7 @@ namespace WpfApp12.strategiesForBookkeeper.ButtonClick
             {
                 windowObj.HideAll();
                 windowObj.RoshodyGrid.Visibility = Visibility.Visible;
-                DataGridUpdater.updateDataGridRashody(windowObj.connectionString, windowObj.filter.sql, windowObj.RoshodyDataGrid);
+                DataGridUpdater.updateCostsDataGrid(windowObj);
             }
 
             windowObj.RoshodyDataGrid.SelectedItem = null;

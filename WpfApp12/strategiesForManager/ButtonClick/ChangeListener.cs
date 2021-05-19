@@ -22,7 +22,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
         {
             if (windowObj.listenerFIOCh.Text == "" || windowObj.listenerPhonesCh.Text == "") { MessageBox.Show("Поля не заполнены или заполнены не правильно."); return; }
             bool b = false;
-            string grLgMas = "'{";
+            string groopsOfListenerArr = "'{";
             ArrayList ls = new ArrayList();
             string sql = "select grid from groups where ";
             for (int i = 0; i < windowObj.checkBoxArrForListeners.Length; i++)
@@ -32,16 +32,16 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                     b = true;
                     sql += "nazvanie='" + windowObj.checkBoxArrForListeners[i].Content.ToString().Substring(0, windowObj.checkBoxArrForListeners[i].Content.ToString().Length - 9) + "' or ";
                     if (windowObj.textBoxArrForListeners[i].Text != "" && Convert.ToDouble(windowObj.textBoxArrForListeners[i].Text) > 100) { System.Windows.Forms.MessageBox.Show("Процент не может быть больше 100"); return; }
-                    if (windowObj.textBoxArrForListeners[i].Text != "") grLgMas += Convert.ToDouble(windowObj.textBoxArrForListeners[i].Text).ToString().Replace(',', '.') + ",";
+                    if (windowObj.textBoxArrForListeners[i].Text != "") groopsOfListenerArr += Convert.ToDouble(windowObj.textBoxArrForListeners[i].Text).ToString().Replace(',', '.') + ",";
                     else
-                        grLgMas += "0,";
+                        groopsOfListenerArr += "0,";
                 }
 
             }
-            grLgMas = grLgMas.Substring(0, grLgMas.Length - 1) + "}'";
+            groopsOfListenerArr = groopsOfListenerArr.Substring(0, groopsOfListenerArr.Length - 1) + "}'";
             sql = sql.Substring(0, sql.Length - 3) + " order by grid";
-            if (b == false) { System.Windows.Forms.MessageBox.Show("Группа не выбрана"); return; }
-            string grMasId = "'{";
+            if (b == false) { MessageBox.Show("Группа не выбрана"); return; }
+            string groopsIDArr = "'{";
             ArrayList GroupsOfListNew = new ArrayList();
             try
             {
@@ -55,13 +55,13 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 
                     while (reader.Read())
                     {
-                        grMasId += reader.GetInt32(0).ToString() + ",";
+                        groopsIDArr += reader.GetInt32(0).ToString() + ",";
                         GroupsOfListNew.Add(reader.GetInt32(0));
                     }
 
                 }
                 con.Close();
-                grMasId = grMasId.Substring(0, grMasId.Length - 1) + "}'";
+                groopsIDArr = groopsIDArr.Substring(0, groopsIDArr.Length - 1) + "}'";
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
             //получение групп слуштеля из таблицы оплат
@@ -106,7 +106,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 
                 NpgsqlConnection con = new NpgsqlConnection(windowObj.connectionString);
                 con.Open();
-                string sql2 = "UPDATE listeners SET  fio='" + windowObj.listenerFIOCh.Text + "', phones='" + windowObj.listenerPhonesCh.Text + "', grid=" + grMasId + ", lgt=" + grLgMas + ", comment='" + windowObj.listenerCommCh.Text + "' WHERE listenerid=" + windowObj.listenerID;
+                string sql2 = "UPDATE listeners SET  fio='" + windowObj.listenerFIOCh.Text + "', phones='" + windowObj.listenerPhonesCh.Text + "', grid=" + groopsIDArr + ", lgt=" + groopsOfListenerArr + ", comment='" + windowObj.listenerCommCh.Text + "' WHERE listenerid=" + windowObj.listenerID;
                 NpgsqlCommand com = new NpgsqlCommand(sql2, con);
                 com.ExecuteNonQuery();
                 con.Close();
@@ -187,19 +187,19 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                             con22.Close();
                         }
                         catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
-                        string masPay = "'{";
+                        string payArr = "'{";
                         for (int i2 = 0; i2 < 12; i2++)
                         {
-                            masPay += payMonth[i2].ToString().Replace(',', '.') + ",";
+                            payArr += payMonth[i2].ToString().Replace(',', '.') + ",";
                         }
-                        masPay = masPay.Substring(0, masPay.Length - 1) + "}'";
+                        payArr = payArr.Substring(0, payArr.Length - 1) + "}'";
                         //добавление записи в таблицу
                         try
                         {
 
                             NpgsqlConnection con2 = new NpgsqlConnection(windowObj.connectionString);
                             con2.Open();
-                            string sql22 = "INSERT INTO listnuch(listenerid, grid, payformonth, payedlist, skidkiforpay, topay, penya, date_stop, isclose) VALUES(" + windowObj.listenerID + ", " + GroupsOfListNew[i] + ", " + masPay + ", '{0,0,0,0,0,0,0,0,0,0,0,0}', '{0,0,0,0,0,0,0,0,0,0,0,0}', " + masPay + ", '{0,0,0,0,0,0,0,0,0,0,0,0}', null, 0)";
+                            string sql22 = "INSERT INTO listnuch(listenerid, grid, payformonth, payedlist, skidkiforpay, topay, penya, date_stop, isclose) VALUES(" + windowObj.listenerID + ", " + GroupsOfListNew[i] + ", " + payArr + ", '{0,0,0,0,0,0,0,0,0,0,0,0}', '{0,0,0,0,0,0,0,0,0,0,0,0}', " + payArr + ", '{0,0,0,0,0,0,0,0,0,0,0,0}', null, 0)";
                             NpgsqlCommand com2 = new NpgsqlCommand(sql22, con2);
                             com2.ExecuteNonQuery();
                             con2.Close();
@@ -217,7 +217,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             //слушатели
             windowObj.listenerDeleteButton.IsEnabled = false;
             windowObj.listenerChangeButton.IsEnabled = false;
-            DataGridUpdater.updateDataGridListener(windowObj.connectionString, windowObj.filtr.sql, windowObj.listenerDataGrid);
+            DataGridUpdater.updateListenerDataGrid(windowObj);
             windowObj.ListenerGrid.Visibility = Visibility.Visible;
         }
     }

@@ -47,7 +47,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             windowObj.dontChangeGroopName = arr[1].ToString();
             windowObj.payToYearCh.Content = arr[3].ToString();
             windowObj.grCommCh.Text = arr[6].ToString();
-            bool ListHasGr = false;
+            bool ListenerHasGroop = false;
             try
             {
 
@@ -59,7 +59,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 
                 if (reader.HasRows)
                 {
-                    ListHasGr = true;
+                    ListenerHasGroop = true;
                 }
                 con.Close();
             }
@@ -80,32 +80,32 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                     while (reader.Read())
                     {
                         windowObj.grPayment1Ch.Text = reader.GetDouble(0).ToString();
-                        if (reader.GetDouble(0) == 0 && ListHasGr == true) { windowObj.grPayment1Ch.IsEnabled = false; }
+                        if (reader.GetDouble(0) == 0 && ListenerHasGroop == true) { windowObj.grPayment1Ch.IsEnabled = false; }
                         windowObj.grPayment2Ch.Text = reader.GetDouble(1).ToString();
-                        if (reader.GetDouble(1) == 0 && ListHasGr == true) { windowObj.grPayment2Ch.IsEnabled = false; }
+                        if (reader.GetDouble(1) == 0 && ListenerHasGroop == true) { windowObj.grPayment2Ch.IsEnabled = false; }
                         windowObj.grPayment3Ch.Text = reader.GetDouble(2).ToString();
-                        if (reader.GetDouble(2) == 0 && ListHasGr == true) { windowObj.grPayment3Ch.IsEnabled = false; }
+                        if (reader.GetDouble(2) == 0 && ListenerHasGroop == true) { windowObj.grPayment3Ch.IsEnabled = false; }
                         windowObj.grPayment4Ch.Text = reader.GetDouble(3).ToString();
-                        if (reader.GetDouble(3) == 0 && ListHasGr == true) { windowObj.grPayment4Ch.IsEnabled = false; }
+                        if (reader.GetDouble(3) == 0 && ListenerHasGroop == true) { windowObj.grPayment4Ch.IsEnabled = false; }
                         windowObj.grPayment5Ch.Text = reader.GetDouble(4).ToString();
-                        if (reader.GetDouble(4) == 0 && ListHasGr == true) { windowObj.grPayment5Ch.IsEnabled = false; }
+                        if (reader.GetDouble(4) == 0 && ListenerHasGroop == true) { windowObj.grPayment5Ch.IsEnabled = false; }
                         windowObj.grPayment6Ch.Text = reader.GetDouble(5).ToString();
-                        if (reader.GetDouble(5) == 0 && ListHasGr == true) { windowObj.grPayment6Ch.IsEnabled = false; }
+                        if (reader.GetDouble(5) == 0 && ListenerHasGroop == true) { windowObj.grPayment6Ch.IsEnabled = false; }
                         windowObj.grPayment7Ch.Text = reader.GetDouble(6).ToString();
-                        if (reader.GetDouble(6) == 0 && ListHasGr == true) { windowObj.grPayment7Ch.IsEnabled = false; }
+                        if (reader.GetDouble(6) == 0 && ListenerHasGroop == true) { windowObj.grPayment7Ch.IsEnabled = false; }
                         windowObj.grPayment8Ch.Text = reader.GetDouble(7).ToString();
-                        if (reader.GetDouble(7) == 0 && ListHasGr == true) { windowObj.grPayment8Ch.IsEnabled = false; }
+                        if (reader.GetDouble(7) == 0 && ListenerHasGroop == true) { windowObj.grPayment8Ch.IsEnabled = false; }
                         windowObj.grPayment9Ch.Text = reader.GetDouble(8).ToString();
-                        if (reader.GetDouble(8) == 0 && ListHasGr == true) { windowObj.grPayment9Ch.IsEnabled = false; }
+                        if (reader.GetDouble(8) == 0 && ListenerHasGroop == true) { windowObj.grPayment9Ch.IsEnabled = false; }
                         windowObj.grPayment10Ch.Text = reader.GetDouble(9).ToString();
-                        if (reader.GetDouble(9) == 0 && ListHasGr == true) { windowObj.grPayment10Ch.IsEnabled = false; }
+                        if (reader.GetDouble(9) == 0 && ListenerHasGroop == true) { windowObj.grPayment10Ch.IsEnabled = false; }
                         windowObj.grPayment11Ch.Text = reader.GetDouble(10).ToString();
-                        if (reader.GetDouble(10) == 0 && ListHasGr == true) { windowObj.grPayment11Ch.IsEnabled = false; }
+                        if (reader.GetDouble(10) == 0 && ListenerHasGroop == true) { windowObj.grPayment11Ch.IsEnabled = false; }
                         windowObj.grPayment12Ch.Text = reader.GetDouble(11).ToString();
-                        if (reader.GetDouble(11) == 0 && ListHasGr == true) { windowObj.grPayment12Ch.IsEnabled = false; }
+                        if (reader.GetDouble(11) == 0 && ListenerHasGroop == true) { windowObj.grPayment12Ch.IsEnabled = false; }
                         windowObj.DateStartCh.Text = reader.GetDateTime(12).ToShortDateString();
                         windowObj.DateEndCh.Text = reader.GetDateTime(13).ToShortDateString();
-                        if (ListHasGr == true) { windowObj.DateStartCh.IsEnabled = false; windowObj.DateEndCh.IsEnabled = false; }
+                        if (ListenerHasGroop == true) { windowObj.DateStartCh.IsEnabled = false; windowObj.DateEndCh.IsEnabled = false; }
                     }
                 }
                 con.Close();

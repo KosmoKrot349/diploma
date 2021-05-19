@@ -27,24 +27,24 @@ namespace WpfApp12.strategiesForAdmin
             windowObj.bckpPyt.Text = "";
             windowObj.sybdPyt.Text = "";
             StreamReader StreamReader = new StreamReader(@"crDump.bat");
-            ArrayList arLs = new ArrayList();
+            ArrayList createBackUpList = new ArrayList();
             while (!StreamReader.EndOfStream)
             {
-                arLs.Add(StreamReader.ReadLine());
+                createBackUpList.Add(StreamReader.ReadLine());
             }
-            object[] batStrMas = arLs.ToArray();
-            string splitMas1 = batStrMas[1].ToString().Substring(2);
-            windowObj.sybdPyt.Text = splitMas1.Trim(' ');
-            string splitMas2 = batStrMas[2].ToString();
-            int index_puti = 0;
+            object[] stringArrFromBatFile = createBackUpList.ToArray();
+            string DBPathString = stringArrFromBatFile[1].ToString().Substring(2);
+            windowObj.sybdPyt.Text = DBPathString.Trim(' ');
+            string BackUpPathString = stringArrFromBatFile[2].ToString();
+            int PathIndex = 0;
 
-            for (int i = 0; i < splitMas2.Length; i++)
+            for (int i = 0; i < BackUpPathString.Length; i++)
             {
-                if (splitMas2[i] == '>') index_puti = i + 1;
+                if (BackUpPathString[i] == '>') PathIndex = i + 1;
             }
-            string[] masFolders = splitMas2.Substring(index_puti).Split('\\');
-            for (int i = 0; i < masFolders.Length - 1; i++)
-            { windowObj.bckpPyt.Text += masFolders[i] + "\\"; }
+            string[] FoldersArr = BackUpPathString.Substring(PathIndex).Split('\\');
+            for (int i = 0; i < FoldersArr.Length - 1; i++)
+            { windowObj.bckpPyt.Text += FoldersArr[i] + "\\"; }
             windowObj.bckpPyt.Text = windowObj.bckpPyt.Text.Trim(' ');
             StreamReader.Close();
         }

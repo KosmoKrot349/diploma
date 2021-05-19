@@ -6,30 +6,28 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace WpfApp12.strategiesForAdmin
+namespace WpfApp12.strategiesForManager.ButtonClick
 {
-
-    class ToBuhg:IButtonClick
+    class GoToBookkeeper:IButtonClick
     {
-        private AdminWindow windowObj;
+        ManagerWindow windowObj;
 
-        public ToBuhg(AdminWindow windowObj)
+        public GoToBookkeeper(ManagerWindow windowObj)
         {
             this.windowObj = windowObj;
         }
 
-        public void buttonClick()
+        public void ButtonClick()
         {
-            int b = 0;
-            if (windowObj.logUser != -1) b = Checker.buhgCheck(windowObj.logUser, windowObj.connectionString);
-            if (b == 1 || windowObj.logUser == -1)
+            int checkerResult = 0;
+            if (windowObj.logUser != -1) checkerResult = Checker.buhgCheck(windowObj.logUser, windowObj.connectionString);
+            if (checkerResult == 1 || windowObj.logUser == -1)
             {
                 BookkeeperWindow wind = new BookkeeperWindow();
                 try
                 {
                     NpgsqlConnection connection = new NpgsqlConnection(windowObj.connectionString);
                     string sql = "select admin,buhgalter,director from users where uid = " + windowObj.logUser;
-
                     connection.Open();
                     NpgsqlCommand command = new NpgsqlCommand(sql, connection);
                     NpgsqlDataReader dReader = command.ExecuteReader();
@@ -55,9 +53,8 @@ namespace WpfApp12.strategiesForAdmin
                 wind.Top = windowObj.Top;
                 wind.Show();
                 windowObj.Close();
-
             }
-            else { MessageBox.Show("Вы не имете доступа к этой роли"); }
+            else { MessageBox.Show("Вы не имеете доступа к этой роли"); }
         }
     }
 }

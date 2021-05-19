@@ -28,14 +28,14 @@ namespace WpfApp12.strategiesForBookkeeper.ButtonClick
             {
                 DateIn wind = new DateIn();
                 wind.gridViplataZp.Visibility = Visibility.Visible;
-                wind.zapid = Convert.ToInt32(arr[0]);
-                wind.topay = Convert.ToDouble(arr[9]);
-                wind.constr = windowObj.connectionString;
+                wind.AccrualRecordId = Convert.ToInt32(arr[0]);
+                wind.toPay = Convert.ToDouble(arr[9]);
+                wind.connectionString = windowObj.connectionString;
                 wind.Owner = windowObj;
                 wind.ShowDialog();
                 windowObj.NachDataGrid.SelectedItem = null;
                 windowObj.ViplataBut.IsEnabled = false;
-                DataGridUpdater.updateGridNachZp(windowObj.connectionString, windowObj.NachMonthLabel, windowObj.checkBoxArrStaffForAccrual, windowObj.NachSotrGrid, windowObj.NachDataGrid, windowObj.dateAccrual);
+                DataGridUpdater.updateAccrualsSalaryDataGrid(windowObj);
             }
         }
     }

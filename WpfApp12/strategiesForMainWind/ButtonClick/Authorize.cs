@@ -123,16 +123,16 @@ namespace WpfApp12.strategiesForMainWind.ButtonClick
                     windowObj.settingGrid.Visibility = Visibility.Visible;
                     windowObj.autGrid.Visibility = Visibility.Collapsed;
                     StreamReader streamReader = new StreamReader(@"setting.txt");
-                    ArrayList list = new ArrayList();
+                    ArrayList ListFromSettingsFile = new ArrayList();
                     while (!streamReader.EndOfStream)
                     {
-                        list.Add(streamReader.ReadLine());
+                        ListFromSettingsFile.Add(streamReader.ReadLine());
                     }
                     streamReader.Close();
-                    object[] mas_str = list.ToArray();
-                    windowObj.connect.Text = mas_str[0].ToString().Split(':')[1];
-                    windowObj.dbPassText.Text = mas_str[1].ToString().Split(':')[1];
-                    windowObj.dbPortText.Text = mas_str[2].ToString().Split(':')[1];
+                    object[] strArr = ListFromSettingsFile.ToArray();
+                    windowObj.connect.Text = strArr[0].ToString().Split(':')[1];
+                    windowObj.dbPassText.Text = strArr[1].ToString().Split(':')[1];
+                    windowObj.dbPortText.Text = strArr[2].ToString().Split(':')[1];
 
                 }
                 if (res == MessageBoxResult.No)

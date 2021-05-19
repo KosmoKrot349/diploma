@@ -136,8 +136,8 @@
     <Compile Include="strategiesForAdmin\ButtonClick\SelectFolderBackUpRestore.cs" />
     <Compile Include="strategiesForAdmin\ButtonClick\SaveRootPassword.cs" />
     <Compile Include="strategiesForAdmin\ButtonClick\ToAdmin.cs" />
-    <Compile Include="strategiesForAdmin\ButtonClick\ToBuhg.cs" />
-    <Compile Include="strategiesForAdmin\ButtonClick\ToDirector.cs" />
+    <Compile Include="strategiesForAdmin\ButtonClick\ToBookkeeper.cs" />
+    <Compile Include="strategiesForAdmin\ButtonClick\ToManager.cs" />
     <Compile Include="strategiesForAdmin\ButtonClick\GoToNextYear.cs" />
     <Compile Include="strategiesForAdmin\ButtonClick\ToNextYear.cs" />
     <Compile Include="strategiesForAdmin\ButtonClick\UnLogin.cs" />
@@ -165,7 +165,7 @@
     <Compile Include="strategiesForBookkeeper\ButtonClick\SalaryPay.cs" />
     <Compile Include="strategiesForBookkeeper\ButtonClick\SaveTax.cs" />
     <Compile Include="strategiesForBookkeeper\ButtonClick\ToAdmin.cs" />
-    <Compile Include="strategiesForBookkeeper\ButtonClick\ToBuhg.cs" />
+    <Compile Include="strategiesForBookkeeper\ButtonClick\ToBookkeeper.cs" />
     <Compile Include="strategiesForBookkeeper\ButtonClick\ToManager.cs" />
     <Compile Include="strategiesForBookkeeper\ButtonClick\UnClosePaymentEntry.cs" />
     <Compile Include="strategiesForBookkeeper\ButtonClick\UnLogin.cs" />
@@ -254,7 +254,7 @@
     <Compile Include="strategiesForManager\ButtonClick\GoToAddScheduleGroop.cs" />
     <Compile Include="strategiesForManager\ButtonClick\GoToAddScheduleTeacher.cs" />
     <Compile Include="strategiesForManager\ButtonClick\GoToAdmin.cs" />
-    <Compile Include="strategiesForManager\ButtonClick\GoToBuhgalter.cs" />
+    <Compile Include="strategiesForManager\ButtonClick\GoToBookkeeper.cs" />
     <Compile Include="strategiesForManager\ButtonClick\GoToChangeCourse.cs" />
     <Compile Include="strategiesForManager\ButtonClick\GoToChangeGroop.cs" />
     <Compile Include="strategiesForManager\ButtonClick\GoToChangeListener.cs" />

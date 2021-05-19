@@ -24,15 +24,15 @@ namespace WpfApp12.strategiesForAdmin
             windowObj.rsDumpGrid.Visibility = Visibility.Visible;
 
             StreamReader StreamReader = new StreamReader(@"rsDump.bat");
-            ArrayList arLs = new ArrayList();
+            ArrayList restoreBackUpList = new ArrayList();
             while (!StreamReader.EndOfStream)
             {
-                arLs.Add(StreamReader.ReadLine());
+                restoreBackUpList.Add(StreamReader.ReadLine());
             }
-            object[] batStrMas = arLs.ToArray();
-            string splitMas1 = batStrMas[1].ToString().Substring(2);
-            windowObj.rsSybdPyt.Text = splitMas1;
-            string splitMas2 = batStrMas[2].ToString();
+            object[] StringArrFromBatFile = restoreBackUpList.ToArray();
+            string DBPathString = StringArrFromBatFile[1].ToString().Substring(2);
+            windowObj.rsSybdPyt.Text = DBPathString;
+            string FileString = StringArrFromBatFile[2].ToString();
             StreamReader.Close();
         }
     }

@@ -26,9 +26,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             DateIn wind = new DateIn();
             wind.gridToRas.Visibility = Visibility.Visible;
             wind.ShowDialog();
-            DateTime dm = wind.getDm();
-            if (dm.Day == 1 && dm.Month == 1 && dm.Year == 1) { return; }
-            windowObj.dateMonday = dm;
+            DateTime dateMonday = wind.getDm();
+            if (dateMonday.Day == 1 && dateMonday.Month == 1 && dateMonday.Year == 1) { return; }
+            windowObj.dateMonday = dateMonday;
             try
             {
                 NpgsqlConnection con = new NpgsqlConnection(windowObj.connectionString);

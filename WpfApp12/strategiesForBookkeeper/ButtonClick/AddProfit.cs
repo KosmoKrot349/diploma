@@ -46,7 +46,7 @@ namespace WpfApp12.strategiesForBookkeeper.ButtonClick
                 windowObj.DohodyDataGrid.SelectedItem = null;
                 windowObj.DohDeleteButton.IsEnabled = false;
                 windowObj.DohChangeButton.IsEnabled = false;
-                DataGridUpdater.updateDataGridDohody(windowObj.connectionString, windowObj.filter.sql, windowObj.DohodyDataGrid);
+                DataGridUpdater.updateProfitDataGrid(windowObj);
             }
         }
     }

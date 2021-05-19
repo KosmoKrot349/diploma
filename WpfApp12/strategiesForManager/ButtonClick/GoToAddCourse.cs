@@ -51,20 +51,20 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                 string sql = "select title,subid from subject";
                 NpgsqlCommand command = new NpgsqlCommand(sql, con);
                 NpgsqlDataReader reader = command.ExecuteReader();
-                windowObj.chbxMas = new CheckBox[chbxMasLength];
+                windowObj.checkBoxArr = new CheckBox[chbxMasLength];
                 int i = 0;
                 if (reader.HasRows)
                 {
                     while (reader.Read())
                     {
 
-                        windowObj.chbxMas[i] = new CheckBox();
-                        windowObj.chbxMas[i].Name = "id" + reader.GetInt32(1).ToString();
-                        windowObj.chbxMas[i].Content = reader.GetString(0);
+                        windowObj.checkBoxArr[i] = new CheckBox();
+                        windowObj.checkBoxArr[i].Name = "id" + reader.GetInt32(1).ToString();
+                        windowObj.checkBoxArr[i].Content = reader.GetString(0);
 
-                        windowObj.subsCanvas.Children.Add(windowObj.chbxMas[i]);
-                        Canvas.SetLeft(windowObj.chbxMas[i], 1);
-                        Canvas.SetTop(windowObj.chbxMas[i], i * 15);
+                        windowObj.subsCanvas.Children.Add(windowObj.checkBoxArr[i]);
+                        Canvas.SetLeft(windowObj.checkBoxArr[i], 1);
+                        Canvas.SetTop(windowObj.checkBoxArr[i], i * 15);
                         i++;
 
                     }

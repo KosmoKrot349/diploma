@@ -20,7 +20,7 @@ namespace WpfApp12.strategiesForManager.MenuClick
         {
             windowObj.HideAll();
             windowObj.subGrid.Visibility = Visibility.Visible;
-            DataGridUpdater.updateDataGridSubjects(windowObj.connectionString, windowObj.subsDataGrid);
+            DataGridUpdater.updateSubjectDataGrid(windowObj);
         }
     }
 }

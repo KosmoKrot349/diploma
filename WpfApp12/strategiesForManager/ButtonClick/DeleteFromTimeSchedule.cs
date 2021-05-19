@@ -60,7 +60,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                 con.Close();
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
-            DataGridUpdater.updateDataGridZvonki(windowObj.connectionString, windowObj.zvonkiDataGrid);
+            DataGridUpdater.updateTimeScheduleDataGrid(windowObj);
             windowObj.zvonkiDataGrid.SelectedItem = null;
             //расписание звонков
             windowObj.zvonkiDeleteButton.IsEnabled = false;

@@ -22,9 +22,9 @@ namespace WpfApp12.strategiesForBookkeeper.MenuClick
             windowObj.DohodyrGrid.Visibility = Visibility.Visible;
             windowObj.FiltrGridDohody.Children.Clear();
             windowObj.FiltrGridDohody.ColumnDefinitions.Clear();
-            windowObj.filter.CreateFiltrDohody(windowObj.FiltrGridDohody);
+            windowObj.filter.CreateProfitFilter(windowObj.FiltrGridDohody);
             windowObj.filter.sql = "SELECT dodhody.dohid as dohid, typedohod.title as title, dodhody.sum as sum, dodhody.data as data, dodhody.fio as fio FROM dodhody inner join typedohod using(idtype) ";
-            DataGridUpdater.updateDataGridDohody(windowObj.connectionString, windowObj.filter.sql, windowObj.DohodyDataGrid);
+            DataGridUpdater.updateProfitDataGrid(windowObj);
         }
     }
 }

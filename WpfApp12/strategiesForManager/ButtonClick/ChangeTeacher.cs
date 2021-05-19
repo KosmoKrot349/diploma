@@ -20,7 +20,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
         public void ButtonClick()
         {
             if (windowObj.prepFio.Text == "" || windowObj.dateStartAdd.Text == "") { MessageBox.Show("Поля не заполнены"); return; }
-            int kategId = 0;
+            int categoryID = 0;
             try
             {
                 NpgsqlConnection con = new NpgsqlConnection(windowObj.connectionString);
@@ -32,7 +32,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                 {
                     while (reader.Read())
                     {
-                        kategId = reader.GetInt32(0);
+                        categoryID = reader.GetInt32(0);
                     }
                 }
                 con.Close();
@@ -41,7 +41,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 
             string[] date = windowObj.dateStart.Text.Split('.');
 
-            int sotrId = 0;
+            int employeeID = 0;
 
             try
             {
@@ -54,7 +54,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                 {
                     while (reader.Read())
                     {
-                        sotrId = reader.GetInt32(0);
+                        employeeID = reader.GetInt32(0);
                     }
                 }
                 con.Close();
@@ -65,7 +65,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             {
                 NpgsqlConnection con = new NpgsqlConnection(windowObj.connectionString);
                 con.Open();
-                string sql = "UPDATE prep SET  kategid =" + kategId + ", date_start ='" + windowObj.dateStartAdd.Text + "' WHERE prepid = " + windowObj.teacherID;
+                string sql = "UPDATE prep SET  kategid =" + categoryID + ", date_start ='" + windowObj.dateStartAdd.Text + "' WHERE prepid = " + windowObj.teacherID;
                 NpgsqlCommand command = new NpgsqlCommand(sql, con);
                 command.ExecuteNonQuery();
                 con.Close();
@@ -77,7 +77,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             {
                 NpgsqlConnection con = new NpgsqlConnection(windowObj.connectionString);
                 con.Open();
-                string sql = ("UPDATE sotrudniki SET  fio ='" + windowObj.prepFio.Text + "', comment ='" + windowObj.prepCom.Text + "' WHERE sotrid = " + sotrId + ";");
+                string sql = ("UPDATE sotrudniki SET  fio ='" + windowObj.prepFio.Text + "', comment ='" + windowObj.prepCom.Text + "' WHERE sotrid = " + employeeID + ";");
                 NpgsqlCommand command = new NpgsqlCommand(sql, con);
                 command.ExecuteNonQuery();
                 con.Close();
@@ -85,7 +85,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
             windowObj.HideAll();
             windowObj.prepGrid.Visibility = Visibility.Visible;
-            DataGridUpdater.updateDataGridPrep(windowObj.connectionString, windowObj.filtr.sql, windowObj.prepDataGrid);
+            DataGridUpdater.updateTeachersDataGrid(windowObj);
         }
     }
 }

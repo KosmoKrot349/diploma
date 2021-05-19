@@ -20,7 +20,7 @@ namespace WpfApp12.strategiesForManager.MenuClick
         {
             window.HideAll();
             window.KoefGrid.Visibility = Visibility.Visible;
-            DataGridUpdater.updateDataGridKoef(window.connectionString, window.KoefDataGrid);
+            DataGridUpdater.updateWorkCoeffDataGrid(window);
         }
     }
 }

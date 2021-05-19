@@ -19,35 +19,35 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 
         public void ButtonClick()
         {
-            string oblswork = "'{ ";
-            string obem = "'{ ";
-            string states = "'{ ";
-            string stavki = "'{ ";
+            string serviceWorkArr = "'{ ";
+            string volumeArr = "'{ ";
+            string positionsArr = "'{ ";
+            string ratesArr = "'{ ";
             bool b = false;
             for (int i = 0; i < windowObj.checkBoxArrServiceWorks.Length; i++)
             {
-                if (windowObj.checkBoxArrServiceWorks[i].IsChecked == true && windowObj.textBoxArrVolumeWork[i].Text == "") { System.Windows.Forms.MessageBox.Show("Обьём работ не заполнен"); return; }
-                else { if (windowObj.checkBoxArrServiceWorks[i].IsChecked == true) { b = true; oblswork += windowObj.checkBoxArrServiceWorks[i].Name.Split('_')[2] + ","; obem += windowObj.textBoxArrVolumeWork[i].Text.Replace(',', '.') + ","; } }
+                if (windowObj.checkBoxArrServiceWorks[i].IsChecked == true && windowObj.textBoxArrVolumeWork[i].Text == "") { MessageBox.Show("Обьём работ не заполнен"); return; }
+                else { if (windowObj.checkBoxArrServiceWorks[i].IsChecked == true) { b = true; serviceWorkArr += windowObj.checkBoxArrServiceWorks[i].Name.Split('_')[2] + ","; volumeArr += windowObj.textBoxArrVolumeWork[i].Text.Replace(',', '.') + ","; } }
             }
             for (int i = 0; i < windowObj.checkBoxArrPositions.Length; i++)
             {
                 if (windowObj.checkBoxArrPositions[i].IsChecked == true && windowObj.textBoxArrRate[i].Text == "") { System.Windows.Forms.MessageBox.Show("Ставки не указаны"); return; }
                 else
-                { if (windowObj.checkBoxArrPositions[i].IsChecked == true) { b = true; states += windowObj.checkBoxArrPositions[i].Name.Split('_')[2] + ","; stavki += windowObj.textBoxArrRate[i].Text.Replace(',', '.') + ","; } }
+                { if (windowObj.checkBoxArrPositions[i].IsChecked == true) { b = true; positionsArr += windowObj.checkBoxArrPositions[i].Name.Split('_')[2] + ","; ratesArr += windowObj.textBoxArrRate[i].Text.Replace(',', '.') + ","; } }
             }
             if (b == false) { MessageBox.Show("Выберите хотя бы одну должность или работу для сотрудника"); return; }
 
 
-            states = states.Substring(0, states.Length - 1) + "}'";
-            stavki = stavki.Substring(0, stavki.Length - 1) + "}'";
-            oblswork = oblswork.Substring(0, oblswork.Length - 1) + "}'";
-            obem = obem.Substring(0, obem.Length - 1) + "}'";
+            positionsArr = positionsArr.Substring(0, positionsArr.Length - 1) + "}'";
+            ratesArr = ratesArr.Substring(0, ratesArr.Length - 1) + "}'";
+            serviceWorkArr = serviceWorkArr.Substring(0, serviceWorkArr.Length - 1) + "}'";
+            volumeArr = volumeArr.Substring(0, volumeArr.Length - 1) + "}'";
 
             try
             {
                 NpgsqlConnection con = new NpgsqlConnection(windowObj.connectionString);
                 con.Open();
-                string sql = "INSERT INTO shtat( sotrid, states, stavky, obslwork, obem) VALUES ( " + windowObj.employeeID + ", " + states + ", " + stavki + ", " + oblswork + ", " + obem + ")";
+                string sql = "INSERT INTO shtat( sotrid, states, stavky, obslwork, obem) VALUES ( " + windowObj.employeeID + ", " + positionsArr + ", " + ratesArr + ", " + serviceWorkArr + ", " + volumeArr + ")";
                 NpgsqlCommand com = new NpgsqlCommand(sql, con);
                 com.ExecuteNonQuery();
                 con.Close();
@@ -68,7 +68,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 
 
             MessageBox.Show("Сотрудник определён как штатный работник");
-            DataGridUpdater.updateDataGridSotr(windowObj.connectionString, windowObj.sqlForAllEmployees, windowObj.ShtatDataGrid);
+            DataGridUpdater.updateEmploeesDataGrid(windowObj);
             windowObj.HideAll();
             windowObj.allSotrGrid.Visibility = Visibility.Visible;
         }

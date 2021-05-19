@@ -47,7 +47,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             windowObj.ObslWorks.RowDefinitions.Clear();
             windowObj.States.Children.Clear();
             windowObj.States.RowDefinitions.Clear();
-            int kol_states = -1, kol_obsWork = -1;
+            int quanPositions = -1, quanServiceWork = -1;
             //получени е кол-ва должностей
             try
             {
@@ -60,7 +60,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                 {
                     while (reader.Read())
                     {
-                        kol_states = reader.GetInt32(0);
+                        quanPositions = reader.GetInt32(0);
                     }
 
                 }
@@ -79,7 +79,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                 {
                     while (reader.Read())
                     {
-                        kol_obsWork = reader.GetInt32(0);
+                        quanServiceWork = reader.GetInt32(0);
                     }
 
                 }
@@ -87,30 +87,30 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
 
-            windowObj.textBoxArrRate = new TextBox[kol_states];
-            windowObj.checkBoxArrPositions = new CheckBox[kol_states];
-            windowObj.textBoxArrVolumeWork = new TextBox[kol_obsWork];
-            windowObj.checkBoxArrServiceWorks = new CheckBox[kol_obsWork];
+            windowObj.textBoxArrRate = new TextBox[quanPositions];
+            windowObj.checkBoxArrPositions = new CheckBox[quanPositions];
+            windowObj.textBoxArrVolumeWork = new TextBox[quanServiceWork];
+            windowObj.checkBoxArrServiceWorks = new CheckBox[quanServiceWork];
 
             //заполнение грида должностей 
-            Label l1 = new Label();
-            l1.Content = "Должность";
-            Label l2 = new Label();
-            l2.Content = "Ставка";
+            Label positionLabel = new Label();
+            positionLabel.Content = "Должность";
+            Label rateLabel = new Label();
+            rateLabel.Content = "Ставка";
 
             RowDefinition rwd1 = new RowDefinition();
             rwd1.Height = new GridLength(40);
 
             windowObj.States.RowDefinitions.Add(rwd1);
 
-            Grid.SetRow(l1, 0);
-            Grid.SetRow(l2, 0);
+            Grid.SetRow(positionLabel, 0);
+            Grid.SetRow(rateLabel, 0);
 
-            Grid.SetColumn(l2, 1);
-            Grid.SetColumn(l1, 0);
+            Grid.SetColumn(rateLabel, 1);
+            Grid.SetColumn(positionLabel, 0);
 
-            windowObj.States.Children.Add(l1);
-            windowObj.States.Children.Add(l2);
+            windowObj.States.Children.Add(positionLabel);
+            windowObj.States.Children.Add(rateLabel);
 
 
             try
@@ -158,29 +158,29 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
             //заполнение грида работ 
 
-            Label l11 = new Label();
-            l11.Content = "Работа";
-            Label l22 = new Label();
-            l22.Content = "Объём";
-            Label l33 = new Label();
-            l33.Content = "Еденицы измерения";
+            Label serviceWorkLabel = new Label();
+            serviceWorkLabel.Content = "Работа";
+            Label workVolumeLabel = new Label();
+            workVolumeLabel.Content = "Объём";
+            Label ubitsLabel = new Label();
+            ubitsLabel.Content = "Еденицы измерения";
 
             RowDefinition rwd11 = new RowDefinition();
             rwd11.Height = new GridLength(40);
 
             windowObj.ObslWorks.RowDefinitions.Add(rwd11);
 
-            Grid.SetRow(l11, 0);
-            Grid.SetRow(l22, 0);
-            Grid.SetRow(l33, 0);
+            Grid.SetRow(serviceWorkLabel, 0);
+            Grid.SetRow(workVolumeLabel, 0);
+            Grid.SetRow(ubitsLabel, 0);
 
-            Grid.SetColumn(l22, 1);
-            Grid.SetColumn(l11, 0);
-            Grid.SetColumn(l33, 2);
+            Grid.SetColumn(workVolumeLabel, 1);
+            Grid.SetColumn(serviceWorkLabel, 0);
+            Grid.SetColumn(ubitsLabel, 2);
 
-            windowObj.ObslWorks.Children.Add(l11);
-            windowObj.ObslWorks.Children.Add(l22);
-            windowObj.ObslWorks.Children.Add(l33);
+            windowObj.ObslWorks.Children.Add(serviceWorkLabel);
+            windowObj.ObslWorks.Children.Add(workVolumeLabel);
+            windowObj.ObslWorks.Children.Add(ubitsLabel);
 
             try
             {

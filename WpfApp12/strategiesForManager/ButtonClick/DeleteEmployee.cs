@@ -117,7 +117,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                 }
                 catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
             }
-            DataGridUpdater.updateDataGridSotr(windowObj.connectionString, windowObj.sqlForAllEmployees, windowObj.allSotrDataGrid);
+            DataGridUpdater.updateEmploeesDataGrid(windowObj);
 
             windowObj.allSotrDataGrid.SelectedItem = null;
             //все сотрудники

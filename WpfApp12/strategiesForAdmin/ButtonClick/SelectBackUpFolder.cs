@@ -25,37 +25,37 @@ namespace WpfApp12.strategiesForAdmin
         public void buttonClick()
         {
             Button but = sender as Button;
-            WinForms.FolderBrowserDialog FBD = new WinForms.FolderBrowserDialog();
-            if (FBD.ShowDialog() == WinForms.DialogResult.OK)
+            WinForms.FolderBrowserDialog FilderBrowserDialog = new WinForms.FolderBrowserDialog();
+            if (FilderBrowserDialog.ShowDialog() == WinForms.DialogResult.OK)
             {
-                for (int i = 0; i < FBD.SelectedPath.Length; i++)
+                for (int i = 0; i < FilderBrowserDialog.SelectedPath.Length; i++)
                 {
-                    if ((FBD.SelectedPath[i] >= 'а' && FBD.SelectedPath[i] <= 'я') || (FBD.SelectedPath[i] >= 'А' && FBD.SelectedPath[i] <= 'Я')) { MessageBox.Show("В пути не должно быть русскких символов"); return; }
+                    if ((FilderBrowserDialog.SelectedPath[i] >= 'а' && FilderBrowserDialog.SelectedPath[i] <= 'я') || (FilderBrowserDialog.SelectedPath[i] >= 'А' && FilderBrowserDialog.SelectedPath[i] <= 'Я')) { MessageBox.Show("В пути не должно быть русскких символов"); return; }
                 }
-                if (but.Name == "selectbckpNextYear") windowObj.bckpPytNextYear.Text = FBD.SelectedPath + "\\";
+                if (but.Name == "selectbckpNextYear") windowObj.bckpPytNextYear.Text = FilderBrowserDialog.SelectedPath + "\\";
                 else
-                    windowObj.bckpPyt.Text = FBD.SelectedPath + "\\";
+                    windowObj.bckpPyt.Text = FilderBrowserDialog.SelectedPath + "\\";
             }
             StreamReader StreamReader = new StreamReader(@"crDump.bat");
-            ArrayList arLs = new ArrayList();
+            ArrayList ListFromBatFile = new ArrayList();
             while (!StreamReader.EndOfStream)
             {
-                arLs.Add(StreamReader.ReadLine());
+                ListFromBatFile.Add(StreamReader.ReadLine());
             }
-            object[] batStrMas = arLs.ToArray();
-            string batLastStr = batStrMas[2].ToString();
+            object[] stringArrFromBatFile = ListFromBatFile.ToArray();
+            string batLastStr = stringArrFromBatFile[2].ToString();
             StreamReader.Close();
-            int index_puti = 0;
+            int PathIndex = 0;
             for (int i = 0; i < batLastStr.Length; i++)
             {
-                if (batLastStr[i] == '>') index_puti = i + 1;
+                if (batLastStr[i] == '>') PathIndex = i + 1;
             }
-            StringBuilder newBatLastStr = new StringBuilder(batLastStr.Substring(0, index_puti) + " " + FBD.SelectedPath + "\\");
-            batStrMas[2] = newBatLastStr;
+            StringBuilder newBatLastStr = new StringBuilder(batLastStr.Substring(0, PathIndex) + " " + FilderBrowserDialog.SelectedPath + "\\");
+            stringArrFromBatFile[2] = newBatLastStr;
             StreamWriter StreamWriter = new StreamWriter(@"crDump.bat");
-            for (int i = 0; i < batStrMas.Length; i++)
+            for (int i = 0; i < stringArrFromBatFile.Length; i++)
             {
-                StreamWriter.WriteLine(batStrMas[i]);
+                StreamWriter.WriteLine(stringArrFromBatFile[i]);
             }
 
             StreamWriter.Close();

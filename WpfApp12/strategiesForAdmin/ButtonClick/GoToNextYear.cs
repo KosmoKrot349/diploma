@@ -37,19 +37,19 @@ namespace WpfApp12.strategiesForAdmin
             {
                 arLs.Add(StreamReader.ReadLine());
             }
-            object[] batStrMas = arLs.ToArray();
-            string splitMas1 = batStrMas[1].ToString().Substring(2);
-            windowObj.sybdPytNextYear.Text = splitMas1.Trim(' ');
-            string splitMas2 = batStrMas[2].ToString();
-            int index_puti = 0;
+            object[] createBackUpList = arLs.ToArray();
+            string DBPathString = createBackUpList[1].ToString().Substring(2);
+            windowObj.sybdPytNextYear.Text = DBPathString.Trim(' ');
+            string BackUpPathString = createBackUpList[2].ToString();
+            int PathIndex = 0;
 
-            for (int i = 0; i < splitMas2.Length; i++)
+            for (int i = 0; i < BackUpPathString.Length; i++)
             {
-                if (splitMas2[i] == '>') index_puti = i + 1;
+                if (BackUpPathString[i] == '>') PathIndex = i + 1;
             }
-            string[] masFolders = splitMas2.Substring(index_puti).Split('\\');
-            for (int i = 0; i < masFolders.Length - 1; i++)
-            { windowObj.bckpPytNextYear.Text += masFolders[i] + "\\"; }
+            string[] FoldersArr = BackUpPathString.Substring(PathIndex).Split('\\');
+            for (int i = 0; i < FoldersArr.Length - 1; i++)
+            { windowObj.bckpPytNextYear.Text += FoldersArr[i] + "\\"; }
             windowObj.bckpPytNextYear.Text = windowObj.bckpPytNextYear.Text.Trim(' ');
             StreamReader.Close();
         }

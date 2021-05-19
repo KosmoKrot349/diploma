@@ -33,11 +33,11 @@ namespace WpfApp12.strategiesForAdmin.strategiesForAdminMenuClick
             windowObj.hideAll();
             windowObj.delChUserGrid.Visibility = Visibility.Visible;
 
-            windowObj.filter.CreateUsersFiltr(windowObj.FiltrGridRoles);
+            windowObj.filter.CreateUsersFilter(windowObj.FiltrGridRoles);
 
             windowObj.filter.sql = "select * from users where uid != -1";
 
-            DataGridUpdater.updateDataGridUsers(windowObj.connectionString, windowObj.filter.sql, windowObj.usersDGrid);
+            DataGridUpdater.updateUsersDataGrid(windowObj);
         }
     }
 }

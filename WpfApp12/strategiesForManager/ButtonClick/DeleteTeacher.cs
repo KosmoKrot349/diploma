@@ -47,7 +47,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                 con.Close();
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных2"); return; }
-            DataGridUpdater.updateDataGridPrep(windowObj.connectionString, windowObj.filtr.sql, windowObj.prepDataGrid);
+            DataGridUpdater.updateTeachersDataGrid(windowObj);
 
             windowObj.prepDataGrid.SelectedItem = null;
 

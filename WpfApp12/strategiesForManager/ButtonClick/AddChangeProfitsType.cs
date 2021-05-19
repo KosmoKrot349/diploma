@@ -30,12 +30,12 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             {
                 DataRowView DRV = windowObj.TypeDohDataGrid.Items[i] as DataRowView;
                 DataRow row = DRV.Row;
-                object[] rMas = row.ItemArray;
-                if (rMas[0].GetType() == typeof(int))
-                    if (Convert.ToInt32(rMas[0]) == 1) continue;
-                if (rMas[1].ToString() == "") { MessageBox.Show("В " + (i + 1) + " строке не указано название дохода"); return; }
-                if (list.IndexOf(rMas[1]) != -1) { MessageBox.Show("Повторяется название дохода " + rMas[1]); return; }
-                list.Add(rMas[1]);
+                object[] recordArr = row.ItemArray;
+                if (recordArr[0].GetType() == typeof(int))
+                    if (Convert.ToInt32(recordArr[0]) == 1) continue;
+                if (recordArr[1].ToString() == "") { MessageBox.Show("В " + (i + 1) + " строке не указано название дохода"); return; }
+                if (list.IndexOf(recordArr[1]) != -1) { MessageBox.Show("Повторяется название дохода " + recordArr[1]); return; }
+                list.Add(recordArr[1]);
                 table.ImportRow(row);
             }
             string sql = "select * from typedohod";
@@ -44,7 +44,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(comm);
             NpgsqlCommandBuilder comandbuilder = new NpgsqlCommandBuilder(adapter);
             adapter.Update(table);
-            DataGridUpdater.updateDataGriTypeDoh(windowObj.connectionString, windowObj.TypeDohDataGrid);
+            DataGridUpdater.updateProfitTypeDataGri(windowObj);
             windowObj.TypeDohDataGrid.SelectedItem = null;
             windowObj.TypeDohDeleteButton.IsEnabled = false;
         }

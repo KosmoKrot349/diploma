@@ -37,10 +37,10 @@ namespace WpfApp12.strategiesForAdmin
                 list.Add(streamReader.ReadLine());
             }
             streamReader.Close();
-            object[] mas_str = list.ToArray();
-            windowObj.connect.Text = mas_str[0].ToString().Split(':')[1];
-            windowObj.dbPassText.Text = mas_str[1].ToString().Split(':')[1];
-            windowObj.dbPortText.Text = mas_str[2].ToString().Split(':')[1];
+            object[] stringArr = list.ToArray();
+            windowObj.connect.Text = stringArr[0].ToString().Split(':')[1];
+            windowObj.dbPassText.Text = stringArr[1].ToString().Split(':')[1];
+            windowObj.dbPortText.Text = stringArr[2].ToString().Split(':')[1];
 
 
             if (windowObj.logUser == -1)

@@ -19,9 +19,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 
         public void ButtonClick()
         {
-            int a = 0;
-            if (windowObj.logUser != -1) a = Checker.adminCheck(windowObj.logUser, windowObj.connectionString);
-            if (a == 1 || windowObj.logUser == -1)
+            int checkerResult = 0;
+            if (windowObj.logUser != -1) checkerResult = Checker.adminCheck(windowObj.logUser, windowObj.connectionString);
+            if (checkerResult == 1 || windowObj.logUser == -1)
             {
                 AdminWindow wind = new AdminWindow();
                 try

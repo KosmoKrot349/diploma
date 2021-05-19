@@ -35,7 +35,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                 con.Close();
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
-            DataGridUpdater.updateDataGridKoef(windowObj.connectionString, windowObj.KoefDataGrid);
+            DataGridUpdater.updateWorkCoeffDataGrid(windowObj);
             windowObj.KoefDataGrid.SelectedItem = null;
             windowObj.KoefDeleteButton.IsEnabled = false;
         }

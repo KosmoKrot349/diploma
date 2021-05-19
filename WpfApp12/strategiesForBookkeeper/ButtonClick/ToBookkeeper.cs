@@ -7,7 +7,7 @@ using System.Windows;
 
 namespace WpfApp12.strategiesForBookkeeper.ButtonClick
 {
-    class ToBuhg:IButtonClick
+    class ToBookkeeper:IButtonClick
     {
         public void ButtonClick()
         {

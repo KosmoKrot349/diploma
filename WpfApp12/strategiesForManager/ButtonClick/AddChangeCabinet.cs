@@ -31,11 +31,11 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             {
                 DataRowView DRV = windowObj.cabDataGrid.Items[i] as DataRowView;
                 DataRow row = DRV.Row;
-                object[] rMas = row.ItemArray;
-                if (rMas[1].ToString() == "") { MessageBox.Show("В " + (i + 1) + " строке не указан адрес кабинета"); return; }
-                if (rMas[3].ToString() == "") { MessageBox.Show("В " + (i + 1) + " строке не указан номер кабинета"); return; }
-                if (list.IndexOf(rMas[1]) != -1) { MessageBox.Show("Повторяется название кабинета " + rMas[1]); return; }
-                list.Add(rMas[3]);
+                object[] recordArr = row.ItemArray;
+                if (recordArr[1].ToString() == "") { MessageBox.Show("В " + (i + 1) + " строке не указан адрес кабинета"); return; }
+                if (recordArr[3].ToString() == "") { MessageBox.Show("В " + (i + 1) + " строке не указан номер кабинета"); return; }
+                if (list.IndexOf(recordArr[1]) != -1) { MessageBox.Show("Повторяется название кабинета " + recordArr[1]); return; }
+                list.Add(recordArr[3]);
                 table.ImportRow(row);
             }
             string sql = "select * from cabinet";
@@ -49,7 +49,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             //кабинеты
             windowObj.cabDeleteButton.IsEnabled = false;
 
-            DataGridUpdater.updateDataGridСab(windowObj.connectionString, windowObj.cabDataGrid);
+            DataGridUpdater.updateCabinetDataGrid(windowObj);
         }
     }
 }

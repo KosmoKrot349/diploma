@@ -54,7 +54,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             {
                 windowObj.HideAll();
                 windowObj.StateGrid.Visibility = Visibility.Visible;
-                DataGridUpdater.updateDataGridStates(windowObj.connectionString, windowObj.StateDataGrid);
+                DataGridUpdater.updatePositionsDataGrid(windowObj);
             }
         }
     }

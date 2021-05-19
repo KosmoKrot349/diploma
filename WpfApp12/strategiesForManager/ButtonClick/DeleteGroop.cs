@@ -73,7 +73,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                 con.Close();
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
-            DataGridUpdater.updateDataGridGroups(windowObj.connectionString, windowObj.filtr.sql, windowObj.groupsDataGrid);
+            DataGridUpdater.updateGroopsDataGrid(windowObj);
             windowObj.groupsDataGrid.SelectedItem = null;
 
             //группы

@@ -64,13 +64,13 @@ namespace WpfApp12
         //переход из меню админа в меню бухгалтера+
         private void BuhgRoleA_Click(object sender, RoutedEventArgs e)
         {
-            IButtonClick actReact = new ToBuhg(this);
+            IButtonClick actReact = new ToBookkeeper(this);
             actReact.buttonClick();
         }
         //переход из меню админа в меню директора+
         private void DirectorRoleA_Click(object sender, RoutedEventArgs e)
         {
-            IButtonClick actReact = new ToDirector(this);
+            IButtonClick actReact = new ToManager(this);
             actReact.buttonClick();
         }
 
