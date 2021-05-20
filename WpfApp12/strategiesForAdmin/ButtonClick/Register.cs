@@ -19,20 +19,20 @@ namespace WpfApp12.strategiesForAdmin
 
         public void buttonClick()
         {
-            if (windowObj.fio.Text == "" || windowObj.log_reg.Text == "" || windowObj.pas_reg.Password == "" || windowObj.rePas.Password == "") { MessageBox.Show("Некоторые поля не заполнены, регистрация невозможна"); return; }
-            if (windowObj.pas_reg.Password != windowObj.rePas.Password) { MessageBox.Show("Пароли не совподают"); return; }
-            if (windowObj.log_reg.Text == "root") { MessageBox.Show("Пользователь root уже существует"); return; }
+            if (windowObj.NameRegistration.Text == "" || windowObj.LoginRegistration.Text == "" || windowObj.PasswordRegistration.Password == "" || windowObj.RepeatPasswordRegistration.Password == "") { MessageBox.Show("Некоторые поля не заполнены, регистрация невозможна"); return; }
+            if (windowObj.PasswordRegistration.Password != windowObj.RepeatPasswordRegistration.Password) { MessageBox.Show("Пароли не совподают"); return; }
+            if (windowObj.LoginRegistration.Text == "root") { MessageBox.Show("Пользователь root уже существует"); return; }
             try
             {
                 NpgsqlConnection npgSqlConnection = new NpgsqlConnection(windowObj.connectionString);
                 npgSqlConnection.Open();
-                string sql = "select log from users where log='" + windowObj.log_reg + "'";
+                string sql = "select log from users where log='" + windowObj.LoginRegistration + "'";
                 NpgsqlCommand Command = new NpgsqlCommand(sql, npgSqlConnection);
                 NpgsqlDataReader reader = Command.ExecuteReader();
                 if (reader.HasRows) { MessageBox.Show("Пользовтель с таким логином уже существует"); return; }
                 npgSqlConnection.Close();
                 npgSqlConnection.Open();
-                sql = "insert into users (fio, log, pas, admin, buhgalter, director) values('" + windowObj.fio.Text + "','" + windowObj.log_reg.Text + "','" + windowObj.pas_reg.Password + "'," + windowObj.adminRole + "," + windowObj.bookkeeperRole + "," + windowObj.managerRole + ")";
+                sql = "insert into users (fio, log, pas, admin, buhgalter, director) values('" + windowObj.NameRegistration.Text + "','" + windowObj.LoginRegistration.Text + "','" + windowObj.PasswordRegistration.Password + "'," + windowObj.adminRole + "," + windowObj.bookkeeperRole + "," + windowObj.managerRole + ")";
                 Command = new NpgsqlCommand(sql, npgSqlConnection);
                 Command.ExecuteReader();
                 npgSqlConnection.Close();
@@ -42,18 +42,18 @@ namespace WpfApp12.strategiesForAdmin
 
             if (but == MessageBoxResult.Yes)
             {
-                windowObj.fio.Text = "";
-                windowObj.log_reg.Text = "";
-                windowObj.pas_reg.Password = "";
-                windowObj.rePas.Password = "";
-                windowObj.adm.IsChecked = false;
-                windowObj.bh.IsChecked = false;
-                windowObj.dr.IsChecked = false;
+                windowObj.NameRegistration.Text = "";
+                windowObj.LoginRegistration.Text = "";
+                windowObj.PasswordRegistration.Password = "";
+                windowObj.RepeatPasswordRegistration.Password = "";
+                windowObj.isAdminRegistration.IsChecked = false;
+                windowObj.isAdminRegistration.IsChecked = false;
+                windowObj.isManagerRegistration.IsChecked = false;
             }
             else
             {
                 windowObj.hideAll();
-                windowObj.delChUserGrid.Visibility = Visibility.Visible;
+                windowObj.UsersGrid.Visibility = Visibility.Visible;
                 windowObj.usersDGrid.SelectedItem = null;
 
                 windowObj.changeUser.IsEnabled = false;

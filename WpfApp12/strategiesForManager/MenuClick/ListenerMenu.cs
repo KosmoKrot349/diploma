@@ -20,9 +20,9 @@ namespace WpfApp12.strategiesForManager.MenuClick
         {
             windowObj.HideAll();
             windowObj.ListenerGrid.Visibility = Visibility.Visible;
-            windowObj.FiltrGridGroups.Children.Clear();
-            windowObj.FiltrGridGroups.ColumnDefinitions.Clear();
-            windowObj.filter.CreateListenersFilter(windowObj.FiltrGridGroups);
+            windowObj.FilterGridGroups.Children.Clear();
+            windowObj.FilterGridGroups.ColumnDefinitions.Clear();
+            windowObj.filter.CreateListenersFilter(windowObj.FilterGridGroups);
             windowObj.filter.sql = "SELECT listenerid,  fio,  phones, comment,array_length(grid, 1) as grid FROM listeners order by listenerid";
             DataGridUpdater.updateListenerDataGrid(windowObj);
         }

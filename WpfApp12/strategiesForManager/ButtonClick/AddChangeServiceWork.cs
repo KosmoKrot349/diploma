@@ -28,10 +28,10 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             table.Columns.Add("ed_izm", System.Type.GetType("System.String"));
             table.Columns.Add("comment", System.Type.GetType("System.String"));
             ArrayList list = new ArrayList();
-            for (int i = 0; i < windowObj.ObslWorkDataGrid.Items.Count - 1; i++)
+            for (int i = 0; i < windowObj.ServiceWorkDataGrid.Items.Count - 1; i++)
             {
 
-                DataRowView DRV = windowObj.ObslWorkDataGrid.Items[i] as DataRowView;
+                DataRowView DRV = windowObj.ServiceWorkDataGrid.Items[i] as DataRowView;
                 DataRow row = DRV.Row;
                 object[] recordArr = row.ItemArray;
                 if (recordArr[1].ToString() == "") { MessageBox.Show("В " + (i + 1) + " строке не указано название"); return; }
@@ -48,7 +48,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             NpgsqlCommandBuilder comandbuilder = new NpgsqlCommandBuilder(adapter);
             adapter.Update(table);
             DataGridUpdater.updateServiceWorksDataGrid(windowObj);
-            windowObj.ObslWorkDataGrid.SelectedItem = null;
+            windowObj.ServiceWorkDataGrid.SelectedItem = null;
             windowObj.ObslWorkDeleteButton.IsEnabled = false;
         }
     }

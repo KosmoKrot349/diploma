@@ -18,11 +18,11 @@ namespace WpfApp12.strategiesForBookkeeper.MenuClick
 
         public void MenuClick()
         {
-            windowObj.MenuRolesB.BorderBrush = null;
-            windowObj.Dohody.BorderBrush = Brushes.DarkRed;
-            windowObj.Rashody.BorderBrush = null;
-            windowObj.Nalogi.BorderBrush = null;
-            windowObj.otchetMenu.BorderBrush = null;
+            windowObj.RolesMenu.BorderBrush = null;
+            windowObj.ProfitMenu.BorderBrush = Brushes.DarkRed;
+            windowObj.CostsMenu.BorderBrush = null;
+            windowObj.TaxesMenu.BorderBrush = null;
+            windowObj.ReportsMenu.BorderBrush = null;
         }
     }
 }

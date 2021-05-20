@@ -32,9 +32,9 @@ namespace WpfApp12.strategiesForAdmin
                 {
                     if ((FilderBrowserDialog.SelectedPath[i] >= 'а' && FilderBrowserDialog.SelectedPath[i] <= 'я') || (FilderBrowserDialog.SelectedPath[i] >= 'А' && FilderBrowserDialog.SelectedPath[i] <= 'Я')) { MessageBox.Show("В пути не должно быть русскких символов"); return; }
                 }
-                if (but.Name == "selectbckpNextYear") windowObj.bckpPytNextYear.Text = FilderBrowserDialog.SelectedPath + "\\";
+                if (but.Name == "SelectBackUpPathNextYear") windowObj.BackUpFilePathGoToNextYear.Text = FilderBrowserDialog.SelectedPath + "\\";
                 else
-                    windowObj.bckpPyt.Text = FilderBrowserDialog.SelectedPath + "\\";
+                    windowObj.BackUpPathCreateBackUp.Text = FilderBrowserDialog.SelectedPath + "\\";
             }
             StreamReader StreamReader = new StreamReader(@"crDump.bat");
             ArrayList ListFromBatFile = new ArrayList();

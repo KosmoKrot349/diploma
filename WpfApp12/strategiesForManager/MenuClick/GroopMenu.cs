@@ -20,11 +20,11 @@ namespace WpfApp12.strategiesForManager.MenuClick
         {
 
             windowObj.HideAll();
-            windowObj.groupsGrid.Visibility = Visibility.Visible;
+            windowObj.GroopsGrid.Visibility = Visibility.Visible;
 
-            windowObj.FiltrGridCourse.Children.Clear();
-            windowObj.FiltrGridCourse.ColumnDefinitions.Clear();
-            windowObj.filter.CreateGroupFilter(windowObj.FiltrGridCourse);
+            windowObj.FilterGridCourse.Children.Clear();
+            windowObj.FilterGridCourse.ColumnDefinitions.Clear();
+            windowObj.filter.CreateGroupFilter(windowObj.FilterGridCourse);
             windowObj.filter.sql = "SELECT groups.grid as grid,  groups.nazvanie as gtitle,courses.title as ctitle, groups.comment as comment ,groups.payment[1],groups.payment[2],groups.payment[3],groups.payment[4],groups.payment[5],groups.payment[6],groups.payment[7],groups.payment[8],groups.payment[9],groups.payment[10],groups.payment[11],groups.payment[12],date_start,date_end FROM groups inner join courses using (courseid)  ";
             DataGridUpdater.updateGroopsDataGrid(windowObj);
         }

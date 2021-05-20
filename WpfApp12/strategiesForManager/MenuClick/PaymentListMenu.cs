@@ -24,18 +24,18 @@ namespace WpfApp12.strategiesForManager.MenuClick
         public void MenuClick()
         {
             window.HideAll();
-            window.ZpOthcetGrid.Visibility = Visibility.Visible;
-            window.ZPOtchetVivodGrid.ColumnDefinitions.Clear();
-            window.ZPOtchetVivodGrid.Children.Clear();
+            window.PaymentListReportGrid.Visibility = Visibility.Visible;
+            window.PaymentListReportOutputGrid.ColumnDefinitions.Clear();
+            window.PaymentListReportOutputGrid.Children.Clear();
 
-            window.ZPOtchetLabel.Content = "Отчёт 'Списки выплат' на " + DateTime.Now.ToShortDateString();
+            window.PaymentListReportLabel.Content = "Отчёт 'Списки выплат' на " + DateTime.Now.ToShortDateString();
 
             ColumnDefinition cmd = new ColumnDefinition();
             cmd.Width = new GridLength(200);
             Grid grid = new Grid();
             Grid.SetColumn(grid, 0);
-            window.ZPOtchetVivodGrid.ColumnDefinitions.Add(cmd);
-            window.ZPOtchetVivodGrid.Children.Add(grid);
+            window.PaymentListReportOutputGrid.ColumnDefinitions.Add(cmd);
+            window.PaymentListReportOutputGrid.Children.Add(grid);
 
             try
             {
@@ -146,7 +146,7 @@ namespace WpfApp12.strategiesForManager.MenuClick
 
                 ColumnDefinition cmdd = new ColumnDefinition();
                 cmdd.Width = new GridLength(600);
-                window.ZPOtchetVivodGrid.ColumnDefinitions.Add(cmdd);
+                window.PaymentListReportOutputGrid.ColumnDefinitions.Add(cmdd);
                 Grid monthGrid = new Grid();
                 for (int j = 0; j < 4; j++)
                 {
@@ -155,7 +155,7 @@ namespace WpfApp12.strategiesForManager.MenuClick
                 }
                 DataGridUpdater.updatePaymentListGrid(window.connectionString, DateTimeAxis.ToDateTime(Convert.ToDouble(dateList[i])), emploeesList, monthGrid);
                 Grid.SetColumn(monthGrid, i + 1);
-                window.ZPOtchetVivodGrid.Children.Add(monthGrid);
+                window.PaymentListReportOutputGrid.Children.Add(monthGrid);
             }
         }
     }

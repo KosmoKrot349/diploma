@@ -70,7 +70,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             MessageBox.Show("Сотрудник определён как штатный работник");
             DataGridUpdater.updateEmploeesDataGrid(windowObj);
             windowObj.HideAll();
-            windowObj.allSotrGrid.Visibility = Visibility.Visible;
+            windowObj.EmployeesGrid.Visibility = Visibility.Visible;
         }
     }
 }

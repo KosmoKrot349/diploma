@@ -27,9 +27,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                 if (ii * windowObj.quanLessonsInDay < windowObj.iCoordScheduleLabel) { day++; } else break;
             }
             //добавление
-            windowObj.raspAddSubs.Items.Clear();
-            windowObj.raspAddPrep.Items.Clear();
-            windowObj.raspAddKab.Items.Clear();
+            windowObj.GroopScheduleSubjects.Items.Clear();
+            windowObj.GroopScheduleTeacher.Items.Clear();
+            windowObj.GroopScheduleCabinet.Items.Clear();
             //вывод предметов
             try
             {
@@ -42,9 +42,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                 {
                     while (reader.Read())
                     {
-                        windowObj.raspAddSubs.Items.Add(reader.GetString(0));
+                        windowObj.GroopScheduleSubjects.Items.Add(reader.GetString(0));
                     }
-                    windowObj.raspAddSubs.SelectedIndex = 0;
+                    windowObj.GroopScheduleSubjects.SelectedIndex = 0;
                 }
                 con.Close();
             }
@@ -63,9 +63,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                 {
                     while (reader.Read())
                     {
-                        windowObj.raspAddPrep.Items.Add(reader.GetString(0));
+                        windowObj.GroopScheduleTeacher.Items.Add(reader.GetString(0));
                     }
-                    windowObj.raspAddPrep.SelectedIndex = 0;
+                    windowObj.GroopScheduleTeacher.SelectedIndex = 0;
                 }
                 con.Close();
             }
@@ -85,29 +85,29 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                 {
                     while (reader.Read())
                     {
-                        windowObj.raspAddKab.Items.Add(reader.GetString(0));
+                        windowObj.GroopScheduleCabinet.Items.Add(reader.GetString(0));
                     }
-                    windowObj.raspAddKab.SelectedIndex = 0;
+                    windowObj.GroopScheduleCabinet.SelectedIndex = 0;
                 }
                 con.Close();
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
             switch (day + 1)
             {
-                case 1: { windowObj.raspAddDayOfWeek.Text = "Понедельник"; } break;
-                case 2: { windowObj.raspAddDayOfWeek.Text = "Вторник"; } break;
-                case 3: { windowObj.raspAddDayOfWeek.Text = "Среда"; } break;
-                case 4: { windowObj.raspAddDayOfWeek.Text = "Четверг"; } break;
-                case 5: { windowObj.raspAddDayOfWeek.Text = "Пятница"; } break;
-                case 6: { windowObj.raspAddDayOfWeek.Text = "Суббота"; } break;
-                case 7: { windowObj.raspAddDayOfWeek.Text = "Воскресенье"; } break;
+                case 1: { windowObj.GroopScheduleDayOfWeek.Text = "Понедельник"; } break;
+                case 2: { windowObj.GroopScheduleDayOfWeek.Text = "Вторник"; } break;
+                case 3: { windowObj.GroopScheduleDayOfWeek.Text = "Среда"; } break;
+                case 4: { windowObj.GroopScheduleDayOfWeek.Text = "Четверг"; } break;
+                case 5: { windowObj.GroopScheduleDayOfWeek.Text = "Пятница"; } break;
+                case 6: { windowObj.GroopScheduleDayOfWeek.Text = "Суббота"; } break;
+                case 7: { windowObj.GroopScheduleDayOfWeek.Text = "Воскресенье"; } break;
             }
 
-            windowObj.raspAddDate.Text = windowObj.dateMonday.AddDays(day).ToShortDateString();
-            windowObj.raspAddLesNum.Text = "" + lessonNumber;
-            windowObj.raspAddGr.Text = windowObj.labelArr[0, windowObj.jCoordScheduleLabel].Content.ToString();
+            windowObj.GroopScheduleDate.Text = windowObj.dateMonday.AddDays(day).ToShortDateString();
+            windowObj.GroopScheduleLessonNumber.Text = "" + lessonNumber;
+            windowObj.GroopScheduleGroop.Text = windowObj.labelArr[0, windowObj.jCoordScheduleLabel].Content.ToString();
             windowObj.HideAll();
-            windowObj.addRaspGrid.Visibility = Visibility.Visible;
+            windowObj.AddGroopScheduleGrid.Visibility = Visibility.Visible;
         }
     }
 }

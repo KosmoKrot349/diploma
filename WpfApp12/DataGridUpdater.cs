@@ -561,15 +561,15 @@ namespace WpfApp12
         //обновление грида оплат(долг)+
         public static void updateDebtDataGrid(BookkeeperWindow window)
         {
-            window.MonthOplGridDolg.ColumnDefinitions.Clear();
-            window.MonthOplGridDolg.Children.Clear();
+            window.PeymentForMonthDebtGrid.ColumnDefinitions.Clear();
+            window.PeymentForMonthDebtGrid.Children.Clear();
             //построение таблицы
             int quanMonth = 0;
             try
             {
                 NpgsqlConnection con = new NpgsqlConnection(window.connectionString);
                 con.Open();
-                string sql = "SELECT  array_to_string(payformonth,'_'), array_to_string(payedlist,'_'), array_to_string(skidkiforpay,'_'), array_to_string(topay,'_'), array_to_string(penya,'_'), date_stop,year  FROM listdolg where listenerid = (select listenerid from listeners where fio='" + window.ListenerDolg.SelectedItem + "') and grid = (select grid from groups where nazvanie ='" + window.GroupsDolg.SelectedItem + "')";
+                string sql = "SELECT  array_to_string(payformonth,'_'), array_to_string(payedlist,'_'), array_to_string(skidkiforpay,'_'), array_to_string(topay,'_'), array_to_string(penya,'_'), date_stop,year  FROM listdolg where listenerid = (select listenerid from listeners where fio='" + window.ListenerDebt.SelectedItem + "') and grid = (select grid from groups where nazvanie ='" + window.DebtPeymentGroops.SelectedItem + "')";
                 NpgsqlCommand com = new NpgsqlCommand(sql, con);
                 NpgsqlDataReader reader = com.ExecuteReader();
                 if (reader.HasRows)
@@ -593,9 +593,9 @@ namespace WpfApp12
 
                       
 
-                        if (!reader.IsDBNull(reader.GetOrdinal("date_stop"))) { window.isStopDolg.Content = "Обучение остановленно " + reader.GetDateTime(5).ToShortDateString(); }
-                        if (reader.IsDBNull(reader.GetOrdinal("date_stop"))) { window.isStopDolg.Content = "Обучение не остановленно"; }
-                        window.DataPerehoda.Content = "Дата добавления записи " + reader.GetDateTime(6).ToShortDateString(); ;
+                        if (!reader.IsDBNull(reader.GetOrdinal("date_stop"))) { window.isStopDebt.Content = "Обучение остановленно " + reader.GetDateTime(5).ToShortDateString(); }
+                        if (reader.IsDBNull(reader.GetOrdinal("date_stop"))) { window.isStopDebt.Content = "Обучение не остановленно"; }
+                        window.DateOfChange.Content = "Дата добавления записи " + reader.GetDateTime(6).ToShortDateString(); ;
 
                         ArrayList Month = new ArrayList();
 
@@ -677,7 +677,7 @@ namespace WpfApp12
 
                             ColumnDefinition cmd = new ColumnDefinition();
                             cmd.Width = new GridLength(100);
-                            window.MonthOplGridDolg.ColumnDefinitions.Add(cmd);
+                            window.PeymentForMonthDebtGrid.ColumnDefinitions.Add(cmd);
 
                             Grid.SetColumn(window.textBoxArrForArrearsDefreyment[i], (i));
                             Grid.SetColumn(monthLabelArr[i], (i));
@@ -696,13 +696,13 @@ namespace WpfApp12
                             Grid.SetRow(toPayLabelArr[i], 5);
                             Grid.SetRow(fineLabelArr[i], 4);
 
-                           window.MonthOplGridDolg.Children.Add(window.textBoxArrForArrearsDefreyment[i]);
-                            window.MonthOplGridDolg.Children.Add(monthLabelArr[i]);
-                            window.MonthOplGridDolg.Children.Add(payForMonthLabelArr[i]);
-                            window.MonthOplGridDolg.Children.Add(payedByListenerLabelArr[i]);
-                            window.MonthOplGridDolg.Children.Add(discountLabelArr[i]);
-                            window.MonthOplGridDolg.Children.Add(toPayLabelArr[i]);
-                            window.MonthOplGridDolg.Children.Add(fineLabelArr[i]);
+                           window.PeymentForMonthDebtGrid.Children.Add(window.textBoxArrForArrearsDefreyment[i]);
+                            window.PeymentForMonthDebtGrid.Children.Add(monthLabelArr[i]);
+                            window.PeymentForMonthDebtGrid.Children.Add(payForMonthLabelArr[i]);
+                            window.PeymentForMonthDebtGrid.Children.Add(payedByListenerLabelArr[i]);
+                            window.PeymentForMonthDebtGrid.Children.Add(discountLabelArr[i]);
+                            window.PeymentForMonthDebtGrid.Children.Add(toPayLabelArr[i]);
+                            window.PeymentForMonthDebtGrid.Children.Add(fineLabelArr[i]);
                             j++;
                         }
                     }
@@ -716,8 +716,8 @@ namespace WpfApp12
         //обновление grid начислений зп+
         public static void updateAccrualsSalaryDataGrid(BookkeeperWindow window)
         {
-           window.NachSotrGrid.Children.Clear();
-            window.NachSotrGrid.RowDefinitions.Clear();
+           window.AccrualsStaffGrid.Children.Clear();
+            window.AccrualsStaffGrid.RowDefinitions.Clear();
             window.NachMonthLabel.Content = "Начисления на ";
             switch (window.dateAccrual.Month)
             {
@@ -754,9 +754,9 @@ namespace WpfApp12
                         window.checkBoxArrStaffForAccrual[i].Content = reader.GetString(0);
                         RowDefinition cmd = new RowDefinition();
                         cmd.Height = new GridLength(20);
-                        window.NachSotrGrid.RowDefinitions.Add(cmd);
+                        window.AccrualsStaffGrid.RowDefinitions.Add(cmd);
                         Grid.SetRow(window.checkBoxArrStaffForAccrual[i], i);
-                        window.NachSotrGrid.Children.Add(window.checkBoxArrStaffForAccrual[i]);
+                        window.AccrualsStaffGrid.Children.Add(window.checkBoxArrStaffForAccrual[i]);
                         i++;
 
                     }
@@ -816,7 +816,7 @@ namespace WpfApp12
 
                 }
                 con.Close();
-                window.NachDataGrid.ItemsSource = table.DefaultView;
+                window.AccrualsDataGrid.ItemsSource = table.DefaultView;
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
         }
@@ -825,23 +825,23 @@ namespace WpfApp12
         public static void updateStaffScheduleGrid(ManagerWindow window)
         {
             window.MonthGrid.Children.Clear();
-            window.ShtatRaspSotrpGrid.Children.Clear();
-            window.ShtatRaspSotrpGrid.RowDefinitions.Clear();
-            window.ShtatRaspMonthYearLabel.Content = "Посещения на ";
+            window.StaffScheduleEmployeesGrid.Children.Clear();
+            window.StaffScheduleEmployeesGrid.RowDefinitions.Clear();
+            window.StaffScheduleDateLabel.Content = "Посещения на ";
             switch (window.date.Month)
             {
-                case 1: { window.ShtatRaspMonthYearLabel.Content += "январь " + window.date.Year; break; }
-                case 2: { window.ShtatRaspMonthYearLabel.Content += "февраль " + window.date.Year; break; }
-                case 3: { window.ShtatRaspMonthYearLabel.Content += "март " + window.date.Year; break; }
-                case 4: { window.ShtatRaspMonthYearLabel.Content += "апрель " + window.date.Year; break; }
-                case 5: { window.ShtatRaspMonthYearLabel.Content += "май " + window.date.Year; break; }
-                case 6: { window.ShtatRaspMonthYearLabel.Content += "июнь " + window.date.Year; break; }
-                case 7: { window.ShtatRaspMonthYearLabel.Content += "июль " + window.date.Year; break; }
-                case 8: { window.ShtatRaspMonthYearLabel.Content += "август " + window.date.Year; break; }
-                case 9: { window.ShtatRaspMonthYearLabel.Content += "сентябрь " + window.date.Year; break; }
-                case 10: { window.ShtatRaspMonthYearLabel.Content += "октябрь " + window.date.Year; break; }
-                case 11: { window.ShtatRaspMonthYearLabel.Content += "ноябрь " + window.date.Year; break; }
-                case 12: { window.ShtatRaspMonthYearLabel.Content += "декабрь " + window.date.Year; break; }
+                case 1: { window.StaffScheduleDateLabel.Content += "январь " + window.date.Year; break; }
+                case 2: { window.StaffScheduleDateLabel.Content += "февраль " + window.date.Year; break; }
+                case 3: { window.StaffScheduleDateLabel.Content += "март " + window.date.Year; break; }
+                case 4: { window.StaffScheduleDateLabel.Content += "апрель " + window.date.Year; break; }
+                case 5: { window.StaffScheduleDateLabel.Content += "май " + window.date.Year; break; }
+                case 6: { window.StaffScheduleDateLabel.Content += "июнь " + window.date.Year; break; }
+                case 7: { window.StaffScheduleDateLabel.Content += "июль " + window.date.Year; break; }
+                case 8: { window.StaffScheduleDateLabel.Content += "август " + window.date.Year; break; }
+                case 9: { window.StaffScheduleDateLabel.Content += "сентябрь " + window.date.Year; break; }
+                case 10: { window.StaffScheduleDateLabel.Content += "октябрь " + window.date.Year; break; }
+                case 11: { window.StaffScheduleDateLabel.Content += "ноябрь " + window.date.Year; break; }
+                case 12: { window.StaffScheduleDateLabel.Content += "декабрь " + window.date.Year; break; }
 
             }
             DateTime newDate = new DateTime(window.date.Year, window.date.Month, 1);
@@ -908,9 +908,9 @@ namespace WpfApp12
                         window.checkBoxArrForStaffSchedule[i].Content = reader.GetString(0);
                         RowDefinition cmd = new RowDefinition();
                         cmd.Height = new GridLength(20);
-                        window.ShtatRaspSotrpGrid.RowDefinitions.Add(cmd);
+                        window.StaffScheduleEmployeesGrid.RowDefinitions.Add(cmd);
                         Grid.SetRow(window.checkBoxArrForStaffSchedule[i], i);
-                        window.ShtatRaspSotrpGrid.Children.Add(window.checkBoxArrForStaffSchedule[i]);
+                        window.StaffScheduleEmployeesGrid.Children.Add(window.checkBoxArrForStaffSchedule[i]);
                         i++;
 
                     }
@@ -1012,7 +1012,7 @@ namespace WpfApp12
 
                 }
                 con.Close();
-                window.ShtatDataGrid.ItemsSource = table.DefaultView;
+                window.StaffDataGrid.ItemsSource = table.DefaultView;
 
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); }
@@ -1057,7 +1057,7 @@ namespace WpfApp12
 
                 }
                 con.Close();
-                window.StateDataGrid.ItemsSource = table.DefaultView;
+                window.PositionsDataGrid.ItemsSource = table.DefaultView;
 
         }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
@@ -1076,7 +1076,7 @@ namespace WpfApp12
                 string sql = "SELECT rabotyid, title, pay,ed_izm, comment FROM raboty_obsl";
                 NpgsqlDataAdapter Adapter = new NpgsqlDataAdapter(sql, con);
                 Adapter.Fill(Table);
-                window.ObslWorkDataGrid.ItemsSource = Table.DefaultView;
+                window.ServiceWorkDataGrid.ItemsSource = Table.DefaultView;
                 con.Close();
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
@@ -1095,7 +1095,7 @@ namespace WpfApp12
                 string sql = "SELECT * from koef_vislugi";
                 NpgsqlDataAdapter Adapter = new NpgsqlDataAdapter(sql, con);
                 Adapter.Fill(Table);
-                window.KoefDataGrid.ItemsSource = Table.DefaultView;
+                window.WorkCoeffDataGrid.ItemsSource = Table.DefaultView;
                 con.Close();
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
@@ -1113,7 +1113,7 @@ namespace WpfApp12
                 con.Open();
                 NpgsqlDataAdapter Adapter = new NpgsqlDataAdapter(window.filter.sql, con);
                 Adapter.Fill(Table);
-                window.RoshodyDataGrid.ItemsSource = Table.DefaultView;
+                window.CostsDataGrid.ItemsSource = Table.DefaultView;
                 con.Close();
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
@@ -1131,7 +1131,7 @@ namespace WpfApp12
                 con.Open();
                 NpgsqlDataAdapter Adapter = new NpgsqlDataAdapter(window.filter.sql, con);
                 Adapter.Fill(Table);
-                window.DohodyDataGrid.ItemsSource = Table.DefaultView;
+                window.ProfitDataGrid.ItemsSource = Table.DefaultView;
                 con.Close();
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
@@ -1141,8 +1141,8 @@ namespace WpfApp12
         //обновление грида оплат+              
         public static void updatePaymentDataGrid(BookkeeperWindow window)
         {
-            window.MonthOplGrid.ColumnDefinitions.Clear();
-            window.MonthOplGrid.Children.Clear();
+            window.PaymentForMonthOutputGrid.ColumnDefinitions.Clear();
+            window.PaymentForMonthOutputGrid.Children.Clear();
             //построение таблицы
             int quanMonth = 0;
             try
@@ -1262,7 +1262,7 @@ namespace WpfApp12
 
                             ColumnDefinition cmd = new ColumnDefinition();
                             cmd.Width = new GridLength(100);
-                            window.MonthOplGrid.ColumnDefinitions.Add(cmd);
+                            window.PaymentForMonthOutputGrid.ColumnDefinitions.Add(cmd);
 
                             Grid.SetColumn(window.textBoxArrForDefreyment[i], (i));
                             Grid.SetColumn(monthLabelArr[i], (i));
@@ -1281,13 +1281,13 @@ namespace WpfApp12
                             Grid.SetRow(toPayLabelArr[i], 5);
                             Grid.SetRow(fineLabelArr[i], 4);
 
-                            window.MonthOplGrid.Children.Add(window.textBoxArrForDefreyment[i]);
-                            window.MonthOplGrid.Children.Add(monthLabelArr[i]);
-                            window.MonthOplGrid.Children.Add(payForMonthLabelArr[i]);
-                            window.MonthOplGrid.Children.Add(payedByListenerLabelAdd[i]);
-                            window.MonthOplGrid.Children.Add(discountLabelArr[i]);
-                            window.MonthOplGrid.Children.Add(toPayLabelArr[i]);
-                            window.MonthOplGrid.Children.Add(fineLabelArr[i]);
+                            window.PaymentForMonthOutputGrid.Children.Add(window.textBoxArrForDefreyment[i]);
+                            window.PaymentForMonthOutputGrid.Children.Add(monthLabelArr[i]);
+                            window.PaymentForMonthOutputGrid.Children.Add(payForMonthLabelArr[i]);
+                            window.PaymentForMonthOutputGrid.Children.Add(payedByListenerLabelAdd[i]);
+                            window.PaymentForMonthOutputGrid.Children.Add(discountLabelArr[i]);
+                            window.PaymentForMonthOutputGrid.Children.Add(toPayLabelArr[i]);
+                            window.PaymentForMonthOutputGrid.Children.Add(fineLabelArr[i]);
                             j++;
                         }
                     }
@@ -1309,7 +1309,7 @@ namespace WpfApp12
                 string sql = "SELECT * from typerash";
                 NpgsqlDataAdapter Adapter = new NpgsqlDataAdapter(sql, con);
                 Adapter.Fill(Table);
-                window.TypeRashDataGrid.ItemsSource = Table.DefaultView;
+                window.CostsTypeDataGrid.ItemsSource = Table.DefaultView;
                 con.Close();
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
@@ -1327,7 +1327,7 @@ namespace WpfApp12
                 string sql = "SELECT * from typedohod";
                 NpgsqlDataAdapter Adapter = new NpgsqlDataAdapter(sql, con);
                 Adapter.Fill(Table);
-                window.TypeDohDataGrid.ItemsSource = Table.DefaultView;
+                window.ProfitTypesDataGrid.ItemsSource = Table.DefaultView;
                 con.Close();
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
@@ -1345,7 +1345,7 @@ namespace WpfApp12
                 string sql = "SELECT * from cabinet";
                 NpgsqlDataAdapter Adapter = new NpgsqlDataAdapter(sql, con);
                 Adapter.Fill(Table);
-                window.cabDataGrid.ItemsSource = Table.DefaultView;
+                window.CabinetsDataGrid.ItemsSource = Table.DefaultView;
                 con.Close();
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
@@ -1444,7 +1444,7 @@ namespace WpfApp12
             }
                 
                 con.Close();
-                window.listenerDataGrid.ItemsSource = table.DefaultView;
+                window.ListenersDataGrid.ItemsSource = table.DefaultView;
 
         }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
@@ -1455,9 +1455,9 @@ namespace WpfApp12
         {
             DateTime dateSunday = window.dateMonday.AddDays(6);
             Array.Clear(window.labelArr, 0, window.labelArr.Length);
-            window.tGс.Children.Clear();
-            window.tGс.RowDefinitions.Clear();
-            window.tGс.ColumnDefinitions.Clear();
+            window.CabinetScheduleOutputGrid.Children.Clear();
+            window.CabinetScheduleOutputGrid.RowDefinitions.Clear();
+            window.CabinetScheduleOutputGrid.ColumnDefinitions.Clear();
             Label[] day = new Label[7];
             for (int i = 0; i < 7; i++)
             {
@@ -1485,14 +1485,14 @@ namespace WpfApp12
             {
                 ColumnDefinition cmd1 = new ColumnDefinition();
                 cmd1.Width = new GridLength(100);
-                window.tGс.ColumnDefinitions.Add(cmd1);
+                window.CabinetScheduleOutputGrid.ColumnDefinitions.Add(cmd1);
             }
 
             for (int i = 0; i < (window.quanLessonsInDay * 7) + 1; i++)
             {
                 RowDefinition cmd1 = new RowDefinition();
                 cmd1.Height = new GridLength(100);
-                window.tGс.RowDefinitions.Add(cmd1);
+                window.CabinetScheduleOutputGrid.RowDefinitions.Add(cmd1);
             }
             for (int i = 0; i < (window.quanLessonsInDay * 7) + 1; i++)
             {
@@ -1511,7 +1511,7 @@ namespace WpfApp12
                     window.labelArr[i, j].Content = "";
                     window.labelArr[i, j].BorderThickness = new Thickness(2);
                     window.labelArr[i, j].BorderBrush = Brushes.Black;
-                    window.tGс.Children.Add(window.labelArr[i, j]);
+                    window.CabinetScheduleOutputGrid.Children.Add(window.labelArr[i, j]);
                     Grid.SetRow(window.labelArr[i, j], i);
                     Grid.SetColumn(window.labelArr[i, j], j);
 
@@ -1521,7 +1521,7 @@ namespace WpfApp12
             }
             for (int i = 1; i <= 7; i++)
             {
-                window.tGс.Children.Add(day[i - 1]);
+                window.CabinetScheduleOutputGrid.Children.Add(day[i - 1]);
                 day[i - 1].BorderThickness = new Thickness(2);
                 day[i - 1].BorderBrush = Brushes.Black;
                 Grid.SetRowSpan(day[i - 1], window.quanLessonsInDay);
@@ -1626,9 +1626,9 @@ namespace WpfApp12
         {
            DateTime dateSunday = window.dateMonday.AddDays(6);
             Array.Clear(window.labelArr, 0, window.labelArr.Length);
-            window.tGp.Children.Clear();
-            window.tGp.RowDefinitions.Clear();
-            window.tGp.ColumnDefinitions.Clear();
+            window.TeacherScheduleOutputGrid.Children.Clear();
+            window.TeacherScheduleOutputGrid.RowDefinitions.Clear();
+            window.TeacherScheduleOutputGrid.ColumnDefinitions.Clear();
             Label[] day = new Label[7];
             for (int i = 0; i < 7; i++)
             {
@@ -1655,14 +1655,14 @@ namespace WpfApp12
             {
                 ColumnDefinition cmd1 = new ColumnDefinition();
                 cmd1.Width = new GridLength(100);
-                window.tGp.ColumnDefinitions.Add(cmd1);
+                window.TeacherScheduleOutputGrid.ColumnDefinitions.Add(cmd1);
             }
 
             for (int i = 0; i < (window.quanLessonsInDay * 7) + 1; i++)
             {
                 RowDefinition cmd1 = new RowDefinition();
                 cmd1.Height = new GridLength(100);
-                window.tGp.RowDefinitions.Add(cmd1);
+                window.TeacherScheduleOutputGrid.RowDefinitions.Add(cmd1);
             }
             for (int i = 0; i < (window.quanLessonsInDay * 7) + 1; i++)
             {
@@ -1681,7 +1681,7 @@ namespace WpfApp12
                     window.labelArr[i, j].Content = "";
                     window.labelArr[i, j].BorderThickness = new Thickness(2);
                     window.labelArr[i, j].BorderBrush = Brushes.Black;
-                    window.tGp.Children.Add(window.labelArr[i, j]);
+                    window.TeacherScheduleOutputGrid.Children.Add(window.labelArr[i, j]);
                     Grid.SetRow(window.labelArr[i, j], i);
                     Grid.SetColumn(window.labelArr[i, j], j);
 
@@ -1691,7 +1691,7 @@ namespace WpfApp12
             }
             for (int i = 1; i <= 7; i++)
             {
-              window.tGp.Children.Add(day[i - 1]);
+              window.TeacherScheduleOutputGrid.Children.Add(day[i - 1]);
                 day[i - 1].BorderThickness = new Thickness(2);
                 day[i - 1].BorderBrush = Brushes.Black;
                 Grid.SetRowSpan(day[i - 1], window.quanLessonsInDay);
@@ -1795,9 +1795,9 @@ namespace WpfApp12
         {
             DateTime dateSunday = window.dateMonday.AddDays(6);
             Array.Clear(window.labelArr, 0, window.labelArr.Length);
-            window.tG.Children.Clear();
-            window.tG.RowDefinitions.Clear();
-            window.tG.ColumnDefinitions.Clear();
+            window.GrooptScheduleOutputGrid.Children.Clear();
+            window.GrooptScheduleOutputGrid.RowDefinitions.Clear();
+            window.GrooptScheduleOutputGrid.ColumnDefinitions.Clear();
             Label[] day = new Label[7];
             for (int i = 0; i < 7; i++)
             {
@@ -1824,14 +1824,14 @@ namespace WpfApp12
             {
                 ColumnDefinition cmd1 = new ColumnDefinition();
                 cmd1.Width = new GridLength(100);
-                window.tG.ColumnDefinitions.Add(cmd1);
+                window.GrooptScheduleOutputGrid.ColumnDefinitions.Add(cmd1);
             }
 
             for (int i = 0; i < (window.quanLessonsInDay * 7) + 1; i++)
             {
                 RowDefinition cmd1 = new RowDefinition();
                 cmd1.Height = new GridLength(100);
-                window.tG.RowDefinitions.Add(cmd1);
+                window.GrooptScheduleOutputGrid.RowDefinitions.Add(cmd1);
             }
             for (int i = 0; i < (window.quanLessonsInDay * 7) + 1; i++)
             {
@@ -1850,7 +1850,7 @@ namespace WpfApp12
                     window.labelArr[i, j].Content = "";
                     window.labelArr[i, j].BorderThickness = new Thickness(2);
                     window.labelArr[i, j].BorderBrush = Brushes.Black;
-                    window.tG.Children.Add(window.labelArr[i, j]);
+                    window.GrooptScheduleOutputGrid.Children.Add(window.labelArr[i, j]);
                     Grid.SetRow(window.labelArr[i, j], i);
                     Grid.SetColumn(window.labelArr[i, j], j);
 
@@ -1860,7 +1860,7 @@ namespace WpfApp12
             }
             for (int i = 1; i <= 7; i++)
             {
-                window.tG.Children.Add(day[i - 1]);
+                window.GrooptScheduleOutputGrid.Children.Add(day[i - 1]);
                 day[i - 1].BorderThickness = new Thickness(2);
                 day[i - 1].BorderBrush = Brushes.Black;
                 Grid.SetRowSpan(day[i - 1], window.quanLessonsInDay);
@@ -2007,7 +2007,7 @@ namespace WpfApp12
                     table.Rows.Add(row);
                 }
                 }
-                window.coursDataGrid.ItemsSource = table.DefaultView;
+                window.CourcesDataGrid.ItemsSource = table.DefaultView;
             con.Close();
             }
             catch { MessageBox.Show("Не удалось подключиться к базе даных"); return; }
@@ -2026,7 +2026,7 @@ namespace WpfApp12
                 string sql = "select * from subject";
                 NpgsqlDataAdapter Adapter = new NpgsqlDataAdapter(sql, con);
                 Adapter.Fill(Table);
-                window.subsDataGrid.ItemsSource = Table.DefaultView;
+                window.SubjectsDataGrid.ItemsSource = Table.DefaultView;
                 con.Close();
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); }
@@ -2129,7 +2129,7 @@ namespace WpfApp12
                     }
                 
                 }
-                window.groupsDataGrid.ItemsSource = table.DefaultView;
+                window.GroupsDataGrid.ItemsSource = table.DefaultView;
                 con.Close();
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); }
@@ -2146,7 +2146,7 @@ namespace WpfApp12
                 string sql = "SELECT * FROM lessons_time order by lesson_number";
                 NpgsqlDataAdapter Adapter = new NpgsqlDataAdapter(sql, con);
                 Adapter.Fill(Table);
-                window.zvonkiDataGrid.ItemsSource = Table.DefaultView;
+                window.TimeScheduleDataGrid.ItemsSource = Table.DefaultView;
                 con.Close();
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); }
@@ -2161,7 +2161,7 @@ namespace WpfApp12
                 con.Open();
                 NpgsqlDataAdapter Adapter = new NpgsqlDataAdapter(window.filter.sql, con);
                 Adapter.Fill(Table);
-                window.prepDataGrid.ItemsSource = Table.DefaultView;
+                window.TeachersDataGrid.ItemsSource = Table.DefaultView;
                 con.Close();
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); }
@@ -2177,7 +2177,7 @@ namespace WpfApp12
              
                 NpgsqlDataAdapter Adapter = new NpgsqlDataAdapter(window.filter.sql, con);
                 Adapter.Fill(Table);
-                window.allSotrDataGrid.ItemsSource = Table.DefaultView;
+                window.EmployeesDataGrid.ItemsSource = Table.DefaultView;
                 con.Close();
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); }
@@ -2194,7 +2194,7 @@ namespace WpfApp12
                 string sql = "SELECT * FROM kategorii";
                 NpgsqlDataAdapter Adapter = new NpgsqlDataAdapter(sql, con);
                 Adapter.Fill(Table);
-                window.kategDataGrid.ItemsSource = Table.DefaultView;
+                window.CategoriesDataGrid.ItemsSource = Table.DefaultView;
                 con.Close();
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); }

@@ -27,9 +27,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             table.Columns.Add("adres", System.Type.GetType("System.String"));
             table.Columns.Add("comment", System.Type.GetType("System.String"));
             ArrayList list = new ArrayList();
-            for (int i = 0; i < windowObj.cabDataGrid.Items.Count - 1; i++)
+            for (int i = 0; i < windowObj.CabinetsDataGrid.Items.Count - 1; i++)
             {
-                DataRowView DRV = windowObj.cabDataGrid.Items[i] as DataRowView;
+                DataRowView DRV = windowObj.CabinetsDataGrid.Items[i] as DataRowView;
                 DataRow row = DRV.Row;
                 object[] recordArr = row.ItemArray;
                 if (recordArr[1].ToString() == "") { MessageBox.Show("В " + (i + 1) + " строке не указан адрес кабинета"); return; }
@@ -44,7 +44,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             NpgsqlDataAdapter adapter = new NpgsqlDataAdapter(comm);
             NpgsqlCommandBuilder comandbuilder = new NpgsqlCommandBuilder(adapter);
             adapter.Update(table);
-            windowObj.cabDataGrid.SelectedItem = null;
+            windowObj.CabinetsDataGrid.SelectedItem = null;
 
             //кабинеты
             windowObj.cabDeleteButton.IsEnabled = false;

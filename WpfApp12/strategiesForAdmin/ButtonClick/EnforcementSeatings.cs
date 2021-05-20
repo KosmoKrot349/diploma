@@ -18,8 +18,8 @@ namespace WpfApp12.strategiesForAdmin
 
         public void buttonClick()
         {
-            SaveDataBaseSettings.Save(windowObj.connect.Text, windowObj.dbPassText.Text, windowObj.dbPortText.Text);
-            windowObj.connectionString = "Server=" + windowObj.connect.Text + ";Port=" + windowObj.dbPortText.Text + ";User Id=postgres;Password=" + windowObj.dbPassText.Text + ";Database=db";
+            SaveDataBaseSettings.Save(windowObj.connect.Text, windowObj.dbPassText.Text, windowObj.dbPortSettings.Text);
+            windowObj.connectionString = "Server=" + windowObj.connect.Text + ";Port=" + windowObj.dbPortSettings.Text + ";User Id=postgres;Password=" + windowObj.dbPassText.Text + ";Database=db";
 
             MessageBox.Show("Настройки сохранены и применены");
         }

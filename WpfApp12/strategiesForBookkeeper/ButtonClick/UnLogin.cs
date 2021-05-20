@@ -19,8 +19,8 @@ namespace WpfApp12.strategiesForBookkeeper.ButtonClick
         {
             windowObj.logUser = -2;
             MainWindow wind = new MainWindow();
-            wind.log.Text = "";
-            wind.pas.Password = "";
+            wind.Login.Text = "";
+            wind.Password.Password = "";
             wind.Width = windowObj.Width;
             wind.Height = windowObj.Height;
             wind.Left = windowObj.Left;

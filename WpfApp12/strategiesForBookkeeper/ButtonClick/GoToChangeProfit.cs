@@ -20,14 +20,14 @@ namespace WpfApp12.strategiesForBookkeeper.ButtonClick
 
         public void ButtonClick()
         {
-            DataRowView DRV = windowObj.DohodyDataGrid.SelectedItem as DataRowView;
+            DataRowView DRV = windowObj.ProfitDataGrid.SelectedItem as DataRowView;
             if (DRV == null) { MessageBox.Show("Изменение не возможно, Вы не выбрали запись для изменения."); return; }
             DataRow DR = DRV.Row;
             object[] arr = DR.ItemArray;
-            windowObj.DohodyChangeSum.Text = arr[2].ToString();
-            windowObj.DohodyChangeDate.Text = arr[3].ToString().Replace('/', '.');
+            windowObj.ProfitChangeSumm.Text = arr[2].ToString();
+            windowObj.ProfitChangeDate.Text = arr[3].ToString().Replace('/', '.');
             windowObj.profitID = (int)arr[0];
-            windowObj.DohodyChangeType.Items.Clear();
+            windowObj.ProfitChangeType.Items.Clear();
 
             try
             {
@@ -39,11 +39,11 @@ namespace WpfApp12.strategiesForBookkeeper.ButtonClick
                 int ii = 0;
                 if (reader.HasRows)
                 {
-                    windowObj.DohodyChangeType.SelectedIndex = 0;
+                    windowObj.ProfitChangeType.SelectedIndex = 0;
                     while (reader.Read())
                     {
-                        windowObj.DohodyChangeType.Items.Add(reader.GetString(0));
-                        if (reader.GetString(0) == arr[1].ToString()) { windowObj.DohodyChangeType.SelectedIndex = ii; }
+                        windowObj.ProfitChangeType.Items.Add(reader.GetString(0));
+                        if (reader.GetString(0) == arr[1].ToString()) { windowObj.ProfitChangeType.SelectedIndex = ii; }
                         ii++;
                     }
 
@@ -65,7 +65,7 @@ namespace WpfApp12.strategiesForBookkeeper.ButtonClick
                 NpgsqlDataReader reader = com.ExecuteReader();
                 if (reader.HasRows)
                 {
-                    windowObj.dohChKtoVnesCmF.SelectedIndex = 1;
+                    windowObj.ProfitChangePersonType.SelectedIndex = 1;
                     a = true;
                 }
                 con.Close();
@@ -83,7 +83,7 @@ namespace WpfApp12.strategiesForBookkeeper.ButtonClick
                 if (reader.HasRows)
                 {
 
-                    windowObj.dohChKtoVnesCmF.SelectedIndex = 0;
+                    windowObj.ProfitChangePersonType.SelectedIndex = 0;
                     b = true;
 
 
@@ -91,10 +91,10 @@ namespace WpfApp12.strategiesForBookkeeper.ButtonClick
                 con.Close();
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
-            if (a == false && b == false) { windowObj.dohChKtoVnesCmF.SelectedIndex = 2; }
-            windowObj.dohChKtoVnesTb.Text = arr[4].ToString();
+            if (a == false && b == false) { windowObj.ProfitChangePersonType.SelectedIndex = 2; }
+            windowObj.ProfitChangePersonName.Text = arr[4].ToString();
             windowObj.HideAll();
-            windowObj.DohodyChangeGrid.Visibility = Visibility.Visible;
+            windowObj.ProfitChangeGrid.Visibility = Visibility.Visible;
         }
     }
 }

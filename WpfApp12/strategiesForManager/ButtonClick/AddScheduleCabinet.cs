@@ -28,7 +28,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             {
                 NpgsqlConnection con = new NpgsqlConnection(windowObj.connectionString);
                 con.Open();
-                string sql = "select prepid from prep inner join sotrudniki using(sotrid) where sotrudniki.fio = '" + windowObj.raspAddPrepK.SelectedItem + "'";
+                string sql = "select prepid from prep inner join sotrudniki using(sotrid) where sotrudniki.fio = '" + windowObj.CabinetScheduleTeacher.SelectedItem + "'";
                 NpgsqlCommand command = new NpgsqlCommand(sql, con);
                 NpgsqlDataReader reader = command.ExecuteReader();
                 if (reader.HasRows)
@@ -46,7 +46,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             {
                 NpgsqlConnection con = new NpgsqlConnection(windowObj.connectionString);
                 con.Open();
-                string sql = "select subid from subject  where title = '" + windowObj.raspAddSubsK.SelectedItem + "'";
+                string sql = "select subid from subject  where title = '" + windowObj.CabinetScheduleSubject.SelectedItem + "'";
                 NpgsqlCommand command = new NpgsqlCommand(sql, con);
                 NpgsqlDataReader reader = command.ExecuteReader();
                 if (reader.HasRows)
@@ -64,7 +64,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             {
                 NpgsqlConnection con = new NpgsqlConnection(windowObj.connectionString);
                 con.Open();
-                string sql = "select grid from groups where nazvanie = '" + windowObj.raspAddGroupK.SelectedItem + "'";
+                string sql = "select grid from groups where nazvanie = '" + windowObj.CabinetScheduleGroop.SelectedItem + "'";
                 NpgsqlCommand command = new NpgsqlCommand(sql, con);
                 NpgsqlDataReader reader = command.ExecuteReader();
                 if (reader.HasRows)
@@ -80,7 +80,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             int cabinetID = Convert.ToInt32(windowObj.labelArr[0, windowObj.jCoordScheduleLabel].Name.Split('_')[1]);
             int day = 0;
 
-            switch (windowObj.raspAddDayOfWeekK.Text)
+            switch (windowObj.CabinetScheduleSelectDayOfWeek.Text)
             {
                 case "Понедельник": { day = 1; } break;
                 case "Вторник": { day = 2; } break;
@@ -96,7 +96,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             {
                 NpgsqlConnection con = new NpgsqlConnection(windowObj.connectionString);
                 con.Open();
-                string sql = "INSERT INTO raspisanie(grid, lesson_number, subid, prepid, date, day,cabid) VALUES(" + groopID + ", " + windowObj.raspAddLesNumK.Text + ", " + subjectID + ", " + teacherID + ", '" + windowObj.raspAddDateK.Text.Replace('.', '-') + "', " + day + "," + cabinetID + "); ";
+                string sql = "INSERT INTO raspisanie(grid, lesson_number, subid, prepid, date, day,cabid) VALUES(" + groopID + ", " + windowObj.CabinetScheduleLessonNumber.Text + ", " + subjectID + ", " + teacherID + ", '" + windowObj.CabinetScheduleDate.Text.Replace('.', '-') + "', " + day + "," + cabinetID + "); ";
                 NpgsqlCommand command = new NpgsqlCommand(sql, con);
                 command.ExecuteNonQuery();
                 con.Close();

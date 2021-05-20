@@ -23,9 +23,9 @@ namespace WpfApp12.strategiesForAdmin
             windowObj.hideAll();
             windowObj.crDumpGrid.Visibility = Visibility.Visible;
 
-            windowObj.bckpName.Text = "";
-            windowObj.bckpPyt.Text = "";
-            windowObj.sybdPyt.Text = "";
+            windowObj.BackUpFileNameCreateBackUp.Text = "";
+            windowObj.BackUpPathCreateBackUp.Text = "";
+            windowObj.DBPathCreateBackUp.Text = "";
             StreamReader StreamReader = new StreamReader(@"crDump.bat");
             ArrayList createBackUpList = new ArrayList();
             while (!StreamReader.EndOfStream)
@@ -34,7 +34,7 @@ namespace WpfApp12.strategiesForAdmin
             }
             object[] stringArrFromBatFile = createBackUpList.ToArray();
             string DBPathString = stringArrFromBatFile[1].ToString().Substring(2);
-            windowObj.sybdPyt.Text = DBPathString.Trim(' ');
+            windowObj.DBPathCreateBackUp.Text = DBPathString.Trim(' ');
             string BackUpPathString = stringArrFromBatFile[2].ToString();
             int PathIndex = 0;
 
@@ -44,8 +44,8 @@ namespace WpfApp12.strategiesForAdmin
             }
             string[] FoldersArr = BackUpPathString.Substring(PathIndex).Split('\\');
             for (int i = 0; i < FoldersArr.Length - 1; i++)
-            { windowObj.bckpPyt.Text += FoldersArr[i] + "\\"; }
-            windowObj.bckpPyt.Text = windowObj.bckpPyt.Text.Trim(' ');
+            { windowObj.BackUpPathCreateBackUp.Text += FoldersArr[i] + "\\"; }
+            windowObj.BackUpPathCreateBackUp.Text = windowObj.BackUpPathCreateBackUp.Text.Trim(' ');
             StreamReader.Close();
         }
     }

@@ -20,7 +20,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 
         public void ButtonClick()
         {
-            DataRowView DRV = windowObj.zvonkiDataGrid.SelectedItem as DataRowView;
+            DataRowView DRV = windowObj.TimeScheduleDataGrid.SelectedItem as DataRowView;
             if (DRV == null) { MessageBox.Show("Удаление прервано, Вы не выбрали запись для удаления."); return; }
             DataRow DR = DRV.Row;
             object[] arr = DR.ItemArray;
@@ -61,7 +61,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
             DataGridUpdater.updateTimeScheduleDataGrid(windowObj);
-            windowObj.zvonkiDataGrid.SelectedItem = null;
+            windowObj.TimeScheduleDataGrid.SelectedItem = null;
             //расписание звонков
             windowObj.zvonkiDeleteButton.IsEnabled = false;
         }

@@ -22,17 +22,17 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 
         public void ButtonClick()
         {
-            DataRowView DRV = windowObj.listenerDataGrid.SelectedItem as DataRowView;
+            DataRowView DRV = windowObj.ListenersDataGrid.SelectedItem as DataRowView;
             if (DRV == null) { MessageBox.Show("Невозможно изменить, Вы не выбрали запись для изменения."); return; }
             DataRow DR = DRV.Row;
             object[] arr = DR.ItemArray;
             windowObj.listenerID = Convert.ToInt32(arr[0]);
 
-            windowObj.listenerFIOCh.Text = "";
-            windowObj.listenerPhonesCh.Text = "";
-            windowObj.listenerCommCh.Text = "";
-            windowObj.gr_lgCh.Children.Clear();
-            windowObj.gr_lgCh.RowDefinitions.Clear();
+            windowObj.ListenerChangeName.Text = "";
+            windowObj.ListenerChangePhone.Text = "";
+            windowObj.ListenerChangeComment.Text = "";
+            windowObj.GroopsOfListenerGrid.Children.Clear();
+            windowObj.GroopsOfListenerGrid.RowDefinitions.Clear();
 
             ArrayList GroopList = new ArrayList();
             String[] groopsOfListenerFinalArr;
@@ -76,7 +76,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                 con1.Close();
 
             }
-            catch { System.Windows.Forms.MessageBox.Show("Не удалось подключиться к базе данных"); return; }
+            catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
             groopsOfListenerFinalArr = didntParsGroopsOfListenerArr.Split('_');
 
             int quanGroop = 0;
@@ -121,7 +121,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                         windowObj.textBoxArrForListeners[i].PreviewTextInput += windowObj.grPayment_PreviewTextInput;
                         RowDefinition rwd = new RowDefinition();
                         rwd.Height = new GridLength(40);
-                        windowObj.gr_lgCh.RowDefinitions.Add(rwd);
+                        windowObj.GroopsOfListenerGrid.RowDefinitions.Add(rwd);
 
                         windowObj.textBoxArrForListeners[i].IsEnabled = false;
                         windowObj.checkBoxArrForListeners[i].Content = reader.GetString(0) + "-льгота: ";
@@ -130,10 +130,10 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 
                         Grid.SetRow(windowObj.checkBoxArrForListeners[i], i);
                         Grid.SetColumn(windowObj.checkBoxArrForListeners[i], 0);
-                        windowObj.gr_lgCh.Children.Add(windowObj.checkBoxArrForListeners[i]);
+                        windowObj.GroopsOfListenerGrid.Children.Add(windowObj.checkBoxArrForListeners[i]);
                         Grid.SetRow(windowObj.textBoxArrForListeners[i], i);
                         Grid.SetColumn(windowObj.textBoxArrForListeners[i], 1);
-                        windowObj.gr_lgCh.Children.Add(windowObj.textBoxArrForListeners[i]);
+                        windowObj.GroopsOfListenerGrid.Children.Add(windowObj.textBoxArrForListeners[i]);
 
                         i++;
                     }
@@ -141,9 +141,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                 con.Close();
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
-            windowObj.listenerFIOCh.Text = arr[1].ToString();
-            windowObj.listenerPhonesCh.Text = arr[2].ToString();
-            windowObj.listenerCommCh.Text = arr[4].ToString();
+            windowObj.ListenerChangeName.Text = arr[1].ToString();
+            windowObj.ListenerChangePhone.Text = arr[2].ToString();
+            windowObj.ListenerChangeComment.Text = arr[4].ToString();
             windowObj.HideAll();
             windowObj.ListenerChangeGrid.Visibility = Visibility.Visible;
         }

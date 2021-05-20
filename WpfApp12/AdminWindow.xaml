@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:WpfApp12"
         mc:Ignorable="d"
         Title="Администратор" Height="300" Width="300">
-    <Grid Name="glGrid">
+    <Grid Name="MainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="15pt"/>
             <RowDefinition/>
@@ -14,16 +14,16 @@
         <!--меню админа-->
         <Menu Name="adminMenu"  Grid.Row="0">
             <MenuItem ToolTip="Нажмите для выбора доступной Вам роли" Name="MenuRolesA" Header="Права" Click="MenuRolesA_Click">
-                <MenuItem  Name="AdminRoleA" Header="Админ" Click="AdminRoleA_Click" ToolTip="Роль администратора уже выбрана" />
-                <MenuItem  Name="BuhgRoleA" Header="Бухгалтер" Click="BuhgRoleA_Click" ToolTip="Нажмите для перехода к роли бухгалтера" />
-                <MenuItem  Name="DirectorRoleA"  Header="Директор" Click="DirectorRoleA_Click" ToolTip="Нажмите для перехода к роли директора"/>
+                <MenuItem  Name="GoToAdminMenu" Header="Админ" Click="AdminRoleA_Click" ToolTip="Роль администратора уже выбрана" />
+                <MenuItem  Name="GoToBookkeerMenu" Header="Бухгалтер" Click="BuhgRoleA_Click" ToolTip="Нажмите для перехода к роли бухгалтера" />
+                <MenuItem  Name="GoToManagerMenu"  Header="Директор" Click="DirectorRoleA_Click" ToolTip="Нажмите для перехода к роли директора"/>
             </MenuItem>
             <MenuItem Name="usersMenu" Header="Пользователи" ToolTip="Нажмите для работы с учётными записями пользователей" Click="MenuItem_Click_1">
             </MenuItem>
-            <MenuItem Header="Архив" Name="arhivMenu" ToolTip="Нажмите для управления базой данных" Click="MenuItem_Click_2">
-                <MenuItem Header="Создать копию" ToolTip="Нажмите для перехода к созданию резервной копии базы данных" Name="crDump" Click="crDump_Click">
+            <MenuItem Header="Архив" Name="archiveMenu" ToolTip="Нажмите для управления базой данных" Click="MenuItem_Click_2">
+                <MenuItem Header="Создать копию" ToolTip="Нажмите для перехода к созданию резервной копии базы данных" Name="CreateBackUpMenu" Click="crDump_Click">
                 </MenuItem>
-                <MenuItem Header="Восстановить из копии" ToolTip="Нажмите для перехода к восстановлению базы данных из резервной копии" Name="rstrDump" Click="rstrDump_Click">
+                <MenuItem Header="Восстановить из копии" ToolTip="Нажмите для перехода к восстановлению базы данных из резервной копии" Name="RestoreBackUpMenu" Click="rstrDump_Click">
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="Переход на следующий год" Name="ToNextYearMenu" Click="ToNextYearMenu_Click" />
@@ -33,7 +33,7 @@
         </Menu>
 
 
-        <!--грид перехода на новый год-->
+        <!--грид перехода на новый год +-->
         <Grid Name="NextYearGrid" Grid.Row="1" Visibility="Collapsed">
             <Grid.RowDefinitions>
                 <RowDefinition Height="30pt"/>
@@ -55,12 +55,12 @@
             <Label Grid.Column="0" Grid.Row="3" FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Content="Путь к папке с копиями" />
             <Label Grid.Column="0" Grid.Row="4" FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Content="Имя копии" />
 
-            <TextBox Grid.Column="1" Grid.Row="2" FontSize="20"  Name="sybdPytNextYear"/>
-            <TextBox Grid.Column="1" Grid.Row="3" FontSize="20" Name="bckpPytNextYear" />
-            <TextBox Grid.Column="1" Grid.Row="4" FontSize="20" Name="bckpNameNextYear" ToolTip="По умолчанию текущая дата и время" />
+            <TextBox Grid.Column="1" Grid.Row="2" FontSize="20"  Name="DBPathGoToNextYear"/>
+            <TextBox Grid.Column="1" Grid.Row="3" FontSize="20" Name="BackUpFilePathGoToNextYear" />
+            <TextBox Grid.Column="1" Grid.Row="4" FontSize="20" Name="BackUpFileNameGoToNextYear" ToolTip="По умолчанию текущая дата и время" />
 
-            <Button Grid.Column="2" Grid.Row="2" FontSize="16" Content="Изменить" Name="selectBinNextYear" Click="selectBin_Click"  />
-            <Button Grid.Column="2" Grid.Row="3" FontSize="16" Content="Изменить" Name="selectbckpNextYear" Click="selectbckp_Click" />
+            <Button Grid.Column="2" Grid.Row="2" FontSize="16" Content="Изменить" Name="SelectBinPathNextYear" Click="selectBin_Click"  />
+            <Button Grid.Column="2" Grid.Row="3" FontSize="16" Content="Изменить" Name="SelectBackUpPathNextYear" Click="selectbckp_Click" />
 
 
             <Button Grid.Row="6" FontSize="16"  Grid.ColumnSpan="3" Grid.Column="0" Content="Выполнить переход" Name="crDumpButtonNextYear" Click="crDumpButtonNextYear_Click"/>
@@ -68,7 +68,7 @@
         </Grid>
 
 
-        <!--грид настроек-->
+        <!--грид настроек +-->
         <Grid Name="settingGrid" Grid.Column="0" Grid.Row="1" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
@@ -91,7 +91,7 @@
             <TextBox  Name="dbPassText" Grid.Column="1" Grid.Row="2" ToolTip="Напишите здесь пароль от базы который Вы указывали при ее установке" />
 
             <Label Content="Порт БД" Grid.Column="0" Grid.Row="3" FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
-            <TextBox  Name="dbPortText" Grid.Column="1" Grid.Row="3" ToolTip="Напишите здесь порт от базы" />
+            <TextBox  Name="dbPortSettings" Grid.Column="1" Grid.Row="3" ToolTip="Напишите здесь порт от базы" />
             <Grid Grid.Column="0" Grid.Row="4" Grid.RowSpan="2" Grid.ColumnSpan="2" Name="rootSettings" Visibility="Collapsed">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
@@ -103,11 +103,11 @@
                     <RowDefinition  Height="30pt"/>
                 </Grid.RowDefinitions>
                 <Label Content="Пароль root" Grid.Column="0" Grid.Row="1" FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
-                <TextBox Name="rootpass" Grid.Column="1" Grid.Row="1" ToolTip="Здесь указан текущий пароль пользователя root"  />
+                <TextBox Name="rootPassSettings" Grid.Column="1" Grid.Row="1" ToolTip="Здесь указан текущий пароль пользователя root"  />
                 <Button Name="rootSave" Content="Сохранить настройки root" FontSize="16"  Grid.Column="2" Grid.Row="1" Click="rootSave_Click" ToolTip="Нажмите для сохранения изменений в пароле пользователя root"  />
             </Grid>
-            <Button Content="Проверить подключение" FontSize="16" Grid.Column="0" Grid.Row="7" Click="Button_Click" ToolTip="Нажмите что бы проверить подключение по заданным настройкам" />
-            <Button Content="Сохранить настройки подключения" FontSize="16" Grid.Column="1" Grid.Row="7" Click="Button_Click_1" ToolTip="Нажмите что бы сохранить настройки без проверки" />
+            <Button Content="Проверить подключение" Name="CheckConnect" FontSize="16" Grid.Column="0" Grid.Row="7" Click="Button_Click" ToolTip="Нажмите что бы проверить подключение по заданным настройкам" />
+            <Button Content="Сохранить настройки подключения" Name="SaveConnect" FontSize="16" Grid.Column="1" Grid.Row="7" Click="Button_Click_1" ToolTip="Нажмите что бы сохранить настройки без проверки" />
         </Grid>
 
         <!--грид изменения пользователей-->
@@ -158,7 +158,7 @@
             <Button Name="change" FontSize="16" ToolTip="Нажмите для сохранения изменений" Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="2" Content="Сохранить"  Click="change_Click"/>
         </Grid>
 
-        <!--грид восстановления резервной копии-->
+        <!--грид восстановления резервной копии+-->
         <Grid Name="rsDumpGrid" Grid.Row="1" Visibility="Collapsed">
             <Grid.RowDefinitions>
                 <RowDefinition Height="30pt"/>
@@ -179,8 +179,8 @@
             <Label Grid.Column="0" Grid.Row="3" FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Content="Путь к копии" />
   
 
-            <TextBox Grid.Column="1" Grid.Row="2" FontSize="20"  Name="rsSybdPyt"/>
-            <TextBox Grid.Column="1" Grid.Row="3" FontSize="20" Name="rsBckpPyt" />
+            <TextBox Grid.Column="1" Grid.Row="2" FontSize="20"  Name="DBPathRestore"/>
+            <TextBox Grid.Column="1" Grid.Row="3" FontSize="20" Name="BackUpPathRestore" />
 
             <Button Grid.Column="2" FontSize="16" Grid.Row="2" Content="Изменить" Name="rsSelectBin" Click="rsSelectBin_Click"   />
             <Button Grid.Column="2" FontSize="16" Grid.Row="3" Content="Изменить" Name="rsSelectbckp" Click="rsSelectbckp_Click"  />
@@ -188,7 +188,7 @@
             <Button Grid.Row="5" FontSize="16"  Grid.ColumnSpan="3" Grid.Column="0" Content="Восстановить" Name="rsDumpButton" Click="rsDumpButton_Click"/>
 
         </Grid>
-        <!--грид создания резервной копии-->
+        <!--грид создания резервной копии+-->
         <Grid Name="crDumpGrid" Grid.Row="1" Visibility="Collapsed">
             <Grid.RowDefinitions>
                 <RowDefinition Height="30pt"/>
@@ -210,9 +210,9 @@
             <Label Grid.Column="0" Grid.Row="3" FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Content="Путь к папке с копиями" />
             <Label Grid.Column="0" Grid.Row="4" FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Content="Имя копии" />
             
-            <TextBox Grid.Column="1" Grid.Row="2" FontSize="20"  Name="sybdPyt"/>
-            <TextBox Grid.Column="1" Grid.Row="3" FontSize="20" Name="bckpPyt" />
-            <TextBox Grid.Column="1" Grid.Row="4" FontSize="20" Name="bckpName" ToolTip="По умолчанию текущее дата и время" />
+            <TextBox Grid.Column="1" Grid.Row="2" FontSize="20"  Name="DBPathCreateBackUp"/>
+            <TextBox Grid.Column="1" Grid.Row="3" FontSize="20" Name="BackUpPathCreateBackUp" />
+            <TextBox Grid.Column="1" Grid.Row="4" FontSize="20" Name="BackUpFileNameCreateBackUp" ToolTip="По умолчанию текущее дата и время" />
             
             <Button FontSize="16" Grid.Column="2" Grid.Row="2" Content="Изменить" Name="selectBin" Click="selectBin_Click"  />
             <Button FontSize="16" Grid.Column="2" Grid.Row="3" Content="Изменить" Name="selectbckp" Click="selectbckp_Click" />
@@ -222,8 +222,8 @@
 
         </Grid>
 
-        <!--грид пользователей-->
-        <Grid Name="delChUserGrid" Grid.Row="1" Visibility="Collapsed">
+        <!--грид пользователей+-->
+        <Grid Name="UsersGrid" Grid.Row="1" Visibility="Collapsed">
             <Grid.RowDefinitions>
                 <RowDefinition Height="30pt"/>
                 <RowDefinition/>
@@ -242,9 +242,9 @@
                 </Grid.ColumnDefinitions>
                 <ScrollViewer Grid.Column="0"  HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
                     <Grid Name="FiltrGridRoles" >
-                        <CheckBox Content="Админ" Name="id_admin" Grid.Column="0" />
-                        <CheckBox Content="Директор" Name="id_dir" Grid.Column="1" />
-                        <CheckBox Content="Бухгалтер" Name="id_buhg" Grid.Column="2" />
+                        <CheckBox Content="Админ" Name="isAdmin" Grid.Column="0" />
+                        <CheckBox Content="Директор" Name="isManager" Grid.Column="1" />
+                        <CheckBox Content="Бухгалтер" Name="isBookkeeper" Grid.Column="2" />
                     </Grid>
                 </ScrollViewer>
                 <Button Content="Применить" FontSize="16" Name="FiltrRolesButton" Grid.Column="1" Click="FiltrRolesButton_Click"/>
@@ -265,13 +265,13 @@
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
-        <!--грид окна приветсвия-->
+        <!--грид окна приветсвия+-->
         <Grid Name="helloGrdi" Grid.Row="1" >
             <TextBlock  TextWrapping="Wrap" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"  Name="hello_label" />
         </Grid>
 
-        <!--грид окна регистрации-->
-        <Grid Name="regGrid" Grid.Row="1" Visibility="Collapsed" >
+        <!--грид окна регистрации+-->
+        <Grid Name="RegistrationGrid" Grid.Row="1" Visibility="Collapsed" >
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
@@ -293,10 +293,10 @@
             <Label Content="Пароль" Grid.Column="0" Grid.Row="4" FontSize="16" HorizontalAlignment="Right" VerticalAlignment="Center"/>
             <Label Content="ФИО" Grid.Column="0" Grid.Row="1" FontSize="16" HorizontalAlignment="Right" VerticalAlignment="Center"/>
             <Label Content="Роли" Grid.Column="0" Grid.Row="5" FontSize="16" HorizontalAlignment="Right" VerticalAlignment="Center"/>
-            <TextBox Name="fio" ToolTip="Укажите ФИО нового пользователя" Grid.Column="1" Grid.Row="1"/>
-            <TextBox Name="log_reg" ToolTip="Укажите логин нового пользователя" Grid.Column="1" Grid.Row="2"/>
-            <PasswordBox Name="pas_reg" ToolTip="Укажите пароль нового пользователя" Grid.Column="1" Grid.Row="3"/>
-            <PasswordBox Name="rePas" ToolTip="Повторите пароль нового пользователя" Grid.Column="1" Grid.Row="4"/>
+            <TextBox Name="NameRegistration" ToolTip="Укажите ФИО нового пользователя" Grid.Column="1" Grid.Row="1"/>
+            <TextBox Name="LoginRegistration" ToolTip="Укажите логин нового пользователя" Grid.Column="1" Grid.Row="2"/>
+            <PasswordBox Name="PasswordRegistration" ToolTip="Укажите пароль нового пользователя" Grid.Column="1" Grid.Row="3"/>
+            <PasswordBox Name="RepeatPasswordRegistration" ToolTip="Повторите пароль нового пользователя" Grid.Column="1" Grid.Row="4"/>
             <Grid Grid.Column="1" Grid.Row="5">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
@@ -310,9 +310,9 @@
                 <Label Content="Админитсратор" Grid.Column="0" Grid.Row="0" VerticalContentAlignment="Top" HorizontalContentAlignment="Center" />
                 <Label Content="Бухгалтер" Grid.Column="1" Grid.Row="0" VerticalContentAlignment="Top" HorizontalContentAlignment="Center" />
                 <Label Content="Руководитель" Grid.Column="2" Grid.Row="0" VerticalContentAlignment="Top" HorizontalContentAlignment="Center" />
-                <CheckBox Name="adm" ToolTip="Нажмите для предоставления этому пользователю роли администратора.\n Если пометка установлена, то пользователь получит эту роль иначе - нет" Grid.Column="0" Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" Checked="adm_Checked" Unchecked="adm_Unchecked"/>
-                <CheckBox Name="bh" ToolTip="Нажмите для предоставления этому пользователю роли бухгалтера.\n Если пометка установлена, то пользователь получит эту роль иначе - нет" Grid.Column="1" Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" Unchecked="bh_Unchecked" Checked="bh_Checked"/>
-                <CheckBox Name="dr" ToolTip="Нажмите для предоставления этому пользователю роли директора.\n Если пометка установлена, то пользователь получит эту роль иначе - нет" Grid.Column="2" Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" Checked="dr_Checked" Unchecked="dr_Unchecked"/>
+                <CheckBox Name="isAdminRegistration" ToolTip="Нажмите для предоставления этому пользователю роли администратора.\n Если пометка установлена, то пользователь получит эту роль иначе - нет" Grid.Column="0" Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" Checked="adm_Checked" Unchecked="adm_Unchecked"/>
+                <CheckBox Name="isBookkeeperRegistration" ToolTip="Нажмите для предоставления этому пользователю роли бухгалтера.\n Если пометка установлена, то пользователь получит эту роль иначе - нет" Grid.Column="1" Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" Unchecked="bh_Unchecked" Checked="bh_Checked"/>
+                <CheckBox Name="isManagerRegistration" ToolTip="Нажмите для предоставления этому пользователю роли директора.\n Если пометка установлена, то пользователь получит эту роль иначе - нет" Grid.Column="2" Grid.Row="1" VerticalAlignment="Bottom" HorizontalAlignment="Center" Checked="dr_Checked" Unchecked="dr_Unchecked"/>
 
             </Grid>
             <Button Name="register" ToolTip="Нажмите для добавления нового пользователя" Grid.Column="0" Grid.Row="7" Grid.ColumnSpan="2" Content="Добавить пользователя" FontSize="16" Click="register_Click"/>

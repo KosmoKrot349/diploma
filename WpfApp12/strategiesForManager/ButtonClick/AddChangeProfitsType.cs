@@ -26,9 +26,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             table.Columns.Add("title", System.Type.GetType("System.String"));
             table.Columns.Add("descriprion", System.Type.GetType("System.String"));
             ArrayList list = new ArrayList();
-            for (int i = 0; i < windowObj.TypeDohDataGrid.Items.Count - 1; i++)
+            for (int i = 0; i < windowObj.ProfitTypesDataGrid.Items.Count - 1; i++)
             {
-                DataRowView DRV = windowObj.TypeDohDataGrid.Items[i] as DataRowView;
+                DataRowView DRV = windowObj.ProfitTypesDataGrid.Items[i] as DataRowView;
                 DataRow row = DRV.Row;
                 object[] recordArr = row.ItemArray;
                 if (recordArr[0].GetType() == typeof(int))
@@ -45,7 +45,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             NpgsqlCommandBuilder comandbuilder = new NpgsqlCommandBuilder(adapter);
             adapter.Update(table);
             DataGridUpdater.updateProfitTypeDataGri(windowObj);
-            windowObj.TypeDohDataGrid.SelectedItem = null;
+            windowObj.ProfitTypesDataGrid.SelectedItem = null;
             windowObj.TypeDohDeleteButton.IsEnabled = false;
         }
     }

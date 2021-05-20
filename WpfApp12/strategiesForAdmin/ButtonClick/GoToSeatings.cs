@@ -24,7 +24,7 @@ namespace WpfApp12.strategiesForAdmin
         {
             windowObj.MenuRolesA.BorderBrush = null;
             windowObj.usersMenu.BorderBrush = null;
-            windowObj.arhivMenu.BorderBrush = null;
+            windowObj.archiveMenu.BorderBrush = null;
             windowObj.settingMenu.BorderBrush = Brushes.DarkRed;
             windowObj.ToNextYearMenu.BorderBrush = null;
             windowObj.hideAll();
@@ -40,7 +40,7 @@ namespace WpfApp12.strategiesForAdmin
             object[] stringArr = list.ToArray();
             windowObj.connect.Text = stringArr[0].ToString().Split(':')[1];
             windowObj.dbPassText.Text = stringArr[1].ToString().Split(':')[1];
-            windowObj.dbPortText.Text = stringArr[2].ToString().Split(':')[1];
+            windowObj.dbPortSettings.Text = stringArr[2].ToString().Split(':')[1];
 
 
             if (windowObj.logUser == -1)
@@ -57,7 +57,7 @@ namespace WpfApp12.strategiesForAdmin
                     {
                         while (reader.Read())
                         {
-                            windowObj.rootpass.Text = reader.GetString(0);
+                            windowObj.rootPassSettings.Text = reader.GetString(0);
 
                         }
 

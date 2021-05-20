@@ -36,17 +36,17 @@ namespace WpfApp12.strategiesForBookkeeper.ButtonClick
                     {
                         while (dReader.Read())
                         {
-                            if (dReader.GetInt32(0) == 0) { wind.AdminRoleA.IsEnabled = false; }
-                            if (dReader.GetInt32(1) == 0) { wind.BuhgRoleA.IsEnabled = false; }
-                            if (dReader.GetInt32(2) == 0) { wind.DirectorRoleA.IsEnabled = false; }
+                            if (dReader.GetInt32(0) == 0) { wind.GoToAdminMenu.IsEnabled = false; }
+                            if (dReader.GetInt32(1) == 0) { wind.GoToAdminMenu.IsEnabled = false; }
+                            if (dReader.GetInt32(2) == 0) { wind.GoToManagerMenu.IsEnabled = false; }
 
                         }
                     }
                 }
                 catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
                 wind.logUser = windowObj.logUser;
-                wind.FIO = windowObj.FIO;
-                wind.Title = windowObj.FIO + " - Админ";
+                wind.UserName = windowObj.UserName;
+                wind.Title = windowObj.UserName + " - Админ";
                 wind.hello_label.Text = "Здравствуйте, Ваша текущая роль администратор. Для начала роботы выберите один из пунктов меню.";
                 wind.Width = windowObj.Width;
                 wind.Height = windowObj.Height;

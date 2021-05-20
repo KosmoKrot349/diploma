@@ -22,10 +22,10 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             table.Columns.Add("title", System.Type.GetType("System.String"));
             table.Columns.Add("description", System.Type.GetType("System.String"));
             ArrayList list = new ArrayList();
-            for (int i = 0; i < windowObj.TypeRashDataGrid.Items.Count - 1; i++)
+            for (int i = 0; i < windowObj.CostsTypeDataGrid.Items.Count - 1; i++)
             {
 
-                DataRowView DRV = windowObj.TypeRashDataGrid.Items[i] as DataRowView;
+                DataRowView DRV = windowObj.CostsTypeDataGrid.Items[i] as DataRowView;
                 DataRow row = DRV.Row;
                 object[] recordArr = row.ItemArray;
                 if (recordArr[0].GetType() == typeof(int))
@@ -42,7 +42,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             NpgsqlCommandBuilder comandbuilder = new NpgsqlCommandBuilder(adapter);
             adapter.Update(table);
             DataGridUpdater.updateTypeCostsDataGrid(windowObj);
-            windowObj.TypeRashDataGrid.SelectedItem = null;
+            windowObj.CostsTypeDataGrid.SelectedItem = null;
             windowObj.TypeRashDeleteButton.IsEnabled = false;
         }
     }

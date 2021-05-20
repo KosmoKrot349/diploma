@@ -25,7 +25,7 @@ namespace WpfApp12.strategiesForBookkeeper.ButtonClick
             {
                 NpgsqlConnection con = new NpgsqlConnection(windowObj.connectionString);
                 con.Open();
-                string sql = "SELECT  array_to_string(payedlist,'_'),array_to_string(topay,'_'),array_to_string(payformonth,'_'),array_to_string(skidkiforpay,'_')  FROM listdolg where listenerid = (select listenerid from listeners where fio='" + windowObj.ListenerDolg.SelectedItem + "') and grid = (select grid from groups where nazvanie ='" + windowObj.GroupsDolg.SelectedItem + "')";
+                string sql = "SELECT  array_to_string(payedlist,'_'),array_to_string(topay,'_'),array_to_string(payformonth,'_'),array_to_string(skidkiforpay,'_')  FROM listdolg where listenerid = (select listenerid from listeners where fio='" + windowObj.ListenerDebt.SelectedItem + "') and grid = (select grid from groups where nazvanie ='" + windowObj.DebtPeymentGroops.SelectedItem + "')";
                 NpgsqlCommand com = new NpgsqlCommand(sql, con);
                 NpgsqlDataReader reader = com.ExecuteReader();
                 if (reader.HasRows)
@@ -135,7 +135,7 @@ namespace WpfApp12.strategiesForBookkeeper.ButtonClick
                         {
                             NpgsqlConnection con1 = new NpgsqlConnection(windowObj.connectionString);
                             con1.Open();
-                            string sql1 = "UPDATE listdolg SET payedlist=" + payedByListener + ", skidkiforpay=" + dicount + ", topay=" + toPay + "  WHERE listenerid = (select listenerid from listeners where fio='" + windowObj.ListenerDolg.SelectedItem + "') and grid = (select grid from groups where nazvanie ='" + windowObj.GroupsDolg.SelectedItem + "')";
+                            string sql1 = "UPDATE listdolg SET payedlist=" + payedByListener + ", skidkiforpay=" + dicount + ", topay=" + toPay + "  WHERE listenerid = (select listenerid from listeners where fio='" + windowObj.ListenerDebt.SelectedItem + "') and grid = (select grid from groups where nazvanie ='" + windowObj.DebtPeymentGroops.SelectedItem + "')";
                             NpgsqlCommand com1 = new NpgsqlCommand(sql1, con1);
                             com1.ExecuteNonQuery();
                             con1.Close();
@@ -150,7 +150,7 @@ namespace WpfApp12.strategiesForBookkeeper.ButtonClick
                                 allSum -= surplus;
                                 NpgsqlConnection con1 = new NpgsqlConnection(windowObj.connectionString);
                                 con1.Open();
-                                string sql1 = "INSERT INTO dodhody(idtype, sum, data,fio)VALUES ( 1, " + allSum.ToString().Replace(',', '.') + ", now(),'" + windowObj.ListenerDolg.SelectedItem + "');";
+                                string sql1 = "INSERT INTO dodhody(idtype, sum, data,fio)VALUES ( 1, " + allSum.ToString().Replace(',', '.') + ", now(),'" + windowObj.ListenerDebt.SelectedItem + "');";
                                 NpgsqlCommand com1 = new NpgsqlCommand(sql1, con1);
                                 com1.ExecuteNonQuery();
                                 con1.Close();

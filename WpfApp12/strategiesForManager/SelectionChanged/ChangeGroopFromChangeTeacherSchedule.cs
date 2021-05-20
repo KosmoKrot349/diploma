@@ -23,18 +23,18 @@ namespace WpfApp12.strategiesForManager.SelectionChanged
             {
                 NpgsqlConnection con = new NpgsqlConnection(window.connectionString);
                 con.Open();
-                string sql = "SELECT title FROM subject where(select courses.subs from courses inner join groups using(courseid) where nazvanie ='" + window.raspChangeGroupP.SelectedItem + "' )  @> ARRAY[subid]";
+                string sql = "SELECT title FROM subject where(select courses.subs from courses inner join groups using(courseid) where nazvanie ='" + window.TeacherScheduleChangeGroop.SelectedItem + "' )  @> ARRAY[subid]";
                 NpgsqlCommand com = new NpgsqlCommand(sql, con);
                 NpgsqlDataReader reader = com.ExecuteReader();
                 if (reader.HasRows)
                 {
-                    window.raspChangeSubsP.Items.Clear();
-                    window.raspChangeSubsP.SelectedIndex = 0;
+                    window.TeacherScheduleChangeSubject.Items.Clear();
+                    window.TeacherScheduleChangeSubject.SelectedIndex = 0;
                     int i = 0;
                     while (reader.Read())
                     {
-                        window.raspChangeSubsP.Items.Add(reader.GetString(0));
-                        if (reader.GetString(0) == window.labelArr[window.iCoordScheduleLabel, window.jCoordScheduleLabel].Content.ToString().Split('\n')[0]) { window.raspChangeSubsP.SelectedIndex = i; }
+                        window.TeacherScheduleChangeSubject.Items.Add(reader.GetString(0));
+                        if (reader.GetString(0) == window.labelArr[window.iCoordScheduleLabel, window.jCoordScheduleLabel].Content.ToString().Split('\n')[0]) { window.TeacherScheduleChangeSubject.SelectedIndex = i; }
                         i++;
                     }
 

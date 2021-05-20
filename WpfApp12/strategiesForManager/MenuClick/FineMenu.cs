@@ -26,14 +26,14 @@ namespace WpfApp12.strategiesForManager.MenuClick
                 string sql = "select penyaproc from last_pereraschet";
                 NpgsqlCommand com = new NpgsqlCommand(sql, con);
                 DateIn wind = new DateIn();
-                wind.gridProcentPeni.Visibility = Visibility.Visible;
+                wind.FinePrecientGrid.Visibility = Visibility.Visible;
                 wind.connectionString = window.connectionString;
                 NpgsqlDataReader reader = com.ExecuteReader();
                 if (reader.HasRows)
                 {
                     while (reader.Read())
                     {
-                        wind.PenyaProc.Text = reader.GetDouble(0).ToString();
+                        wind.FinePrecent.Text = reader.GetDouble(0).ToString();
                     }
                 }
                 con.Close();

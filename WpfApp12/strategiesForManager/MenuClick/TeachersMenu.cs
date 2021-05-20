@@ -19,12 +19,12 @@ namespace WpfApp12.strategiesForManager.MenuClick
         public void MenuClick()
         {
             windowObj.HideAll();
-            windowObj.prepGrid.Visibility = Visibility.Visible;
+            windowObj.TeachersGrid.Visibility = Visibility.Visible;
 
-            windowObj.FiltrGridPrep.Children.Clear();
-            windowObj.FiltrGridPrep.ColumnDefinitions.Clear();
+            windowObj.FilterGridTeacher.Children.Clear();
+            windowObj.FilterGridTeacher.ColumnDefinitions.Clear();
 
-            windowObj.filter.CreateTeacherFilter(windowObj.FiltrGridPrep);
+            windowObj.filter.CreateTeacherFilter(windowObj.FilterGridTeacher);
             windowObj.filter.sql = "SELECT prep.prepid as prid,kategorii.title as nazva ,sotrudniki.fio as name ,prep.date_start as date,sotrudniki.comment as comm FROM sotrudniki inner join prep using(sotrid) inner join kategorii using(kategid)";
 
             DataGridUpdater.updateTeachersDataGrid(windowObj);

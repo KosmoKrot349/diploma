@@ -19,7 +19,7 @@ namespace WpfApp12.strategiesForManager.MenuClick
         public void MenuClick()
         {
             windowObj.HideAll();
-            windowObj.allSotrGrid.Visibility = Visibility.Visible;
+            windowObj.EmployeesGrid.Visibility = Visibility.Visible;
             windowObj.sqlForAllEmployees = "SELECT * FROM sotrudniki";
             DataGridUpdater.updateEmploeesDataGrid(windowObj);
         }

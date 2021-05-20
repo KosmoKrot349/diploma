@@ -28,7 +28,7 @@ namespace WpfApp12.strategiesForAdmin
                 {
                     if ((FolderBrowserDialog.SelectedPath[i] >= 'а' && FolderBrowserDialog.SelectedPath[i] <= 'я') || (FolderBrowserDialog.SelectedPath[i] >= 'А' && FolderBrowserDialog.SelectedPath[i] <= 'Я')) { MessageBox.Show("В пути не должно быть русскких символов"); return; }
                 }
-                windowObj.rsSybdPyt.Text = FolderBrowserDialog.SelectedPath + "\\";
+                windowObj.DBPathRestore.Text = FolderBrowserDialog.SelectedPath + "\\";
             }
             StreamReader StreamReader = new StreamReader(@"rsDump.bat");
             ArrayList ListFromBatFile = new ArrayList();

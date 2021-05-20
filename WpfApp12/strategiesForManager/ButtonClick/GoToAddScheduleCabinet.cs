@@ -27,9 +27,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                 if (ii * windowObj.quanLessonsInDay < windowObj.iCoordScheduleLabel) { day++; } else break;
             }
             //добавление
-            windowObj.raspAddSubsK.Items.Clear();
-            windowObj.raspAddPrepK.Items.Clear();
-            windowObj.raspAddGroupK.Items.Clear();
+            windowObj.CabinetScheduleSubject.Items.Clear();
+            windowObj.CabinetScheduleTeacher.Items.Clear();
+            windowObj.CabinetScheduleGroop.Items.Clear();
             int groopID = -1;
             //вывод групп
             try
@@ -46,11 +46,11 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                     int i = 0;
                     while (reader.Read())
                     {
-                        windowObj.raspAddGroupK.Items.Add(reader.GetString(0));
+                        windowObj.CabinetScheduleGroop.Items.Add(reader.GetString(0));
                         if (i == 0) { groopID = reader.GetInt32(1); i++; }
 
                     }
-                    windowObj.raspAddGroupK.SelectedIndex = 0;
+                    windowObj.CabinetScheduleGroop.SelectedIndex = 0;
                 }
                 con.Close();
             }
@@ -69,9 +69,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                 {
                     while (reader.Read())
                     {
-                        windowObj.raspAddPrepK.Items.Add(reader.GetString(0));
+                        windowObj.CabinetScheduleTeacher.Items.Add(reader.GetString(0));
                     }
-                    windowObj.raspAddPrepK.SelectedIndex = 0;
+                    windowObj.CabinetScheduleTeacher.SelectedIndex = 0;
                 }
                 con.Close();
             }
@@ -79,20 +79,20 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 
             switch (day + 1)
             {
-                case 1: { windowObj.raspAddDayOfWeekK.Text = "Понедельник"; } break;
-                case 2: { windowObj.raspAddDayOfWeekK.Text = "Вторник"; } break;
-                case 3: { windowObj.raspAddDayOfWeekK.Text = "Среда"; } break;
-                case 4: { windowObj.raspAddDayOfWeekK.Text = "Четверг"; } break;
-                case 5: { windowObj.raspAddDayOfWeekK.Text = "Пятница"; } break;
-                case 6: { windowObj.raspAddDayOfWeekK.Text = "Суббота"; } break;
-                case 7: { windowObj.raspAddDayOfWeekK.Text = "Воскресенье"; } break;
+                case 1: { windowObj.CabinetScheduleSelectDayOfWeek.Text = "Понедельник"; } break;
+                case 2: { windowObj.CabinetScheduleSelectDayOfWeek.Text = "Вторник"; } break;
+                case 3: { windowObj.CabinetScheduleSelectDayOfWeek.Text = "Среда"; } break;
+                case 4: { windowObj.CabinetScheduleSelectDayOfWeek.Text = "Четверг"; } break;
+                case 5: { windowObj.CabinetScheduleSelectDayOfWeek.Text = "Пятница"; } break;
+                case 6: { windowObj.CabinetScheduleSelectDayOfWeek.Text = "Суббота"; } break;
+                case 7: { windowObj.CabinetScheduleSelectDayOfWeek.Text = "Воскресенье"; } break;
             }
 
-            windowObj.raspAddDateK.Text = windowObj.dateMonday.AddDays(day).ToShortDateString();
-            windowObj.raspAddLesNumK.Text = "" + lessonNumber;
-            windowObj.raspAddKabK.Text = windowObj.labelArr[0, windowObj.jCoordScheduleLabel].Content.ToString();
+            windowObj.CabinetScheduleDate.Text = windowObj.dateMonday.AddDays(day).ToShortDateString();
+            windowObj.CabinetScheduleLessonNumber.Text = "" + lessonNumber;
+            windowObj.CabinetScheduleCabinet.Text = windowObj.labelArr[0, windowObj.jCoordScheduleLabel].Content.ToString();
             windowObj.HideAll();
-            windowObj.addRaspGridKab.Visibility = Visibility.Visible;
+            windowObj.AddCabinetScheduleGrdi.Visibility = Visibility.Visible;
         }
     }
 }

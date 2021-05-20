@@ -20,7 +20,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 
         public void ButtonClick()
         {
-            DataRowView DRV = windowObj.allSotrDataGrid.SelectedItem as DataRowView;
+            DataRowView DRV = windowObj.EmployeesDataGrid.SelectedItem as DataRowView;
             if (DRV == null) { MessageBox.Show("Добавление прервано, Вы не выбрали сотрудника."); return; }
             DataRow DR = DRV.Row;
             object[] arr = DR.ItemArray;
@@ -39,8 +39,8 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
             windowObj.HideAll();
-            windowObj.kategCMB.Items.Clear();
-            windowObj.addPrepGrid.Visibility = Visibility.Visible;
+            windowObj.TeacherAddCategory.Items.Clear();
+            windowObj.AddTeacherGrid.Visibility = Visibility.Visible;
             try
             {
                 NpgsqlConnection con = new NpgsqlConnection(windowObj.connectionString);
@@ -53,11 +53,11 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                     while (reader.Read())
                     {
 
-                        windowObj.kategCMB.Items.Add(reader.GetString(0));
+                        windowObj.TeacherAddCategory.Items.Add(reader.GetString(0));
 
                     }
-                    windowObj.kategCMB.SelectedIndex = 0;
-                    windowObj.dateStart.Text = DateTime.Now.ToShortDateString();
+                    windowObj.TeacherAddCategory.SelectedIndex = 0;
+                    windowObj.TeacherAddDateStart.Text = DateTime.Now.ToShortDateString();
                 }
                 con.Close();
             }

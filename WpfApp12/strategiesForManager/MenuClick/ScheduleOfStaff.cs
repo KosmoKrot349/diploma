@@ -22,7 +22,7 @@ namespace WpfApp12.strategiesForManager.MenuClick
         public void MenuClick()
         {
             window.HideAll();
-            window.ShtatRaspGrid.Visibility = Visibility.Visible;
+            window.StaffScheduleGrid.Visibility = Visibility.Visible;
             for (int i = 0; i < 7; i++)
             {
                 for (int j = 0; j < 7; j++)

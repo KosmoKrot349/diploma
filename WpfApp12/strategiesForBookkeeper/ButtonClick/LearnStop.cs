@@ -21,7 +21,7 @@ namespace WpfApp12.strategiesForBookkeeper.ButtonClick
         public void ButtonClick()
         {
             DateIn wind = new DateIn();
-            wind.gridToPay.Visibility = Visibility.Visible;
+            wind.ToPayGrid.Visibility = Visibility.Visible;
             wind.ShowDialog();
             DateTime dateMonday = wind.getDm();
             if (dateMonday.Day == 1 && dateMonday.Month == 1 && dateMonday.Year == 1) { return; }

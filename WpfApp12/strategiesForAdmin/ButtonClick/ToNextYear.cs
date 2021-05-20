@@ -26,9 +26,9 @@ namespace WpfApp12.strategiesForAdmin
             MessageBoxResult res = MessageBox.Show("Вы собираетесь выполнить переход к новому году.\n Текущая версия Вашей базы данных будет сохранена отдельным файлом на вашем ПК.\n Будут подсчитаны расходы и доходы за весь год.\n Так же очищены выплаченные зп и таблицы дохода и расхода.\n Для слушателей оплативших весь год обучения записи будут обнулены, должники занесены в отдельную таблицу.\n Год в дате обучения у групп будет увеличен на 1.\n Вы не потеряете Ваши данные, Вы всегда можете их восстановить из файла который будет создан после этой процедуры. ", "Предупреждение", MessageBoxButton.YesNo);
             if (res == MessageBoxResult.Yes)
             {
-                if (windowObj.bckpNameNextYear.Text != "")
+                if (windowObj.BackUpFileNameGoToNextYear.Text != "")
                 {
-                    string bckpname = windowObj.bckpName.Text;
+                    string bckpname = windowObj.BackUpFileNameCreateBackUp.Text;
                     for (int i = 0; i < bckpname.Length; i++)
                     {
                         if ((bckpname[i] >= 'а' && bckpname[i] <= 'я') || (bckpname[i] >= 'А' && bckpname[i] <= 'Я')) { MessageBox.Show("В имени копии не должно быть русскких символов"); return; }
@@ -53,14 +53,14 @@ namespace WpfApp12.strategiesForAdmin
                 object[] StringArrFromSettingsFile = ListFromSettingsFile.ToArray();
 
                 string batLastStr = "pg_dump -d postgresql://postgres:" + StringArrFromSettingsFile[1].ToString().Split(':')[1] + "@" + StringArrFromSettingsFile[0].ToString().Split(':')[1] + ":" + StringArrFromSettingsFile[2].ToString().Split(':')[1] + "/db > ";
-                if (windowObj.bckpNameNextYear.Text == "")
+                if (windowObj.BackUpFileNameGoToNextYear.Text == "")
                 {
                     DateTime dateNow = DateTime.Now;
-                    batLastStr += windowObj.bckpPytNextYear.Text + "" + dateNow.Day + "_" + dateNow.Month + "_" + dateNow.Year + "_" + dateNow.Hour + "_" + dateNow.Minute + "_" + dateNow.Second + "_stary_god.sql";
+                    batLastStr += windowObj.BackUpFilePathGoToNextYear.Text + "" + dateNow.Day + "_" + dateNow.Month + "_" + dateNow.Year + "_" + dateNow.Hour + "_" + dateNow.Minute + "_" + dateNow.Second + "_stary_god.sql";
                 }
                 else
                 {
-                    batLastStr += windowObj.bckpPytNextYear.Text + windowObj.bckpName.Text + "_stary_god.sql";
+                    batLastStr += windowObj.BackUpFilePathGoToNextYear.Text + windowObj.BackUpFileNameCreateBackUp.Text + "_stary_god.sql";
 
                 }
                 stringArrFromBatFile[2] = batLastStr;

@@ -20,7 +20,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 
         public void ButtonClick()
         {
-            DataRowView DRV = windowObj.StateDataGrid.SelectedItem as DataRowView;
+            DataRowView DRV = windowObj.PositionsDataGrid.SelectedItem as DataRowView;
             if (DRV == null) { MessageBox.Show("Изменение не возможно, Вы не выбрали запись."); return; }
             DataRow DR = DRV.Row;
             object[] arr = DR.ItemArray;
@@ -37,18 +37,18 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                     while (reader.Read())
                     {
                         string[] ss = reader.GetString(0).Split('_');
-                        windowObj.Chanedays1.Text = ss[0]; windowObj.Chanedays2.Text = ss[1]; windowObj.Chanedays3.Text = ss[2]; windowObj.Chanedays4.Text = ss[3]; windowObj.Chanedays5.Text = ss[4]; windowObj.Chanedays6.Text = ss[5]; windowObj.Chanedays7.Text = ss[6]; windowObj.Chanedays8.Text = ss[7]; windowObj.Chanedays9.Text = ss[8]; windowObj.Chanedays10.Text = ss[9]; windowObj.Chanedays11.Text = ss[10]; windowObj.Chanedays12.Text = ss[11];
+                        windowObj.ChangeWorksDaysIn1Month.Text = ss[0]; windowObj.ChangeWorksDaysIn2Month.Text = ss[1]; windowObj.ChangeWorksDaysIn3Month.Text = ss[2]; windowObj.ChangeWorksDaysIn4Month.Text = ss[3]; windowObj.ChangeWorksDaysIn5Month.Text = ss[4]; windowObj.ChangeWorksDaysIn6Month.Text = ss[5]; windowObj.ChangeWorksDaysIn7Month.Text = ss[6]; windowObj.ChangeWorksDaysIn8Month.Text = ss[7]; windowObj.ChangeWorksDaysIn9Month.Text = ss[8]; windowObj.ChangeWorksDaysIn10Month.Text = ss[9]; windowObj.ChangeWorksDaysIn11Month.Text = ss[10]; windowObj.ChangeWorksDaysIn12Month.Text = ss[11];
                     }
 
                 }
                 con.Close();
-                windowObj.StateChaneTitle.Text = arr[1].ToString();
-                windowObj.StateChanePay.Text = arr[3].ToString();
-                windowObj.StateChaneCom.Text = arr[4].ToString();
+                windowObj.PositionChangeTitle.Text = arr[1].ToString();
+                windowObj.PositionChangeSalary.Text = arr[3].ToString();
+                windowObj.PositionChangeComment.Text = arr[4].ToString();
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
             windowObj.HideAll();
-            windowObj.StateChaneGrid.Visibility = Visibility.Visible;
+            windowObj.PositionsChangeGrid.Visibility = Visibility.Visible;
         }
     }
 }

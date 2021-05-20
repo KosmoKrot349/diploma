@@ -35,7 +35,7 @@ public int logUser;
         public TextBox[] textBoxArrForListeners;
         
         public CheckBox[] checkBoxArr;
-        public string FIO = "";
+        public string userName = "";
         public Label[,] labelArr;
         public int quanLessonsInDay = 0;//число зантий в дне
         public int quanGroops = 0;//число групп
@@ -93,12 +93,12 @@ public int logUser;
             StaffFromCashboxFiltr.connectionString = connectionString;
             ProfitTypesFromCashboxFilter.connectionString = connectionString;
             CostsTypesFromCashboxFilter.connectionString = connectionString;
-            MenuRolesD.BorderBrush = null;
-            raspMenu.BorderBrush = null;
-            sotrMenu.BorderBrush = null;
-            obuchMenu.BorderBrush = null;
-            MenuOtchety.BorderBrush = null;
-            skidki.BorderBrush = null;
+            MenuRoles.BorderBrush = null;
+            ScheduleMenu.BorderBrush = null;
+            EmployeesMenu.BorderBrush = null;
+            LearningMenu.BorderBrush = null;
+            ReportsMenu.BorderBrush = null;
+            DiscountMenu.BorderBrush = null;
         }
         //+
         public void HideAll()
@@ -628,34 +628,34 @@ public int logUser;
         private void grPayment1_TextChanged(object sender, TextChangedEventArgs e)
         {
             double res = 0;
-            if (grPayment1.Text != "") res += Convert.ToDouble(grPayment1.Text);
-            if (grPayment2.Text != "") res += Convert.ToDouble(grPayment2.Text);
-            if (grPayment3.Text != "") res += Convert.ToDouble(grPayment3.Text);
-            if (grPayment4.Text != "") res += Convert.ToDouble(grPayment4.Text);
-            if (grPayment5.Text != "") res += Convert.ToDouble(grPayment5.Text);
-            if (grPayment6.Text != "") res += Convert.ToDouble(grPayment6.Text);
-            if (grPayment7.Text != "") res += Convert.ToDouble(grPayment7.Text);
-            if (grPayment8.Text != "") res += Convert.ToDouble(grPayment8.Text);
-            if (grPayment9.Text != "") res += Convert.ToDouble(grPayment9.Text);
-            if (grPayment10.Text != "") res += Convert.ToDouble(grPayment10.Text);
-            if (grPayment11.Text != "") res += Convert.ToDouble(grPayment11.Text);
-            if (grPayment12.Text != "") res += Convert.ToDouble(grPayment12.Text);
-            payToYear.Content = Math.Round(res,2);
+            if (GroopAddPaymentFor1Month.Text != "") res += Convert.ToDouble(GroopAddPaymentFor1Month.Text);
+            if (GroopAddPaymentFor2Month.Text != "") res += Convert.ToDouble(GroopAddPaymentFor2Month.Text);
+            if (GroopAddPaymentFor3Month.Text != "") res += Convert.ToDouble(GroopAddPaymentFor3Month.Text);
+            if (GroopAddPaymentFor4Month.Text != "") res += Convert.ToDouble(GroopAddPaymentFor4Month.Text);
+            if (GroopAddPaymentFor5Month.Text != "") res += Convert.ToDouble(GroopAddPaymentFor5Month.Text);
+            if (GroopAddPaymentFor6Month.Text != "") res += Convert.ToDouble(GroopAddPaymentFor6Month.Text);
+            if (GroopAddPaymentFor7Month.Text != "") res += Convert.ToDouble(GroopAddPaymentFor7Month.Text);
+            if (GroopAddPaymentFor8Month.Text != "") res += Convert.ToDouble(GroopAddPaymentFor8Month.Text);
+            if (GroopAddPaymentFor9Month.Text != "") res += Convert.ToDouble(GroopAddPaymentFor9Month.Text);
+            if (GroopAddPaymentFor10Month.Text != "") res += Convert.ToDouble(GroopAddPaymentFor10Month.Text);
+            if (GroopAddPaymentFor11Month.Text != "") res += Convert.ToDouble(GroopAddPaymentFor11Month.Text);
+            if (GroopAddPaymentFor12Month.Text != "") res += Convert.ToDouble(GroopAddPaymentFor12Month.Text);
+            GroopAddPayForYear.Content = Math.Round(res,2);
 
             double res2 = 0;
-            if (grPayment1Ch.Text != "") res2 += Convert.ToDouble(grPayment1Ch.Text);
-            if (grPayment2Ch.Text != "") res2 += Convert.ToDouble(grPayment2Ch.Text);
-            if (grPayment3Ch.Text != "") res2 += Convert.ToDouble(grPayment3Ch.Text);
-            if (grPayment4Ch.Text != "") res2 += Convert.ToDouble(grPayment4Ch.Text);
-            if (grPayment5Ch.Text != "") res2 += Convert.ToDouble(grPayment5Ch.Text);
-            if (grPayment6Ch.Text != "") res2 += Convert.ToDouble(grPayment6Ch.Text);
-            if (grPayment7Ch.Text != "") res2 += Convert.ToDouble(grPayment7Ch.Text);
-            if (grPayment8Ch.Text != "") res2 += Convert.ToDouble(grPayment8Ch.Text);
-            if (grPayment9Ch.Text != "") res2 += Convert.ToDouble(grPayment9Ch.Text);
-            if (grPayment10Ch.Text != "") res2 += Convert.ToDouble(grPayment10Ch.Text);
-            if (grPayment11Ch.Text != "") res2 += Convert.ToDouble(grPayment11Ch.Text);
-            if (grPayment12Ch.Text != "") res2 += Convert.ToDouble(grPayment12Ch.Text);
-            payToYearCh.Content = Math.Round(res2, 2);
+            if (GroopChangePaymentFor1Month.Text != "") res2 += Convert.ToDouble(GroopChangePaymentFor1Month.Text);
+            if (GroopChangePaymentFor2Month.Text != "") res2 += Convert.ToDouble(GroopChangePaymentFor2Month.Text);
+            if (GroopChangePaymentFor3Month.Text != "") res2 += Convert.ToDouble(GroopChangePaymentFor3Month.Text);
+            if (GroopChangePaymentFor4Month.Text != "") res2 += Convert.ToDouble(GroopChangePaymentFor4Month.Text);
+            if (GroopChangePaymentFor5Month.Text != "") res2 += Convert.ToDouble(GroopChangePaymentFor5Month.Text);
+            if (GroopChangePaymentFor6Month.Text != "") res2 += Convert.ToDouble(GroopChangePaymentFor6Month.Text);
+            if (GroopChangePaymentFor7Month.Text != "") res2 += Convert.ToDouble(GroopChangePaymentFor7Month.Text);
+            if (GroopChangePaymentFor8Month.Text != "") res2 += Convert.ToDouble(GroopChangePaymentFor8Month.Text);
+            if (GroopChangePaymentFor9Month.Text != "") res2 += Convert.ToDouble(GroopChangePaymentFor9Month.Text);
+            if (GroopChangePaymentFor10Month.Text != "") res2 += Convert.ToDouble(GroopChangePaymentFor10Month.Text);
+            if (GroopChangePaymentFor11Month.Text != "") res2 += Convert.ToDouble(GroopChangePaymentFor11Month.Text);
+            if (GroopChangePaymentFor12Month.Text != "") res2 += Convert.ToDouble(GroopChangePaymentFor12Month.Text);
+            GroopChangePayForYear.Content = Math.Round(res2, 2);
         }
         //чекбокс (чек) для выбора групп +
         public void CheckBox_Checked(object sender, RoutedEventArgs e)
@@ -897,18 +897,8 @@ public int logUser;
         //выбор варианта фильтрации штата+
         private void ShtatFiltrCmbx_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (ShtatFiltrCmbx.SelectedIndex == 0)
-            {
-
-                FiltrShtatSotr.Children.Clear();
-                FiltrShtatSotr.ColumnDefinitions.Clear();
-                filter.CreateStaffFirstFilter(FiltrShtatSotr);
-            }
-            else {
-                FiltrShtatSotr.Children.Clear();
-                FiltrShtatSotr.ColumnDefinitions.Clear();
-                filter.CreateStaffSecondFilter(FiltrShtatSotr);
-            }
+            ISelectionChaged actionReact = new ChangeFilterTypeForStaff(this);
+            actionReact.SelectionChanged();
         }
         //переход к гриду отчета кассы+
         private void kassaMenu_Click(object sender, RoutedEventArgs e)
@@ -941,13 +931,13 @@ public int logUser;
             if (bt.Name == "PrimFKD") 
             {
                 PeopleFromCashboxFilter.ApplyProfitFilterForCashboxReport(ProfitTypesFromCashboxFilter);
-                DataGridUpdater.updateCashBoxGrid(connectionString, KassaDodohGrid, KassaRashodGrid, kassaTitleLabel, KassaItogoDohod, KassaItogoRashod, kassaAllDohodLabel, PeopleFromCashboxFilter.sql, StaffFromCashboxFiltr.sql);
+                DataGridUpdater.updateCashBoxGrid(connectionString, CashboxProfitGrid, CashboxCostsGrid, CashboxTitleLabel, CashboxTotalProfit, CashboxTotalCosts, CashboxFinalProfit, PeopleFromCashboxFilter.sql, StaffFromCashboxFiltr.sql);
             }
             if (bt.Name == "PrimFKR") 
             {
 
                 StaffFromCashboxFiltr.ApplyCostsFilterForCashboxReport(CostsTypesFromCashboxFilter);
-                DataGridUpdater.updateCashBoxGrid(connectionString, KassaDodohGrid, KassaRashodGrid, kassaTitleLabel, KassaItogoDohod, KassaItogoRashod, kassaAllDohodLabel, PeopleFromCashboxFilter.sql, StaffFromCashboxFiltr.sql);
+                DataGridUpdater.updateCashBoxGrid(connectionString, CashboxProfitGrid, CashboxCostsGrid, CashboxTitleLabel, CashboxTotalProfit, CashboxTotalCosts, CashboxFinalProfit, PeopleFromCashboxFilter.sql, StaffFromCashboxFiltr.sql);
             }
         }
     }

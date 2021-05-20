@@ -25,7 +25,7 @@ namespace WpfApp12.strategiesForBookkeeper.SelectionChanged
 
             if (cmb.SelectedIndex == 1)
             {
-                windowObj.dohAddKtoVnesCm.Items.Clear();
+                windowObj.ProfitAddPerson.Items.Clear();
                 try
                 {
                     NpgsqlConnection con = new NpgsqlConnection(windowObj.connectionString);
@@ -37,9 +37,9 @@ namespace WpfApp12.strategiesForBookkeeper.SelectionChanged
                     {
                         while (reader.Read())
                         {
-                            windowObj.dohAddKtoVnesCm.Items.Add(reader.GetString(0));
+                            windowObj.ProfitAddPerson.Items.Add(reader.GetString(0));
                         }
-                        windowObj.dohAddKtoVnesCm.SelectedIndex = 0;
+                        windowObj.ProfitAddPerson.SelectedIndex = 0;
                     }
                     con.Close();
                 }
@@ -47,7 +47,7 @@ namespace WpfApp12.strategiesForBookkeeper.SelectionChanged
             }
             if (cmb.SelectedIndex == 0)
             {
-                windowObj.dohAddKtoVnesCm.Items.Clear();
+                windowObj.ProfitAddPerson.Items.Clear();
                 try
                 {
 
@@ -60,17 +60,17 @@ namespace WpfApp12.strategiesForBookkeeper.SelectionChanged
                     {
                         while (reader.Read())
                         {
-                            windowObj.dohAddKtoVnesCm.Items.Add(reader.GetString(0));
+                            windowObj.ProfitAddPerson.Items.Add(reader.GetString(0));
                         }
-                        windowObj.dohAddKtoVnesCm.SelectedIndex = 0;
+                        windowObj.ProfitAddPerson.SelectedIndex = 0;
                     }
                     con3.Close();
 
                 }
                 catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
             }
-            if (cmb.SelectedIndex == 2) { windowObj.dohAddKtoVnesCm.Items.Clear(); windowObj.dohAddKtoVnesCm.Items.Add("Нет в списке"); }
-            windowObj.dohAddKtoVnesCm.SelectedIndex = 0;
+            if (cmb.SelectedIndex == 2) { windowObj.ProfitAddPerson.Items.Clear(); windowObj.ProfitAddPerson.Items.Add("Нет в списке"); }
+            windowObj.ProfitAddPerson.SelectedIndex = 0;
 
         }
     }

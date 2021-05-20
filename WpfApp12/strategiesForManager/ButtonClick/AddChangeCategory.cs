@@ -22,14 +22,14 @@ namespace WpfApp12.strategiesForManager.ButtonClick
         public void ButtonClick()
         {
             ArrayList list = new ArrayList();
-            for (int i = 0; i < windowObj.kategDataGrid.Items.Count - 1; i++)
+            for (int i = 0; i < windowObj.CategoriesDataGrid.Items.Count - 1; i++)
             {
                 DataTable table = new DataTable();
                 table.Columns.Add("kategid", System.Type.GetType("System.Int32"));
                 table.Columns.Add("title", System.Type.GetType("System.String"));
                 table.Columns.Add("pay", System.Type.GetType("System.Double"));
 
-                DataRowView DRV = windowObj.kategDataGrid.Items[i] as DataRowView;
+                DataRowView DRV = windowObj.CategoriesDataGrid.Items[i] as DataRowView;
                 DataRow row = DRV.Row;
                 object[] recordArr = row.ItemArray;
                 if (recordArr[1].ToString() == "") { MessageBox.Show("В " + (i + 1) + " строке не указано название категории"); return; }
@@ -46,7 +46,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                 adapter.Update(table);
             }
 
-            windowObj.kategDataGrid.SelectedItem = null;
+            windowObj.CategoriesDataGrid.SelectedItem = null;
 
             //категории
             windowObj.kategDeleteButton.IsEnabled = false;

@@ -18,12 +18,12 @@ namespace WpfApp12.strategiesForManager.MenuClick
 
         public void MenuClick()
         {
-            window.MenuRolesD.BorderBrush = null;
-            window.raspMenu.BorderBrush = Brushes.DarkRed;
-            window.sotrMenu.BorderBrush = null;
-            window.obuchMenu.BorderBrush = null;
-            window.skidki.BorderBrush = null;
-            window.MenuOtchety.BorderBrush = null;
+            window.GoToAdminMenu.BorderBrush = null;
+            window.ScheduleMenu.BorderBrush = Brushes.DarkRed;
+            window.EmployeesMenu.BorderBrush = null;
+            window.LearningMenu.BorderBrush = null;
+            window.DiscountMenu.BorderBrush = null;
+            window.ReportsMenu.BorderBrush = null;
         }
     }
 }

@@ -19,12 +19,12 @@ namespace WpfApp12.strategiesForBookkeeper.ButtonClick
 
         public void ButtonClick()
         {
-            if (windowObj.DohodyAddSum.Text == "" || windowObj.DohodyAddDate.Text == "" || windowObj.dohAddKtoVnesTb.Text == "") { MessageBox.Show("Поля не заполнены"); return; }
+            if (windowObj.ProfitAddSum.Text == "" || windowObj.ProfitAddDate.Text == "" || windowObj.ProfitAddPersonNmae.Text == "") { MessageBox.Show("Поля не заполнены"); return; }
             try
             {
                 NpgsqlConnection con = new NpgsqlConnection(windowObj.connectionString);
                 con.Open();
-                string sql = "INSERT INTO dodhody(idtype, sum, data,fio)VALUES ((select idtype from typedohod where title='" + windowObj.DohodyAddType.SelectedItem + "'), " + windowObj.DohodyAddSum.Text.Replace(',', '.') + ", '" + windowObj.DohodyAddDate.Text.Replace('.', '-') + "','" + windowObj.dohAddKtoVnesTb.Text + "')";
+                string sql = "INSERT INTO dodhody(idtype, sum, data,fio)VALUES ((select idtype from typedohod where title='" + windowObj.ProfitAddType.SelectedItem + "'), " + windowObj.ProfitAddSum.Text.Replace(',', '.') + ", '" + windowObj.ProfitAddDate.Text.Replace('.', '-') + "','" + windowObj.ProfitAddPersonNmae.Text + "')";
                 NpgsqlCommand com = new NpgsqlCommand(sql, con);
                 com.ExecuteNonQuery();
                 con.Close();
@@ -33,17 +33,17 @@ namespace WpfApp12.strategiesForBookkeeper.ButtonClick
             MessageBoxResult res = MessageBox.Show("Сумма добавленна.\nПродолжить добавление?", "Продолжить", MessageBoxButton.YesNo);
             if (res == MessageBoxResult.Yes)
             {
-                windowObj.DohodyAddSum.Text = "";
-                windowObj.DohodyAddDate.Text = DateTime.Now.ToShortDateString();
-                windowObj.DohodyAddType.SelectedIndex = 0;
-                windowObj.dohAddKtoVnesCm.SelectedIndex = 0;
+                windowObj.ProfitAddSum.Text = "";
+                windowObj.ProfitAddDate.Text = DateTime.Now.ToShortDateString();
+                windowObj.ProfitAddType.SelectedIndex = 0;
+                windowObj.ProfitAddPerson.SelectedIndex = 0;
             }
             if (res == MessageBoxResult.No)
             {
                 windowObj.HideAll();
-                windowObj.DohodyrGrid.Visibility = Visibility.Visible;
+                windowObj.ProfitGrid.Visibility = Visibility.Visible;
 
-                windowObj.DohodyDataGrid.SelectedItem = null;
+                windowObj.ProfitDataGrid.SelectedItem = null;
                 windowObj.DohDeleteButton.IsEnabled = false;
                 windowObj.DohChangeButton.IsEnabled = false;
                 DataGridUpdater.updateProfitDataGrid(windowObj);

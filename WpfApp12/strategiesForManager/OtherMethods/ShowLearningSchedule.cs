@@ -15,7 +15,7 @@ namespace WpfApp12.strategiesForManager.OtherMethods
         {
             window.quanLessonsInDay = 0;//число зантий в дне
             window.quanGroops = 0;//число групп
-            window.LabelDateRasp.Content = "Расписание на " + dm.ToShortDateString() + " - " + ds.ToShortDateString();
+            window.GroopsScheduleDateLabel.Content = "Расписание на " + dm.ToShortDateString() + " - " + ds.ToShortDateString();
             try
             {
                 NpgsqlConnection con = new NpgsqlConnection(window.connectionString);
@@ -56,7 +56,7 @@ namespace WpfApp12.strategiesForManager.OtherMethods
             window.DeleteRaspBut.IsEnabled = false;
             window.ChangeRaspBut.IsEnabled = false;
             window.AddRaspBut.IsEnabled = false;
-            window.raspGridG.Visibility = Visibility.Visible;
+            window.GroopScheduleGrid.Visibility = Visibility.Visible;
             window.labelArr = new Label[(window.quanLessonsInDay * 7) + 1, window.quanGroops + 2];
             DataGridUpdater.updateGroopScheduleGrid(window);
             for (int i = 0; i < (window.quanLessonsInDay * 7) + 1; i++)
@@ -73,7 +73,7 @@ namespace WpfApp12.strategiesForManager.OtherMethods
         {
             window.quanLessonsInDay = 0;//число зантий в дне
             window.quanGroops = 0;//число преподавателей
-            window.LabelDateRaspP.Content = "Расписание на " + dm.ToShortDateString() + " - " + ds.ToShortDateString();
+            window.TeachersScheduleDateLabel.Content = "Расписание на " + dm.ToShortDateString() + " - " + ds.ToShortDateString();
             try
             {
                 NpgsqlConnection con = new NpgsqlConnection(window.connectionString);
@@ -114,7 +114,7 @@ namespace WpfApp12.strategiesForManager.OtherMethods
             window.DeleteRaspButP.IsEnabled = false;
             window.ChangeRaspButP.IsEnabled = false;
             window.AddRaspButP.IsEnabled = false;
-            window.raspGridP.Visibility = Visibility.Visible;
+            window.TeacherScheduleGrid.Visibility = Visibility.Visible;
             window.labelArr = new Label[(window.quanLessonsInDay * 7) + 1, window.quanGroops + 2];
             DataGridUpdater.updateTeacherScheduleGrid(window);
             for (int i = 0; i < (window.quanLessonsInDay * 7) + 1; i++)
@@ -131,7 +131,7 @@ namespace WpfApp12.strategiesForManager.OtherMethods
         {
            window.quanLessonsInDay = 0;//число зантий в дне
             window.quanGroops = 0;//число кабинетов
-            window.LabelDateRaspС.Content = "Расписание на " + dm.ToShortDateString() + " - " + ds.ToShortDateString();
+            window.CabinetsScheduleDateLabel.Content = "Расписание на " + dm.ToShortDateString() + " - " + ds.ToShortDateString();
             try
             {
                 NpgsqlConnection con = new NpgsqlConnection(window.connectionString);
@@ -172,7 +172,7 @@ namespace WpfApp12.strategiesForManager.OtherMethods
             window.DeleteRaspButС.IsEnabled = false;
             window.ChangeRaspButС.IsEnabled = false;
             window.AddRaspButС.IsEnabled = false;
-            window.raspGridС.Visibility = Visibility.Visible;
+            window.CabinetScheduleGrid.Visibility = Visibility.Visible;
             window.labelArr = new Label[(window.quanLessonsInDay * 7) + 1, window.quanGroops + 2];
             DataGridUpdater.updateScheduleCabinetGrid(window);
             for (int i = 0; i < (window.quanLessonsInDay * 7) + 1; i++)

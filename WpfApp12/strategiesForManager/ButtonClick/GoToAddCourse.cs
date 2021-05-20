@@ -20,11 +20,11 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 
         public void ButtonClick()
         {
-            windowObj.courseTitle.Text = "";
-            windowObj.courseComm.Text = "";
-            windowObj.subsCanvas.Children.Clear();
+            windowObj.CourseAddTitle.Text = "";
+            windowObj.CourseAddComm.Text = "";
+            windowObj.CourseAddSubjects.Children.Clear();
             windowObj.HideAll();
-            windowObj.courseAddGrid.Visibility = Visibility.Visible;
+            windowObj.CourseAddGrid.Visibility = Visibility.Visible;
             int chbxMasLength = 0;
             try
             {
@@ -62,14 +62,14 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                         windowObj.checkBoxArr[i].Name = "id" + reader.GetInt32(1).ToString();
                         windowObj.checkBoxArr[i].Content = reader.GetString(0);
 
-                        windowObj.subsCanvas.Children.Add(windowObj.checkBoxArr[i]);
+                        windowObj.CourseAddSubjects.Children.Add(windowObj.checkBoxArr[i]);
                         Canvas.SetLeft(windowObj.checkBoxArr[i], 1);
                         Canvas.SetTop(windowObj.checkBoxArr[i], i * 15);
                         i++;
 
                     }
                 }
-                windowObj.subsCanvas.Height = i * 15;
+                windowObj.CourseAddSubjects.Height = i * 15;
                 con.Close();
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }

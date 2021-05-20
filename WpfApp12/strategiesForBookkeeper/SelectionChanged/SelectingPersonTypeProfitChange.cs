@@ -24,7 +24,7 @@ namespace WpfApp12.strategiesForBookkeeper.SelectionChanged
         {
             if (cmb.SelectedIndex == 1)
             {
-                windowObj.dohChKtoVnesCm.Items.Clear();
+                windowObj.ProfitChangePerson.Items.Clear();
                 try
                 {
                     NpgsqlConnection con = new NpgsqlConnection(windowObj.connectionString);
@@ -34,13 +34,13 @@ namespace WpfApp12.strategiesForBookkeeper.SelectionChanged
                     NpgsqlDataReader reader = com.ExecuteReader();
                     if (reader.HasRows)
                     {
-                        windowObj.dohChKtoVnesCm.SelectedIndex = 0;
+                        windowObj.ProfitChangePerson.SelectedIndex = 0;
                         int i = 0;
                         while (reader.Read())
                         {
-                            windowObj.dohChKtoVnesCm.Items.Add(reader.GetString(0));
+                            windowObj.ProfitChangePerson.Items.Add(reader.GetString(0));
 
-                            if (reader.GetString(0) == windowObj.personForProfit) {windowObj.dohChKtoVnesCm.SelectedIndex = i; }
+                            if (reader.GetString(0) == windowObj.personForProfit) {windowObj.ProfitChangePerson.SelectedIndex = i; }
                             i++;
                         }
                     }
@@ -50,7 +50,7 @@ namespace WpfApp12.strategiesForBookkeeper.SelectionChanged
             }
             if (cmb.SelectedIndex == 0)
             {
-                windowObj.dohChKtoVnesCm.Items.Clear();
+                windowObj.ProfitChangePerson.Items.Clear();
                 try
                 {
 
@@ -61,12 +61,12 @@ namespace WpfApp12.strategiesForBookkeeper.SelectionChanged
                     NpgsqlDataReader reader = com.ExecuteReader();
                     if (reader.HasRows)
                     {
-                        windowObj.dohChKtoVnesCm.SelectedIndex = 0;
+                        windowObj.ProfitChangePerson.SelectedIndex = 0;
                         int i = 0;
                         while (reader.Read())
                         {
-                            windowObj.dohChKtoVnesCm.Items.Add(reader.GetString(0));
-                            if (reader.GetString(0) == windowObj.personForProfit) { windowObj.dohChKtoVnesCm.SelectedIndex = i; }
+                            windowObj.ProfitChangePerson.Items.Add(reader.GetString(0));
+                            if (reader.GetString(0) == windowObj.personForProfit) { windowObj.ProfitChangePerson.SelectedIndex = i; }
                             i++;
                         }
                     }
@@ -75,7 +75,7 @@ namespace WpfApp12.strategiesForBookkeeper.SelectionChanged
                 }
                 catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
             }
-            if (cmb.SelectedIndex == 2) { windowObj.dohChKtoVnesCm.Items.Clear(); windowObj.dohChKtoVnesCm.SelectedIndex = 0; windowObj.dohChKtoVnesCm.Items.Add("Нет в списке"); }
+            if (cmb.SelectedIndex == 2) { windowObj.ProfitChangePerson.Items.Clear(); windowObj.ProfitChangePerson.SelectedIndex = 0; windowObj.ProfitChangePerson.Items.Add("Нет в списке"); }
 
         }
     }

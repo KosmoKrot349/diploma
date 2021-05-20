@@ -19,7 +19,7 @@ namespace WpfApp12.strategiesForBookkeeper.ButtonClick
 
         public void ButtonClick()
         {
-            DataRowView DRV = windowObj.NachDataGrid.SelectedItem as DataRowView;
+            DataRowView DRV = windowObj.AccrualsDataGrid.SelectedItem as DataRowView;
             if (DRV == null) { MessageBox.Show("Выплата прервана, Вы не выбрали запись для выплаты."); return; }
             DataRow DR = DRV.Row;
             object[] arr = DR.ItemArray;
@@ -27,13 +27,13 @@ namespace WpfApp12.strategiesForBookkeeper.ButtonClick
             if (Convert.ToInt32(arr[9])>0)
             {
                 DateIn wind = new DateIn();
-                wind.gridViplataZp.Visibility = Visibility.Visible;
+                wind.PaymentSalaryGrid.Visibility = Visibility.Visible;
                 wind.AccrualRecordId = Convert.ToInt32(arr[0]);
                 wind.toPay = Convert.ToDouble(arr[9]);
                 wind.connectionString = windowObj.connectionString;
                 wind.Owner = windowObj;
                 wind.ShowDialog();
-                windowObj.NachDataGrid.SelectedItem = null;
+                windowObj.AccrualsDataGrid.SelectedItem = null;
                 windowObj.ViplataBut.IsEnabled = false;
                 DataGridUpdater.updateAccrualsSalaryDataGrid(windowObj);
             }

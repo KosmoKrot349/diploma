@@ -21,13 +21,13 @@ namespace WpfApp12.strategiesForManager.MenuClick
         public void MenuClick()
         {
             windowObj.HideAll();
-            windowObj.skidkiGrid.Visibility = Visibility.Visible;
-            windowObj.MenuRolesD.BorderBrush = null;
-            windowObj.raspMenu.BorderBrush = null;
-            windowObj.sotrMenu.BorderBrush = null;
-            windowObj.skidki.BorderBrush = Brushes.DarkRed; ;
-            windowObj.obuchMenu.BorderBrush = null;
-            windowObj.MenuOtchety.BorderBrush = null;
+            windowObj.DiscountGrid.Visibility = Visibility.Visible;
+            windowObj.GoToAdminMenu.BorderBrush = null;
+            windowObj.ScheduleMenu.BorderBrush = null;
+            windowObj.EmployeesMenu.BorderBrush = null;
+            windowObj.DiscountMenu.BorderBrush = Brushes.DarkRed; ;
+            windowObj.LearningMenu.BorderBrush = null;
+            windowObj.ReportsMenu.BorderBrush = null;
             try
             {
                 NpgsqlConnection con = new NpgsqlConnection(windowObj.connectionString);
@@ -42,18 +42,18 @@ namespace WpfApp12.strategiesForManager.MenuClick
                     {
                         switch (i)
                         {
-                            case 0: { windowObj.sk1.Text = reader.GetDouble(0).ToString(); break; }
-                            case 1: { windowObj.sk2.Text = reader.GetDouble(0).ToString(); break; }
-                            case 2: { windowObj.sk3.Text = reader.GetDouble(0).ToString(); break; }
-                            case 3: { windowObj.sk4.Text = reader.GetDouble(0).ToString(); break; }
-                            case 4: { windowObj.sk5.Text = reader.GetDouble(0).ToString(); break; }
-                            case 5: { windowObj.sk6.Text = reader.GetDouble(0).ToString(); break; }
-                            case 6: { windowObj.sk7.Text = reader.GetDouble(0).ToString(); break; }
-                            case 7: { windowObj.sk8.Text = reader.GetDouble(0).ToString(); break; }
-                            case 8: { windowObj.sk9.Text = reader.GetDouble(0).ToString(); break; }
-                            case 9: { windowObj.sk10.Text = reader.GetDouble(0).ToString(); break; }
-                            case 10: { windowObj.sk11.Text = reader.GetDouble(0).ToString(); break; }
-                            case 11: { windowObj.sk12.Text = reader.GetDouble(0).ToString(); break; }
+                            case 0: { windowObj.DiscountFor1Month.Text = reader.GetDouble(0).ToString(); break; }
+                            case 1: { windowObj.DiscountFor2Month.Text = reader.GetDouble(0).ToString(); break; }
+                            case 2: { windowObj.DiscountFor3Month.Text = reader.GetDouble(0).ToString(); break; }
+                            case 3: { windowObj.DiscountFor4Month.Text = reader.GetDouble(0).ToString(); break; }
+                            case 4: { windowObj.DiscountFor5Month.Text = reader.GetDouble(0).ToString(); break; }
+                            case 5: { windowObj.DiscountFor6Month.Text = reader.GetDouble(0).ToString(); break; }
+                            case 6: { windowObj.DiscountFor7Month.Text = reader.GetDouble(0).ToString(); break; }
+                            case 7: { windowObj.DiscountFor8Month.Text = reader.GetDouble(0).ToString(); break; }
+                            case 8: { windowObj.DiscountFor9Month.Text = reader.GetDouble(0).ToString(); break; }
+                            case 9: { windowObj.DiscountFor10Month.Text = reader.GetDouble(0).ToString(); break; }
+                            case 10: { windowObj.DiscountFor11Month.Text = reader.GetDouble(0).ToString(); break; }
+                            case 11: { windowObj.DiscountFor12Month.Text = reader.GetDouble(0).ToString(); break; }
 
                         }
                         i++;

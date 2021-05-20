@@ -11,25 +11,25 @@ namespace WpfApp12.strategiesForBookkeeper.OtherMethods
     {
         public static void Hide(BookkeeperWindow window)
         {
-            window.NachDataGrid.SelectedItem = null;
-            window.RoshodyDataGrid.SelectedItem = null;
-            window.DohodyDataGrid.SelectedItem = null;
+            window.AccrualsDataGrid.SelectedItem = null;
+            window.CostsDataGrid.SelectedItem = null;
+            window.ProfitDataGrid.SelectedItem = null;
 
             window.helloGrdi.Visibility = Visibility.Collapsed;
-            window.OplataGrid.Visibility = Visibility.Collapsed;
-            window.DohodyrGrid.Visibility = Visibility.Collapsed;
-            window.DohodyrAddGrid.Visibility = Visibility.Collapsed;
-            window.DohodyChangeGrid.Visibility = Visibility.Collapsed;
-            window.RoshodyGrid.Visibility = Visibility.Collapsed;
-            window.RashodyAddGrid.Visibility = Visibility.Collapsed;
-            window.RashodyChangeGrid.Visibility = Visibility.Collapsed;
-            window.NalogiGrid.Visibility = Visibility.Collapsed;
-            window.GlNachGrid.Visibility = Visibility.Collapsed;
-            window.DolgGrid.Visibility = Visibility.Collapsed;
-            window.NoDolgGrdi.Visibility = Visibility.Collapsed;
-            window.kassaGrid.Visibility = Visibility.Collapsed;
-            window.StatisticaGrid.Visibility = Visibility.Collapsed;
-            window.ZpOthcetGrid.Visibility = Visibility.Collapsed;
+            window.PaymentGrid.Visibility = Visibility.Collapsed;
+            window.ProfitGrid.Visibility = Visibility.Collapsed;
+            window.ProfitAddGrid.Visibility = Visibility.Collapsed;
+            window.ProfitChangeGrid.Visibility = Visibility.Collapsed;
+            window.CostsGrid.Visibility = Visibility.Collapsed;
+            window.CostsAddGrid.Visibility = Visibility.Collapsed;
+            window.CostsChangeGrid.Visibility = Visibility.Collapsed;
+            window.TaxesGrid.Visibility = Visibility.Collapsed;
+            window.AccrualsGrid.Visibility = Visibility.Collapsed;
+            window.DebtPaymentGrid.Visibility = Visibility.Collapsed;
+            window.LearningAccrualsPaymentGrdi.Visibility = Visibility.Collapsed;
+            window.CashboxGrid.Visibility = Visibility.Collapsed;
+            window.StatisticGrid.Visibility = Visibility.Collapsed;
+            window.PaymentListGrid.Visibility = Visibility.Collapsed;
 
             //начисления
             window.ViplataBut.IsEnabled = false;

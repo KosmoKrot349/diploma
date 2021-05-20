@@ -38,16 +38,16 @@ namespace WpfApp12
         //дата для остановки расчёта 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-            if (datePick2.Text == "") { MessageBox.Show("Дата не выбрана"); return; }
-            dateMonday = Convert.ToDateTime(datePick2.Text);
+            if (SelectDateToPay.Text == "") { MessageBox.Show("Дата не выбрана"); return; }
+            dateMonday = Convert.ToDateTime(SelectDateToPay.Text);
             this.Close();
         }
         //размер пени
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
             double percent = 0;
-            if (PenyaProc.Text == "") { percent = 0; }
-            else { percent = Convert.ToDouble(PenyaProc.Text); }
+            if (FinePrecent.Text == "") { percent = 0; }
+            else { percent = Convert.ToDouble(FinePrecent.Text); }
 
             if (percent > 100) { MessageBox.Show("Процент не может быть больше 100"); return; }
 
@@ -80,13 +80,13 @@ namespace WpfApp12
         //выплата зп
         private void Button_Click_3(object sender, RoutedEventArgs e)
         {
-            if (ZpViplata.Text != "" && Convert.ToDouble(ZpViplata.Text) <= toPay)
+            if (PaymentSalary.Text != "" && Convert.ToDouble(PaymentSalary.Text) <= toPay)
             {
                 try
                 {
                     NpgsqlConnection con = new NpgsqlConnection(connectionString);
                     con.Open();
-                    string sql = "UPDATE nachisl SET  viplacheno=viplacheno+" + ZpViplata.Text.Replace(',', '.') + " WHERE nachid =" + AccrualRecordId;
+                    string sql = "UPDATE nachisl SET  viplacheno=viplacheno+" + PaymentSalary.Text.Replace(',', '.') + " WHERE nachid =" + AccrualRecordId;
                     NpgsqlCommand com = new NpgsqlCommand(sql, con);
                     com.ExecuteNonQuery();
                     con.Close();
@@ -96,7 +96,7 @@ namespace WpfApp12
                 {
                     NpgsqlConnection con = new NpgsqlConnection(connectionString);
                     con.Open();
-                    string sql = "INSERT INTO rashody(typeid, sotrid, summ, data, description) VALUES (1, (select sotrid from nachisl where nachid="+AccrualRecordId+"), "+ ZpViplata.Text.Replace(',', '.') + ", now(), 'Выплата зп')";
+                    string sql = "INSERT INTO rashody(typeid, sotrid, summ, data, description) VALUES (1, (select sotrid from nachisl where nachid="+AccrualRecordId+"), "+ PaymentSalary.Text.Replace(',', '.') + ", now(), 'Выплата зп')";
                     NpgsqlCommand com = new NpgsqlCommand(sql, con);
                     com.ExecuteNonQuery();
                     con.Close();

@@ -21,7 +21,7 @@ namespace WpfApp12.strategiesForBookkeeper.MenuClick
         public void MenuClick()
         {
             windowObj.HideAll();
-            windowObj.GlNachGrid.Visibility = Visibility.Visible;
+            windowObj.AccrualsGrid.Visibility = Visibility.Visible;
             windowObj.dateAccrual = DateTime.Now;
             try
             {

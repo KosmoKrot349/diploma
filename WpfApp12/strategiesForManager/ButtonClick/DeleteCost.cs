@@ -20,7 +20,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 
         public void ButtonClick()
         {
-            DataRowView DRV = windowObj.TypeRashDataGrid.SelectedItem as DataRowView;
+            DataRowView DRV = windowObj.CostsTypeDataGrid.SelectedItem as DataRowView;
             if (DRV == null) { MessageBox.Show("Удаление прервано, Вы не выбрали запись для удаления."); return; }
             DataRow DR = DRV.Row;
             object[] arr = DR.ItemArray;
@@ -52,7 +52,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
             DataGridUpdater.updateTypeCostsDataGrid(windowObj);
-            windowObj.TypeRashDataGrid.SelectedItem = null;
+            windowObj.CostsTypeDataGrid.SelectedItem = null;
             windowObj.TypeRashDeleteButton.IsEnabled = false;
         }
     }

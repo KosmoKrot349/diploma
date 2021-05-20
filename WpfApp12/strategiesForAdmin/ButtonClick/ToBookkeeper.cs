@@ -37,17 +37,17 @@ namespace WpfApp12.strategiesForAdmin
                     {
                         while (dReader.Read())
                         {
-                            if (dReader.GetInt32(0) == 0) { wind.AdminRoleB.IsEnabled = false; }
-                            if (dReader.GetInt32(1) == 0) { wind.BuhgRoleB.IsEnabled = false; }
-                            if (dReader.GetInt32(2) == 0) { wind.DirectorRoleB.IsEnabled = false; }
+                            if (dReader.GetInt32(0) == 0) { wind.GoToAdmin.IsEnabled = false; }
+                            if (dReader.GetInt32(1) == 0) { wind.GoToBookkeeper.IsEnabled = false; }
+                            if (dReader.GetInt32(2) == 0) { wind.GoToManager.IsEnabled = false; }
 
                         }
                     }
                 }
                 catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
                 wind.logUser = windowObj.logUser;
-                wind.FIO = windowObj.FIO;
-                wind.Title = windowObj.FIO + " - Бухгалтер";
+                wind.UserName = windowObj.UserName;
+                wind.Title = windowObj.UserName + " - Бухгалтер";
                 wind.hello_label.Text = "Здравствуйте, Ваша текущая роль бухгалтер. Для начала роботы выберите один из пунктов меню.";
                 wind.Width = windowObj.Width;
                 wind.Height = windowObj.Height;

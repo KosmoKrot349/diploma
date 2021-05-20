@@ -23,14 +23,14 @@ namespace WpfApp12.strategiesForAdmin
         {
             windowObj.MenuRolesA.BorderBrush = null;
             windowObj.usersMenu.BorderBrush = null;
-            windowObj.arhivMenu.BorderBrush = null;
+            windowObj.archiveMenu.BorderBrush = null;
             windowObj.settingMenu.BorderBrush = null;
             windowObj.ToNextYearMenu.BorderBrush = Brushes.DarkRed;
             windowObj.hideAll();
             windowObj.NextYearGrid.Visibility = Visibility.Visible;
-            windowObj.bckpNameNextYear.Text = "";
-            windowObj.bckpPytNextYear.Text = "";
-            windowObj.sybdPytNextYear.Text = "";
+            windowObj.BackUpFileNameGoToNextYear.Text = "";
+            windowObj.BackUpFilePathGoToNextYear.Text = "";
+            windowObj.DBPathGoToNextYear.Text = "";
             StreamReader StreamReader = new StreamReader(@"crDump.bat");
             ArrayList arLs = new ArrayList();
             while (!StreamReader.EndOfStream)
@@ -39,7 +39,7 @@ namespace WpfApp12.strategiesForAdmin
             }
             object[] createBackUpList = arLs.ToArray();
             string DBPathString = createBackUpList[1].ToString().Substring(2);
-            windowObj.sybdPytNextYear.Text = DBPathString.Trim(' ');
+            windowObj.DBPathGoToNextYear.Text = DBPathString.Trim(' ');
             string BackUpPathString = createBackUpList[2].ToString();
             int PathIndex = 0;
 
@@ -49,8 +49,8 @@ namespace WpfApp12.strategiesForAdmin
             }
             string[] FoldersArr = BackUpPathString.Substring(PathIndex).Split('\\');
             for (int i = 0; i < FoldersArr.Length - 1; i++)
-            { windowObj.bckpPytNextYear.Text += FoldersArr[i] + "\\"; }
-            windowObj.bckpPytNextYear.Text = windowObj.bckpPytNextYear.Text.Trim(' ');
+            { windowObj.BackUpFilePathGoToNextYear.Text += FoldersArr[i] + "\\"; }
+            windowObj.BackUpFilePathGoToNextYear.Text = windowObj.BackUpFilePathGoToNextYear.Text.Trim(' ');
             StreamReader.Close();
         }
     }

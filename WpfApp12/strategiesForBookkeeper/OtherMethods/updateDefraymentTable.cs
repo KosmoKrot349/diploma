@@ -63,7 +63,7 @@ namespace WpfApp12.strategiesForBookkeeper.OtherMethods
                 {
                     NpgsqlConnection con = new NpgsqlConnection(window.connectionString);
                     con.Open();
-                    string sql = "SELECT  array_to_string(payformonth,'_')  FROM listdolg where listenerid = (select listenerid from listeners where fio='" + window.ListenerDolg.SelectedItem + "') and grid = (select grid from groups where nazvanie ='" + window.GroupsDolg.SelectedItem + "')";
+                    string sql = "SELECT  array_to_string(payformonth,'_')  FROM listdolg where listenerid = (select listenerid from listeners where fio='" + window.ListenerDebt.SelectedItem + "') and grid = (select grid from groups where nazvanie ='" + window.DebtPeymentGroops.SelectedItem + "')";
                     NpgsqlCommand com = new NpgsqlCommand(sql, con);
                     NpgsqlDataReader reader = com.ExecuteReader();
                     if (reader.HasRows)

@@ -19,13 +19,13 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 
         public void ButtonClick()
         {
-            if (windowObj.dateStart.Text == "") { MessageBox.Show("Дата начала работы не выбрана"); return; }
+            if (windowObj.TeacherAddDateStart.Text == "") { MessageBox.Show("Дата начала работы не выбрана"); return; }
             int categoryID = -1;
             try
             {
                 NpgsqlConnection con = new NpgsqlConnection(windowObj.connectionString);
                 con.Open();
-                string sql = "select kategid from kategorii where title='" + windowObj.kategCMB.SelectedItem + "'";
+                string sql = "select kategid from kategorii where title='" + windowObj.TeacherAddCategory.SelectedItem + "'";
                 NpgsqlCommand command = new NpgsqlCommand(sql, con);
                 NpgsqlDataReader reader = command.ExecuteReader();
                 if (reader.HasRows)
@@ -46,7 +46,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 
                 NpgsqlConnection con = new NpgsqlConnection(windowObj.connectionString);
                 con.Open();
-                string sql = "INSERT INTO prep(kategid, date_start, sotrid) VALUES(" + categoryID + ", '" + windowObj.dateStart.Text + "', " + windowObj.employeeID + ")";
+                string sql = "INSERT INTO prep(kategid, date_start, sotrid) VALUES(" + categoryID + ", '" + windowObj.TeacherAddDateStart.Text + "', " + windowObj.employeeID + ")";
                 NpgsqlCommand command = new NpgsqlCommand(sql, con);
                 NpgsqlDataReader reader = command.ExecuteReader();
                 con.Close();
@@ -56,7 +56,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             MessageBox.Show("Сотрудник определён как преподаватель");
             DataGridUpdater.updateEmploeesDataGrid(windowObj);
             windowObj.HideAll();
-            windowObj.allSotrGrid.Visibility = Visibility.Visible;
+            windowObj.EmployeesGrid.Visibility = Visibility.Visible;
         }
     }
 }

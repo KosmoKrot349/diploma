@@ -27,9 +27,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                 if (ii * windowObj.quanLessonsInDay < windowObj.iCoordScheduleLabel) { day++; } else break;
             }
             //добавление
-            windowObj.raspAddSubsP.Items.Clear();
-            windowObj.raspAddKabP.Items.Clear();
-            windowObj.raspAddGroupP.Items.Clear();
+            windowObj.TeacherScheduleSelectSubject.Items.Clear();
+            windowObj.TeacherScheduleSelectCabinet.Items.Clear();
+            windowObj.TeacherScheduleSelectGroop.Items.Clear();
             int grid = -1;
             //вывод групп
             try
@@ -46,11 +46,11 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                     int i = 0;
                     while (reader.Read())
                     {
-                        windowObj.raspAddGroupP.Items.Add(reader.GetString(0));
+                        windowObj.TeacherScheduleSelectGroop.Items.Add(reader.GetString(0));
                         if (i == 0) { grid = reader.GetInt32(1); i++; }
 
                     }
-                    windowObj.raspAddGroupP.SelectedIndex = 0;
+                    windowObj.TeacherScheduleSelectGroop.SelectedIndex = 0;
                 }
                 con.Close();
             }
@@ -66,10 +66,10 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                 NpgsqlDataReader reader = command.ExecuteReader();
                 if (reader.HasRows)
                 {
-                    windowObj.raspAddKabP.SelectedIndex = 0;
+                    windowObj.TeacherScheduleSelectCabinet.SelectedIndex = 0;
                     while (reader.Read())
                     {
-                        windowObj.raspAddKabP.Items.Add(reader.GetString(0));
+                        windowObj.TeacherScheduleSelectCabinet.Items.Add(reader.GetString(0));
                     }
                 }
                 con.Close();
@@ -78,20 +78,20 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 
             switch (day + 1)
             {
-                case 1: { windowObj.raspAddDayOfWeekP.Text = "Понедельник"; } break;
-                case 2: { windowObj.raspAddDayOfWeekP.Text = "Вторник"; } break;
-                case 3: { windowObj.raspAddDayOfWeekP.Text = "Среда"; } break;
-                case 4: { windowObj.raspAddDayOfWeekP.Text = "Четверг"; } break;
-                case 5: { windowObj.raspAddDayOfWeekP.Text = "Пятница"; } break;
-                case 6: { windowObj.raspAddDayOfWeekP.Text = "Суббота"; } break;
-                case 7: { windowObj.raspAddDayOfWeekP.Text = "Воскресенье"; } break;
+                case 1: { windowObj.TeacherScheduleDayOfWeek.Text = "Понедельник"; } break;
+                case 2: { windowObj.TeacherScheduleDayOfWeek.Text = "Вторник"; } break;
+                case 3: { windowObj.TeacherScheduleDayOfWeek.Text = "Среда"; } break;
+                case 4: { windowObj.TeacherScheduleDayOfWeek.Text = "Четверг"; } break;
+                case 5: { windowObj.TeacherScheduleDayOfWeek.Text = "Пятница"; } break;
+                case 6: { windowObj.TeacherScheduleDayOfWeek.Text = "Суббота"; } break;
+                case 7: { windowObj.TeacherScheduleDayOfWeek.Text = "Воскресенье"; } break;
             }
 
-            windowObj.raspAddDateP.Text = windowObj.dateMonday.AddDays(day).ToShortDateString();
-            windowObj.raspAddLesNumP.Text = "" + lessonNumber;
-            windowObj.raspAddPrepP.Text = windowObj.labelArr[0, windowObj.jCoordScheduleLabel].Content.ToString();
+            windowObj.TeacherScheduleDate.Text = windowObj.dateMonday.AddDays(day).ToShortDateString();
+            windowObj.TeacherScheduleSelectLessonNumber.Text = "" + lessonNumber;
+            windowObj.TeacherScheduleTeacher.Text = windowObj.labelArr[0, windowObj.jCoordScheduleLabel].Content.ToString();
             windowObj.HideAll();
-            windowObj.addRaspGridPrep.Visibility = Visibility.Visible;
+            windowObj.AddTeacherScheduleGrid.Visibility = Visibility.Visible;
         }
     }
 }

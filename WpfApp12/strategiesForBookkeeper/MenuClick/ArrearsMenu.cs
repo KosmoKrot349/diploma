@@ -20,9 +20,9 @@ namespace WpfApp12.strategiesForBookkeeper.MenuClick
         public void MenuClick()
         {
             windowObj.HideAll();
-            windowObj.DolgGrid.Visibility = Visibility.Visible;
+            windowObj.DebtPaymentGrid.Visibility = Visibility.Visible;
 
-            windowObj.GroupsDolg.Items.Clear();
+            windowObj.DebtPeymentGroops.Items.Clear();
             try
             {
                 NpgsqlConnection con = new NpgsqlConnection(windowObj.connectionString);
@@ -34,14 +34,14 @@ namespace WpfApp12.strategiesForBookkeeper.MenuClick
                 {
                     while (reader.Read())
                     {
-                        windowObj.GroupsDolg.Items.Add(reader.GetString(0));
+                        windowObj.DebtPeymentGroops.Items.Add(reader.GetString(0));
                     }
-                    windowObj.GroupsDolg.SelectedIndex = 0;
+                    windowObj.DebtPeymentGroops.SelectedIndex = 0;
                 }
                 if (reader.HasRows == false)
                 {
                     windowObj.HideAll();
-                    windowObj.NoDolgGrdi.Visibility = Visibility.Visible;
+                    windowObj.LearningAccrualsPaymentGrdi.Visibility = Visibility.Visible;
                 }
                 con.Close();
 

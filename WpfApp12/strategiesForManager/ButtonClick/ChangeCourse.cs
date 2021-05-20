@@ -31,14 +31,14 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             }
             subjectMass = subjectMass.Substring(0, subjectMass.Length - 1);
             subjectMass += "}'";
-            if (b == false || windowObj.courseChangeTitle.Text == "") { MessageBox.Show("Название курса или предметы не добавлены"); return; }
-            if (windowObj.dontChangeCourseName != windowObj.courseChangeTitle.Text)
+            if (b == false || windowObj.CourseChangeTitle.Text == "") { MessageBox.Show("Название курса или предметы не добавлены"); return; }
+            if (windowObj.dontChangeCourseName != windowObj.CourseChangeTitle.Text)
             {
                 try
                 {
                     NpgsqlConnection con1 = new NpgsqlConnection(windowObj.connectionString);
                     con1.Open();
-                    string sql1 = "select count(courseid) from courses where title='" + windowObj.courseChangeTitle.Text + "'";
+                    string sql1 = "select count(courseid) from courses where title='" + windowObj.CourseChangeTitle.Text + "'";
                     NpgsqlCommand command1 = new NpgsqlCommand(sql1, con1);
                     NpgsqlDataReader reader = command1.ExecuteReader();
                     if (reader.HasRows)
@@ -59,7 +59,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             {
                 NpgsqlConnection con1 = new NpgsqlConnection(windowObj.connectionString);
                 con1.Open();
-                string sql1 = "UPDATE courses SET title ='" + windowObj.courseChangeTitle.Text + "', subs =" + subjectMass + ", comment ='" + windowObj.courseChangeComm.Text + "' WHERE courseid=" + windowObj.courseID;
+                string sql1 = "UPDATE courses SET title ='" + windowObj.CourseChangeTitle.Text + "', subs =" + subjectMass + ", comment ='" + windowObj.CourseChangeComment.Text + "' WHERE courseid=" + windowObj.courseID;
                 NpgsqlCommand command1 = new NpgsqlCommand(sql1, con1);
                 command1.ExecuteNonQuery();
                 con1.Close();
@@ -67,7 +67,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
 
             windowObj.HideAll();
-            windowObj.courseGrid.Visibility = Visibility.Visible;
+            windowObj.CourcesGrid.Visibility = Visibility.Visible;
             DataGridUpdater.updateСoursesDataGrid(windowObj);
         }
     }

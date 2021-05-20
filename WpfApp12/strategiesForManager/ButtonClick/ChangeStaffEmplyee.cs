@@ -67,7 +67,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
             DataGridUpdater.updateStaffDataGrid(windowObj);
             windowObj.HideAll();
-            windowObj.ShtatGrid.Visibility = Visibility.Visible;
+            windowObj.StaffGrid.Visibility = Visibility.Visible;
         }
     }
 }

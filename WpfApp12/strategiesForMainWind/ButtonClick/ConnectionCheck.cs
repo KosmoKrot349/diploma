@@ -19,7 +19,7 @@ namespace WpfApp12.strategiesForMainWind.ButtonClick
 
         public void ButtonClick()
         {
-            string testConStr = "Server=" + windowObj.connect.Text + ";Port=" + windowObj.dbPortText.Text + ";User Id=postgres;Password=" + windowObj.dbPassText.Text + ";Database=db;";
+            string testConStr = "Server=" + windowObj.DBServer.Text + ";Port=" + windowObj.DBPort.Text + ";User Id=postgres;Password=" + windowObj.DBPassword.Text + ";Database=db;";
             NpgsqlConnection testcon = new NpgsqlConnection(testConStr);
             try
             {
@@ -30,12 +30,12 @@ namespace WpfApp12.strategiesForMainWind.ButtonClick
             MessageBoxResult res = MessageBox.Show("Подключение по данным параметрам прошло успешно. \nСохранить параметры?", "Сохранение", MessageBoxButton.YesNo);
             if (res == MessageBoxResult.Yes)
             {
-                SaveDataBaseSettings.Save(windowObj.connect.Text, windowObj.dbPassText.Text, windowObj.dbPortText.Text);
-                windowObj.connectionString = "Server=" + windowObj.connect.Text + ";Port=" + windowObj.dbPortText.Text + ";User Id=postgres;Password=" + windowObj.dbPassText.Text + ";Database=db";
+                SaveDataBaseSettings.Save(windowObj.DBServer.Text, windowObj.DBPassword.Text, windowObj.DBPort.Text);
+                windowObj.connectionString = "Server=" + windowObj.DBServer.Text + ";Port=" + windowObj.DBPort.Text + ";User Id=postgres;Password=" + windowObj.DBPassword.Text + ";Database=db";
 
                 MessageBox.Show("Настройки сохранены и применены");
-                windowObj.settingGrid.Visibility = Visibility.Collapsed;
-                windowObj.autGrid.Visibility = Visibility.Visible;
+                windowObj.SettingsGrid.Visibility = Visibility.Collapsed;
+                windowObj.AuthorizationGrid.Visibility = Visibility.Visible;
             }
             if (res == MessageBoxResult.No)
             {

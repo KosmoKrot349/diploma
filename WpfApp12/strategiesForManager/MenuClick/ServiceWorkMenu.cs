@@ -19,7 +19,7 @@ namespace WpfApp12.strategiesForManager.MenuClick
         public void MenuClick()
         {
             window.HideAll();
-            window.ObslWorkGrid.Visibility = Visibility.Visible;
+            window.ServiceWorksGrid.Visibility = Visibility.Visible;
             DataGridUpdater.updateServiceWorksDataGrid(window);
         }
     }

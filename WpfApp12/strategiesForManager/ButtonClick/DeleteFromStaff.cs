@@ -20,7 +20,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 
         public void ButtonClick()
         {
-            DataRowView DRV = windowObj.ShtatDataGrid.SelectedItem as DataRowView;
+            DataRowView DRV = windowObj.StaffDataGrid.SelectedItem as DataRowView;
             if (DRV == null) { MessageBox.Show("Удаление прервано, Вы не выбрали запись для удаления."); return; }
             DataRow DR = DRV.Row;
             object[] arr = DR.ItemArray;
@@ -51,7 +51,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); }
             DataGridUpdater.updateStaffDataGrid(windowObj);
 
-            windowObj.ShtatDataGrid.SelectedItem = null;
+            windowObj.StaffDataGrid.SelectedItem = null;
 
             //штат
             windowObj.shtatDeleteButton.IsEnabled = false;

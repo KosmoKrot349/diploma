@@ -20,7 +20,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 
         public void ButtonClick()
         {
-            if (windowObj.listenerFIOCh.Text == "" || windowObj.listenerPhonesCh.Text == "") { MessageBox.Show("Поля не заполнены или заполнены не правильно."); return; }
+            if (windowObj.ListenerChangeName.Text == "" || windowObj.ListenerChangePhone.Text == "") { MessageBox.Show("Поля не заполнены или заполнены не правильно."); return; }
             bool b = false;
             string groopsOfListenerArr = "'{";
             ArrayList ls = new ArrayList();
@@ -31,7 +31,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                 {
                     b = true;
                     sql += "nazvanie='" + windowObj.checkBoxArrForListeners[i].Content.ToString().Substring(0, windowObj.checkBoxArrForListeners[i].Content.ToString().Length - 9) + "' or ";
-                    if (windowObj.textBoxArrForListeners[i].Text != "" && Convert.ToDouble(windowObj.textBoxArrForListeners[i].Text) > 100) { System.Windows.Forms.MessageBox.Show("Процент не может быть больше 100"); return; }
+                    if (windowObj.textBoxArrForListeners[i].Text != "" && Convert.ToDouble(windowObj.textBoxArrForListeners[i].Text) > 100) { MessageBox.Show("Процент не может быть больше 100"); return; }
                     if (windowObj.textBoxArrForListeners[i].Text != "") groopsOfListenerArr += Convert.ToDouble(windowObj.textBoxArrForListeners[i].Text).ToString().Replace(',', '.') + ",";
                     else
                         groopsOfListenerArr += "0,";
@@ -106,7 +106,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 
                 NpgsqlConnection con = new NpgsqlConnection(windowObj.connectionString);
                 con.Open();
-                string sql2 = "UPDATE listeners SET  fio='" + windowObj.listenerFIOCh.Text + "', phones='" + windowObj.listenerPhonesCh.Text + "', grid=" + groopsIDArr + ", lgt=" + groopsOfListenerArr + ", comment='" + windowObj.listenerCommCh.Text + "' WHERE listenerid=" + windowObj.listenerID;
+                string sql2 = "UPDATE listeners SET  fio='" + windowObj.ListenerChangeName.Text + "', phones='" + windowObj.ListenerChangePhone.Text + "', grid=" + groopsIDArr + ", lgt=" + groopsOfListenerArr + ", comment='" + windowObj.ListenerChangeComment.Text + "' WHERE listenerid=" + windowObj.listenerID;
                 NpgsqlCommand com = new NpgsqlCommand(sql2, con);
                 com.ExecuteNonQuery();
                 con.Close();

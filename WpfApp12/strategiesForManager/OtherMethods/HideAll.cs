@@ -11,21 +11,21 @@ namespace WpfApp12.strategiesForManager.OtherMethods
     {
         public static void Hide(ManagerWindow window) {
 
-            window.listenerDataGrid.SelectedItem = null;
-            window.coursDataGrid.SelectedItem = null;
-            window.subsDataGrid.SelectedItem = null;
-            window.groupsDataGrid.SelectedItem = null;
-            window.prepDataGrid.SelectedItem = null;
-            window.kategDataGrid.SelectedItem = null;
-            window.allSotrDataGrid.SelectedItem = null;
-            window.zvonkiDataGrid.SelectedItem = null;
-            window.cabDataGrid.SelectedItem = null;
-            window.StateDataGrid.SelectedItem = null;
-            window.ObslWorkDataGrid.SelectedItem = null;
-            window.ShtatDataGrid.SelectedItem = null;
-            window.KoefDataGrid.SelectedItem = null;
-            window.TypeRashDataGrid.SelectedItem = null;
-            window.TypeDohDataGrid.SelectedItem = null;
+            window.ListenersDataGrid.SelectedItem = null;
+            window.CourcesDataGrid.SelectedItem = null;
+            window.SubjectsDataGrid.SelectedItem = null;
+            window.GroupsDataGrid.SelectedItem = null;
+            window.TeachersDataGrid.SelectedItem = null;
+            window.CategoriesDataGrid.SelectedItem = null;
+            window.EmployeesDataGrid.SelectedItem = null;
+            window.TimeScheduleDataGrid.SelectedItem = null;
+            window.CabinetsDataGrid.SelectedItem = null;
+            window.PositionsDataGrid.SelectedItem = null;
+            window.ServiceWorkDataGrid.SelectedItem = null;
+            window.StaffDataGrid.SelectedItem = null;
+            window.WorkCoeffDataGrid.SelectedItem = null;
+            window.CostsTypeDataGrid.SelectedItem = null;
+            window.ProfitTypesDataGrid.SelectedItem = null;
 
 
 
@@ -87,46 +87,46 @@ namespace WpfApp12.strategiesForManager.OtherMethods
 
             window.ListenerAddGrid.Visibility = Visibility.Collapsed;
             window.helloGrdi.Visibility = Visibility.Collapsed;
-            window.zvonkiGrid.Visibility = Visibility.Collapsed;
-            window.prepGrid.Visibility = Visibility.Collapsed;
-            window.kategGrid.Visibility = Visibility.Collapsed;
-            window.allSotrGrid.Visibility = Visibility.Collapsed;
-            window.groupsGrid.Visibility = Visibility.Collapsed;
-            window.prepChangeGrid.Visibility = Visibility.Collapsed;
-            window.subGrid.Visibility = Visibility.Collapsed;
-            window.courseGrid.Visibility = Visibility.Collapsed;
-            window.groupAddGrid.Visibility = Visibility.Collapsed;
-            window.groupChangeGrid.Visibility = Visibility.Collapsed;
-            window.courseAddGrid.Visibility = Visibility.Collapsed;
-            window.courseChangeGrid.Visibility = Visibility.Collapsed;
-            window.addPrepGrid.Visibility = Visibility.Collapsed;
-            window.raspGridG.Visibility = Visibility.Collapsed;
-            window.raspGridP.Visibility = Visibility.Collapsed;
-            window.raspGridС.Visibility = Visibility.Collapsed;
-            window.addRaspGrid.Visibility = Visibility.Collapsed;
-            window.changeRaspGrid.Visibility = Visibility.Collapsed;
+            window.TimeScheduleGrid.Visibility = Visibility.Collapsed;
+            window.TeachersGrid.Visibility = Visibility.Collapsed;
+            window.CategoriesGrid.Visibility = Visibility.Collapsed;
+            window.EmployeesGrid.Visibility = Visibility.Collapsed;
+            window.GroopsGrid.Visibility = Visibility.Collapsed;
+            window.TeacherChangeGrid.Visibility = Visibility.Collapsed;
+            window.SubjectsGrid.Visibility = Visibility.Collapsed;
+            window.CourcesGrid.Visibility = Visibility.Collapsed;
+            window.GroopAddGrid.Visibility = Visibility.Collapsed;
+            window.GroupChangeGrid.Visibility = Visibility.Collapsed;
+            window.CourseAddGrid.Visibility = Visibility.Collapsed;
+            window.CourseChangeGrid.Visibility = Visibility.Collapsed;
+            window.AddTeacherGrid.Visibility = Visibility.Collapsed;
+            window.GroopScheduleGrid.Visibility = Visibility.Collapsed;
+            window.TeacherScheduleGrid.Visibility = Visibility.Collapsed;
+            window.CabinetScheduleGrid.Visibility = Visibility.Collapsed;
+            window.AddGroopScheduleGrid.Visibility = Visibility.Collapsed;
+            window.ChangeGroopSchduleGrid.Visibility = Visibility.Collapsed;
             window.ListenerGrid.Visibility = Visibility.Collapsed;
             window.ListenerChangeGrid.Visibility = Visibility.Collapsed;
-            window.addRaspGridKab.Visibility = Visibility.Collapsed;
-            window.changeRaspGridKab.Visibility = Visibility.Collapsed;
-            window.addRaspGridPrep.Visibility = Visibility.Collapsed;
-            window.changeRaspGridPrep.Visibility = Visibility.Collapsed;
-            window.cabGrid.Visibility = Visibility.Collapsed;
-            window.skidkiGrid.Visibility = Visibility.Collapsed;
-            window.TypeDohGrid.Visibility = Visibility.Collapsed;
-            window.TypeRashGrid.Visibility = Visibility.Collapsed;
-            window.KoefGrid.Visibility = Visibility.Collapsed;
-            window.ObslWorkGrid.Visibility = Visibility.Collapsed;
-            window.StateGrid.Visibility = Visibility.Collapsed;
-            window.StateAddGrid.Visibility = Visibility.Collapsed;
-            window.StateChaneGrid.Visibility = Visibility.Collapsed;
-            window.addShtatGrid.Visibility = Visibility.Collapsed;
-            window.ShtatGrid.Visibility = Visibility.Collapsed;
+            window.AddCabinetScheduleGrdi.Visibility = Visibility.Collapsed;
+            window.ChangeCabinetScheduleGrid.Visibility = Visibility.Collapsed;
+            window.AddTeacherScheduleGrid.Visibility = Visibility.Collapsed;
+            window.ChangeTeacherScheduleGrid.Visibility = Visibility.Collapsed;
+            window.CabinetsGrid.Visibility = Visibility.Collapsed;
+            window.DiscountGrid.Visibility = Visibility.Collapsed;
+            window.ProfiTypesGrid.Visibility = Visibility.Collapsed;
+            window.CostsTypeGrid.Visibility = Visibility.Collapsed;
+            window.WorkCoeffGrid.Visibility = Visibility.Collapsed;
+            window.ServiceWorksGrid.Visibility = Visibility.Collapsed;
+            window.PositionGrid.Visibility = Visibility.Collapsed;
+            window.PositionAddGrid.Visibility = Visibility.Collapsed;
+            window.PositionsChangeGrid.Visibility = Visibility.Collapsed;
+            window.AddStaffGrid.Visibility = Visibility.Collapsed;
+            window.StaffGrid.Visibility = Visibility.Collapsed;
             window.ChangeShtatGrid.Visibility = Visibility.Collapsed;
-            window.ShtatRaspGrid.Visibility = Visibility.Collapsed;
-            window.kassaGrid.Visibility = Visibility.Collapsed;
-            window.StatisticaGrid.Visibility = Visibility.Collapsed;
-            window.ZpOthcetGrid.Visibility = Visibility.Collapsed;
+            window.StaffScheduleGrid.Visibility = Visibility.Collapsed;
+            window.CashboxReportGrid.Visibility = Visibility.Collapsed;
+            window.StatisticGrid.Visibility = Visibility.Collapsed;
+            window.PaymentListReportGrid.Visibility = Visibility.Collapsed;
 
         }
     }

@@ -17,10 +17,10 @@ namespace WpfApp12.strategiesForBookkeeper.SelectionChanged
 
         public void SelectionChanged()
         {
-            if (window.dohChKtoVnesCm.Items.Count == 0) { return; }
-            if (window.dohChKtoVnesCm.SelectedItem.ToString() == "Нет в списке") { window.dohChKtoVnesTb.Text = ""; window.dohChKtoVnesTb.IsEnabled = true; }
+            if (window.ProfitChangePerson.Items.Count == 0) { return; }
+            if (window.ProfitChangePerson.SelectedItem.ToString() == "Нет в списке") { window.ProfitChangePersonName.Text = ""; window.ProfitChangePersonName.IsEnabled = true; }
             else
-            { window.dohChKtoVnesTb.Text = window.dohChKtoVnesCm.SelectedItem.ToString(); window.dohChKtoVnesTb.IsEnabled = false; }
+            { window.ProfitChangePersonName.Text = window.ProfitChangePerson.SelectedItem.ToString(); window.ProfitChangePersonName.IsEnabled = false; }
         }
     }
 }

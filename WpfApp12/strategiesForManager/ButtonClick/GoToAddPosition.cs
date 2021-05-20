@@ -19,22 +19,22 @@ namespace WpfApp12.strategiesForManager.ButtonClick
         public void ButtonClick()
         {
             windowObj.HideAll();
-            windowObj.days1.Text = "22";
-            windowObj.days2.Text = "22";
-            windowObj.days3.Text = "22";
-            windowObj.days4.Text = "22";
-            windowObj.days5.Text = "22";
-            windowObj.days6.Text = "22";
-            windowObj.days7.Text = "22";
-            windowObj.days8.Text = "22";
-            windowObj.days9.Text = "22";
-            windowObj.days10.Text = "22";
-            windowObj.days11.Text = "22";
-            windowObj.days12.Text = "22";
-            windowObj.StateAddTitle.Text = "";
-            windowObj.StateAddPay.Text = "";
-            windowObj.StateAddCom.Text = "";
-            windowObj.StateAddGrid.Visibility = Visibility.Visible;
+            windowObj.AddWorksDay1Month.Text = "22";
+            windowObj.AddWorksDay2Month.Text = "22";
+            windowObj.AddWorksDay3Month.Text = "22";
+            windowObj.AddWorksDay4Month.Text = "22";
+            windowObj.AddWorksDay5Month.Text = "22";
+            windowObj.AddWorksDay6Month.Text = "22";
+            windowObj.AddWorksDay7Month.Text = "22";
+            windowObj.AddWorksDay8Month.Text = "22";
+            windowObj.AddWorksDay9Month.Text = "22";
+            windowObj.AddWorksDay10Month.Text = "22";
+            windowObj.AddWorksDay11Month.Text = "22";
+            windowObj.AddWorksDay12Month.Text = "22";
+            windowObj.PositionAddTitle.Text = "";
+            windowObj.PositionAddSalary.Text = "";
+            windowObj.PositionAddComment.Text = "";
+            windowObj.PositionAddGrid.Visibility = Visibility.Visible;
         }
     }
 }

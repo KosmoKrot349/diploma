@@ -21,15 +21,15 @@ namespace WpfApp12.strategiesForAdmin
         public void buttonClick()
         {
 
-            admWind.fio.Text = "";
-            admWind.log_reg.Text = "";
-            admWind.pas_reg.Password = "";
-            admWind.rePas.Password = "";
-            admWind.adm.IsChecked = false;
-            admWind.bh.IsChecked = false;
-            admWind.dr.IsChecked = false;
+            admWind.NameRegistration.Text = "";
+            admWind.LoginRegistration.Text = "";
+            admWind.PasswordRegistration.Password = "";
+            admWind.RepeatPasswordRegistration.Password = "";
+            admWind.isAdminRegistration.IsChecked = false;
+            admWind.isAdminRegistration.IsChecked = false;
+            admWind.isManagerRegistration.IsChecked = false;
             admWind.hideAll();
-            admWind.regGrid.Visibility = Visibility.Visible;
+            admWind.RegistrationGrid.Visibility = Visibility.Visible;
         }
     }
 }

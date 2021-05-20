@@ -32,13 +32,13 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             }
             subjectsArr = subjectsArr.Substring(0, subjectsArr.Length - 1);
             subjectsArr += "}'";
-            if (b == false || windowObj.courseTitle.Text == "") { MessageBox.Show("Название курса или предметы не добавлены"); return; }
+            if (b == false || windowObj.CourseAddTitle.Text == "") { MessageBox.Show("Название курса или предметы не добавлены"); return; }
 
             try
             {
                 NpgsqlConnection con1 = new NpgsqlConnection(windowObj.connectionString);
                 con1.Open();
-                string sql1 = "select count(courseid) from courses where title='" + windowObj.courseTitle.Text + "'";
+                string sql1 = "select count(courseid) from courses where title='" + windowObj.CourseAddTitle.Text + "'";
                 NpgsqlCommand command1 = new NpgsqlCommand(sql1, con1);
                 NpgsqlDataReader reader = command1.ExecuteReader();
                 if (reader.HasRows)
@@ -58,7 +58,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             {
                 NpgsqlConnection con1 = new NpgsqlConnection(windowObj.connectionString);
                 con1.Open();
-                string sql1 = "INSERT INTO courses(title, subs, comment) VALUES('" + windowObj.courseTitle.Text + "', " + subjectsArr + ", '" + windowObj.courseComm.Text + "'); ";
+                string sql1 = "INSERT INTO courses(title, subs, comment) VALUES('" + windowObj.CourseAddTitle.Text + "', " + subjectsArr + ", '" + windowObj.CourseAddComm.Text + "'); ";
                 NpgsqlCommand command1 = new NpgsqlCommand(sql1, con1);
                 command1.ExecuteNonQuery();
                 con1.Close();
@@ -67,13 +67,13 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             var mbx = MessageBox.Show("Курс добавлен. \n Продолжить добавление?", "Добавить", MessageBoxButton.YesNo);
             if (mbx == MessageBoxResult.Yes)
             {
-                windowObj.courseTitle.Text = "";
-                windowObj.courseComm.Text = "";
+                windowObj.CourseAddTitle.Text = "";
+                windowObj.CourseAddComm.Text = "";
             }
             else
             {
                 windowObj.HideAll();
-                windowObj.courseGrid.Visibility = Visibility.Visible;
+                windowObj.CourcesGrid.Visibility = Visibility.Visible;
                 DataGridUpdater.updateСoursesDataGrid(windowObj);
 
             }

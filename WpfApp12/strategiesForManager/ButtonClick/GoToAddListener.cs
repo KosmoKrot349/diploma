@@ -22,11 +22,11 @@ namespace WpfApp12.strategiesForManager.ButtonClick
         {
             windowObj.HideAll();
             windowObj.ListenerAddGrid.Visibility = Visibility.Visible;
-            windowObj.gr_lg.Children.Clear();
-            windowObj.gr_lg.RowDefinitions.Clear();
-            windowObj.listenerFIO.Text = "";
-            windowObj.listenerPhones.Text = "";
-            windowObj.listenerComm.Text = "";
+            windowObj.AddGroopsOfListener.Children.Clear();
+            windowObj.AddGroopsOfListener.RowDefinitions.Clear();
+            windowObj.ListenerAddName.Text = "";
+            windowObj.ListenerAddPhones.Text = "";
+            windowObj.ListenerAddComment.Text = "";
             int countGr = 0;
             try
             {
@@ -69,16 +69,16 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                         windowObj.textBoxArrForListeners[i].PreviewTextInput += windowObj.grPayment_PreviewTextInput;
                         RowDefinition rwd = new RowDefinition();
                         rwd.Height = new GridLength(40);
-                        windowObj.gr_lg.RowDefinitions.Add(rwd);
+                        windowObj.AddGroopsOfListener.RowDefinitions.Add(rwd);
                         windowObj.textBoxArrForListeners[i].IsEnabled = false;
                         windowObj.checkBoxArrForListeners[i].Content = reader.GetString(0) + "-льгота: ";
                         windowObj.checkBoxArrForListeners[i].Name = "chbxMasgrlg_" + i;
                         Grid.SetRow(windowObj.checkBoxArrForListeners[i], i);
                         Grid.SetColumn(windowObj.checkBoxArrForListeners[i], 0);
-                        windowObj.gr_lg.Children.Add(windowObj.checkBoxArrForListeners[i]);
+                        windowObj.AddGroopsOfListener.Children.Add(windowObj.checkBoxArrForListeners[i]);
                         Grid.SetRow(windowObj.textBoxArrForListeners[i], i);
                         Grid.SetColumn(windowObj.textBoxArrForListeners[i], 1);
-                        windowObj.gr_lg.Children.Add(windowObj.textBoxArrForListeners[i]);
+                        windowObj.AddGroopsOfListener.Children.Add(windowObj.textBoxArrForListeners[i]);
 
                         i++;
                     }

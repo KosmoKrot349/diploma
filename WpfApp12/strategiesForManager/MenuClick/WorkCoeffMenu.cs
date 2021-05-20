@@ -19,7 +19,7 @@ namespace WpfApp12.strategiesForManager.MenuClick
         public void MenuClick()
         {
             window.HideAll();
-            window.KoefGrid.Visibility = Visibility.Visible;
+            window.WorkCoeffGrid.Visibility = Visibility.Visible;
             DataGridUpdater.updateWorkCoeffDataGrid(window);
         }
     }

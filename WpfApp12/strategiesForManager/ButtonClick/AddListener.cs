@@ -20,7 +20,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 
         public void ButtonClick()
         {
-            if (windowObj.listenerFIO.Text == "" || windowObj.listenerPhones.Text == "") { MessageBox.Show("Поля не заполнены или заполнены не правильно."); return; }
+            if (windowObj.ListenerAddName.Text == "" || windowObj.ListenerAddPhones.Text == "") { MessageBox.Show("Поля не заполнены или заполнены не правильно."); return; }
             bool b = false;
             string groopsOfListenerArr = "'{";
             ArrayList ls = new ArrayList();
@@ -70,7 +70,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 
                 NpgsqlConnection con = new NpgsqlConnection(windowObj.connectionString);
                 con.Open();
-                string sql2 = "INSERT INTO listeners(fio, phones, grid, lgt, comment)VALUES ('" + windowObj.listenerFIO.Text + "', '" + windowObj.listenerPhones.Text + "', " + groopsIdArr + ", " + groopsOfListenerArr + ", '" + windowObj.listenerComm.Text + "') returning listenerid";
+                string sql2 = "INSERT INTO listeners(fio, phones, grid, lgt, comment)VALUES ('" + windowObj.ListenerAddName.Text + "', '" + windowObj.ListenerAddPhones.Text + "', " + groopsIdArr + ", " + groopsOfListenerArr + ", '" + windowObj.ListenerAddComment.Text + "') returning listenerid";
                 NpgsqlCommand com = new NpgsqlCommand(sql2, con);
                 NpgsqlDataReader reader = com.ExecuteReader();
                 if (reader.HasRows)
@@ -175,9 +175,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             MessageBoxResult res = MessageBox.Show("Слушатель добавлен. \n Продолжить добавление?", "Добавление", MessageBoxButton.YesNo);
             if (res == MessageBoxResult.Yes)
             {
-                windowObj.listenerFIO.Text = "";
-                windowObj.listenerPhones.Text = "";
-                windowObj.listenerComm.Text = "";
+                windowObj.ListenerAddName.Text = "";
+                windowObj.ListenerAddPhones.Text = "";
+                windowObj.ListenerAddComment.Text = "";
                 for (int i = 0; i < windowObj.checkBoxArrForListeners.Length; i++)
                 { windowObj.checkBoxArrForListeners[i].IsChecked = false; }
             }
@@ -185,7 +185,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             {
                 windowObj.HideAll();
 
-                windowObj.listenerDataGrid.SelectedItem = null;
+                windowObj.ListenersDataGrid.SelectedItem = null;
                 //слушатели
                 windowObj.listenerDeleteButton.IsEnabled = false;
                 windowObj.listenerChangeButton.IsEnabled = false;

@@ -35,7 +35,7 @@ namespace WpfApp12.strategiesForAdmin
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
             windowObj.hideAll();
-            windowObj.delChUserGrid.Visibility = Visibility.Visible;
+            windowObj.UsersGrid.Visibility = Visibility.Visible;
             windowObj.usersDGrid.SelectedItem = null;
             windowObj.changeUser.IsEnabled = false;
             windowObj.dellUser.IsEnabled = false;

@@ -19,13 +19,13 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 
         public void ButtonClick()
         {
-            if (windowObj.grTitle.Text == "" || windowObj.payToYear.Content.ToString() == "" || windowObj.DateStartGrAdd.Text == "" || windowObj.DateEndGrAdd.Text == "") { MessageBox.Show("Поля не заполнены"); return; }
+            if (windowObj.GroopAddTitle.Text == "" || windowObj.GroopAddPayForYear.Content.ToString() == "" || windowObj.GroopAddDateStartLearn.Text == "" || windowObj.GroopAddDateEndLearn.Text == "") { MessageBox.Show("Поля не заполнены"); return; }
             //проверка существования группы
             try
             {
                 NpgsqlConnection con = new NpgsqlConnection(windowObj.connectionString);
                 con.Open();
-                string sql = ("select grid from groups where nazvanie ='" + windowObj.grTitle.Text + "'");
+                string sql = ("select grid from groups where nazvanie ='" + windowObj.GroopAddTitle.Text + "'");
                 NpgsqlCommand command = new NpgsqlCommand(sql, con);
                 NpgsqlDataReader reader = command.ExecuteReader();
                 if (reader.HasRows)
@@ -42,7 +42,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             {
                 NpgsqlConnection con = new NpgsqlConnection(windowObj.connectionString);
                 con.Open();
-                string sql = "select courseid from courses where title ='" + windowObj.grCourse.SelectedItem + "'";
+                string sql = "select courseid from courses where title ='" + windowObj.GroopAddCourse.SelectedItem + "'";
                 NpgsqlCommand command = new NpgsqlCommand(sql, con);
                 NpgsqlDataReader reader = command.ExecuteReader();
                 if (reader.HasRows)
@@ -57,22 +57,22 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
             //добавление группы
             double[] payInMonth = new double[12];
-            if (windowObj.grPayment1.Text != "") payInMonth[0] = Convert.ToDouble(windowObj.grPayment1.Text);
-            if (windowObj.grPayment2.Text != "") payInMonth[1] = Convert.ToDouble(windowObj.grPayment2.Text);
-            if (windowObj.grPayment3.Text != "") payInMonth[2] = Convert.ToDouble(windowObj.grPayment3.Text);
-            if (windowObj.grPayment4.Text != "") payInMonth[3] = Convert.ToDouble(windowObj.grPayment4.Text);
-            if (windowObj.grPayment5.Text != "") payInMonth[4] = Convert.ToDouble(windowObj.grPayment5.Text);
-            if (windowObj.grPayment6.Text != "") payInMonth[5] = Convert.ToDouble(windowObj.grPayment6.Text);
-            if (windowObj.grPayment7.Text != "") payInMonth[6] = Convert.ToDouble(windowObj.grPayment7.Text);
-            if (windowObj.grPayment8.Text != "") payInMonth[7] = Convert.ToDouble(windowObj.grPayment8.Text);
-            if (windowObj.grPayment9.Text != "") payInMonth[8] = Convert.ToDouble(windowObj.grPayment9.Text);
-            if (windowObj.grPayment10.Text != "") payInMonth[9] = Convert.ToDouble(windowObj.grPayment10.Text);
-            if (windowObj.grPayment11.Text != "") payInMonth[10] = Convert.ToDouble(windowObj.grPayment11.Text);
-            if (windowObj.grPayment12.Text != "") payInMonth[11] = Convert.ToDouble(windowObj.grPayment12.Text);
+            if (windowObj.GroopAddPaymentFor1Month.Text != "") payInMonth[0] = Convert.ToDouble(windowObj.GroopAddPaymentFor1Month.Text);
+            if (windowObj.GroopAddPaymentFor2Month.Text != "") payInMonth[1] = Convert.ToDouble(windowObj.GroopAddPaymentFor2Month.Text);
+            if (windowObj.GroopAddPaymentFor3Month.Text != "") payInMonth[2] = Convert.ToDouble(windowObj.GroopAddPaymentFor3Month.Text);
+            if (windowObj.GroopAddPaymentFor4Month.Text != "") payInMonth[3] = Convert.ToDouble(windowObj.GroopAddPaymentFor4Month.Text);
+            if (windowObj.GroopAddPaymentFor5Month.Text != "") payInMonth[4] = Convert.ToDouble(windowObj.GroopAddPaymentFor5Month.Text);
+            if (windowObj.GroopAddPaymentFor6Month.Text != "") payInMonth[5] = Convert.ToDouble(windowObj.GroopAddPaymentFor6Month.Text);
+            if (windowObj.GroopAddPaymentFor7Month.Text != "") payInMonth[6] = Convert.ToDouble(windowObj.GroopAddPaymentFor7Month.Text);
+            if (windowObj.GroopAddPaymentFor8Month.Text != "") payInMonth[7] = Convert.ToDouble(windowObj.GroopAddPaymentFor8Month.Text);
+            if (windowObj.GroopAddPaymentFor9Month.Text != "") payInMonth[8] = Convert.ToDouble(windowObj.GroopAddPaymentFor9Month.Text);
+            if (windowObj.GroopAddPaymentFor10Month.Text != "") payInMonth[9] = Convert.ToDouble(windowObj.GroopAddPaymentFor10Month.Text);
+            if (windowObj.GroopAddPaymentFor11Month.Text != "") payInMonth[10] = Convert.ToDouble(windowObj.GroopAddPaymentFor11Month.Text);
+            if (windowObj.GroopAddPaymentFor12Month.Text != "") payInMonth[11] = Convert.ToDouble(windowObj.GroopAddPaymentFor12Month.Text);
             //проверка оплаты за нужные месяца
 
-            DateTime dateStartAdd = Convert.ToDateTime(windowObj.DateStartGrAdd.Text);
-            DateTime dateEndAdd = Convert.ToDateTime(windowObj.DateEndGrAdd.Text);
+            DateTime dateStartAdd = Convert.ToDateTime(windowObj.GroopAddDateStartLearn.Text);
+            DateTime dateEndAdd = Convert.ToDateTime(windowObj.GroopAddDateEndLearn.Text);
             if (dateEndAdd.Year - dateStartAdd.Year == 1 || dateEndAdd.Year - dateStartAdd.Year == 0)
             {
                 if (dateStartAdd.Month > dateEndAdd.Month)
@@ -118,7 +118,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                         { if (payInMonth[i] != 0) { MessageBox.Show("В месяце2 " + (i + 1) + " стоит оплата, хотя он не отмечен как месяц обучения"); return; } }
                     }
                     else
-                    { System.Windows.Forms.MessageBox.Show("Дата введена не корректно"); return; }
+                    {MessageBox.Show("Дата введена не корректно"); return; }
                 }
             }
             else { MessageBox.Show("Дата введена не корректно"); return; }
@@ -128,7 +128,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             {
                 NpgsqlConnection con = new NpgsqlConnection(windowObj.connectionString);
                 con.Open();
-                string sql = "INSERT INTO groups(courseid, nazvanie, comment, payment,date_start,date_end) VALUES(" + courseID + ",'" + windowObj.grTitle.Text + "' ,'" + windowObj.grComm.Text + "' , '{" + payInMonth[0].ToString().Replace(',', '.') + "," + payInMonth[1].ToString().Replace(',', '.') + "," + payInMonth[2].ToString().Replace(',', '.') + "," + payInMonth[3].ToString().Replace(',', '.') + "," + payInMonth[4].ToString().Replace(',', '.') + "," + payInMonth[5].ToString().Replace(',', '.') + "," + payInMonth[6].ToString().Replace(',', '.') + "," + payInMonth[7].ToString().Replace(',', '.') + "," + payInMonth[8].ToString().Replace(',', '.') + "," + payInMonth[9].ToString().Replace(',', '.') + "," + payInMonth[10].ToString().Replace(',', '.') + "," + payInMonth[11].ToString().Replace(',', '.') + "}','" + dateStartAdd.ToShortDateString().Replace('.', '-') + "','" + dateEndAdd.ToShortDateString().Replace('.', '-') + "' ); ";
+                string sql = "INSERT INTO groups(courseid, nazvanie, comment, payment,date_start,date_end) VALUES(" + courseID + ",'" + windowObj.GroopAddTitle.Text + "' ,'" + windowObj.GroopAddComment.Text + "' , '{" + payInMonth[0].ToString().Replace(',', '.') + "," + payInMonth[1].ToString().Replace(',', '.') + "," + payInMonth[2].ToString().Replace(',', '.') + "," + payInMonth[3].ToString().Replace(',', '.') + "," + payInMonth[4].ToString().Replace(',', '.') + "," + payInMonth[5].ToString().Replace(',', '.') + "," + payInMonth[6].ToString().Replace(',', '.') + "," + payInMonth[7].ToString().Replace(',', '.') + "," + payInMonth[8].ToString().Replace(',', '.') + "," + payInMonth[9].ToString().Replace(',', '.') + "," + payInMonth[10].ToString().Replace(',', '.') + "," + payInMonth[11].ToString().Replace(',', '.') + "}','" + dateStartAdd.ToShortDateString().Replace('.', '-') + "','" + dateEndAdd.ToShortDateString().Replace('.', '-') + "' ); ";
                 NpgsqlCommand command = new NpgsqlCommand(sql, con);
                 command.ExecuteNonQuery();
                 con.Close();
@@ -140,29 +140,29 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             var btn = MessageBox.Show("Группа добавлена. \n Продолжить добавление?", "Добавление", MessageBoxButton.YesNo);
             if (btn == MessageBoxResult.Yes)
             {
-                windowObj.grTitle.Text = "";
-                windowObj.grComm.Text = "";
-                windowObj.grCourse.SelectedIndex = 0;
-                windowObj.grPayment1.Text = "";
-                windowObj.grPayment2.Text = "";
-                windowObj.grPayment3.Text = "";
-                windowObj.grPayment4.Text = "";
-                windowObj.grPayment5.Text = "";
-                windowObj.grPayment6.Text = "";
-                windowObj.grPayment7.Text = "";
-                windowObj.grPayment8.Text = "";
-                windowObj.grPayment9.Text = "";
-                windowObj.grPayment10.Text = "";
-                windowObj.grPayment11.Text = "";
-                windowObj.grPayment12.Text = "";
-                windowObj.payToYear.Content = "";
-                windowObj.DateStartGrAdd.Text = DateTime.Now.AddMonths(-11).ToShortDateString();
-                windowObj.DateEndGrAdd.Text = DateTime.Now.ToShortDateString();
+                windowObj.GroopAddTitle.Text = "";
+                windowObj.GroopAddComment.Text = "";
+                windowObj.GroopAddCourse.SelectedIndex = 0;
+                windowObj.GroopAddPaymentFor1Month.Text = "";
+                windowObj.GroopAddPaymentFor2Month.Text = "";
+                windowObj.GroopAddPaymentFor3Month.Text = "";
+                windowObj.GroopAddPaymentFor4Month.Text = "";
+                windowObj.GroopAddPaymentFor5Month.Text = "";
+                windowObj.GroopAddPaymentFor6Month.Text = "";
+                windowObj.GroopAddPaymentFor7Month.Text = "";
+                windowObj.GroopAddPaymentFor8Month.Text = "";
+                windowObj.GroopAddPaymentFor9Month.Text = "";
+                windowObj.GroopAddPaymentFor10Month.Text = "";
+                windowObj.GroopAddPaymentFor11Month.Text = "";
+                windowObj.GroopAddPaymentFor12Month.Text = "";
+                windowObj.GroopAddPayForYear.Content = "";
+                windowObj.GroopAddDateStartLearn.Text = DateTime.Now.AddMonths(-11).ToShortDateString();
+                windowObj.GroopAddDateEndLearn.Text = DateTime.Now.ToShortDateString();
             }
             if (btn == MessageBoxResult.No)
             {
                 windowObj.HideAll();
-                windowObj.groupsGrid.Visibility = Visibility.Visible;
+                windowObj.GroopsGrid.Visibility = Visibility.Visible;
                 DataGridUpdater.updateGroopsDataGrid(windowObj);
             }
         }

@@ -20,12 +20,12 @@ namespace WpfApp12.strategiesForBookkeeper.ButtonClick
         public void ButtonClick()
         {
             windowObj.HideAll();
-            windowObj.RashodyAddGrid.Visibility = Visibility.Visible;
-            windowObj.RashodyAddType.Items.Clear();
-            windowObj.RashodyAddFIO.Items.Clear();
-            windowObj.RashodyAddSum.Text = "";
-            windowObj.RashodyAddDate.Text = DateTime.Now.ToShortDateString();
-            windowObj.RashodyAddDesc.Text = "";
+            windowObj.CostsAddGrid.Visibility = Visibility.Visible;
+            windowObj.CostsAddType.Items.Clear();
+            windowObj.CostsAddPersonName.Items.Clear();
+            windowObj.CostsAddSum.Text = "";
+            windowObj.CostsAddDate.Text = DateTime.Now.ToShortDateString();
+            windowObj.CostsAddDesc.Text = "";
             try
             {
                 NpgsqlConnection con = new NpgsqlConnection(windowObj.connectionString);
@@ -37,9 +37,9 @@ namespace WpfApp12.strategiesForBookkeeper.ButtonClick
                 {
                     while (reader.Read())
                     {
-                        windowObj.RashodyAddType.Items.Add(reader.GetString(0));
+                        windowObj.CostsAddType.Items.Add(reader.GetString(0));
                     }
-                    windowObj.RashodyAddType.SelectedIndex = 0;
+                    windowObj.CostsAddType.SelectedIndex = 0;
                 }
                 con.Close();
             }
@@ -56,9 +56,9 @@ namespace WpfApp12.strategiesForBookkeeper.ButtonClick
                 {
                     while (reader.Read())
                     {
-                        windowObj.RashodyAddFIO.Items.Add(reader.GetString(0));
+                        windowObj.CostsAddPersonName.Items.Add(reader.GetString(0));
                     }
-                    windowObj.RashodyAddFIO.SelectedIndex = 0;
+                    windowObj.CostsAddPersonName.SelectedIndex = 0;
                 }
                 con.Close();
             }

@@ -19,12 +19,12 @@ namespace WpfApp12.strategiesForBookkeeper.ButtonClick
 
         public void ButtonClick()
         {
-            if (windowObj.RashodyChangeSum.Text == "" || windowObj.RashodyChangeDate.Text == "") { MessageBox.Show("Поля не заполнены"); return; }
+            if (windowObj.CostsChangeSum.Text == "" || windowObj.CostsChangeDate.Text == "") { MessageBox.Show("Поля не заполнены"); return; }
             try
             {
                 NpgsqlConnection con = new NpgsqlConnection(windowObj.connectionString);
                 con.Open();
-                string sql = "UPDATE rashody SET typeid=(SELECT typeid FROM typerash where title='" + windowObj.RashodyChangeType.SelectedItem + "'), sotrid=(SELECT sotrid FROM sotrudniki where fio='" + windowObj.RashodyChangeFIO.SelectedItem + "'), summ=" + windowObj.RashodyChangeSum.Text.Replace(',', '.') + ", data='" + windowObj.RashodyChangeDate.Text.Replace('.', '-') + "', description='" + windowObj.RashodyChangeDesc.Text + "' WHERE rashid =" + windowObj.costID;
+                string sql = "UPDATE rashody SET typeid=(SELECT typeid FROM typerash where title='" + windowObj.CostsChangeType.SelectedItem + "'), sotrid=(SELECT sotrid FROM sotrudniki where fio='" + windowObj.CostsChangePersonName.SelectedItem + "'), summ=" + windowObj.CostsChangeSum.Text.Replace(',', '.') + ", data='" + windowObj.CostsChangeDate.Text.Replace('.', '-') + "', description='" + windowObj.CostsChangeComment.Text + "' WHERE rashid =" + windowObj.costID;
                 NpgsqlCommand com = new NpgsqlCommand(sql, con);
                 com.ExecuteNonQuery();
                 con.Close();
@@ -32,9 +32,9 @@ namespace WpfApp12.strategiesForBookkeeper.ButtonClick
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
 
             windowObj.HideAll();
-            windowObj.RoshodyGrid.Visibility = Visibility.Visible;
+            windowObj.CostsGrid.Visibility = Visibility.Visible;
 
-            windowObj.RoshodyDataGrid.SelectedItem = null;
+            windowObj.CostsDataGrid.SelectedItem = null;
             windowObj.RashDeleteButton.IsEnabled = false;
             windowObj.RashChangeButton.IsEnabled = false;
             DataGridUpdater.updateCostsDataGrid(windowObj);

@@ -23,7 +23,7 @@ namespace WpfApp12.strategiesForAdmin
             {
                 NpgsqlConnection conn = new NpgsqlConnection(windowObj.connectionString);
                 conn.Open();
-                string sql = "UPDATE users SET pas = '" + windowObj.rootpass.Text + "' where uid = -1";
+                string sql = "UPDATE users SET pas = '" + windowObj.rootPassSettings.Text + "' where uid = -1";
                 NpgsqlCommand com = new NpgsqlCommand(sql, conn);
                 com.ExecuteNonQuery();
                 conn.Close();

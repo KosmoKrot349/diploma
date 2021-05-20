@@ -399,9 +399,9 @@ namespace WpfApp12
                 checkBoxVariantsArr[i] = new CheckBox();
                 switch (i)
                 {
-                    case 0: { checkBoxVariantsArr[i].Content = "Админ"; checkBoxVariantsArr[i].Name = "id_admin"; break; }
-                    case 1: { checkBoxVariantsArr[i].Content = "Директор"; checkBoxVariantsArr[i].Name = "id_dir"; break; }
-                    case 2: { checkBoxVariantsArr[i].Content = "Бухгалтер"; checkBoxVariantsArr[i].Name = "id_buhg"; break; }
+                    case 0: { checkBoxVariantsArr[i].Content = "Админ"; checkBoxVariantsArr[i].Name = "isAdmin"; break; }
+                    case 1: { checkBoxVariantsArr[i].Content = "Директор"; checkBoxVariantsArr[i].Name = "isManager"; break; }
+                    case 2: { checkBoxVariantsArr[i].Content = "Бухгалтер"; checkBoxVariantsArr[i].Name = "isBookkeeper"; break; }
                 }
                 ColumnDefinition cmd = new ColumnDefinition();
                 FilterRolesGrid.ColumnDefinitions.Add(cmd);

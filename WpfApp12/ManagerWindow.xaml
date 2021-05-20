@@ -8,90 +8,90 @@
         mc:Ignorable="d"
         Title="Менеджер"  Height="300" Width="300">
     <!--самый главный грид-->
-    <Grid Name="glGrid">
+    <Grid Name="MainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="15pt"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        <!--меню директора-->
-        <Menu Name="dirMenu"  Grid.Row="0">
-            <MenuItem Name="MenuRolesD" Header="Права" ToolTip="Нажмите для выбора доступной Вам роли" Click="MenuRolesD_Click">
-                <MenuItem Name="AdminRoleD" Header="Админ" Click="AdminRoleD_Click" ToolTip="Нажмите для перехода к роли администратора"/>
-                <MenuItem  Name="BuhgRoleD" Header="Бухгалтер" Click="BuhgRoleD_Click" ToolTip="Нажмите для перехода к роли бухгалтера"/>
-                <MenuItem  Name="DirectorRoleD" Header="Директор" Click="DirectorRoleD_Click" ToolTip="Роль директора уже выбрана"/>
+        <!--меню директора+-->
+        <Menu Name="ManagerMenu"  Grid.Row="0">
+            <MenuItem Name="MenuRoles" Header="Права" ToolTip="Нажмите для выбора доступной Вам роли" Click="MenuRolesD_Click">
+                <MenuItem Name="GoToAdminMenu" Header="Админ" Click="AdminRoleD_Click" ToolTip="Нажмите для перехода к роли администратора"/>
+                <MenuItem  Name="GoToBookkeeperMenu" Header="Бухгалтер" Click="BuhgRoleD_Click" ToolTip="Нажмите для перехода к роли бухгалтера"/>
+                <MenuItem  Name="GoToManagerMenu" Header="Директор" Click="DirectorRoleD_Click" ToolTip="Роль директора уже выбрана"/>
             </MenuItem>
-            <MenuItem Name="raspMenu" Header="Расписание" ToolTip="Нажмите для редактрования расписания" Click="raspMenu_Click" >
-                <MenuItem Name="zvonkiMenu" Header="Расписание времени занятий" Click="zvonkiMenu_Click" ToolTip="Нажмите для редактирования расписания времени занятий" >
+            <MenuItem Name="ScheduleMenu" Header="Расписание" ToolTip="Нажмите для редактрования расписания" Click="raspMenu_Click" >
+                <MenuItem Name="TimeScheduleMenu" Header="Расписание времени занятий" Click="zvonkiMenu_Click" ToolTip="Нажмите для редактирования расписания времени занятий" >
                 </MenuItem>
-                <MenuItem Name="shtatRasp" Header="Штатное расписание" ToolTip="Нажмите для работы со штатным расписанием" Click="shtatRasp_Click"/>
-                <MenuItem Name="yrokiMenu" Header="Расписание занятй"  ToolTip="Нажмите для редактирования расписания занятий" >
-                    <MenuItem Name="yrokiGMenu" Header="По группам"  ToolTip="Нажмите для редактирования расписания" Click="yrokiMenu_Click"/>
-                    <MenuItem Name="yrokiPMenu" Header="По преподавателям"  ToolTip="Нажмите для редактирования расписания" Click="yrokiPMenu_Click"/>
-                    <MenuItem Name="yrokiCMenu" Header="По кабинетам"  ToolTip="Нажмите для редактирования расписания" Click="yrokiCMenu_Click"/>
+                <MenuItem Name="StaffScheduleMenu" Header="Штатное расписание" ToolTip="Нажмите для работы со штатным расписанием" Click="shtatRasp_Click"/>
+                <MenuItem Name="LessosnScheduleMenu" Header="Расписание занятй"  ToolTip="Нажмите для редактирования расписания занятий" >
+                    <MenuItem Name="GroopsScheduleMenu" Header="По группам"  ToolTip="Нажмите для редактирования расписания" Click="yrokiMenu_Click"/>
+                    <MenuItem Name="TeachersScheduleMenu" Header="По преподавателям"  ToolTip="Нажмите для редактирования расписания" Click="yrokiPMenu_Click"/>
+                    <MenuItem Name="CabinetsScheduleMenu" Header="По кабинетам"  ToolTip="Нажмите для редактирования расписания" Click="yrokiCMenu_Click"/>
                 </MenuItem>
-                <MenuItem Name="kabMenu" Header="Кабинеты" ToolTip="Нажмите для работы с кабинетами" Click="kabMenu_Click" />
+                <MenuItem Name="CabinetMenu" Header="Кабинеты" ToolTip="Нажмите для работы с кабинетами" Click="kabMenu_Click" />
             </MenuItem>
-            <MenuItem Name="sotrMenu" Header="Персонал" ToolTip="Нажмите для редактирования информации о работниках" Click="sotrMenu_Click" >
+            <MenuItem Name="EmployeesMenu" Header="Персонал" ToolTip="Нажмите для редактирования информации о работниках" Click="sotrMenu_Click" >
 
                 <MenuItem Header="Сотрудники">
-                    <MenuItem Name="allSotr" Header="Все сотрудники" ToolTip="Нажмите для перехода к работе с общей таблицей сотрудников" Click="allSotr_Click" />
-                    <MenuItem Name="preps" Header="Преподаватели" ToolTip="Нажмите для перехода к работе с таблицей преподавателей" Click="preps_Click" />
-                    <MenuItem Name="shtat" Header="Штатные сотрудники" ToolTip="Нажмите для перехода к работе с таблицей штатных сотрудников" Click="shtat_Click" />
+                    <MenuItem Name="AllEmployeesMenu" Header="Все сотрудники" ToolTip="Нажмите для перехода к работе с общей таблицей сотрудников" Click="allSotr_Click" />
+                    <MenuItem Name="TeachersMenu" Header="Преподаватели" ToolTip="Нажмите для перехода к работе с таблицей преподавателей" Click="preps_Click" />
+                    <MenuItem Name="StaffMenu" Header="Штатные сотрудники" ToolTip="Нажмите для перехода к работе с таблицей штатных сотрудников" Click="shtat_Click" />
                 </MenuItem>
 
                 <MenuItem Header="Работы">
-                    <MenuItem Name="kategorii" Header="Категории" ToolTip="Нажмите для работы с категориями" Click="kategorii_Click" />
-                    <MenuItem Name="koefVisl" Header="Коэффициент выслуги лет" ToolTip="Нажмите для работы с коэффициентом" Click="koefVisl_Click"  />
-                    <MenuItem Name="states" Header="Должности" ToolTip="Нажмите для работы с должностями" Click="states_Click" />
-                    <MenuItem Name="sdelniy_rab" Header="Работы обслуживания" ToolTip="Нажмите для работы со сдельными работами" Click="sdelniy_rab_Click" />
+                    <MenuItem Name="CategoriesMenu" Header="Категории" ToolTip="Нажмите для работы с категориями" Click="kategorii_Click" />
+                    <MenuItem Name="WorkCoeffMenu" Header="Коэффициент выслуги лет" ToolTip="Нажмите для работы с коэффициентом" Click="koefVisl_Click"  />
+                    <MenuItem Name="PositionsMenu" Header="Должности" ToolTip="Нажмите для работы с должностями" Click="states_Click" />
+                    <MenuItem Name="ServiceWorkMenu" Header="Работы обслуживания" ToolTip="Нажмите для работы со сдельными работами" Click="sdelniy_rab_Click" />
                 </MenuItem>
                 
             </MenuItem>
-            <MenuItem Name="obuchMenu" Header="Обучение" ToolTip="Нажмите для редактирования информации об обучении" Click="obuchMenu_Click">
-                <MenuItem Name="groupsMenu" Header="Группы" ToolTip="Нажмите для работы с группами" Click="groupsMenu_Click" />
-                <MenuItem Name="coursesMenu" Header="Курсы" ToolTip="Нажмите для работы с курсами" Click="coursesMenu_Click"/>
-                <MenuItem Name="subjectMeny" Header="Предметы" ToolTip="Нажмите для работы с предметами" Click="subjectMeny_Click"/>
-                <MenuItem Name="listenerMenu" Header="Слушатели" ToolTip="Нажмите для работы со слушателями" Click="listenerMenu_Click"/>
+            <MenuItem Name="LearningMenu" Header="Обучение" ToolTip="Нажмите для редактирования информации об обучении" Click="obuchMenu_Click">
+                <MenuItem Name="GroupsMenu" Header="Группы" ToolTip="Нажмите для работы с группами" Click="groupsMenu_Click" />
+                <MenuItem Name="CoursesMenu" Header="Курсы" ToolTip="Нажмите для работы с курсами" Click="coursesMenu_Click"/>
+                <MenuItem Name="SubjectMeny" Header="Предметы" ToolTip="Нажмите для работы с предметами" Click="subjectMeny_Click"/>
+                <MenuItem Name="ListenerMenu" Header="Слушатели" ToolTip="Нажмите для работы со слушателями" Click="listenerMenu_Click"/>
             </MenuItem>
-            <MenuItem  Name="skidki" Header="Финансы" >
-                <MenuItem ToolTip="Скидки при оплате за обучение" Name="skidkii" Header="Скидки" Click="skidki_Click"/>
-                <MenuItem ToolTip="Пеня при оплате за обучение" Name="penya" Header="Пеня" Click="penya_Click" />
-                <MenuItem ToolTip="Типы доходов предприятия" Name="doh" Header="Типы доходов" Click="doh_Click" />
-                <MenuItem ToolTip="Типы расходов предприятия" Name="rash" Header="Типы расходов" Click="rash_Click" />
+            <MenuItem  Name="DiscountMenu" Header="Финансы" >
+                <MenuItem ToolTip="Скидки при оплате за обучение" Name="DiscountsMenu" Header="Скидки" Click="skidki_Click"/>
+                <MenuItem ToolTip="Пеня при оплате за обучение" Name="FineMenu" Header="Пеня" Click="penya_Click" />
+                <MenuItem ToolTip="Типы доходов предприятия" Name="TypeProfitMenu" Header="Типы доходов" Click="doh_Click" />
+                <MenuItem ToolTip="Типы расходов предприятия" Name="TypeCostsMenu" Header="Типы расходов" Click="rash_Click" />
             </MenuItem>
 
-            <MenuItem Header="Отчёты" Name="MenuOtchety" Click="MenuOtchety_Click">
-                <MenuItem  Header="Касса" Name="kassaMenu" Click="kassaMenu_Click" />
-                <MenuItem  Header="Списки выплат"  Name="SpiskiVyplatMenu" Click="StatistikaMenu_Click" />
-                <MenuItem  Header="Статистика доходов/расходов" Name="StatistikaMenu" Click="SpiskiVyplatMenu_Click"   />
+            <MenuItem Header="Отчёты" Name="ReportsMenu" Click="MenuOtchety_Click">
+                <MenuItem  Header="Касса" Name="CashboxReportMenu" Click="kassaMenu_Click" />
+                <MenuItem  Header="Списки выплат"  Name="PaymentListReportMenu" Click="StatistikaMenu_Click" />
+                <MenuItem  Header="Статистика доходов/расходов" Name="StatisticReportMenu" Click="SpiskiVyplatMenu_Click"   />
             </MenuItem>
 
             <MenuItem ToolTip="Нажмите что бы выйти из учётной записи" Name="Leave" Header="Выйти" Click="Leave_Click" />
         </Menu>
 
-        <!--грид списки выплат -->
-        <Grid Name="ZpOthcetGrid"  Grid.Row="1" Visibility="Collapsed">
+        <!--грид списки выплат+ -->
+        <Grid Name="PaymentListReportGrid"  Grid.Row="1" Visibility="Collapsed">
             <Grid.RowDefinitions>
                 <RowDefinition Height="1*"/>
                 <RowDefinition Height="8*"/>
             </Grid.RowDefinitions>
-            <Label Grid.Row="0" Name="ZPOtchetLabel" FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
+            <Label Grid.Row="0" Name="PaymentListReportLabel" FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
             <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
-                <Grid Name="ZPOtchetVivodGrid">
+                <Grid Name="PaymentListReportOutputGrid">
 
                 </Grid>
             </ScrollViewer>
         </Grid>
 
-        <!--грид статистика -->
-        <Grid Name="StatisticaGrid"  Grid.Row="1" Visibility="Collapsed">
-            <oxy:PlotView Name="statGraf"/>
+        <!--грид статистика+ -->
+        <Grid Name="StatisticGrid"  Grid.Row="1" Visibility="Collapsed">
+            <oxy:PlotView Name="StatisticPlot"/>
         </Grid>
 
 
 
-        <!--грид касса -->
-        <Grid Name="kassaGrid"  Grid.Row="1" Visibility="Collapsed">
+        <!--грид касса+ -->
+        <Grid Name="CashboxReportGrid"  Grid.Row="1" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="7*"/>
@@ -110,12 +110,12 @@
                 <Label Content="Фильтр для доходов" Grid.Row="0" />
                 <Label Content="Кто внёс" Grid.Row="1" />
                 <ScrollViewer Grid.Row="2" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
-                    <Grid Name="pD">
+                    <Grid Name="PersonProfitFilterGrid">
                     </Grid>
                 </ScrollViewer>
                 <Label Content="Тип дохода" Grid.Row="3" />
                 <ScrollViewer Grid.Row="4" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
-                    <Grid Name="tD">
+                    <Grid Name="TypeProfitFilterGrid">
                     </Grid>
                 </ScrollViewer>
                 <Button Content="Применить" Grid.Row="5" Name="PrimFKD" Click="Button_Click_1" />
@@ -134,12 +134,12 @@
                 <Label Content="Фильтр для расходов" Grid.Row="0" />
                 <Label Content="Кто получил" Grid.Row="1" />
                 <ScrollViewer Grid.Row="2" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
-                    <Grid Name="pR">
+                    <Grid Name="PersonCostsFilterGrid">
                     </Grid>
                 </ScrollViewer>
                 <Label Content="Тип расхода" Grid.Row="3" />
                 <ScrollViewer Grid.Row="4" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
-                    <Grid Name="tR">
+                    <Grid Name="TypeCostsFilterGrid">
                     </Grid>
                 </ScrollViewer>
                 <Button Content="Применить"  Name="PrimFKR" Click="Button_Click_1" Grid.Row="5" />
@@ -159,14 +159,14 @@
                     <RowDefinition Height="0.5*"/>
                 </Grid.RowDefinitions>
 
-                <Label Name="kassaTitleLabel" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"   BorderThickness="2" BorderBrush="Black" FontSize="20" VerticalContentAlignment="Top" HorizontalContentAlignment="Center" />
+                <Label Name="CashboxTitleLabel" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"   BorderThickness="2" BorderBrush="Black" FontSize="20" VerticalContentAlignment="Top" HorizontalContentAlignment="Center" />
 
                 <Label Content="Доходы" Grid.Row="1" Grid.Column="0" BorderThickness="2" BorderBrush="Black" FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
                 <Label Content="Расходы" Grid.Row="1" Grid.Column="1"  BorderThickness="2" BorderBrush="Black" FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  />
 
 
                 <ScrollViewer Grid.Row="2" Grid.Column="0" >
-                    <Grid  Name="KassaDodohGrid">
+                    <Grid  Name="CashboxProfitGrid">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
                             <ColumnDefinition/>
@@ -176,7 +176,7 @@
                     </Grid>
                 </ScrollViewer>
                 <ScrollViewer Grid.Row="2" Grid.Column="1">
-                    <Grid  Name="KassaRashodGrid">
+                    <Grid  Name="CashboxCostsGrid">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition/>
                             <ColumnDefinition/>
@@ -186,17 +186,17 @@
                     </Grid>
                 </ScrollViewer>
 
-                <Label Content="Итого:" Name="KassaItogoDohod" Grid.Row="3" Grid.Column="0"  BorderThickness="2" BorderBrush="Black" FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  />
-                <Label Content="Итого:" Name="KassaItogoRashod" Grid.Row="3" Grid.Column="1"  BorderThickness="2" BorderBrush="Black" FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  />
+                <Label Content="Итого:" Name="CashboxTotalProfit" Grid.Row="3" Grid.Column="0"  BorderThickness="2" BorderBrush="Black" FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  />
+                <Label Content="Итого:" Name="CashboxTotalCosts" Grid.Row="3" Grid.Column="1"  BorderThickness="2" BorderBrush="Black" FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  />
 
-                <Label Name="kassaAllDohodLabel" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"  BorderThickness="2" BorderBrush="Black" FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  />
+                <Label Name="CashboxFinalProfit" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"  BorderThickness="2" BorderBrush="Black" FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  />
 
             </Grid>
 
         </Grid>
 
-        <!--грид штатного расписания -->
-        <Grid Name="ShtatRaspGrid" Grid.Row="1" Visibility="Collapsed">
+        <!--грид штатного расписания+-->
+        <Grid Name="StaffScheduleGrid" Grid.Row="1" Visibility="Collapsed">
             <Grid.RowDefinitions>
                 <RowDefinition Height="30pt"/>
                 <RowDefinition Height="6*"/>
@@ -209,7 +209,7 @@
                     <ColumnDefinition Width="1.5*"/>
                 </Grid.ColumnDefinitions>
                 <Button Grid.Column="0" Content="Предыдущий месяц" Name="ShtatRaspPrevBut" Click="ShtatRaspPrevBut_Click"  FontSize="14" />
-                <Label Name="ShtatRaspMonthYearLabel" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="20" Grid.Row="0" Grid.Column="1" />
+                <Label Name="StaffScheduleDateLabel" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="20" Grid.Row="0" Grid.Column="1" />
                 <Button Grid.Column="2" Name="ShtatRaspNextBut" Content="Следующий месяц" Click="ShtatRaspNextBut_Click" FontSize="14" />
             </Grid>
            
@@ -247,7 +247,7 @@
                     </Grid.RowDefinitions>
                     <Label Content="Присутствующие сторудники" Grid.Row="0" FontSize="12" VerticalContentAlignment="Top" HorizontalContentAlignment="Center" />
                     <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
-                        <Grid Name="ShtatRaspSotrpGrid">
+                        <Grid Name="StaffScheduleEmployeesGrid">
                         </Grid>
                     </ScrollViewer>
                 </Grid>
@@ -262,8 +262,8 @@
             </Grid>
         </Grid>
 
-        <!--грид работы обслуживания -->
-        <Grid Name="ObslWorkGrid" Grid.Row="1" Visibility="Collapsed">
+        <!--грид работы обслуживания+ -->
+        <Grid Name="ServiceWorksGrid" Grid.Row="1" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -273,7 +273,7 @@
                 <RowDefinition/>
                 <RowDefinition Height="30pt"/>
             </Grid.RowDefinitions>
-            <DataGrid Name="ObslWorkDataGrid" ToolTip="Таблица в которой отображаются добавленные Вами работы обслуживания. Для сохранения или изменения добавьте новую работу в пустую строку или измените существующий и нажмите 'Добавить/изменить'" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" ItemsSource="{Binding}" AutoGenerateColumns="False" SelectedCellsChanged="listenerDataGrid_SelectedCellsChanged">
+            <DataGrid Name="ServiceWorkDataGrid" ToolTip="Таблица в которой отображаются добавленные Вами работы обслуживания. Для сохранения или изменения добавьте новую работу в пустую строку или измените существующий и нажмите 'Добавить/изменить'" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" ItemsSource="{Binding}" AutoGenerateColumns="False" SelectedCellsChanged="listenerDataGrid_SelectedCellsChanged">
                 <DataGrid.Columns>
                     <DataGridTextColumn Visibility="Collapsed" Header="ID" Binding="{Binding rabotyid}" Width="5*" />
                     <DataGridTextColumn Header="Название" Binding="{Binding title}" Width="5*" />
@@ -286,8 +286,8 @@
             <Button Name="ObslWorkChangeButton" FontSize="16" Content="Добавить/изменить" ToolTip="Нажмите для сохранений изменений в таблице" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Click="ObslWorkChangeButton_Click" />
         </Grid>
 
-        <!--грид изменения должностей -->
-        <Grid Name="StateChaneGrid" Grid.Row="1" Visibility="Collapsed">
+        <!--грид изменения должностей+ -->
+        <Grid Name="PositionsChangeGrid" Grid.Row="1" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -309,7 +309,7 @@
             <Label Content="Оплата" Grid.Row="4" Grid.Column="0" VerticalContentAlignment="Top" HorizontalContentAlignment="Right" FontSize="16" />
             <Label Content="Комментарий" Grid.Row="5" Grid.Column="0" VerticalContentAlignment="Top" HorizontalContentAlignment="Right" FontSize="16" />
 
-            <TextBox Grid.Row="1" Grid.Column="1" Name="StateChaneTitle"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Name="PositionChangeTitle"/>
             <ScrollViewer Grid.Row="2" Grid.RowSpan="2" Grid.Column="1">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -343,29 +343,29 @@
                     <Label Content="Ноябрь" Grid.Row="10" Grid.Column="0"/>
                     <Label Content="Декабрь" Grid.Row="11" Grid.Column="0"/>
 
-                    <TextBox Grid.Row="0" Grid.Column="1" Name="Chanedays1" PreviewTextInput="days1_PreviewTextInput"/>
-                    <TextBox Grid.Row="1" Grid.Column="1"  Name="Chanedays2" PreviewTextInput="days1_PreviewTextInput"/>
-                    <TextBox Grid.Row="2" Grid.Column="1"  Name="Chanedays3" PreviewTextInput="days1_PreviewTextInput"/>
-                    <TextBox Grid.Row="3" Grid.Column="1"  Name="Chanedays4" PreviewTextInput="days1_PreviewTextInput"/>
-                    <TextBox Grid.Row="4" Grid.Column="1"  Name="Chanedays5" PreviewTextInput="days1_PreviewTextInput"/>
-                    <TextBox Grid.Row="5" Grid.Column="1"  Name="Chanedays6" PreviewTextInput="days1_PreviewTextInput"/>
-                    <TextBox Grid.Row="6" Grid.Column="1"  Name="Chanedays7" PreviewTextInput="days1_PreviewTextInput"/>
-                    <TextBox Grid.Row="7" Grid.Column="1"  Name="Chanedays8" PreviewTextInput="days1_PreviewTextInput"/>
-                    <TextBox Grid.Row="8" Grid.Column="1"  Name="Chanedays9" PreviewTextInput="days1_PreviewTextInput"/>
-                    <TextBox Grid.Row="9" Grid.Column="1"  Name="Chanedays10" PreviewTextInput="days1_PreviewTextInput"/>
-                    <TextBox Grid.Row="10" Grid.Column="1"  Name="Chanedays11" PreviewTextInput="days1_PreviewTextInput"/>
-                    <TextBox Grid.Row="11" Grid.Column="1"  Name="Chanedays12" PreviewTextInput="days1_PreviewTextInput"/>
+                    <TextBox Grid.Row="0" Grid.Column="1" Name="ChangeWorksDaysIn1Month" PreviewTextInput="days1_PreviewTextInput"/>
+                    <TextBox Grid.Row="1" Grid.Column="1"  Name="ChangeWorksDaysIn2Month" PreviewTextInput="days1_PreviewTextInput"/>
+                    <TextBox Grid.Row="2" Grid.Column="1"  Name="ChangeWorksDaysIn3Month" PreviewTextInput="days1_PreviewTextInput"/>
+                    <TextBox Grid.Row="3" Grid.Column="1"  Name="ChangeWorksDaysIn4Month" PreviewTextInput="days1_PreviewTextInput"/>
+                    <TextBox Grid.Row="4" Grid.Column="1"  Name="ChangeWorksDaysIn5Month" PreviewTextInput="days1_PreviewTextInput"/>
+                    <TextBox Grid.Row="5" Grid.Column="1"  Name="ChangeWorksDaysIn6Month" PreviewTextInput="days1_PreviewTextInput"/>
+                    <TextBox Grid.Row="6" Grid.Column="1"  Name="ChangeWorksDaysIn7Month" PreviewTextInput="days1_PreviewTextInput"/>
+                    <TextBox Grid.Row="7" Grid.Column="1"  Name="ChangeWorksDaysIn8Month" PreviewTextInput="days1_PreviewTextInput"/>
+                    <TextBox Grid.Row="8" Grid.Column="1"  Name="ChangeWorksDaysIn9Month" PreviewTextInput="days1_PreviewTextInput"/>
+                    <TextBox Grid.Row="9" Grid.Column="1"  Name="ChangeWorksDaysIn10Month" PreviewTextInput="days1_PreviewTextInput"/>
+                    <TextBox Grid.Row="10" Grid.Column="1"  Name="ChangeWorksDaysIn11Month" PreviewTextInput="days1_PreviewTextInput"/>
+                    <TextBox Grid.Row="11" Grid.Column="1"  Name="ChangeWorksDaysIn12Month" PreviewTextInput="days1_PreviewTextInput"/>
                 </Grid>
             </ScrollViewer>
-            <TextBox Grid.Row="4" Grid.Column="1" Name="StateChanePay" PreviewTextInput="grPayment_PreviewTextInput" />
-            <TextBox Grid.Row="5" Grid.Column="1"  Name="StateChaneCom"/>
+            <TextBox Grid.Row="4" Grid.Column="1" Name="PositionChangeSalary" PreviewTextInput="grPayment_PreviewTextInput" />
+            <TextBox Grid.Row="5" Grid.Column="1"  Name="PositionChangeComment"/>
 
             <Button Name="StateChaneBut" FontSize="16" Content="Изменить" ToolTip="Нажмите для изменения должности" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="7" Click="StateChaneBut_Click"/>
 
         </Grid>
 
-        <!--грид добавления должностей -->
-        <Grid Name="StateAddGrid" Grid.Row="1" Visibility="Collapsed">
+        <!--грид добавления должностей+ -->
+        <Grid Name="PositionAddGrid" Grid.Row="1" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -387,7 +387,7 @@
             <Label Content="Оплата" Grid.Row="4" Grid.Column="0"  VerticalContentAlignment="Top" HorizontalContentAlignment="Right" FontSize="16"/>
             <Label Content="Комментарий" Grid.Row="5" Grid.Column="0" VerticalContentAlignment="Top" HorizontalContentAlignment="Right" FontSize="16"/>
 
-            <TextBox Grid.Row="1" Grid.Column="1" Name="StateAddTitle"/>
+            <TextBox Grid.Row="1" Grid.Column="1" Name="PositionAddTitle"/>
             <ScrollViewer Grid.Row="2" Grid.RowSpan="2" Grid.Column="1">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -421,30 +421,30 @@
                     <Label Content="Ноябрь" Grid.Row="10" Grid.Column="0"/>
                     <Label Content="Декабрь" Grid.Row="11" Grid.Column="0"/>
 
-                    <TextBox Grid.Row="0" Grid.Column="1" Name="days1" PreviewTextInput="days1_PreviewTextInput"/>
-                    <TextBox Grid.Row="1" Grid.Column="1"  Name="days2" PreviewTextInput="days1_PreviewTextInput"/>
-                    <TextBox Grid.Row="2" Grid.Column="1"  Name="days3" PreviewTextInput="days1_PreviewTextInput"/>
-                    <TextBox Grid.Row="3" Grid.Column="1"  Name="days4" PreviewTextInput="days1_PreviewTextInput"/>
-                    <TextBox Grid.Row="4" Grid.Column="1"  Name="days5" PreviewTextInput="days1_PreviewTextInput"/>
-                    <TextBox Grid.Row="5" Grid.Column="1"  Name="days6" PreviewTextInput="days1_PreviewTextInput"/>
-                    <TextBox Grid.Row="6" Grid.Column="1"  Name="days7" PreviewTextInput="days1_PreviewTextInput"/>
-                    <TextBox Grid.Row="7" Grid.Column="1"  Name="days8" PreviewTextInput="days1_PreviewTextInput"/>
-                    <TextBox Grid.Row="8" Grid.Column="1"  Name="days9" PreviewTextInput="days1_PreviewTextInput"/>
-                    <TextBox Grid.Row="9" Grid.Column="1"  Name="days10" PreviewTextInput="days1_PreviewTextInput"/>
-                    <TextBox Grid.Row="10" Grid.Column="1"  Name="days11" PreviewTextInput="days1_PreviewTextInput"/>
-                    <TextBox Grid.Row="11" Grid.Column="1"  Name="days12" PreviewTextInput="days1_PreviewTextInput"/>
+                    <TextBox Grid.Row="0" Grid.Column="1" Name="AddWorksDay1Month" PreviewTextInput="days1_PreviewTextInput"/>
+                    <TextBox Grid.Row="1" Grid.Column="1"  Name="AddWorksDay2Month" PreviewTextInput="days1_PreviewTextInput"/>
+                    <TextBox Grid.Row="2" Grid.Column="1"  Name="AddWorksDay3Month" PreviewTextInput="days1_PreviewTextInput"/>
+                    <TextBox Grid.Row="3" Grid.Column="1"  Name="AddWorksDay4Month" PreviewTextInput="days1_PreviewTextInput"/>
+                    <TextBox Grid.Row="4" Grid.Column="1"  Name="AddWorksDay5Month" PreviewTextInput="days1_PreviewTextInput"/>
+                    <TextBox Grid.Row="5" Grid.Column="1"  Name="AddWorksDay6Month" PreviewTextInput="days1_PreviewTextInput"/>
+                    <TextBox Grid.Row="6" Grid.Column="1"  Name="AddWorksDay7Month" PreviewTextInput="days1_PreviewTextInput"/>
+                    <TextBox Grid.Row="7" Grid.Column="1"  Name="AddWorksDay8Month" PreviewTextInput="days1_PreviewTextInput"/>
+                    <TextBox Grid.Row="8" Grid.Column="1"  Name="AddWorksDay9Month" PreviewTextInput="days1_PreviewTextInput"/>
+                    <TextBox Grid.Row="9" Grid.Column="1"  Name="AddWorksDay10Month" PreviewTextInput="days1_PreviewTextInput"/>
+                    <TextBox Grid.Row="10" Grid.Column="1"  Name="AddWorksDay11Month" PreviewTextInput="days1_PreviewTextInput"/>
+                    <TextBox Grid.Row="11" Grid.Column="1"  Name="AddWorksDay12Month" PreviewTextInput="days1_PreviewTextInput"/>
                 </Grid>
             </ScrollViewer>
-            <TextBox Grid.Row="4" Grid.Column="1" Name="StateAddPay" PreviewTextInput="grPayment_PreviewTextInput" />
-            <TextBox Grid.Row="5" Grid.Column="1"  Name="StateAddCom"/>
+            <TextBox Grid.Row="4" Grid.Column="1" Name="PositionAddSalary" PreviewTextInput="grPayment_PreviewTextInput" />
+            <TextBox Grid.Row="5" Grid.Column="1"  Name="PositionAddComment"/>
 
             <Button Name="StateAddBut" FontSize="16" Content="Добавить" ToolTip="Нажмите для добавления новой должности" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="7" Click="StateAddBut_Click" />
             
         </Grid>
 
 
-        <!--грид должностей -->
-        <Grid Name="StateGrid" Grid.Row="1" Visibility="Collapsed">
+        <!--грид должностей+ -->
+        <Grid Name="PositionGrid" Grid.Row="1" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -454,7 +454,7 @@
                 <RowDefinition/>
                 <RowDefinition Height="30pt"/>
             </Grid.RowDefinitions>
-            <DataGrid Name="StateDataGrid" ToolTip="Таблица в которой отображаются добавленные Вами должности. Для сохранения или изменения добавьте новую должность в пустую строку или измените существующий и нажмите 'Добавить/изменить'" IsReadOnly="True" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" ItemsSource="{Binding}" AutoGenerateColumns="False" SelectedCellsChanged="listenerDataGrid_SelectedCellsChanged">
+            <DataGrid Name="PositionsDataGrid" ToolTip="Таблица в которой отображаются добавленные Вами должности. Для сохранения или изменения добавьте новую должность в пустую строку или измените существующий и нажмите 'Добавить/изменить'" IsReadOnly="True" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" ItemsSource="{Binding}" AutoGenerateColumns="False" SelectedCellsChanged="listenerDataGrid_SelectedCellsChanged">
                 <DataGrid.Columns>
                     <DataGridTextColumn Visibility="Collapsed" Header="ID" Binding="{Binding statesid}" Width="5*" />
                     <DataGridTextColumn Header="Название" Binding="{Binding title}" Width="5*" />
@@ -470,7 +470,7 @@
         
         
         <!--грид коеф за выслугу лет -->
-        <Grid Name="KoefGrid" Grid.Row="1" Visibility="Collapsed">
+        <Grid Name="WorkCoeffGrid" Grid.Row="1" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -480,7 +480,7 @@
                 <RowDefinition/>
                 <RowDefinition Height="30pt"/>
             </Grid.RowDefinitions>
-            <DataGrid Name="KoefDataGrid" ToolTip="Таблица в которой отображаются добавленные Вами коэффициенты за выслугу лет. Для сохранения или изменения добавьте новый коэффициент в пустую строку или измените существующий и нажмите 'Добавить/изменить'" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" ItemsSource="{Binding}" AutoGenerateColumns="False" SelectedCellsChanged="listenerDataGrid_SelectedCellsChanged">
+            <DataGrid Name="WorkCoeffDataGrid" ToolTip="Таблица в которой отображаются добавленные Вами коэффициенты за выслугу лет. Для сохранения или изменения добавьте новый коэффициент в пустую строку или измените существующий и нажмите 'Добавить/изменить'" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" ItemsSource="{Binding}" AutoGenerateColumns="False" SelectedCellsChanged="listenerDataGrid_SelectedCellsChanged">
                 <DataGrid.Columns>
                     <DataGridTextColumn Visibility="Collapsed" Header="ID" Binding="{Binding koefid}" Width="3*" />
                     <DataGridTextColumn Header="Количество лет" Binding="{Binding kol_year}" Width="3*" />
@@ -492,8 +492,8 @@
         </Grid>
 
 
-        <!--грид типов расходов -->
-        <Grid Name="TypeRashGrid" Grid.Row="1" Visibility="Collapsed">
+        <!--грид типов расходов+ -->
+        <Grid Name="CostsTypeGrid" Grid.Row="1" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -503,7 +503,7 @@
                 <RowDefinition/>
                 <RowDefinition Height="30pt"/>
             </Grid.RowDefinitions>
-            <DataGrid Name="TypeRashDataGrid" ToolTip="Таблица в которой отображаются добавленные Вами типы расходов. Для сохранения или изменения добавьте новый тип в пустую строку или измените существующий и нажмите 'Добавить/изменить'" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" ItemsSource="{Binding}" AutoGenerateColumns="False" SelectedCellsChanged="listenerDataGrid_SelectedCellsChanged">
+            <DataGrid Name="CostsTypeDataGrid" ToolTip="Таблица в которой отображаются добавленные Вами типы расходов. Для сохранения или изменения добавьте новый тип в пустую строку или измените существующий и нажмите 'Добавить/изменить'" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" ItemsSource="{Binding}" AutoGenerateColumns="False" SelectedCellsChanged="listenerDataGrid_SelectedCellsChanged">
                 <DataGrid.Columns>
                     <DataGridTextColumn Visibility="Collapsed" Header="ID" Binding="{Binding typeid}" Width="4*" />
                     <DataGridTextColumn Header="Название" Binding="{Binding title}" Width="4*" />
@@ -514,8 +514,8 @@
             <Button Name="TypeRashChangeButton" FontSize="16" Content="Добавить/изменить" ToolTip="Нажмите для сохранений изменений в таблице" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Click="TypeRashChangeButton_Click"      />
         </Grid>
 
-        <!--грид типов дохода-->
-        <Grid Name="TypeDohGrid" Grid.Row="1" Visibility="Collapsed">
+        <!--грид типов дохода+-->
+        <Grid Name="ProfiTypesGrid" Grid.Row="1" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -525,7 +525,7 @@
                 <RowDefinition/>
                 <RowDefinition Height="30pt"/>
             </Grid.RowDefinitions>
-            <DataGrid Name="TypeDohDataGrid" ToolTip="Таблица в которой отображаются добавленные Вами типы доходов. Для сохранения или изменения добавьте новый тип в пустую строку или измените существующий и нажмите 'Добавить/изменить'" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" ItemsSource="{Binding}" AutoGenerateColumns="False" SelectedCellsChanged="listenerDataGrid_SelectedCellsChanged">
+            <DataGrid Name="ProfitTypesDataGrid" ToolTip="Таблица в которой отображаются добавленные Вами типы доходов. Для сохранения или изменения добавьте новый тип в пустую строку или измените существующий и нажмите 'Добавить/изменить'" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" ItemsSource="{Binding}" AutoGenerateColumns="False" SelectedCellsChanged="listenerDataGrid_SelectedCellsChanged">
                 <DataGrid.Columns>
                     <DataGridTextColumn Visibility="Collapsed" Header="ID" Binding="{Binding idtype}" Width="4*" />
                     <DataGridTextColumn Header="Название" Binding="{Binding title}" Width="4*" />
@@ -536,8 +536,8 @@
             <Button Name="TypeDohChangeButton" FontSize="16" Content="Добавить/изменить" ToolTip="Нажмите для сохранений изменений в таблице" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" Click="TypeDohChangeButton_Click"     />
         </Grid>
 
-        <!--грид скидок-->
-        <Grid Name="skidkiGrid" Grid.Row="1" Visibility="Collapsed">
+        <!--грид скидок+-->
+        <Grid Name="DiscountGrid" Grid.Row="1" Visibility="Collapsed">
             <Grid.RowDefinitions>
                 <RowDefinition Height="3.5*"/>
                 <RowDefinition Height="1.5*"/>
@@ -581,20 +581,20 @@
                         <Label FontSize="16" Content="11 месяцев" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Grid.Row="11" Grid.Column="0"/>
                         <Label FontSize="16" Content="12 месяцев" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Grid.Row="12" Grid.Column="0"/>
 
-                        <TextBox Visibility="Collapsed" Name="sk1" Grid.Row="1" Grid.Column="1" PreviewTextInput="grPayment_PreviewTextInput"/>
-                        <TextBox Name="sk2" Grid.Row="2" Grid.Column="1" PreviewTextInput="grPayment_PreviewTextInput"/>
-                        <TextBox Name="sk3" Grid.Row="3" Grid.Column="1" PreviewTextInput="grPayment_PreviewTextInput"/>
-                        <TextBox Name="sk4" Grid.Row="4" Grid.Column="1" PreviewTextInput="grPayment_PreviewTextInput"/>
+                        <TextBox Visibility="Collapsed" Name="DiscountFor1Month" Grid.Row="1" Grid.Column="1" PreviewTextInput="grPayment_PreviewTextInput"/>
+                        <TextBox Name="DiscountFor2Month" Grid.Row="2" Grid.Column="1" PreviewTextInput="grPayment_PreviewTextInput"/>
+                        <TextBox Name="DiscountFor3Month" Grid.Row="3" Grid.Column="1" PreviewTextInput="grPayment_PreviewTextInput"/>
+                        <TextBox Name="DiscountFor4Month" Grid.Row="4" Grid.Column="1" PreviewTextInput="grPayment_PreviewTextInput"/>
 
-                        <TextBox Name="sk5" Grid.Row="5" Grid.Column="1" PreviewTextInput="grPayment_PreviewTextInput"/>
-                        <TextBox Name="sk6" Grid.Row="6" Grid.Column="1" PreviewTextInput="grPayment_PreviewTextInput"/>
-                        <TextBox Name="sk7" Grid.Row="7" Grid.Column="1" PreviewTextInput="grPayment_PreviewTextInput"/>
-                        <TextBox Name="sk8" Grid.Row="8" Grid.Column="1" PreviewTextInput="grPayment_PreviewTextInput"/>
+                        <TextBox Name="DiscountFor5Month" Grid.Row="5" Grid.Column="1" PreviewTextInput="grPayment_PreviewTextInput"/>
+                        <TextBox Name="DiscountFor6Month" Grid.Row="6" Grid.Column="1" PreviewTextInput="grPayment_PreviewTextInput"/>
+                        <TextBox Name="DiscountFor7Month" Grid.Row="7" Grid.Column="1" PreviewTextInput="grPayment_PreviewTextInput"/>
+                        <TextBox Name="DiscountFor8Month" Grid.Row="8" Grid.Column="1" PreviewTextInput="grPayment_PreviewTextInput"/>
 
-                        <TextBox Name="sk9" Grid.Row="9" Grid.Column="1" PreviewTextInput="grPayment_PreviewTextInput"/>
-                        <TextBox Name="sk10" Grid.Row="10" Grid.Column="1" PreviewTextInput="grPayment_PreviewTextInput"/>
-                        <TextBox Name="sk11" Grid.Row="11" Grid.Column="1" PreviewTextInput="grPayment_PreviewTextInput"/>
-                        <TextBox Name="sk12" Grid.Row="12" Grid.Column="1" PreviewTextInput="grPayment_PreviewTextInput"/>
+                        <TextBox Name="DiscountFor9Month" Grid.Row="9" Grid.Column="1" PreviewTextInput="grPayment_PreviewTextInput"/>
+                        <TextBox Name="DiscountFor10Month" Grid.Row="10" Grid.Column="1" PreviewTextInput="grPayment_PreviewTextInput"/>
+                        <TextBox Name="DiscountFor11Month" Grid.Row="11" Grid.Column="1" PreviewTextInput="grPayment_PreviewTextInput"/>
+                        <TextBox Name="DiscountFor12Month" Grid.Row="12" Grid.Column="1" PreviewTextInput="grPayment_PreviewTextInput"/>
                     </Grid>
                 </ScrollViewer>
             </Grid>
@@ -604,8 +604,8 @@
         </Grid>
 
         
-        <!--грид кабинетов-->
-        <Grid Name="cabGrid" Grid.Row="1" Visibility="Collapsed">
+        <!--грид кабинетов+-->
+        <Grid Name="CabinetsGrid" Grid.Row="1" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -615,7 +615,7 @@
                 <RowDefinition/>
                 <RowDefinition Height="30pt"/>
             </Grid.RowDefinitions>
-            <DataGrid Name="cabDataGrid" ToolTip="Таблица в которой отображаются добавленные Вами кабинеты. Для сохранения или изменения добавьте новый кабинет в пустую строку или измените существующий и нажмите 'Добавить/изменить'" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" ItemsSource="{Binding}" AutoGenerateColumns="False" SelectedCellsChanged="listenerDataGrid_SelectedCellsChanged">
+            <DataGrid Name="CabinetsDataGrid" ToolTip="Таблица в которой отображаются добавленные Вами кабинеты. Для сохранения или изменения добавьте новый кабинет в пустую строку или измените существующий и нажмите 'Добавить/изменить'" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" ItemsSource="{Binding}" AutoGenerateColumns="False" SelectedCellsChanged="listenerDataGrid_SelectedCellsChanged">
                 <DataGrid.Columns>
                     <DataGridTextColumn Visibility="Collapsed" Header="ID" Binding="{Binding cabid}" Width="4*" />
                     <DataGridTextColumn Header="Номер кабинета" Binding="{Binding num}" Width="4*" />
@@ -628,7 +628,7 @@
         </Grid>
 
 
-        <!--грид изменения слушателей-->
+        <!--грид изменения слушателей+-->
         <Grid Name="ListenerChangeGrid" Grid.Row="1" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -651,13 +651,13 @@
             <Label FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Content="Группы/процент льготы" Grid.Column="0" Grid.Row="3" Grid.RowSpan="2" />
             <Label FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Content="Комментарий" Grid.Column="0" Grid.Row="5" />
 
-            <TextBox Name="listenerFIOCh" Grid.Column="1" Grid.Row="1" />
-            <TextBox Name="listenerPhonesCh" Grid.Column="1" Grid.Row="2" />
+            <TextBox Name="ListenerChangeName" Grid.Column="1" Grid.Row="1" />
+            <TextBox Name="ListenerChangePhone" Grid.Column="1" Grid.Row="2" />
 
-            <TextBox Name="listenerCommCh" Grid.Column="1" Grid.Row="5" />
+            <TextBox Name="ListenerChangeComment" Grid.Column="1" Grid.Row="5" />
             <Grid  Grid.Column="1" Grid.Row="3" Grid.RowSpan="2">
                 <ScrollViewer>
-                    <Grid Name="gr_lgCh">
+                    <Grid Name="GroopsOfListenerGrid">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1*"/>
                             <ColumnDefinition Width="3*"/>
@@ -670,7 +670,7 @@
 
         </Grid>
 
-        <!--грид добавления слушателей-->
+        <!--грид добавления слушателей+-->
         <Grid Name="ListenerAddGrid" Grid.Row="1" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -693,13 +693,13 @@
             <Label FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Content="Группы/процент льготы" Grid.Column="0" Grid.Row="3" Grid.RowSpan="2" />
             <Label FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Content="Комментарий" Grid.Column="0" Grid.Row="5" />
 
-            <TextBox Name="listenerFIO" Grid.Column="1" Grid.Row="1" />
-            <TextBox Name="listenerPhones" Grid.Column="1" Grid.Row="2" />
+            <TextBox Name="ListenerAddName" Grid.Column="1" Grid.Row="1" />
+            <TextBox Name="ListenerAddPhones" Grid.Column="1" Grid.Row="2" />
 
-            <TextBox Name="listenerComm" Grid.Column="1" Grid.Row="5" />
+            <TextBox Name="ListenerAddComment" Grid.Column="1" Grid.Row="5" />
             <Grid  Grid.Column="1" Grid.Row="3" Grid.RowSpan="2">
                 <ScrollViewer>
-                    <Grid Name="gr_lg">
+                    <Grid Name="AddGroopsOfListener">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="1*"/>
                             <ColumnDefinition Width="3*"/>
@@ -710,7 +710,7 @@
             <Button Grid.Column="0" FontSize="16" Grid.ColumnSpan="2" Grid.Row="7" Name="listenerAddBut" Content="Добавить" Click="listenerAddBut_Click" />
 
         </Grid>
-        <!--грид слушателей-->
+        <!--грид слушателей+-->
         <Grid Name="ListenerGrid" Grid.Row="1" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -730,14 +730,14 @@
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
                 <ScrollViewer Grid.Column="0"  HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
-                    <Grid Name="FiltrGridGroups" >
+                    <Grid Name="FilterGridGroups" >
                     </Grid>
                 </ScrollViewer>
                 <Button Content="Применить" FontSize="16" Name="FiltrGroupsButton" Grid.Column="1" Click="FiltrGroupsButton_Click"/>
             </Grid>
 
 
-            <DataGrid ToolTip="Таблица в которой отображаются добавленные Вами слушатели. Для работы с ними выберете одну из записей кликнув н неё, после чего выберете одно из действий ниже." Name="listenerDataGrid" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" IsReadOnly="true" ItemsSource="{Binding}" AutoGenerateColumns="False" SelectedCellsChanged="listenerDataGrid_SelectedCellsChanged">
+            <DataGrid ToolTip="Таблица в которой отображаются добавленные Вами слушатели. Для работы с ними выберете одну из записей кликнув н неё, после чего выберете одно из действий ниже." Name="ListenersDataGrid" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" IsReadOnly="true" ItemsSource="{Binding}" AutoGenerateColumns="False" SelectedCellsChanged="listenerDataGrid_SelectedCellsChanged">
                 <DataGrid.Columns>
                     <DataGridTextColumn Visibility="Collapsed" Header="ID" Binding="{Binding listenerid}" Width="5*" />
                     <DataGridTextColumn Header="ФИО слушателя" Binding="{Binding fio}" Width="5*" />
@@ -752,17 +752,17 @@
 
         </Grid>
 
-        <!--грид расписания занятий по кабинетам-->
-        <Grid Name="raspGridС" Grid.Row="1" Visibility="Collapsed">
+        <!--грид расписания занятий по кабинетам+-->
+        <Grid Name="CabinetScheduleGrid" Grid.Row="1" Visibility="Collapsed">
             <Grid.RowDefinitions >
                 <RowDefinition Height="30pt"/>
                 <RowDefinition Height="4*"/>
                 <RowDefinition Height="30pt"/>
             </Grid.RowDefinitions>
-            <Label Name="LabelDateRaspС" Grid.Column="0" Grid.Row="0" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Top"/>
+            <Label Name="CabinetsScheduleDateLabel" Grid.Column="0" Grid.Row="0" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Top"/>
             <Grid Name="BoxGridС" Grid.Column="0" Grid.Row="1" >
                 <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible">
-                    <Grid Name="tGс" />
+                    <Grid Name="CabinetScheduleOutputGrid" />
                 </ScrollViewer>
             </Grid>
             <Grid Name="ControlGridС" Grid.Column="0" Grid.Row="2">
@@ -787,17 +787,17 @@
         </Grid>
 
 
-        <!--грид расписания занятий по преподавателям-->
-        <Grid Name="raspGridP" Grid.Row="1" Visibility="Collapsed">
+        <!--грид расписания занятий по преподавателям+-->
+        <Grid Name="TeacherScheduleGrid" Grid.Row="1" Visibility="Collapsed">
             <Grid.RowDefinitions >
                 <RowDefinition Height="30pt"/>
                 <RowDefinition Height="4*"/>
                 <RowDefinition Height="30pt"/>
             </Grid.RowDefinitions>
-            <Label Name="LabelDateRaspP" Grid.Column="0" Grid.Row="0" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Top"/>
-            <Grid Name="BoxGridP" Grid.Column="0" Grid.Row="1" >
+            <Label Name="TeachersScheduleDateLabel" Grid.Column="0" Grid.Row="0" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Top"/>
+            <Grid Grid.Column="0" Grid.Row="1" >
                 <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible">
-                    <Grid Name="tGp" />
+                    <Grid Name="TeacherScheduleOutputGrid" />
                 </ScrollViewer>
             </Grid>
             <Grid Name="ControlGridP" Grid.Column="0" Grid.Row="2">
@@ -822,17 +822,17 @@
         </Grid>
 
 
-        <!--грид расписания занятий по группам-->
-        <Grid Name="raspGridG" Grid.Row="1" Visibility="Collapsed">
+        <!--грид расписания занятий по группам+-->
+        <Grid Name="GroopScheduleGrid" Grid.Row="1" Visibility="Collapsed">
             <Grid.RowDefinitions >
                 <RowDefinition Height="30pt"/>
                 <RowDefinition Height="4*"/>
                 <RowDefinition Height="30pt"/>
             </Grid.RowDefinitions>
-            <Label Name="LabelDateRasp" Grid.Column="0" Grid.Row="0" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Top"/>
-            <Grid Name="BoxGrid" Grid.Column="0" Grid.Row="1" >
+            <Label Name="GroopsScheduleDateLabel" Grid.Column="0" Grid.Row="0" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Top"/>
+            <Grid  Grid.Column="0" Grid.Row="1" >
                 <ScrollViewer VerticalScrollBarVisibility="Visible" HorizontalScrollBarVisibility="Visible">
-                    <Grid Name="tG" />
+                    <Grid Name="GrooptScheduleOutputGrid" />
                 </ScrollViewer>
             </Grid>
             <Grid Name="ControlGrid" Grid.Column="0" Grid.Row="2">
@@ -857,8 +857,8 @@
         </Grid>
 
 
-        <!--грид добавления в расписания занятий по преподавателям-->
-        <Grid Name="addRaspGridPrep" Grid.Row="1" Visibility="Collapsed">
+        <!--грид добавления в расписания занятий по преподавателям+-->
+        <Grid Name="AddTeacherScheduleGrid" Grid.Row="1" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -878,19 +878,19 @@
             <Label Content="Предмет" Grid.Column="0" Grid.Row="3" FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
             <Label Content="Группа" Grid.Column="0" Grid.Row="4" FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
 
-            <TextBox Name="raspAddDayOfWeekP" Visibility="Collapsed" IsEnabled="False" Grid.Column="1" Grid.Row="1" />
-            <TextBox Name="raspAddDateP" Visibility="Collapsed" IsEnabled="False"   Grid.Column="1" Grid.Row="1" />
-            <TextBox Name="raspAddLesNumP" Visibility="Collapsed" IsEnabled="False"  Grid.Column="1" Grid.Row="1" />
-            <TextBox Name="raspAddPrepP" Visibility="Collapsed" IsEnabled="False" Grid.Column="1" Grid.Row="1" />
-            <ComboBox Name="raspAddKabP" Grid.Column="1" Grid.Row="2" />
-            <ComboBox Name="raspAddSubsP" Grid.Column="1" Grid.Row="3"   />
-            <ComboBox Name="raspAddGroupP" Grid.Column="1" Grid.Row="4" SelectionChanged="raspAddGroupK_SelectionChanged" />
+            <TextBox Name="TeacherScheduleDayOfWeek" Visibility="Collapsed" IsEnabled="False" Grid.Column="1" Grid.Row="1" />
+            <TextBox Name="TeacherScheduleDate" Visibility="Collapsed" IsEnabled="False"   Grid.Column="1" Grid.Row="1" />
+            <TextBox Name="TeacherScheduleSelectLessonNumber" Visibility="Collapsed" IsEnabled="False"  Grid.Column="1" Grid.Row="1" />
+            <TextBox Name="TeacherScheduleTeacher" Visibility="Collapsed" IsEnabled="False" Grid.Column="1" Grid.Row="1" />
+            <ComboBox Name="TeacherScheduleSelectCabinet" Grid.Column="1" Grid.Row="2" />
+            <ComboBox Name="TeacherScheduleSelectSubject" Grid.Column="1" Grid.Row="3"   />
+            <ComboBox Name="TeacherScheduleSelectGroop" Grid.Column="1" Grid.Row="4" SelectionChanged="raspAddGroupK_SelectionChanged" />
 
             <Button Content="Добавить" FontSize="16" Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2" Name="raspAddButToTableP" Click="raspAddButToTableP_Click" />
         </Grid>
 
-        <!--грид изменения в расписания занятий по преподавательям-->
-        <Grid Name="changeRaspGridPrep" Grid.Row="1" Visibility="Collapsed">
+        <!--грид изменения в расписания занятий по преподавательям+-->
+        <Grid Name="ChangeTeacherScheduleGrid" Grid.Row="1" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -910,21 +910,21 @@
             <Label Content="Предмет" FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="3" />
             <Label Content="Группа"  FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Grid.ColumnSpan="2" Grid.Column="0" Grid.Row="4" />
 
-            <TextBox Name="raspChangeDayOfWeekP" IsEnabled="False" Visibility="Collapsed" Grid.Column="1" Grid.Row="1" />
-            <TextBox Name="raspChangeDateP" IsEnabled="False" Visibility="Collapsed"  Grid.Column="1" Grid.Row="1" />
-            <TextBox Name="raspChangeLesNumP" IsEnabled="False" Visibility="Collapsed" Grid.Column="1" Grid.Row="1" />
-            <TextBox Name="raspChangePrepP" IsEnabled="False" Visibility="Collapsed" Grid.Column="1" Grid.Row="1" />
+            <TextBox Name="TeacherScheduleChangeDayOfWeek" IsEnabled="False" Visibility="Collapsed" Grid.Column="1" Grid.Row="1" />
+            <TextBox Name="TeacherScheduleChangeDate" IsEnabled="False" Visibility="Collapsed"  Grid.Column="1" Grid.Row="1" />
+            <TextBox Name="TeacherScheduleChangeLessonNumber" IsEnabled="False" Visibility="Collapsed" Grid.Column="1" Grid.Row="1" />
+            <TextBox Name="TeacherScheduleChangeTeacher" IsEnabled="False" Visibility="Collapsed" Grid.Column="1" Grid.Row="1" />
 
-            <ComboBox Name="raspChangeKabP" Grid.Column="1" Grid.Row="2" />
-            <ComboBox Name="raspChangeSubsP" Grid.Column="1" Grid.Row="3" />
-            <ComboBox Name="raspChangeGroupP" Grid.Column="1" Grid.Row="4" SelectionChanged="raspChangeGroupK_SelectionChanged" />
+            <ComboBox Name="TeacherScheduleChangeCabinet" Grid.Column="1" Grid.Row="2" />
+            <ComboBox Name="TeacherScheduleChangeSubject" Grid.Column="1" Grid.Row="3" />
+            <ComboBox Name="TeacherScheduleChangeGroop" Grid.Column="1" Grid.Row="4" SelectionChanged="raspChangeGroupK_SelectionChanged" />
 
             <Button Content="Сохранить" FontSize="16" Name="raspChangeButtonP" Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2" Click="raspChangeButtonP_Click"  />
         </Grid>
 
 
-        <!--грид добавления в расписания занятий по кабинетам-->
-        <Grid Name="addRaspGridKab" Grid.Row="1" Visibility="Collapsed">
+        <!--грид добавления в расписания занятий по кабинетам+-->
+        <Grid Name="AddCabinetScheduleGrdi" Grid.Row="1" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -944,19 +944,19 @@
             <Label Content="Предмет" Grid.Column="0" Grid.Row="3" FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
             <Label Content="Группа" Grid.Column="0" Grid.Row="4" FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
 
-            <TextBox Name="raspAddDayOfWeekK" Visibility="Collapsed" IsEnabled="False" Grid.Column="1" Grid.Row="1" />
-            <TextBox Name="raspAddDateK" Visibility="Collapsed" IsEnabled="False"   Grid.Column="1" Grid.Row="1" />
-            <TextBox Name="raspAddLesNumK" Visibility="Collapsed" IsEnabled="False"  Grid.Column="1" Grid.Row="1" />
-            <TextBox Name="raspAddKabK" Visibility="Collapsed" IsEnabled="False" Grid.Column="1" Grid.Row="1" />
-            <ComboBox Name="raspAddPrepK" Grid.Column="1" Grid.Row="2" />
-            <ComboBox Name="raspAddSubsK" Grid.Column="1" Grid.Row="3" />
-            <ComboBox Name="raspAddGroupK" Grid.Column="1" Grid.Row="4"  SelectionChanged="raspAddGroupK_SelectionChanged" />
+            <TextBox Name="CabinetScheduleSelectDayOfWeek" Visibility="Collapsed" IsEnabled="False" Grid.Column="1" Grid.Row="1" />
+            <TextBox Name="CabinetScheduleDate" Visibility="Collapsed" IsEnabled="False"   Grid.Column="1" Grid.Row="1" />
+            <TextBox Name="CabinetScheduleLessonNumber" Visibility="Collapsed" IsEnabled="False"  Grid.Column="1" Grid.Row="1" />
+            <TextBox Name="CabinetScheduleCabinet" Visibility="Collapsed" IsEnabled="False" Grid.Column="1" Grid.Row="1" />
+            <ComboBox Name="CabinetScheduleTeacher" Grid.Column="1" Grid.Row="2" />
+            <ComboBox Name="CabinetScheduleSubject" Grid.Column="1" Grid.Row="3" />
+            <ComboBox Name="CabinetScheduleGroop" Grid.Column="1" Grid.Row="4"  SelectionChanged="raspAddGroupK_SelectionChanged" />
 
             <Button Content="Добавить" FontSize="16" Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2" Name="raspAddButToTableK" Click="raspAddButToTableK_Click" />
         </Grid>
 
-        <!--грид изменения в расписания занятий по кабинетам-->
-        <Grid Name="changeRaspGridKab" Grid.Row="1" Visibility="Collapsed">
+        <!--грид изменения в расписания занятий по кабинетам+-->
+        <Grid Name="ChangeCabinetScheduleGrid" Grid.Row="1" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -976,21 +976,21 @@
             <Label Content="Предмет"  VerticalContentAlignment="Center" HorizontalContentAlignment="Right" FontSize="16" Grid.Column="0" Grid.Row="3" />
             <Label Content="Группа" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" FontSize="16" Grid.Column="0" Grid.Row="4" />
 
-            <TextBox Name="raspChangeDayOfWeekK" IsEnabled="False" Visibility="Collapsed" Grid.Column="1" Grid.Row="1" />
-            <TextBox Name="raspChangeDateK" IsEnabled="False" Visibility="Collapsed"  Grid.Column="1" Grid.Row="1" />
-            <TextBox Name="raspChangeLesNumK" IsEnabled="False" Visibility="Collapsed" Grid.Column="1" Grid.Row="1" />
-            <TextBox Name="raspChangeKabK" IsEnabled="False" Visibility="Collapsed" Grid.Column="1" Grid.Row="1" />
+            <TextBox Name="CabinetScheduleChangeDayOfWeek" IsEnabled="False" Visibility="Collapsed" Grid.Column="1" Grid.Row="1" />
+            <TextBox Name="CabinetScheduleChangeDate" IsEnabled="False" Visibility="Collapsed"  Grid.Column="1" Grid.Row="1" />
+            <TextBox Name="CabinetScheduleChangeLessonNumber" IsEnabled="False" Visibility="Collapsed" Grid.Column="1" Grid.Row="1" />
+            <TextBox Name="CabinetScheduleChangeCabinet" IsEnabled="False" Visibility="Collapsed" Grid.Column="1" Grid.Row="1" />
 
-            <ComboBox Name="raspChangePrepK" Grid.Column="1" Grid.Row="2" />
-            <ComboBox Name="raspChangeSubsK" Grid.Column="1" Grid.Row="3" />
-            <ComboBox Name="raspChangeGroupK" Grid.Column="1" Grid.Row="4" SelectionChanged="raspChangeGroupK_SelectionChanged" />
+            <ComboBox Name="CabinetScheduleChangeTeacher" Grid.Column="1" Grid.Row="2" />
+            <ComboBox Name="CabinetScheduleChangeSubject" Grid.Column="1" Grid.Row="3" />
+            <ComboBox Name="CabinetScheduleChangeGroop" Grid.Column="1" Grid.Row="4" SelectionChanged="raspChangeGroupK_SelectionChanged" />
 
             <Button Content="Сохранить" FontSize="16" Name="raspChangeButtonK" Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2" Click="raspChangeButtonK_Click"  />
         </Grid>
 
 
-        <!--грид добавления в расписания занятий по группам-->
-        <Grid Name="addRaspGrid" Grid.Row="1" Visibility="Collapsed">
+        <!--грид добавления в расписания занятий по группам+-->
+        <Grid Name="AddGroopScheduleGrid" Grid.Row="1" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -1010,19 +1010,19 @@
             <Label Content="Предмет" Grid.Column="0" Grid.Row="3" />
             <Label Content="Кабинет" Grid.Column="0" Grid.Row="4" />
 
-            <TextBox Name="raspAddDayOfWeek" Visibility="Collapsed" IsEnabled="False" Grid.Column="1" Grid.Row="1" />
-            <TextBox Name="raspAddDate" Visibility="Collapsed" IsEnabled="False"   Grid.Column="1" Grid.Row="1" />
-            <TextBox Name="raspAddLesNum" Visibility="Collapsed" IsEnabled="False"  Grid.Column="1" Grid.Row="1" />
-            <TextBox Name="raspAddGr" Visibility="Collapsed" IsEnabled="False" Grid.Column="1" Grid.Row="1" />
-            <ComboBox Name="raspAddPrep" Grid.Column="1" Grid.Row="2" />
-            <ComboBox Name="raspAddSubs" Grid.Column="1" Grid.Row="3" />
-            <ComboBox Name="raspAddKab" Grid.Column="1" Grid.Row="4" />
+            <TextBox Name="GroopScheduleDayOfWeek" Visibility="Collapsed" IsEnabled="False" Grid.Column="1" Grid.Row="1" />
+            <TextBox Name="GroopScheduleDate" Visibility="Collapsed" IsEnabled="False"   Grid.Column="1" Grid.Row="1" />
+            <TextBox Name="GroopScheduleLessonNumber" Visibility="Collapsed" IsEnabled="False"  Grid.Column="1" Grid.Row="1" />
+            <TextBox Name="GroopScheduleGroop" Visibility="Collapsed" IsEnabled="False" Grid.Column="1" Grid.Row="1" />
+            <ComboBox Name="GroopScheduleTeacher" Grid.Column="1" Grid.Row="2" />
+            <ComboBox Name="GroopScheduleSubjects" Grid.Column="1" Grid.Row="3" />
+            <ComboBox Name="GroopScheduleCabinet" Grid.Column="1" Grid.Row="4" />
 
             <Button Content="Добавить" Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2" Click="Button_Click" />
         </Grid>
 
-        <!--грид изменения в расписания занятий по группам-->
-        <Grid Name="changeRaspGrid" Grid.Row="1" Visibility="Collapsed">
+        <!--грид изменения в расписания занятий по группам+-->
+        <Grid Name="ChangeGroopSchduleGrid" Grid.Row="1" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -1042,22 +1042,22 @@
             <Label Content="Предмет" Grid.Column="0" FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Grid.Row="3" />
             <Label Content="Кабинет" Grid.Column="0" FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" Grid.Row="4" />
 
-            <TextBox Name="raspChangeDayOfWeek" IsEnabled="False" Visibility="Collapsed" Grid.Column="1" Grid.Row="1" />
-            <TextBox Name="raspChangeDate" IsEnabled="False" Visibility="Collapsed"  Grid.Column="1" Grid.Row="1" />
-            <TextBox Name="raspChangeLesNum" IsEnabled="False" Visibility="Collapsed" Grid.Column="1" Grid.Row="1" />
-            <TextBox Name="raspChangeGr" IsEnabled="False" Visibility="Collapsed" Grid.Column="1" Grid.Row="1" />
+            <TextBox Name="GroopScheduleChangeDayOfWeek" IsEnabled="False" Visibility="Collapsed" Grid.Column="1" Grid.Row="1" />
+            <TextBox Name="GroopScheduleChangeDate" IsEnabled="False" Visibility="Collapsed"  Grid.Column="1" Grid.Row="1" />
+            <TextBox Name="GroopScheduleChangeLessonNumber" IsEnabled="False" Visibility="Collapsed" Grid.Column="1" Grid.Row="1" />
+            <TextBox Name="GroopScheduleChangeGroop" IsEnabled="False" Visibility="Collapsed" Grid.Column="1" Grid.Row="1" />
             
-            <ComboBox Name="raspChangePrep" Grid.Column="1" Grid.Row="2" />
-            <ComboBox Name="raspChangeSubs" Grid.Column="1" Grid.Row="3" />
-            <ComboBox Name="raspChangeKab" Grid.Column="1" Grid.Row="4" />
+            <ComboBox Name="GroopScheduleChangeTeacher" Grid.Column="1" Grid.Row="2" />
+            <ComboBox Name="GroopScheduleChangeSubject" Grid.Column="1" Grid.Row="3" />
+            <ComboBox Name="GroopScheduleChangeCabinet" Grid.Column="1" Grid.Row="4" />
 
             <Button Content="Сохранить" FontSize="16" Name="raspChangeButton" Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2" Click="raspChangeButton_Click"  />
         </Grid>
 
 
 
-        <!--грид добавления группы-->
-        <Grid Name="groupAddGrid" Grid.Row="1" Visibility="Collapsed">
+        <!--грид добавления группы+-->
+        <Grid Name="GroopAddGrid" Grid.Row="1" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -1085,9 +1085,9 @@
             <Label Content="Дата конца обучения" Grid.Row="7" Grid.Column="0"  FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Right"/>
 
 
-            <TextBox Name="grTitle" ToolTip="Укажите название создаваемой группы" Grid.Column="1" Grid.Row="1" />
-            <ComboBox Name="grCourse" ToolTip="Выберите курс группы" Grid.Column="1" Grid.Row="2" />
-            <Grid Name="grPaymentGrid" Grid.RowSpan="2" ToolTip="Укажите оплату для группы за учебный год" Grid.Column="1" Grid.Row="3">
+            <TextBox Name="GroopAddTitle" ToolTip="Укажите название создаваемой группы" Grid.Column="1" Grid.Row="1" />
+            <ComboBox Name="GroopAddCourse" ToolTip="Выберите курс группы" Grid.Column="1" Grid.Row="2" />
+            <Grid Grid.RowSpan="2" ToolTip="Укажите оплату для группы за учебный год" Grid.Column="1" Grid.Row="3">
                 <ScrollViewer>
                     <Grid >
                         <Grid.RowDefinitions>
@@ -1124,35 +1124,35 @@
                         <Label Content="Ноябрь" Grid.Row="10" Grid.Column="0" />
                         <Label Content="Декабрь" Grid.Row="11" Grid.Column="0" />
 
-                        <TextBox Name="grPayment1" Grid.Column="1" Grid.Row="0" PreviewTextInput="grPayment_PreviewTextInput" TextChanged="grPayment1_TextChanged" />
-                        <TextBox Name="grPayment2" Grid.Column="1" Grid.Row="1" PreviewTextInput="grPayment_PreviewTextInput" TextChanged="grPayment1_TextChanged"/>
-                        <TextBox Name="grPayment3" Grid.Column="1" Grid.Row="2" PreviewTextInput="grPayment_PreviewTextInput" TextChanged="grPayment1_TextChanged"/>
-                        <TextBox Name="grPayment4" Grid.Column="1" Grid.Row="3" PreviewTextInput="grPayment_PreviewTextInput" TextChanged="grPayment1_TextChanged"/>
-                        <TextBox Name="grPayment5" Grid.Column="1" Grid.Row="4" PreviewTextInput="grPayment_PreviewTextInput" TextChanged="grPayment1_TextChanged"/>
-                        <TextBox Name="grPayment6" Grid.Column="1" Grid.Row="5" PreviewTextInput="grPayment_PreviewTextInput" TextChanged="grPayment1_TextChanged"/>
-                        <TextBox Name="grPayment7" Grid.Column="1" Grid.Row="6" PreviewTextInput="grPayment_PreviewTextInput" TextChanged="grPayment1_TextChanged"/>
-                        <TextBox Name="grPayment8" Grid.Column="1" Grid.Row="7" PreviewTextInput="grPayment_PreviewTextInput" TextChanged="grPayment1_TextChanged"/>
-                        <TextBox Name="grPayment9" Grid.Column="1" Grid.Row="8" PreviewTextInput="grPayment_PreviewTextInput" TextChanged="grPayment1_TextChanged"/>
-                        <TextBox Name="grPayment10" Grid.Column="1" Grid.Row="9" PreviewTextInput="grPayment_PreviewTextInput" TextChanged="grPayment1_TextChanged"/>
-                        <TextBox Name="grPayment11" Grid.Column="1" Grid.Row="10" PreviewTextInput="grPayment_PreviewTextInput" TextChanged="grPayment1_TextChanged"/>
-                        <TextBox Name="grPayment12" Grid.Column="1" Grid.Row="11" PreviewTextInput="grPayment_PreviewTextInput" TextChanged="grPayment1_TextChanged"/>
+                        <TextBox Name="GroopAddPaymentFor1Month" Grid.Column="1" Grid.Row="0" PreviewTextInput="grPayment_PreviewTextInput" TextChanged="grPayment1_TextChanged" />
+                        <TextBox Name="GroopAddPaymentFor2Month" Grid.Column="1" Grid.Row="1" PreviewTextInput="grPayment_PreviewTextInput" TextChanged="grPayment1_TextChanged"/>
+                        <TextBox Name="GroopAddPaymentFor3Month" Grid.Column="1" Grid.Row="2" PreviewTextInput="grPayment_PreviewTextInput" TextChanged="grPayment1_TextChanged"/>
+                        <TextBox Name="GroopAddPaymentFor4Month" Grid.Column="1" Grid.Row="3" PreviewTextInput="grPayment_PreviewTextInput" TextChanged="grPayment1_TextChanged"/>
+                        <TextBox Name="GroopAddPaymentFor5Month" Grid.Column="1" Grid.Row="4" PreviewTextInput="grPayment_PreviewTextInput" TextChanged="grPayment1_TextChanged"/>
+                        <TextBox Name="GroopAddPaymentFor6Month" Grid.Column="1" Grid.Row="5" PreviewTextInput="grPayment_PreviewTextInput" TextChanged="grPayment1_TextChanged"/>
+                        <TextBox Name="GroopAddPaymentFor7Month" Grid.Column="1" Grid.Row="6" PreviewTextInput="grPayment_PreviewTextInput" TextChanged="grPayment1_TextChanged"/>
+                        <TextBox Name="GroopAddPaymentFor8Month" Grid.Column="1" Grid.Row="7" PreviewTextInput="grPayment_PreviewTextInput" TextChanged="grPayment1_TextChanged"/>
+                        <TextBox Name="GroopAddPaymentFor9Month" Grid.Column="1" Grid.Row="8" PreviewTextInput="grPayment_PreviewTextInput" TextChanged="grPayment1_TextChanged"/>
+                        <TextBox Name="GroopAddPaymentFor10Month" Grid.Column="1" Grid.Row="9" PreviewTextInput="grPayment_PreviewTextInput" TextChanged="grPayment1_TextChanged"/>
+                        <TextBox Name="GroopAddPaymentFor11Month" Grid.Column="1" Grid.Row="10" PreviewTextInput="grPayment_PreviewTextInput" TextChanged="grPayment1_TextChanged"/>
+                        <TextBox Name="GroopAddPaymentFor12Month" Grid.Column="1" Grid.Row="11" PreviewTextInput="grPayment_PreviewTextInput" TextChanged="grPayment1_TextChanged"/>
                     </Grid>
                 </ScrollViewer>
             </Grid>
-            <Label Name="payToYear"  Grid.Column="1" Grid.Row="5" />
+            <Label Name="GroopAddPayForYear"  Grid.Column="1" Grid.Row="5" />
 
-            <DatePicker Name="DateStartGrAdd" Grid.Column="1" Grid.Row="6"/>
+            <DatePicker Name="GroopAddDateStartLearn" Grid.Column="1" Grid.Row="6"/>
 
-            <DatePicker Name="DateEndGrAdd" Grid.Column="1" Grid.Row="7"/>
-            <TextBox Name="grComm" ToolTip="Укажите комментарий к группе, если он необходим"  Grid.Column="1" Grid.Row="8" />
+            <DatePicker Name="GroopAddDateEndLearn" Grid.Column="1" Grid.Row="7"/>
+            <TextBox Name="GroopAddComment" ToolTip="Укажите комментарий к группе, если он необходим"  Grid.Column="1" Grid.Row="8" />
 
             <Button Name="grAddButton" FontSize="16" Content="Добавить" ToolTip="Нажмите что бы создать группу" Grid.Row="9" Grid.ColumnSpan="2" Click="grAddButton_Click" />
 
         </Grid>
 
 
-        <!--грид изменения курса-->
-        <Grid Name="courseChangeGrid" Grid.Row="1" Visibility="Collapsed">
+        <!--грид изменения курса+-->
+        <Grid Name="CourseChangeGrid" Grid.Row="1" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -1172,18 +1172,18 @@
             <Label Content="Комментарий" Grid.Row="2" Grid.Column="0"  FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Right"/>
             <Label Content="Предметы:" Grid.Row="3" Grid.Column="0"  FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Right"/>
 
-            <TextBox Name="courseChangeTitle" ToolTip="Измените название курса если это необходимо" Grid.Column="1" Grid.Row="1" />
-            <TextBox Name="courseChangeComm"  ToolTip="Измените комментарий к курсу если это необходимо" Grid.Column="1" Grid.Row="2" />
+            <TextBox Name="CourseChangeTitle" ToolTip="Измените название курса если это необходимо" Grid.Column="1" Grid.Row="1" />
+            <TextBox Name="CourseChangeComment"  ToolTip="Измените комментарий к курсу если это необходимо" Grid.Column="1" Grid.Row="2" />
             <ScrollViewer HorizontalScrollBarVisibility="Auto" Grid.Column="1" Grid.Row="3" Grid.RowSpan="3" >
-                <Canvas Name="subsChangeCanvas" ToolTip="Здесь можно изменить предметы которые изучает этот курс" />
+                <Canvas Name="CourseChangeSubjects" ToolTip="Здесь можно изменить предметы которые изучает этот курс" />
             </ScrollViewer>
 
             <Button Name="courseChangeButton2" FontSize="16"  Content="Сохранить" ToolTip="Нажмите для сохранения изменений" Grid.Row="6" Grid.ColumnSpan="2"  Click="courseChangeButton2_Click"   />
 
         </Grid>
 
-        <!--грид добавления курса-->
-        <Grid Name="courseAddGrid" Grid.Row="1" Visibility="Collapsed">
+        <!--грид добавления курса+-->
+        <Grid Name="CourseAddGrid" Grid.Row="1" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -1203,18 +1203,18 @@
             <Label Content="Комментарий" Grid.Row="2" Grid.Column="0"  FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Right"/>
             <Label Content="Предметы:" Grid.Row="3" Grid.Column="0"  FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Right"/>
          
-            <TextBox Name="courseTitle" ToolTip="Укажите название создаваемого курса" Grid.Column="1" Grid.Row="1" />
-            <TextBox Name="courseComm" ToolTip="Укажите комментарий к создаваемому курсу если это необходимо" Grid.Column="1" Grid.Row="2" />
+            <TextBox Name="CourseAddTitle" ToolTip="Укажите название создаваемого курса" Grid.Column="1" Grid.Row="1" />
+            <TextBox Name="CourseAddComm" ToolTip="Укажите комментарий к создаваемому курсу если это необходимо" Grid.Column="1" Grid.Row="2" />
             <ScrollViewer HorizontalScrollBarVisibility="Auto" Grid.Column="1" Grid.Row="3" Grid.RowSpan="3" >
-                <Canvas Name="subsCanvas" ToolTip="Здесь можно выбрать предметы которые будет изучать курс"/>
+                <Canvas Name="CourseAddSubjects" ToolTip="Здесь можно выбрать предметы которые будет изучать курс"/>
             </ScrollViewer>
 
             <Button Name="courseAddButton" FontSize="16" Content="Добавить" ToolTip="Нажмите для добавления этого курса" Grid.Row="6" Grid.ColumnSpan="2"  Click="courseAddButton_Click"  />
 
         </Grid>
 
-        <!--грид изменения группы-->
-        <Grid Name="groupChangeGrid" Grid.Row="1" Visibility="Collapsed">
+        <!--грид изменения группы+-->
+        <Grid Name="GroupChangeGrid" Grid.Row="1" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -1242,9 +1242,9 @@
             <Label Content="Месяц конца обучения" Grid.Row="7" Grid.Column="0"  FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Right"/>
 
 
-            <TextBox Name="grTitleCh" ToolTip="Укажите название создаваемой группы" Grid.Column="1" Grid.Row="1" />
-            <ComboBox Name="grCourseCh" ToolTip="Выберите курс группы" Grid.Column="1" Grid.Row="2" />
-            <Grid Name="grPaymentGridCh" Grid.RowSpan="2" ToolTip="Укажите оплату для группы за учебный год" Grid.Column="1" Grid.Row="3">
+            <TextBox Name="GroopChangeTitle" ToolTip="Укажите название создаваемой группы" Grid.Column="1" Grid.Row="1" />
+            <ComboBox Name="GroopChangeCourse" ToolTip="Выберите курс группы" Grid.Column="1" Grid.Row="2" />
+            <Grid Grid.RowSpan="2" ToolTip="Укажите оплату для группы за учебный год" Grid.Column="1" Grid.Row="3">
                 <ScrollViewer>
                     <Grid >
                         <Grid.RowDefinitions>
@@ -1280,32 +1280,32 @@
                         <Label Content="Ноябрь" Grid.Row="10" Grid.Column="0" />
                         <Label Content="Декабрь" Grid.Row="11" Grid.Column="0" />
 
-                        <TextBox Name="grPayment1Ch" Grid.Column="1" Grid.Row="0" PreviewTextInput="grPayment_PreviewTextInput" TextChanged="grPayment1_TextChanged" />
-                        <TextBox Name="grPayment2Ch" Grid.Column="1" Grid.Row="1" PreviewTextInput="grPayment_PreviewTextInput" TextChanged="grPayment1_TextChanged"/>
-                        <TextBox Name="grPayment3Ch" Grid.Column="1" Grid.Row="2" PreviewTextInput="grPayment_PreviewTextInput" TextChanged="grPayment1_TextChanged"/>
-                        <TextBox Name="grPayment4Ch" Grid.Column="1" Grid.Row="3" PreviewTextInput="grPayment_PreviewTextInput" TextChanged="grPayment1_TextChanged"/>
-                        <TextBox Name="grPayment5Ch" Grid.Column="1" Grid.Row="4" PreviewTextInput="grPayment_PreviewTextInput" TextChanged="grPayment1_TextChanged"/>
-                        <TextBox Name="grPayment6Ch" Grid.Column="1" Grid.Row="5" PreviewTextInput="grPayment_PreviewTextInput" TextChanged="grPayment1_TextChanged"/>
-                        <TextBox Name="grPayment7Ch" Grid.Column="1" Grid.Row="6" PreviewTextInput="grPayment_PreviewTextInput" TextChanged="grPayment1_TextChanged"/>
-                        <TextBox Name="grPayment8Ch" Grid.Column="1" Grid.Row="7" PreviewTextInput="grPayment_PreviewTextInput" TextChanged="grPayment1_TextChanged"/>
-                        <TextBox Name="grPayment9Ch" Grid.Column="1" Grid.Row="8" PreviewTextInput="grPayment_PreviewTextInput" TextChanged="grPayment1_TextChanged"/>
-                        <TextBox Name="grPayment10Ch" Grid.Column="1" Grid.Row="9" PreviewTextInput="grPayment_PreviewTextInput" TextChanged="grPayment1_TextChanged"/>
-                        <TextBox Name="grPayment11Ch" Grid.Column="1" Grid.Row="10" PreviewTextInput="grPayment_PreviewTextInput" TextChanged="grPayment1_TextChanged"/>
-                        <TextBox Name="grPayment12Ch" Grid.Column="1" Grid.Row="11" PreviewTextInput="grPayment_PreviewTextInput" TextChanged="grPayment1_TextChanged"/>
+                        <TextBox Name="GroopChangePaymentFor1Month" Grid.Column="1" Grid.Row="0" PreviewTextInput="grPayment_PreviewTextInput" TextChanged="grPayment1_TextChanged" />
+                        <TextBox Name="GroopChangePaymentFor2Month" Grid.Column="1" Grid.Row="1" PreviewTextInput="grPayment_PreviewTextInput" TextChanged="grPayment1_TextChanged"/>
+                        <TextBox Name="GroopChangePaymentFor3Month" Grid.Column="1" Grid.Row="2" PreviewTextInput="grPayment_PreviewTextInput" TextChanged="grPayment1_TextChanged"/>
+                        <TextBox Name="GroopChangePaymentFor4Month" Grid.Column="1" Grid.Row="3" PreviewTextInput="grPayment_PreviewTextInput" TextChanged="grPayment1_TextChanged"/>
+                        <TextBox Name="GroopChangePaymentFor5Month" Grid.Column="1" Grid.Row="4" PreviewTextInput="grPayment_PreviewTextInput" TextChanged="grPayment1_TextChanged"/>
+                        <TextBox Name="GroopChangePaymentFor6Month" Grid.Column="1" Grid.Row="5" PreviewTextInput="grPayment_PreviewTextInput" TextChanged="grPayment1_TextChanged"/>
+                        <TextBox Name="GroopChangePaymentFor7Month" Grid.Column="1" Grid.Row="6" PreviewTextInput="grPayment_PreviewTextInput" TextChanged="grPayment1_TextChanged"/>
+                        <TextBox Name="GroopChangePaymentFor8Month" Grid.Column="1" Grid.Row="7" PreviewTextInput="grPayment_PreviewTextInput" TextChanged="grPayment1_TextChanged"/>
+                        <TextBox Name="GroopChangePaymentFor9Month" Grid.Column="1" Grid.Row="8" PreviewTextInput="grPayment_PreviewTextInput" TextChanged="grPayment1_TextChanged"/>
+                        <TextBox Name="GroopChangePaymentFor10Month" Grid.Column="1" Grid.Row="9" PreviewTextInput="grPayment_PreviewTextInput" TextChanged="grPayment1_TextChanged"/>
+                        <TextBox Name="GroopChangePaymentFor11Month" Grid.Column="1" Grid.Row="10" PreviewTextInput="grPayment_PreviewTextInput" TextChanged="grPayment1_TextChanged"/>
+                        <TextBox Name="GroopChangePaymentFor12Month" Grid.Column="1" Grid.Row="11" PreviewTextInput="grPayment_PreviewTextInput" TextChanged="grPayment1_TextChanged"/>
                     </Grid>
                 </ScrollViewer>
             </Grid>
-            <Label Name="payToYearCh"  Grid.Column="1" Grid.Row="5" />
-            <DatePicker Name="DateStartCh" Grid.Column="1" Grid.Row="6"/>
+            <Label Name="GroopChangePayForYear"  Grid.Column="1" Grid.Row="5" />
+            <DatePicker Name="GroopChangeDateStartLearn" Grid.Column="1" Grid.Row="6"/>
 
-            <DatePicker Name="DateEndCh" Grid.Column="1" Grid.Row="7"/>
-            <TextBox Name="grCommCh" ToolTip="Укажите комментарий к группе, если он необходим"  Grid.Column="1" Grid.Row="8" />
+            <DatePicker Name="GroopChangeDateEndLearn" Grid.Column="1" Grid.Row="7"/>
+            <TextBox Name="GroopChangeComment" ToolTip="Укажите комментарий к группе, если он необходим"  Grid.Column="1" Grid.Row="8" />
             <Button Name="grChangeAddButton" FontSize="16" Content="Сохранить" ToolTip="Нажмите для сохранения изменений" Grid.Row="9" Grid.ColumnSpan="2" Click="grChangeAddButton_Click"  />
 
         </Grid>
 
-        <!--грид курсов-->
-        <Grid Name="courseGrid" Grid.Row="1" Visibility="Collapsed">
+        <!--грид курсов+-->
+        <Grid Name="CourcesGrid" Grid.Row="1" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -1324,12 +1324,12 @@
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
                 <ScrollViewer Grid.Column="0"  HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
-                    <Grid Name="FiltrGridSubs" >
+                    <Grid Name="FilterGridSubs" >
                     </Grid>
                 </ScrollViewer>
                 <Button Content="Применить" FontSize="16" Name="FiltrSubsButton" Grid.Column="1" Click="FiltrGroupsButton_Click"/>
             </Grid>
-            <DataGrid ToolTip="Таблица в которой отображаются созданные Вами курсы. Для работы с ними выберете один из курсов кликнув н него, после чего выберете одно из действий ниже." Name="coursDataGrid" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" IsReadOnly="True" ItemsSource="{Binding}" AutoGenerateColumns="False" SelectedCellsChanged="listenerDataGrid_SelectedCellsChanged">
+            <DataGrid ToolTip="Таблица в которой отображаются созданные Вами курсы. Для работы с ними выберете один из курсов кликнув н него, после чего выберете одно из действий ниже." Name="CourcesDataGrid" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" IsReadOnly="True" ItemsSource="{Binding}" AutoGenerateColumns="False" SelectedCellsChanged="listenerDataGrid_SelectedCellsChanged">
                 <DataGrid.Columns>
                     <DataGridTextColumn Visibility="Collapsed" Header="ID" Binding="{Binding courseid}" Width="4*" />
                     <DataGridTextColumn Header="Название курса" Binding="{Binding title}" Width="4*" />
@@ -1344,8 +1344,8 @@
 
         </Grid>
 
-        <!--грид предметов-->
-        <Grid Name="subGrid" Grid.Row="1" Visibility="Collapsed">
+        <!--грид предметов+-->
+        <Grid Name="SubjectsGrid" Grid.Row="1" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -1355,7 +1355,7 @@
                 <RowDefinition/>
                 <RowDefinition Height="30pt"/>
             </Grid.RowDefinitions>
-            <DataGrid Name="subsDataGrid" ToolTip="Таблица в которой отображаются добавленные Вами предметы. Для сохранения или изменения добавьте новый предмет в пустую строку или измените существующий и нажмите 'Добавить/изменить'" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" ItemsSource="{Binding}" AutoGenerateColumns="False" SelectedCellsChanged="listenerDataGrid_SelectedCellsChanged">
+            <DataGrid Name="SubjectsDataGrid" ToolTip="Таблица в которой отображаются добавленные Вами предметы. Для сохранения или изменения добавьте новый предмет в пустую строку или измените существующий и нажмите 'Добавить/изменить'" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" ItemsSource="{Binding}" AutoGenerateColumns="False" SelectedCellsChanged="listenerDataGrid_SelectedCellsChanged">
                 <DataGrid.Columns>
                     <DataGridTextColumn Visibility="Collapsed" Header="ID" Binding="{Binding subid}" Width="3*" />
                     <DataGridTextColumn Header="Название предмета" Binding="{Binding title}" Width="3*" />
@@ -1368,8 +1368,8 @@
         </Grid>
 
 
-        <!--грид определения сотрудника как штатного -->
-        <Grid Name="addShtatGrid" Grid.Row="1" Visibility="Collapsed" >
+        <!--грид определения сотрудника как штатного+ -->
+        <Grid Name="AddStaffGrid" Grid.Row="1" Visibility="Collapsed" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -1388,7 +1388,7 @@
             <Label  Content="Должности" Grid.Column="0" Grid.Row="2" FontSize="16" HorizontalContentAlignment="Right" VerticalContentAlignment="Top" Grid.RowSpan="2" />
             <Label  Content="Работы обслуживания" Grid.Column="0" FontSize="16" Grid.Row="4" HorizontalContentAlignment="Right" VerticalContentAlignment="Top" Grid.RowSpan="2" />
             <ScrollViewer Grid.Column="1" Grid.Row="2" Grid.RowSpan="2">
-                <Grid Name="States">
+                <Grid Name="Positions">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
@@ -1397,7 +1397,7 @@
             </ScrollViewer>
 
             <ScrollViewer Grid.Column="1" Grid.Row="4" Grid.RowSpan="2" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
-                <Grid Name="ObslWorks">
+                <Grid Name="SeviceWorks">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition />
                         <ColumnDefinition Width="2*"/>
@@ -1410,8 +1410,8 @@
             <Button Content="Сохранить" FontSize="16" Name="addToShtat" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Click="addToShtat_Click" />
         </Grid>
 
-        <!--грид определения сотрудника как преподавателя -->
-        <Grid Name="addPrepGrid" Grid.Row="1" Visibility="Collapsed" >
+        <!--грид определения сотрудника как преподавателя+ -->
+        <Grid Name="AddTeacherGrid" Grid.Row="1" Visibility="Collapsed" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -1429,14 +1429,14 @@
             <Label  Content="Категория" Grid.Column="0" Grid.Row="2" FontSize="16" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
             <Label  Content="Дата начала роботы" Grid.Column="0" FontSize="16" Grid.Row="3" HorizontalContentAlignment="Right" VerticalContentAlignment="Center" />
 
-            <ComboBox Name="kategCMB" ToolTip="Выберете категорию этого преподавателя " Grid.Column="1" Grid.Row="2" />
-            <DatePicker Name="dateStart" ToolTip="Выберете дату начала работы этого преподавателя" Grid.Column="1" Grid.Row="3" />
+            <ComboBox Name="TeacherAddCategory" ToolTip="Выберете категорию этого преподавателя " Grid.Column="1" Grid.Row="2" />
+            <DatePicker Name="TeacherAddDateStart" ToolTip="Выберете дату начала работы этого преподавателя" Grid.Column="1" Grid.Row="3" />
 
             <Button Content="Сохранить" FontSize="16" Name="addToPrerB" Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Click="addToPrerB_Click" />
         </Grid>
 
-        <!--грид изменения преподавателей-->
-        <Grid Name="prepChangeGrid" Grid.Row="1" Visibility="Collapsed">
+        <!--грид изменения преподавателей+-->
+        <Grid Name="TeacherChangeGrid" Grid.Row="1" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -1457,18 +1457,18 @@
             <Label Content="Категория" Grid.Column="0" Grid.Row="3" FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
             <Label Content="Комментарий" Grid.Column="0" Grid.Row="4" FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
 
-            <TextBox Name="prepCom" ToolTip="Измените комментарий к этому преподавателю если необходимо" Grid.Column="1" Grid.Row="4" />
-            <TextBox Name="prepFio" ToolTip="Измените ФИО преподавателя если необходимо" Grid.Column="1" Grid.Row="1" />
+            <TextBox Name="TeacherChangeComment" ToolTip="Измените комментарий к этому преподавателю если необходимо" Grid.Column="1" Grid.Row="4" />
+            <TextBox Name="TeacherChangeName" ToolTip="Измените ФИО преподавателя если необходимо" Grid.Column="1" Grid.Row="1" />
 
-            <DatePicker Name="dateStartAdd" ToolTip="Измените дату начала работы преподавателя если необходимо"  Grid.Column="1" Grid.Row="2" />
-            <ComboBox Name="kategCMBX" ToolTip="Измените категорию преподавателя если необходимо" Grid.Column="1" Grid.Row="3" />
+            <DatePicker Name="TeacherChangeDateStart" ToolTip="Измените дату начала работы преподавателя если необходимо"  Grid.Column="1" Grid.Row="2" />
+            <ComboBox Name="TeacherChangeCategory" ToolTip="Измените категорию преподавателя если необходимо" Grid.Column="1" Grid.Row="3" />
 
             <Button Content="Сохранить" FontSize="16" ToolTip="Нажмите для сохранения изменений" Name="save" Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2" Click="save_Click" />
 
         </Grid>
 
 
-        <!--грид изменения штата -->
+        <!--грид изменения штата +-->
         <Grid Name="ChangeShtatGrid" Grid.Row="1" Visibility="Collapsed" >
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -1493,7 +1493,7 @@
 
 
             <ScrollViewer Grid.Column="1" Grid.Row="2" Grid.RowSpan="2">
-                <Grid Name="ChangeStates">
+                <Grid Name="ChangeStaffPositions">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition/>
@@ -1502,7 +1502,7 @@
             </ScrollViewer>
 
             <ScrollViewer Grid.Column="1" Grid.Row="4" Grid.RowSpan="2" HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
-                <Grid Name="ChangeObslWorks">
+                <Grid Name="ChangeStaffServiceWork">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition/>
                         <ColumnDefinition Width="2*"/>
@@ -1516,7 +1516,7 @@
         </Grid>
 
         <!--грид групп-->
-        <Grid Name="groupsGrid" Grid.Row="1" Visibility="Collapsed">
+        <Grid Name="GroopsGrid" Grid.Row="1" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -1535,13 +1535,13 @@
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
                 <ScrollViewer Grid.Column="0"  HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
-                    <Grid Name="FiltrGridCourse" >
+                    <Grid Name="FilterGridCourse" >
                     </Grid>
                 </ScrollViewer>
                 <Button Content="Применить" FontSize="16" Name="FiltrCourseButton" Grid.Column="1" Click="FiltrGroupsButton_Click"/>
             </Grid>
 
-            <DataGrid ToolTip="Таблица в которой отображаются созданные Вами группы. Для работы с группой выберите группу кликнув на нее в таблице, после чего выберите одно из действий указанных ниже" Name="groupsDataGrid" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" ItemsSource="{Binding}" IsReadOnly="True"  AutoGenerateColumns="False" SelectedCellsChanged="listenerDataGrid_SelectedCellsChanged">
+            <DataGrid ToolTip="Таблица в которой отображаются созданные Вами группы. Для работы с группой выберите группу кликнув на нее в таблице, после чего выберите одно из действий указанных ниже" Name="GroupsDataGrid" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" ItemsSource="{Binding}" IsReadOnly="True"  AutoGenerateColumns="False" SelectedCellsChanged="listenerDataGrid_SelectedCellsChanged">
                 <DataGrid.Columns>
                     <DataGridTextColumn Visibility="Collapsed" Header="ID" Binding="{Binding grid}" Width="5*" />
                     <DataGridTextColumn Header="Название группы" Binding="{Binding gtitle}" Width="5*" />
@@ -1557,8 +1557,8 @@
             <Button Name="groupAddButton"  FontSize="16" ToolTip="Нажмите для создания новой группы" Content="Добавить" Grid.Column="2"  Grid.Row="2" Click="groupAddButton_Click"  />
         </Grid>
 
-        <!--грид штата-->
-        <Grid Name="ShtatGrid" Grid.Row="1" Visibility="Collapsed">
+        <!--грид штата+-->
+        <Grid Name="StaffGrid" Grid.Row="1" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -1582,12 +1582,12 @@
                             <ColumnDefinition Width="6*"/>
                            
                         </Grid.ColumnDefinitions>
-                        <ComboBox Name="ShtatFiltrCmbx" Grid.Column="0" SelectionChanged="ShtatFiltrCmbx_SelectionChanged" >
+                        <ComboBox Name="StaffFilterCMBX" Grid.Column="0" SelectionChanged="ShtatFiltrCmbx_SelectionChanged" >
                             <ComboBoxItem Content="По должностям" />
                             <ComboBoxItem Content="По работам обслуживания" />
                         </ComboBox>
                     <ScrollViewer Grid.Column="1"  HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
-                        <Grid Name="FiltrShtatSotr"  >
+                        <Grid Name="StaffFilter"  >
                         </Grid>
                     </ScrollViewer>
                 </Grid>
@@ -1595,7 +1595,7 @@
                 <Button Content="Применить"  FontSize="16" Name="FiltrShtatButton" Grid.Column="1" Click="FiltrGroupsButton_Click"/>
             </Grid>
             
-            <DataGrid ToolTip="Таблица в которой отображаются сотрудники которые были добавлены Вами как штатные. Для работы с ними выбирите его кликнув на него в таблице, после чего выбирите одно из действий указанных ниже" Name="ShtatDataGrid" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" ItemsSource="{Binding}" IsReadOnly="True"  AutoGenerateColumns="False" SelectedCellsChanged="listenerDataGrid_SelectedCellsChanged">
+            <DataGrid ToolTip="Таблица в которой отображаются сотрудники которые были добавлены Вами как штатные. Для работы с ними выбирите его кликнув на него в таблице, после чего выбирите одно из действий указанных ниже" Name="StaffDataGrid" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" ItemsSource="{Binding}" IsReadOnly="True"  AutoGenerateColumns="False" SelectedCellsChanged="listenerDataGrid_SelectedCellsChanged">
 
                 <DataGrid.Columns>
                     <DataGridTextColumn Visibility="Collapsed" Header="ID" Binding="{Binding shtatid}" Width="4*" />
@@ -1609,8 +1609,8 @@
             <Button Name="shtatChangeButton"  FontSize="16" IsEnabled="False" ToolTip="Нажмите для изменения выбранного сотрудника" Content="Изменить" Grid.Column="1"  Grid.Row="2" Click="shtatChangeButton_Click"  />
         </Grid>
         
-        <!--грид преподавателей-->
-        <Grid Name="prepGrid" Grid.Row="1" Visibility="Collapsed">
+        <!--грид преподавателей+-->
+        <Grid Name="TeachersGrid" Grid.Row="1" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -1628,13 +1628,13 @@
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
                 <ScrollViewer Grid.Column="0"  HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
-                    <Grid Name="FiltrGridPrep" >
+                    <Grid Name="FilterGridTeacher" >
                     </Grid>
                 </ScrollViewer>
                 <Button Content="Применить"  FontSize="16" Name="FiltrPrepButton" Grid.Column="1" Click="FiltrGroupsButton_Click"/>
             </Grid>
 
-            <DataGrid ToolTip="Таблица в которой отображаются сотрудники которые были добавлены Вами как преподаватели. Для работы с преподавателями выберите его кликнув на него в таблице, после чего выберите одно из действий указанных ниже" Name="prepDataGrid" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" ItemsSource="{Binding}" IsReadOnly="True"  AutoGenerateColumns="False" SelectedCellsChanged="listenerDataGrid_SelectedCellsChanged">
+            <DataGrid ToolTip="Таблица в которой отображаются сотрудники которые были добавлены Вами как преподаватели. Для работы с преподавателями выберите его кликнув на него в таблице, после чего выберите одно из действий указанных ниже" Name="TeachersDataGrid" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" ItemsSource="{Binding}" IsReadOnly="True"  AutoGenerateColumns="False" SelectedCellsChanged="listenerDataGrid_SelectedCellsChanged">
                 <DataGrid.Columns>
                     <DataGridTextColumn Visibility="Collapsed" Header="ID преподавателя" Binding="{Binding prid}" Width="5*" />
                     <DataGridTextColumn Header="Категория" Binding="{Binding nazva}" Width="5*" />
@@ -1647,8 +1647,8 @@
             <Button Name="prepChangeButton"  FontSize="16" IsEnabled="False" ToolTip="Нажмите для изменения выбранного преподавателя" Content="Изменить" Grid.Column="1"  Grid.Row="2" Click="prepChangeButton_Click"  />
         </Grid>
 
-        <!--грид категорий-->
-        <Grid Name="kategGrid" Grid.Row="1" Visibility="Collapsed">
+        <!--грид категорий+-->
+        <Grid Name="CategoriesGrid" Grid.Row="1" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -1658,7 +1658,7 @@
                 <RowDefinition/>
                 <RowDefinition Height="30pt"/>
             </Grid.RowDefinitions>
-            <DataGrid ToolTip="Таблица в которой отображаются добавленные Вами категории преподавателей. Добавьте новую категорию в пустой строке или же измените существующую, после чего нажмите 'Добавить/изменить'" Name="kategDataGrid" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" ItemsSource="{Binding}"  AutoGenerateColumns="False" SelectedCellsChanged="listenerDataGrid_SelectedCellsChanged">
+            <DataGrid ToolTip="Таблица в которой отображаются добавленные Вами категории преподавателей. Добавьте новую категорию в пустой строке или же измените существующую, после чего нажмите 'Добавить/изменить'" Name="CategoriesDataGrid" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" ItemsSource="{Binding}"  AutoGenerateColumns="False" SelectedCellsChanged="listenerDataGrid_SelectedCellsChanged">
                 <DataGrid.Columns>
                     <DataGridTextColumn Visibility="Collapsed" Header="ID" Binding="{Binding kategid}" Width="3*" />
                     <DataGridTextColumn Header="Название" Binding="{Binding title}" Width="3*" />
@@ -1669,8 +1669,8 @@
             <Button Name="kategAddButton"  FontSize="16" Content="Добавить/изменить" ToolTip="Нажмите для сохранения изменений"  Grid.Column="1" Grid.ColumnSpan="2"  Grid.Row="1" Click="kategAddButton_Click"   />
         </Grid>
 
-        <!--грид всех сотрудников-->
-        <Grid Name="allSotrGrid" Grid.Row="1" Visibility="Collapsed">
+        <!--грид всех сотрудников+-->
+        <Grid Name="EmployeesGrid" Grid.Row="1" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -1690,7 +1690,7 @@
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
                 <ScrollViewer Grid.Column="0"  HorizontalScrollBarVisibility="Visible" VerticalScrollBarVisibility="Visible">
-                    <Grid Name="FiltrGridAllSotr" >
+                    <Grid Name="FilterGridEmployees" >
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
                             <ColumnDefinition />
@@ -1704,7 +1704,7 @@
                 <Button Content="Применить"  FontSize="16" Name="FiltrAllSotrButton" Grid.Column="1" Click="FiltrGroupsButton_Click"/>
             </Grid>
 
-            <DataGrid ToolTip="Таблица в которой отображаются добавленные Вами сотрудники. Для работы с сотрудником выберете его кликнув по нему, после чего выберете одно из действий предложенных ниже" Name="allSotrDataGrid" Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="1" ItemsSource="{Binding}"  AutoGenerateColumns="False" SelectedCellsChanged="listenerDataGrid_SelectedCellsChanged">
+            <DataGrid ToolTip="Таблица в которой отображаются добавленные Вами сотрудники. Для работы с сотрудником выберете его кликнув по нему, после чего выберете одно из действий предложенных ниже" Name="EmployeesDataGrid" Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="1" ItemsSource="{Binding}"  AutoGenerateColumns="False" SelectedCellsChanged="listenerDataGrid_SelectedCellsChanged">
                 <DataGrid.Columns>
                     <DataGridTextColumn Visibility="Collapsed" Header="ID" Binding="{Binding sotrid}" Width="5*" />
                     <DataGridTextColumn Header="ФИО" Binding="{Binding fio}" Width="5*" />
@@ -1725,8 +1725,8 @@
             <TextBlock  TextWrapping="Wrap" FontSize="16" HorizontalAlignment="Center" VerticalAlignment="Center"  Name="hello_label" />
         </Grid>
         
-        <!--грид расписания звонков-->
-        <Grid Name="zvonkiGrid" Grid.Row="1" Visibility="Collapsed">
+        <!--грид расписания звонков+-->
+        <Grid Name="TimeScheduleGrid" Grid.Row="1" Visibility="Collapsed">
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition Height="30pt"/>
@@ -1736,7 +1736,7 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <DataGrid ToolTip="Таблица в которой отображаются добавленное Вами время расписания занятий. Добавьте новое время занятий заполнив пустую строку либо измените существующее, после чего нажмите 'Добавить/Изменить'" Name="zvonkiDataGrid" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" ItemsSource="{Binding}" AutoGenerateColumns="False" SelectedCellsChanged="listenerDataGrid_SelectedCellsChanged">
+            <DataGrid ToolTip="Таблица в которой отображаются добавленное Вами время расписания занятий. Добавьте новое время занятий заполнив пустую строку либо измените существующее, после чего нажмите 'Добавить/Изменить'" Name="TimeScheduleDataGrid" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" ItemsSource="{Binding}" AutoGenerateColumns="False" SelectedCellsChanged="listenerDataGrid_SelectedCellsChanged">
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Id" Binding="{Binding id}" Visibility="Collapsed" Width="4*" />
                     <DataGridTextColumn Header="Номер занятия" Binding="{Binding lesson_number}" Width="4*" />

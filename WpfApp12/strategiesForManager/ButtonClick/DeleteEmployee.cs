@@ -20,7 +20,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 
         public void ButtonClick()
         {
-            DataRowView DRV = windowObj.allSotrDataGrid.SelectedItem as DataRowView;
+            DataRowView DRV = windowObj.EmployeesDataGrid.SelectedItem as DataRowView;
             if (DRV == null) { MessageBox.Show("Удаление прервано, Вы не выбрали запись для удаления."); return; }
             DataRow DR = DRV.Row;
             object[] arr = DR.ItemArray;
@@ -119,7 +119,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             }
             DataGridUpdater.updateEmploeesDataGrid(windowObj);
 
-            windowObj.allSotrDataGrid.SelectedItem = null;
+            windowObj.EmployeesDataGrid.SelectedItem = null;
             //все сотрудники
             windowObj.allSotrDeleteButton.IsEnabled = false;
             windowObj.allSotrToPrepBtton.IsEnabled = false;

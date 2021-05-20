@@ -19,26 +19,26 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 
         public void ButtonClick()
         {
-            windowObj.grTitle.Text = "";
-            windowObj.grComm.Text = "";
-            windowObj.grCourse.SelectedIndex = 0;
-            windowObj.grPayment1.Text = "";
-            windowObj.grPayment2.Text = "";
-            windowObj.grPayment3.Text = "";
-            windowObj.grPayment4.Text = "";
-            windowObj.grPayment5.Text = "";
-            windowObj.grPayment6.Text = "";
-            windowObj.grPayment7.Text = "";
-            windowObj.grPayment8.Text = "";
-            windowObj.grPayment9.Text = "";
-            windowObj.grPayment10.Text = "";
-            windowObj.grPayment11.Text = "";
-            windowObj.grPayment12.Text = "";
-            windowObj.payToYear.Content = "";
+            windowObj.GroopAddTitle.Text = "";
+            windowObj.GroopAddComment.Text = "";
+            windowObj.GroopAddCourse.SelectedIndex = 0;
+            windowObj.GroopAddPaymentFor1Month.Text = "";
+            windowObj.GroopAddPaymentFor2Month.Text = "";
+            windowObj.GroopAddPaymentFor3Month.Text = "";
+            windowObj.GroopAddPaymentFor4Month.Text = "";
+            windowObj.GroopAddPaymentFor5Month.Text = "";
+            windowObj.GroopAddPaymentFor6Month.Text = "";
+            windowObj.GroopAddPaymentFor7Month.Text = "";
+            windowObj.GroopAddPaymentFor8Month.Text = "";
+            windowObj.GroopAddPaymentFor9Month.Text = "";
+            windowObj.GroopAddPaymentFor10Month.Text = "";
+            windowObj.GroopAddPaymentFor11Month.Text = "";
+            windowObj.GroopAddPaymentFor12Month.Text = "";
+            windowObj.GroopAddPayForYear.Content = "";
             windowObj.HideAll();
-            windowObj.groupAddGrid.Visibility = Visibility.Visible;
-            windowObj.DateStartGrAdd.Text = DateTime.Now.AddMonths(-11).ToShortDateString();
-            windowObj.DateEndGrAdd.Text = DateTime.Now.ToShortDateString();
+            windowObj.GroopAddGrid.Visibility = Visibility.Visible;
+            windowObj.GroopAddDateStartLearn.Text = DateTime.Now.AddMonths(-11).ToShortDateString();
+            windowObj.GroopAddDateEndLearn.Text = DateTime.Now.ToShortDateString();
             try
             {
                 NpgsqlConnection con = new NpgsqlConnection(windowObj.connectionString);
@@ -50,10 +50,10 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                 {
                     while (reader.Read())
                     {
-                        windowObj.grCourse.Items.Add(reader.GetString(0));
+                        windowObj.GroopAddCourse.Items.Add(reader.GetString(0));
 
                     }
-                    windowObj.grCourse.SelectedIndex = 0;
+                    windowObj.GroopAddCourse.SelectedIndex = 0;
                 }
                 con.Close();
             }

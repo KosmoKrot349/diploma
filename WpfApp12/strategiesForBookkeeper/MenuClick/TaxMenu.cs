@@ -20,13 +20,13 @@ namespace WpfApp12.strategiesForBookkeeper.MenuClick
 
         public void MenuClick()
         {
-            windowObj.MenuRolesB.BorderBrush = null;
-            windowObj.Dohody.BorderBrush = null;
-            windowObj.Rashody.BorderBrush = null;
-            windowObj.Nalogi.BorderBrush = Brushes.DarkRed;
-            windowObj.otchetMenu.BorderBrush = null;
+            windowObj.RolesMenu.BorderBrush = null;
+            windowObj.ProfitMenu.BorderBrush = null;
+            windowObj.CostsMenu.BorderBrush = null;
+            windowObj.TaxesMenu.BorderBrush = Brushes.DarkRed;
+            windowObj.ReportsMenu.BorderBrush = null;
             windowObj.HideAll();
-            windowObj.NalogiGrid.Visibility = Visibility.Visible;
+            windowObj.TaxesGrid.Visibility = Visibility.Visible;
             try
             {
                 NpgsqlConnection con = new NpgsqlConnection(windowObj.connectionString);

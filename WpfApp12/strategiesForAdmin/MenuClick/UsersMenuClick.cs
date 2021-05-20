@@ -21,7 +21,7 @@ namespace WpfApp12.strategiesForAdmin.strategiesForAdminMenuClick
         {
             windowObj.MenuRolesA.BorderBrush = null;
             windowObj.usersMenu.BorderBrush = Brushes.DarkRed;
-            windowObj.arhivMenu.BorderBrush = null;
+            windowObj.archiveMenu.BorderBrush = null;
             windowObj.settingMenu.BorderBrush = null;
             windowObj.ToNextYearMenu.BorderBrush = null;
 
@@ -31,7 +31,7 @@ namespace WpfApp12.strategiesForAdmin.strategiesForAdminMenuClick
             windowObj.dellUser.IsEnabled = false;
 
             windowObj.hideAll();
-            windowObj.delChUserGrid.Visibility = Visibility.Visible;
+            windowObj.UsersGrid.Visibility = Visibility.Visible;
 
             windowObj.filter.CreateUsersFilter(windowObj.FiltrGridRoles);
 

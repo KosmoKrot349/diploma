@@ -420,7 +420,7 @@ namespace WpfApp12.strategiesForBookkeeper.ButtonClick
                     catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
                 }
             }
-            windowObj.NachDataGrid.SelectedItem = null;
+            windowObj.AccrualsDataGrid.SelectedItem = null;
             windowObj.ViplataBut.IsEnabled = false;
             DataGridUpdater.updateAccrualsSalaryDataGrid(windowObj);
         }

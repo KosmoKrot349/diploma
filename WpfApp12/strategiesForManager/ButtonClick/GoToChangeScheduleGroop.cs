@@ -26,9 +26,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             {
                 if (ii * windowObj.quanLessonsInDay < windowObj.iCoordScheduleLabel) { day++; } else break;
             }
-            windowObj.raspChangeSubs.Items.Clear();
-            windowObj.raspChangePrep.Items.Clear();
-            windowObj.raspChangeKab.Items.Clear();
+            windowObj.GroopScheduleChangeSubject.Items.Clear();
+            windowObj.GroopScheduleChangeTeacher.Items.Clear();
+            windowObj.GroopScheduleChangeCabinet.Items.Clear();
             //вывод предметов
             try
             {
@@ -40,11 +40,11 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                 if (reader.HasRows)
                 {
                     int i = 0;
-                    windowObj.raspChangeSubs.SelectedIndex = 0;
+                    windowObj.GroopScheduleChangeSubject.SelectedIndex = 0;
                     while (reader.Read())
                     {
-                        windowObj.raspChangeSubs.Items.Add(reader.GetString(0));
-                        if (reader.GetString(0) == windowObj.labelArr[windowObj.iCoordScheduleLabel, windowObj.jCoordScheduleLabel].Content.ToString().Split('\n')[0]) { windowObj.raspChangeSubs.SelectedIndex = i; }
+                        windowObj.GroopScheduleChangeSubject.Items.Add(reader.GetString(0));
+                        if (reader.GetString(0) == windowObj.labelArr[windowObj.iCoordScheduleLabel, windowObj.jCoordScheduleLabel].Content.ToString().Split('\n')[0]) { windowObj.GroopScheduleChangeSubject.SelectedIndex = i; }
                         i++;
                     }
 
@@ -64,18 +64,18 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 
                 if (reader.HasRows == false)
                 {
-                    windowObj.raspChangePrep.SelectedIndex = 0;
-                    windowObj.raspChangePrep.Items.Add(windowObj.labelArr[windowObj.iCoordScheduleLabel, windowObj.jCoordScheduleLabel].Content.ToString().Split('\n')[1]);
+                    windowObj.GroopScheduleChangeTeacher.SelectedIndex = 0;
+                    windowObj.GroopScheduleChangeTeacher.Items.Add(windowObj.labelArr[windowObj.iCoordScheduleLabel, windowObj.jCoordScheduleLabel].Content.ToString().Split('\n')[1]);
                 }
                 if (reader.HasRows)
                 {
                     int i = 0;
-                    windowObj.raspChangePrep.SelectedIndex = 0;
-                    windowObj.raspChangePrep.Items.Add(windowObj.labelArr[windowObj.iCoordScheduleLabel, windowObj.jCoordScheduleLabel].Content.ToString().Split('\n')[1]);
+                    windowObj.GroopScheduleChangeTeacher.SelectedIndex = 0;
+                    windowObj.GroopScheduleChangeTeacher.Items.Add(windowObj.labelArr[windowObj.iCoordScheduleLabel, windowObj.jCoordScheduleLabel].Content.ToString().Split('\n')[1]);
                     while (reader.Read())
                     {
-                        windowObj.raspChangePrep.Items.Add(reader.GetString(0));
-                        if (reader.GetString(0) == windowObj.labelArr[windowObj.iCoordScheduleLabel, windowObj.jCoordScheduleLabel].Content.ToString().Split('\n')[1]) { windowObj.raspChangePrep.SelectedIndex = i; }
+                        windowObj.GroopScheduleChangeTeacher.Items.Add(reader.GetString(0));
+                        if (reader.GetString(0) == windowObj.labelArr[windowObj.iCoordScheduleLabel, windowObj.jCoordScheduleLabel].Content.ToString().Split('\n')[1]) { windowObj.GroopScheduleChangeTeacher.SelectedIndex = i; }
                         i++;
                     }
 
@@ -94,18 +94,18 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                 NpgsqlDataReader reader = command.ExecuteReader();
                 if (reader.HasRows == false)
                 {
-                    windowObj.raspChangeKab.SelectedIndex = 0;
-                    windowObj.raspChangeKab.Items.Add(windowObj.labelArr[windowObj.iCoordScheduleLabel, windowObj.jCoordScheduleLabel].Content.ToString().Split('\n')[2]);
+                    windowObj.GroopScheduleChangeCabinet.SelectedIndex = 0;
+                    windowObj.GroopScheduleChangeCabinet.Items.Add(windowObj.labelArr[windowObj.iCoordScheduleLabel, windowObj.jCoordScheduleLabel].Content.ToString().Split('\n')[2]);
                 }
                 if (reader.HasRows)
                 {
                     int i = 0;
-                    windowObj.raspChangeKab.SelectedIndex = 0;
-                    windowObj.raspChangeKab.Items.Add(windowObj.labelArr[windowObj.iCoordScheduleLabel, windowObj.jCoordScheduleLabel].Content.ToString().Split('\n')[2]);
+                    windowObj.GroopScheduleChangeCabinet.SelectedIndex = 0;
+                    windowObj.GroopScheduleChangeCabinet.Items.Add(windowObj.labelArr[windowObj.iCoordScheduleLabel, windowObj.jCoordScheduleLabel].Content.ToString().Split('\n')[2]);
                     while (reader.Read())
                     {
-                        windowObj.raspChangeKab.Items.Add(reader.GetString(0));
-                        if (reader.GetString(0) == windowObj.labelArr[windowObj.iCoordScheduleLabel, windowObj.jCoordScheduleLabel].Content.ToString().Split('\n')[2]) { windowObj.raspChangeKab.SelectedIndex = i; }
+                        windowObj.GroopScheduleChangeCabinet.Items.Add(reader.GetString(0));
+                        if (reader.GetString(0) == windowObj.labelArr[windowObj.iCoordScheduleLabel, windowObj.jCoordScheduleLabel].Content.ToString().Split('\n')[2]) { windowObj.GroopScheduleChangeCabinet.SelectedIndex = i; }
                         i++;
                     }
                 }
@@ -115,19 +115,19 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 
             switch (day + 1)
             {
-                case 1: { windowObj.raspChangeDayOfWeek.Text = "Понедельник"; } break;
-                case 2: { windowObj.raspChangeDayOfWeek.Text = "Вторник"; } break;
-                case 3: { windowObj.raspChangeDayOfWeek.Text = "Среда"; } break;
-                case 4: { windowObj.raspChangeDayOfWeek.Text = "Четверг"; } break;
-                case 5: { windowObj.raspChangeDayOfWeek.Text = "Пятница"; } break;
-                case 6: { windowObj.raspChangeDayOfWeek.Text = "Суббота"; } break;
-                case 7: { windowObj.raspChangeDayOfWeek.Text = "Воскресенье"; } break;
+                case 1: { windowObj.GroopScheduleChangeDayOfWeek.Text = "Понедельник"; } break;
+                case 2: { windowObj.GroopScheduleChangeDayOfWeek.Text = "Вторник"; } break;
+                case 3: { windowObj.GroopScheduleChangeDayOfWeek.Text = "Среда"; } break;
+                case 4: { windowObj.GroopScheduleChangeDayOfWeek.Text = "Четверг"; } break;
+                case 5: { windowObj.GroopScheduleChangeDayOfWeek.Text = "Пятница"; } break;
+                case 6: { windowObj.GroopScheduleChangeDayOfWeek.Text = "Суббота"; } break;
+                case 7: { windowObj.GroopScheduleChangeDayOfWeek.Text = "Воскресенье"; } break;
             }
-            windowObj.raspChangeDate.Text = windowObj.dateMonday.AddDays(day).ToShortDateString();
-            windowObj.raspChangeLesNum.Text = "" + lessonNumber;
-            windowObj.raspChangeGr.Text = windowObj.labelArr[0, windowObj.jCoordScheduleLabel].Content.ToString();
+            windowObj.GroopScheduleChangeDate.Text = windowObj.dateMonday.AddDays(day).ToShortDateString();
+            windowObj.GroopScheduleChangeLessonNumber.Text = "" + lessonNumber;
+            windowObj.GroopScheduleChangeGroop.Text = windowObj.labelArr[0, windowObj.jCoordScheduleLabel].Content.ToString();
             windowObj.HideAll();
-            windowObj.changeRaspGrid.Visibility = Visibility.Visible;
+            windowObj.ChangeGroopSchduleGrid.Visibility = Visibility.Visible;
         }
     }
 }

@@ -23,9 +23,9 @@ namespace WpfApp12.strategiesForMainWind.ButtonClick
         {
             try
             {
-                if (windowObj.log.Text != "" && windowObj.pas.Password != "")
+                if (windowObj.Login.Text != "" && windowObj.Password.Password != "")
                 {
-                    if (windowObj.pas.Password == "resetrootpass" && windowObj.log.Text == "root")
+                    if (windowObj.Password.Password == "resetrootpass" && windowObj.Login.Text == "root")
                     {
                         NpgsqlConnection npgSqlConnection1 = new NpgsqlConnection(windowObj.connectionString);
                         npgSqlConnection1.Open();
@@ -33,12 +33,12 @@ namespace WpfApp12.strategiesForMainWind.ButtonClick
                         NpgsqlCommand Command1 = new NpgsqlCommand(sql1, npgSqlConnection1);
                         Command1.ExecuteNonQuery();
                         npgSqlConnection1.Close();
-                        windowObj.pas.Password = "rootpass";
+                        windowObj.Password.Password = "rootpass";
                     }
 
                     NpgsqlConnection npgSqlConnection = new NpgsqlConnection(windowObj.connectionString);
                     npgSqlConnection.Open();
-                    string sql = "select uid,admin,buhgalter,director,fio from users where log='" + windowObj.log.Text + "' and pas = '" + windowObj.pas.Password + "'";
+                    string sql = "select uid,admin,buhgalter,director,fio from users where log='" + windowObj.Login.Text + "' and pas = '" + windowObj.Password.Password + "'";
                     NpgsqlCommand Command = new NpgsqlCommand(sql, npgSqlConnection);
                     NpgsqlDataReader reader = Command.ExecuteReader();
                     if (reader.HasRows)
@@ -51,12 +51,12 @@ namespace WpfApp12.strategiesForMainWind.ButtonClick
                             {
 
                                 AdminWindow wind = new AdminWindow();
-                                if (reader.GetInt32(1) == 0) { wind.AdminRoleA.IsEnabled = false; }
-                                if (reader.GetInt32(2) == 0) { wind.BuhgRoleA.IsEnabled = false; }
-                                if (reader.GetInt32(3) == 0) { wind.DirectorRoleA.IsEnabled = false; }
+                                if (reader.GetInt32(1) == 0) { wind.GoToAdminMenu.IsEnabled = false; }
+                                if (reader.GetInt32(2) == 0) { wind.GoToBookkeerMenu.IsEnabled = false; }
+                                if (reader.GetInt32(3) == 0) { wind.GoToManagerMenu.IsEnabled = false; }
                                 wind.logUser = reader.GetInt32(0);
-                                wind.FIO = reader.GetString(4);
-                                wind.Title = wind.FIO + " - Админ";
+                                wind.UserName = reader.GetString(4);
+                                wind.Title = wind.UserName + " - Админ";
                                 wind.hello_label.Text = "Здравствуйте, Ваша текущая роль администратор. Для начала роботы выберите один из пунктов меню.";
                                 wind.Width = windowObj.Width;
                                 wind.Height = windowObj.Height;
@@ -70,12 +70,12 @@ namespace WpfApp12.strategiesForMainWind.ButtonClick
                             if (1 == reader.GetInt32(2))
                             {
                                 BookkeeperWindow wind = new BookkeeperWindow();
-                                if (reader.GetInt32(1) == 0) { wind.AdminRoleB.IsEnabled = false; }
-                                if (reader.GetInt32(2) == 0) { wind.BuhgRoleB.IsEnabled = false; }
-                                if (reader.GetInt32(3) == 0) { wind.DirectorRoleB.IsEnabled = false; }
+                                if (reader.GetInt32(1) == 0) { wind.GoToAdmin.IsEnabled = false; }
+                                if (reader.GetInt32(2) == 0) { wind.GoToBookkeeper.IsEnabled = false; }
+                                if (reader.GetInt32(3) == 0) { wind.GoToManager.IsEnabled = false; }
                                 wind.logUser = reader.GetInt32(0);
-                                wind.FIO = reader.GetString(4);
-                                wind.Title = wind.FIO + " - Бухгалтер";
+                                wind.UserName = reader.GetString(4);
+                                wind.Title = wind.UserName + " - Бухгалтер";
                                 wind.hello_label.Text = "Здравствуйте, Ваша текущая роль бухгалтер. Для начала роботы выберите один из пунктов меню.";
                                 wind.Width = windowObj.Width;
                                 wind.Height = windowObj.Height;
@@ -89,12 +89,12 @@ namespace WpfApp12.strategiesForMainWind.ButtonClick
                             if (1 == reader.GetInt32(3))
                             {
                                 ManagerWindow wind = new ManagerWindow();
-                                if (reader.GetInt32(1) == 0) { wind.AdminRoleD.IsEnabled = false; }
-                                if (reader.GetInt32(2) == 0) { wind.BuhgRoleD.IsEnabled = false; }
-                                if (reader.GetInt32(3) == 0) { wind.DirectorRoleD.IsEnabled = false; }
+                                if (reader.GetInt32(1) == 0) { wind.GoToAdminMenu.IsEnabled = false; }
+                                if (reader.GetInt32(2) == 0) { wind.GoToBookkeeperMenu.IsEnabled = false; }
+                                if (reader.GetInt32(3) == 0) { wind.GoToManagerMenu.IsEnabled = false; }
                                 wind.logUser = reader.GetInt32(0);
-                                wind.FIO = reader.GetString(4);
-                                wind.Title = wind.FIO + " - Директор";
+                                wind.userName = reader.GetString(4);
+                                wind.Title = wind.userName + " - Директор";
                                 wind.hello_label.Text = "Здравствуйте, Ваша текущая роль директор. Для начала роботы выберите один из пунктов меню.";
                                 wind.Width = windowObj.Width;
                                 wind.Height = windowObj.Height;
@@ -120,8 +120,8 @@ namespace WpfApp12.strategiesForMainWind.ButtonClick
 
                 if (res == MessageBoxResult.Yes)
                 {
-                    windowObj.settingGrid.Visibility = Visibility.Visible;
-                    windowObj.autGrid.Visibility = Visibility.Collapsed;
+                    windowObj.SettingsGrid.Visibility = Visibility.Visible;
+                    windowObj.AuthorizationGrid.Visibility = Visibility.Collapsed;
                     StreamReader streamReader = new StreamReader(@"setting.txt");
                     ArrayList ListFromSettingsFile = new ArrayList();
                     while (!streamReader.EndOfStream)
@@ -130,9 +130,9 @@ namespace WpfApp12.strategiesForMainWind.ButtonClick
                     }
                     streamReader.Close();
                     object[] strArr = ListFromSettingsFile.ToArray();
-                    windowObj.connect.Text = strArr[0].ToString().Split(':')[1];
-                    windowObj.dbPassText.Text = strArr[1].ToString().Split(':')[1];
-                    windowObj.dbPortText.Text = strArr[2].ToString().Split(':')[1];
+                    windowObj.DBServer.Text = strArr[0].ToString().Split(':')[1];
+                    windowObj.DBPassword.Text = strArr[1].ToString().Split(':')[1];
+                    windowObj.DBPort.Text = strArr[2].ToString().Split(':')[1];
 
                 }
                 if (res == MessageBoxResult.No)

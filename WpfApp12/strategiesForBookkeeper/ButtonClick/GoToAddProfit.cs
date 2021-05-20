@@ -19,15 +19,15 @@ namespace WpfApp12.strategiesForBookkeeper.ButtonClick
 
         public void ButtonClick()
         {
-            windowObj.DohodyAddSum.Text = "";
-            windowObj.DohodyAddDate.Text = DateTime.Now.ToShortDateString();
-            windowObj.DohodyAddType.Items.Clear();
-            windowObj.dohAddKtoVnesTb.Text = "";
-            windowObj.dohAddKtoVnesCmF.SelectedIndex = 0;
+            windowObj.ProfitAddSum.Text = "";
+            windowObj.ProfitAddDate.Text = DateTime.Now.ToShortDateString();
+            windowObj.ProfitAddType.Items.Clear();
+            windowObj.ProfitAddPersonNmae.Text = "";
+            windowObj.ProfitAddPErsonType.SelectedIndex = 0;
 
 
             windowObj.HideAll();
-            windowObj.DohodyrAddGrid.Visibility = Visibility.Visible;
+            windowObj.ProfitAddGrid.Visibility = Visibility.Visible;
             try
             {
                 NpgsqlConnection con = new NpgsqlConnection(windowObj.connectionString);
@@ -39,9 +39,9 @@ namespace WpfApp12.strategiesForBookkeeper.ButtonClick
                 {
                     while (reader.Read())
                     {
-                        windowObj.DohodyAddType.Items.Add(reader.GetString(0));
+                        windowObj.ProfitAddType.Items.Add(reader.GetString(0));
                     }
-                    windowObj.DohodyAddType.SelectedIndex = 0;
+                    windowObj.ProfitAddType.SelectedIndex = 0;
                 }
                 con.Close();
             }

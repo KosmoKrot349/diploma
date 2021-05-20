@@ -31,7 +31,7 @@ namespace WpfApp12.strategiesForAdmin
             }
             object[] StringArrFromBatFile = restoreBackUpList.ToArray();
             string DBPathString = StringArrFromBatFile[1].ToString().Substring(2);
-            windowObj.rsSybdPyt.Text = DBPathString;
+            windowObj.DBPathRestore.Text = DBPathString;
             string FileString = StringArrFromBatFile[2].ToString();
             StreamReader.Close();
         }

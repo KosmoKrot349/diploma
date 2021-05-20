@@ -27,7 +27,7 @@ namespace WpfApp12.strategiesForAdmin
                 {
                     if ((fileDialog.FileName[i] >= 'а' && fileDialog.FileName[i] <= 'я') || (fileDialog.FileName[i] >= 'А' && fileDialog.FileName[i] <= 'Я')) { MessageBox.Show("В пути не должно быть русскких символов"); return; }
                 }
-                windowObject.rsBckpPyt.Text = fileDialog.FileName;
+                windowObject.BackUpPathRestore.Text = fileDialog.FileName;
             }
         }
     }

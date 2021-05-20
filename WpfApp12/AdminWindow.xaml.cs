@@ -19,7 +19,7 @@ namespace WpfApp12
         public int bookkeeperRole = 0;
         public int userID = 0;
         public int logUser;
-        public string FIO = "";
+        public string UserName = "";
         //строка подключения
         public string connectionString = "";
         public filtr filter = new filtr();
@@ -38,7 +38,7 @@ namespace WpfApp12
             filter.connectionString = connectionString;
             MenuRolesA.BorderBrush = null;
             usersMenu.BorderBrush = null;
-            arhivMenu.BorderBrush = null;
+            archiveMenu.BorderBrush = null;
             settingMenu.BorderBrush = null;
             ToNextYearMenu.BorderBrush = null;
         }
@@ -46,8 +46,8 @@ namespace WpfApp12
         public void hideAll()
         {
             helloGrdi.Visibility = Visibility.Collapsed;
-            delChUserGrid.Visibility = Visibility.Collapsed;
-            regGrid.Visibility = Visibility.Collapsed;
+            UsersGrid.Visibility = Visibility.Collapsed;
+            RegistrationGrid.Visibility = Visibility.Collapsed;
             crDumpGrid.Visibility = Visibility.Collapsed;
             rsDumpGrid.Visibility = Visibility.Collapsed;
             userChangeGrid.Visibility = Visibility.Collapsed;

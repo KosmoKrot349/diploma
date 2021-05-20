@@ -61,7 +61,7 @@ namespace WpfApp12
 
             if (but.Name == "FiltrShtatButton")
             {
-                if (window.ShtatFiltrCmbx.SelectedIndex == 0)
+                if (window.StaffFilterCMBX.SelectedIndex == 0)
                 {
                     window.filter.ApplyStaffFirstFilter();
                 }
@@ -91,12 +91,12 @@ namespace WpfApp12
             if (but.Name == "PrimFKD")
             {
                 window.PeopleFromCashboxFilter.ApplyProfitFilterForCashboxReport(window.ProfitTypesFromCashboxFilter);
-                DataGridUpdater.updateCashBoxGrid(window.connectionString, window.KassaDodohGrid, window.KassaRashodGrid, window.kassaTitleLabel, window.KassaItogoDohod, window.KassaItogoRashod, window.kassaAllDohodLabel, window.PeopleFromCashboxFilter.sql, window.StaffFromCashboxFiltr.sql);
+                DataGridUpdater.updateCashBoxGrid(window.connectionString, window.CashboxProfitGrid, window.CashboxCostsGrid, window.CashboxTitleLabel, window.CashboxTotalProfit, window.CashboxTotalCosts, window.CashboxProfit, window.PeopleFromCashboxFilter.sql, window.StaffFromCashboxFiltr.sql);
             }
             if (but.Name == "PrimFKR")
             {
                 window.StaffFromCashboxFiltr.ApplyCostsFilterForCashboxReport(window.CostsTypesFromCashboxFilter);
-                DataGridUpdater.updateCashBoxGrid(window.connectionString, window.KassaDodohGrid, window.KassaRashodGrid, window.kassaTitleLabel, window.KassaItogoDohod, window.KassaItogoRashod, window.kassaAllDohodLabel, window.PeopleFromCashboxFilter.sql, window.StaffFromCashboxFiltr.sql);
+                DataGridUpdater.updateCashBoxGrid(window.connectionString, window.CashboxProfitGrid, window.CashboxCostsGrid, window.CashboxTitleLabel, window.CashboxTotalProfit, window.CashboxTotalCosts, window.CashboxProfit, window.PeopleFromCashboxFilter.sql, window.StaffFromCashboxFiltr.sql);
             }
         }
     }

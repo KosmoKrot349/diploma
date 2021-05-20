@@ -17,9 +17,9 @@ namespace WpfApp12.strategiesForBookkeeper.SelectionChanged
 
         public void SelectionChanged()
         {
-            if (window.dohAddKtoVnesCm.Items.Count == 0) { return; }
-            if (window.dohAddKtoVnesCm.SelectedItem.ToString() == "Нет в списке") { window.dohAddKtoVnesTb.Text = ""; window.dohAddKtoVnesTb.IsEnabled = true; }
-            else { window.dohAddKtoVnesTb.Text = window.dohAddKtoVnesCm.SelectedItem.ToString(); window.dohAddKtoVnesTb.IsEnabled = false; }
+            if (window.ProfitAddPerson.Items.Count == 0) { return; }
+            if (window.ProfitAddPerson.SelectedItem.ToString() == "Нет в списке") { window.ProfitAddPersonNmae.Text = ""; window.ProfitAddPersonNmae.IsEnabled = true; }
+            else { window.ProfitAddPersonNmae.Text = window.ProfitAddPerson.SelectedItem.ToString(); window.ProfitAddPersonNmae.IsEnabled = false; }
         }
     }
 }

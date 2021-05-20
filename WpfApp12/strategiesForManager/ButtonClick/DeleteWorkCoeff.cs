@@ -20,7 +20,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 
         public void ButtonClick()
         {
-            DataRowView DRV = windowObj.KoefDataGrid.SelectedItem as DataRowView;
+            DataRowView DRV = windowObj.WorkCoeffDataGrid.SelectedItem as DataRowView;
             if (DRV == null) { MessageBox.Show("Удаление прервано, Вы не выбрали запись для удаления."); return; }
             DataRow DR = DRV.Row;
             object[] arr = DR.ItemArray;
@@ -36,7 +36,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
             DataGridUpdater.updateWorkCoeffDataGrid(windowObj);
-            windowObj.KoefDataGrid.SelectedItem = null;
+            windowObj.WorkCoeffDataGrid.SelectedItem = null;
             windowObj.KoefDeleteButton.IsEnabled = false;
         }
     }

@@ -20,7 +20,7 @@ namespace WpfApp12.strategiesForAdmin.strategiesForAdminMenuClick
         {
             windowObj.MenuRolesA.BorderBrush = Brushes.DarkRed;
             windowObj.usersMenu.BorderBrush = null;
-            windowObj.arhivMenu.BorderBrush = null;
+            windowObj.archiveMenu.BorderBrush = null;
             windowObj.settingMenu.BorderBrush = null;
             windowObj.ToNextYearMenu.BorderBrush = null;
         }

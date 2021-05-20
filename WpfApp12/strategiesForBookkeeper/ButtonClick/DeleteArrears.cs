@@ -26,14 +26,14 @@ namespace WpfApp12.strategiesForBookkeeper.ButtonClick
                 {
                     NpgsqlConnection con = new NpgsqlConnection(windowObj.connectionString);
                     con.Open();
-                    string sql = "delete from listdolg where grid in (select grid from groups where nazvanie ='" + windowObj.GroupsDolg.SelectedItem + "') and listenerid in (select listenerid from listeners where fio ='" + windowObj.ListenerDolg.SelectedItem + "')";
+                    string sql = "delete from listdolg where grid in (select grid from groups where nazvanie ='" + windowObj.DebtPeymentGroops.SelectedItem + "') and listenerid in (select listenerid from listeners where fio ='" + windowObj.ListenerDebt.SelectedItem + "')";
                     NpgsqlCommand com = new NpgsqlCommand(sql, con);
                     com.ExecuteNonQuery();
                     con.Close();
 
                 }
                 catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
-                windowObj.GroupsDolg.Items.Clear();
+                windowObj.DebtPeymentGroops.Items.Clear();
                 try
                 {
                     NpgsqlConnection con = new NpgsqlConnection(windowObj.connectionString);
@@ -45,14 +45,14 @@ namespace WpfApp12.strategiesForBookkeeper.ButtonClick
                     {
                         while (reader.Read())
                         {
-                            windowObj.GroupsDolg.Items.Add(reader.GetString(0));
+                            windowObj.DebtPeymentGroops.Items.Add(reader.GetString(0));
                         }
-                        windowObj.GroupsDolg.SelectedIndex = 0;
+                        windowObj.DebtPeymentGroops.SelectedIndex = 0;
                     }
                     if (reader.HasRows == false)
                     {
                         windowObj.HideAll();
-                        windowObj.NoDolgGrdi.Visibility = Visibility.Visible;
+                        windowObj.LearningAccrualsPaymentGrdi.Visibility = Visibility.Visible;
                     }
                     con.Close();
 

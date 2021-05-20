@@ -24,18 +24,18 @@ namespace WpfApp12.strategiesForBookkeeper.MenuClick
         public void MenuClick()
         {
             windowObj.HideAll();
-            windowObj.ZpOthcetGrid.Visibility = Visibility.Visible;
-            windowObj.ZPOtchetVivodGrid.ColumnDefinitions.Clear();
-            windowObj.ZPOtchetVivodGrid.Children.Clear();
+            windowObj.PaymentListGrid.Visibility = Visibility.Visible;
+            windowObj.PaymentListOutputGrid.ColumnDefinitions.Clear();
+            windowObj.PaymentListOutputGrid.Children.Clear();
 
-            windowObj.ZPOtchetLabel.Content = "Отчёт 'Списки выплат' на " + DateTime.Now.ToShortDateString();
+            windowObj.PaymentListLabel.Content = "Отчёт 'Списки выплат' на " + DateTime.Now.ToShortDateString();
 
             ColumnDefinition cmd = new ColumnDefinition();
             cmd.Width = new GridLength(200);
             Grid grid = new Grid();
             Grid.SetColumn(grid, 0);
-            windowObj.ZPOtchetVivodGrid.ColumnDefinitions.Add(cmd);
-            windowObj.ZPOtchetVivodGrid.Children.Add(grid);
+            windowObj.PaymentListOutputGrid.ColumnDefinitions.Add(cmd);
+            windowObj.PaymentListOutputGrid.Children.Add(grid);
 
             try
             {
@@ -146,7 +146,7 @@ namespace WpfApp12.strategiesForBookkeeper.MenuClick
 
                 ColumnDefinition cmdd = new ColumnDefinition();
                 cmdd.Width = new GridLength(300);
-                windowObj.ZPOtchetVivodGrid.ColumnDefinitions.Add(cmdd);
+                windowObj.PaymentListOutputGrid.ColumnDefinitions.Add(cmdd);
                 Grid monthGrid = new Grid();
                 for (int j = 0; j < 4; j++)
                 {
@@ -155,7 +155,7 @@ namespace WpfApp12.strategiesForBookkeeper.MenuClick
                 }
                 DataGridUpdater.updatePaymentListGrid(windowObj.connectionString, DateTimeAxis.ToDateTime(Convert.ToDouble(dateList[i])), emploeesList, monthGrid);
                 Grid.SetColumn(monthGrid, i + 1);
-                windowObj.ZPOtchetVivodGrid.Children.Add(monthGrid);
+                windowObj.PaymentListOutputGrid.Children.Add(monthGrid);
             }
         }
     }

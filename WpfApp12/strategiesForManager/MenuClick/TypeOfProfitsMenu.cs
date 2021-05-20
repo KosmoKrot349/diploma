@@ -19,7 +19,7 @@ namespace WpfApp12.strategiesForManager.MenuClick
         public void MenuClick()
         {
             window.HideAll();
-            window.TypeDohGrid.Visibility = Visibility.Visible;
+            window.ProfiTypesGrid.Visibility = Visibility.Visible;
             DataGridUpdater.updateProfitTypeDataGri(window);
         }
     }

@@ -22,17 +22,17 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 
         public void ButtonClick()
         {
-            DataRowView DRV = windowObj.coursDataGrid.SelectedItem as DataRowView;
+            DataRowView DRV = windowObj.CourcesDataGrid.SelectedItem as DataRowView;
             if (DRV == null) { MessageBox.Show("Вы не можете перейти к изменению не выбрав запись."); return; }
             DataRow DR = DRV.Row;
-            windowObj.subsChangeCanvas.Children.Clear();
+            windowObj.CourseChangeSubjects.Children.Clear();
             windowObj.HideAll();
-            windowObj.courseChangeGrid.Visibility = Visibility.Visible;
+            windowObj.CourseChangeGrid.Visibility = Visibility.Visible;
             object[] arr = DR.ItemArray;
             windowObj.courseID = Convert.ToInt32(arr[0]);
-            windowObj.courseChangeTitle.Text = arr[1].ToString();
+            windowObj.CourseChangeTitle.Text = arr[1].ToString();
             windowObj.dontChangeCourseName = arr[1].ToString();
-            windowObj.courseChangeComm.Text = arr[3].ToString();
+            windowObj.CourseChangeComment.Text = arr[3].ToString();
             object[] subjectsArr = arr[2].ToString().Replace(" ", "").Split(',');
             ArrayList list = new ArrayList(subjectsArr);
             int checkBoxArrLength = 0;
@@ -72,14 +72,14 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                         windowObj.checkBoxArr[i].Name = "id" + reader.GetInt32(1).ToString();
                         windowObj.checkBoxArr[i].Content = reader.GetString(0);
                         if (list.IndexOf(reader.GetString(0)) != -1) { windowObj.checkBoxArr[i].IsChecked = true; }
-                        windowObj.subsChangeCanvas.Children.Add(windowObj.checkBoxArr[i]);
+                        windowObj.CourseChangeSubjects.Children.Add(windowObj.checkBoxArr[i]);
                         Canvas.SetLeft(windowObj.checkBoxArr[i], 1);
                         Canvas.SetTop(windowObj.checkBoxArr[i], i * 15);
                         i++;
 
                     }
                 }
-                windowObj.subsCanvas.Height = i * 15;
+                windowObj.CourseAddSubjects.Height = i * 15;
                 con.Close();
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }

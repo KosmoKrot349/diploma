@@ -18,9 +18,9 @@ namespace WpfApp12.strategiesForManager.MenuClick
 
         public void MenuClick()
         {
-            DataGridUpdater.updateStatisticGrid(window.connectionString, window.statGraf);
+            DataGridUpdater.updateStatisticGrid(window.connectionString, window.StatisticPlot);
             window.HideAll();
-            window.StatisticaGrid.Visibility = Visibility.Visible;
+            window.StatisticGrid.Visibility = Visibility.Visible;
         }
     }
 }

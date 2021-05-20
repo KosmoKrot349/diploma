@@ -20,16 +20,16 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 
         public void ButtonClick()
         {
-            DataRowView DRV = windowObj.prepDataGrid.SelectedItem as DataRowView;
+            DataRowView DRV = windowObj.TeachersDataGrid.SelectedItem as DataRowView;
             if (DRV == null) { MessageBox.Show("Вы не можете перейти к изменению не выбрав запись."); return; }
             DataRow DR = DRV.Row;
             object[] arr = DR.ItemArray;
             windowObj.teacherID = Convert.ToInt32(arr[0]);
-            windowObj.prepFio.Text = arr[2].ToString();
-            windowObj.prepCom.Text = arr[4].ToString();
+            windowObj.TeacherChangeName.Text = arr[2].ToString();
+            windowObj.TeacherChangeComment.Text = arr[4].ToString();
             string[] dateStart = arr[3].ToString().Split(' ');
             string parsedDateStart = dateStart[0];
-            windowObj.dateStartAdd.Text = parsedDateStart;
+            windowObj.TeacherChangeDateStart.Text = parsedDateStart;
             try
             {
                 NpgsqlConnection con = new NpgsqlConnection(windowObj.connectionString);
@@ -38,13 +38,13 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                 NpgsqlCommand command = new NpgsqlCommand(sql, con);
                 NpgsqlDataReader reader = command.ExecuteReader();
                 int itmeIndex = 0;
-                windowObj.kategCMBX.SelectedIndex = 0;
+                windowObj.TeacherChangeCategory.SelectedIndex = 0;
                 if (reader.HasRows)
                 {
                     while (reader.Read())
                     {
-                        windowObj.kategCMBX.Items.Add(reader.GetString(0));
-                        if (reader.GetString(0) == arr[1].ToString()) { windowObj.kategCMBX.SelectedIndex = itmeIndex; }
+                        windowObj.TeacherChangeCategory.Items.Add(reader.GetString(0));
+                        if (reader.GetString(0) == arr[1].ToString()) { windowObj.TeacherChangeCategory.SelectedIndex = itmeIndex; }
                         itmeIndex++;
                     }
 
@@ -53,7 +53,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
             windowObj.HideAll();
-            windowObj.prepChangeGrid.Visibility = Visibility.Visible;
+            windowObj.TeacherChangeGrid.Visibility = Visibility.Visible;
         }
     }
 }

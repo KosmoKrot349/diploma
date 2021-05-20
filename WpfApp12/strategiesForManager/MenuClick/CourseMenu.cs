@@ -19,14 +19,14 @@ namespace WpfApp12.strategiesForManager.MenuClick
         public void MenuClick()
         {
             windowObj.HideAll();
-            windowObj.courseGrid.Visibility = Visibility.Visible;
+            windowObj.CourcesGrid.Visibility = Visibility.Visible;
 
 
-            windowObj.FiltrGridCourse.Children.Clear();
-            windowObj.FiltrGridCourse.ColumnDefinitions.Clear();
+            windowObj.FilterGridCourse.Children.Clear();
+            windowObj.FilterGridCourse.ColumnDefinitions.Clear();
 
 
-            windowObj.filter.CreateCourseFilter(windowObj.FiltrGridSubs);
+            windowObj.filter.CreateCourseFilter(windowObj.FilterGridSubs);
 
             windowObj.filter.sql = "select courseid,title,comment FROM courses";
 

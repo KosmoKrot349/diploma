@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 
 namespace WpfApp12.strategiesForBookkeeper.MenuClick
 {
@@ -19,10 +14,10 @@ namespace WpfApp12.strategiesForBookkeeper.MenuClick
         public void MenuClick()
         {
             windowObj.HideAll();
-            windowObj.DohodyrGrid.Visibility = Visibility.Visible;
-            windowObj.FiltrGridDohody.Children.Clear();
-            windowObj.FiltrGridDohody.ColumnDefinitions.Clear();
-            windowObj.filter.CreateProfitFilter(windowObj.FiltrGridDohody);
+            windowObj.ProfitGrid.Visibility = Visibility.Visible;
+            windowObj.FilterGridDohody.Children.Clear();
+            windowObj.FilterGridDohody.ColumnDefinitions.Clear();
+            windowObj.filter.CreateProfitFilter(windowObj.FilterGridDohody);
             windowObj.filter.sql = "SELECT dodhody.dohid as dohid, typedohod.title as title, dodhody.sum as sum, dodhody.data as data, dodhody.fio as fio FROM dodhody inner join typedohod using(idtype) ";
             DataGridUpdater.updateProfitDataGrid(windowObj);
         }

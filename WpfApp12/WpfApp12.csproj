@@ -314,6 +314,7 @@
     <Compile Include="strategiesForManager\OtherMethods\ShowLearningSchedule.cs" />
     <Compile Include="strategiesForManager\SelectedCellsChanged\ControlButtonState.cs" />
     <Compile Include="strategiesForManager\SelectedCellsChanged\ISelectedChanged.cs" />
+    <Compile Include="strategiesForManager\SelectionChanged\ChangeFilterTypeForStaff.cs" />
     <Compile Include="strategiesForManager\SelectionChanged\ChangeGroopFromAddCabinetSchedule.cs" />
     <Compile Include="strategiesForManager\SelectionChanged\ChangeGroopFromAddTeacherSchedule.cs" />
     <Compile Include="strategiesForManager\SelectionChanged\ChangeGroopFromChangeCabinetSchedule.cs" />

@@ -20,7 +20,7 @@ namespace WpfApp12.strategiesForBookkeeper.ButtonClick
 
         public void ButtonClick()
         {
-            DataRowView DRV = windowObj.DohodyDataGrid.SelectedItem as DataRowView;
+            DataRowView DRV = windowObj.ProfitDataGrid.SelectedItem as DataRowView;
             if (DRV == null) { MessageBox.Show("Удаление прервано, Вы не выбрали запись для удаления."); return; }
             DataRow DR = DRV.Row;
             object[] arr = DR.ItemArray;
@@ -38,7 +38,7 @@ namespace WpfApp12.strategiesForBookkeeper.ButtonClick
                 }
                 catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
 
-                windowObj.DohodyDataGrid.SelectedItem = null;
+                windowObj.ProfitDataGrid.SelectedItem = null;
                 windowObj.DohDeleteButton.IsEnabled = false;
                 windowObj.DohChangeButton.IsEnabled = false;
                 DataGridUpdater.updateProfitDataGrid(windowObj);

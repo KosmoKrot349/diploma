@@ -18,7 +18,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 
         public void ButtonClick()
         {
-            DataRowView DRV = windowObj.ShtatDataGrid.SelectedItem as DataRowView;
+            DataRowView DRV = windowObj.StaffDataGrid.SelectedItem as DataRowView;
             if (DRV == null) { MessageBox.Show("Добавление прервано, Вы не выбрали сотрудника."); return; }
             DataRow DR = DRV.Row;
             object[] arr = DR.ItemArray;
@@ -28,11 +28,11 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 
             windowObj.fioChangeShtat.Text = arr[1].ToString();
 
-            windowObj.ChangeStates.Children.Clear();
-            windowObj.ChangeStates.RowDefinitions.Clear();
+            windowObj.ChangeStaffPositions.Children.Clear();
+            windowObj.ChangeStaffPositions.RowDefinitions.Clear();
 
-            windowObj.ChangeObslWorks.Children.Clear();
-            windowObj.ChangeObslWorks.RowDefinitions.Clear();
+            windowObj.ChangeStaffServiceWork.Children.Clear();
+            windowObj.ChangeStaffServiceWork.RowDefinitions.Clear();
 
             int quanPositions = -1, quanServiceWork = -1;
             //получени е кол-ва должностей
@@ -158,7 +158,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             RowDefinition rwd1 = new RowDefinition();
             rwd1.Height = new GridLength(40);
 
-            windowObj.ChangeStates.RowDefinitions.Add(rwd1);
+            windowObj.ChangeStaffPositions.RowDefinitions.Add(rwd1);
 
             Grid.SetRow(positionLabel, 0);
             Grid.SetRow(rateLabel, 0);
@@ -168,8 +168,8 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             Grid.SetColumn(positionLabel, 0);
 
 
-            windowObj.ChangeStates.Children.Add(positionLabel);
-            windowObj.ChangeStates.Children.Add(rateLabel);
+            windowObj.ChangeStaffPositions.Children.Add(positionLabel);
+            windowObj.ChangeStaffPositions.Children.Add(rateLabel);
 
             try
             {
@@ -202,7 +202,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                         RowDefinition rwd = new RowDefinition();
                         rwd.Height = new GridLength(40);
 
-                        windowObj.ChangeStates.RowDefinitions.Add(rwd);
+                        windowObj.ChangeStaffPositions.RowDefinitions.Add(rwd);
 
                         Grid.SetRow(windowObj.textBoxArrRate[i], (i + 1));
                         Grid.SetRow(windowObj.checkBoxArrPositions[i], (i + 1));
@@ -212,8 +212,8 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                         Grid.SetColumn(windowObj.checkBoxArrPositions[i], 0);
 
 
-                        windowObj.ChangeStates.Children.Add(windowObj.textBoxArrRate[i]);
-                        windowObj.ChangeStates.Children.Add(windowObj.checkBoxArrPositions[i]);
+                        windowObj.ChangeStaffPositions.Children.Add(windowObj.textBoxArrRate[i]);
+                        windowObj.ChangeStaffPositions.Children.Add(windowObj.checkBoxArrPositions[i]);
 
                         i++;
                     }
@@ -235,7 +235,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             RowDefinition rwd11 = new RowDefinition();
             rwd11.Height = new GridLength(40);
 
-            windowObj.ChangeObslWorks.RowDefinitions.Add(rwd11);
+            windowObj.ChangeStaffServiceWork.RowDefinitions.Add(rwd11);
 
             Grid.SetRow(serviceWorkLabel, 0);
             Grid.SetRow(workVolumeLabel, 0);
@@ -245,9 +245,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             Grid.SetColumn(serviceWorkLabel, 0);
             Grid.SetColumn(unitsLabel, 2);
 
-            windowObj.ChangeObslWorks.Children.Add(serviceWorkLabel);
-            windowObj.ChangeObslWorks.Children.Add(workVolumeLabel);
-            windowObj.ChangeObslWorks.Children.Add(unitsLabel);
+            windowObj.ChangeStaffServiceWork.Children.Add(serviceWorkLabel);
+            windowObj.ChangeStaffServiceWork.Children.Add(workVolumeLabel);
+            windowObj.ChangeStaffServiceWork.Children.Add(unitsLabel);
 
             try
             {
@@ -280,7 +280,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                         RowDefinition rwd = new RowDefinition();
                         rwd.Height = new GridLength(40);
 
-                        windowObj.ChangeObslWorks.RowDefinitions.Add(rwd);
+                        windowObj.ChangeStaffServiceWork.RowDefinitions.Add(rwd);
 
                         Grid.SetRow(windowObj.textBoxArrVolumeWork[i], (i + 1));
                         Grid.SetRow(windowObj.checkBoxArrServiceWorks[i], (i + 1));
@@ -290,9 +290,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                         Grid.SetColumn(windowObj.checkBoxArrServiceWorks[i], 0);
                         Grid.SetColumn(lb, 2);
 
-                        windowObj.ChangeObslWorks.Children.Add(windowObj.textBoxArrVolumeWork[i]);
-                        windowObj.ChangeObslWorks.Children.Add(windowObj.checkBoxArrServiceWorks[i]);
-                        windowObj.ChangeObslWorks.Children.Add(lb);
+                        windowObj.ChangeStaffServiceWork.Children.Add(windowObj.textBoxArrVolumeWork[i]);
+                        windowObj.ChangeStaffServiceWork.Children.Add(windowObj.checkBoxArrServiceWorks[i]);
+                        windowObj.ChangeStaffServiceWork.Children.Add(lb);
                         i++;
                     }
 

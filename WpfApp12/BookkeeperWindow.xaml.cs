@@ -18,7 +18,7 @@ namespace WpfApp12
     public partial class BookkeeperWindow : Window
     {
         public int logUser;
-        public string FIO = "";
+        public string UserName = "";
         public TextBox[] textBoxArrForDefreyment;
         public TextBox[] textBoxArrForArrearsDefreyment;
         //строка подключения
@@ -59,11 +59,11 @@ namespace WpfApp12
             StaffFromCashboxFiltr.connectionString = connectionString;
             ProfitTypesFromCashboxFilter.connectionString = connectionString;
             CostsTypesFromCashboxFilter.connectionString = connectionString;
-            MenuRolesB.BorderBrush = null;
-            Dohody.BorderBrush = null;
-            Rashody.BorderBrush = null;
-            Nalogi.BorderBrush = null;
-            otchetMenu.BorderBrush = null;
+            RolesMenu.BorderBrush = null;
+            ProfitMenu.BorderBrush = null;
+            CostsMenu.BorderBrush = null;
+            TaxesMenu.BorderBrush = null;
+            ReportsMenu.BorderBrush = null;
 
         }
         //+
@@ -109,13 +109,13 @@ namespace WpfApp12
         private void Groups_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             ComboBox cmb = sender as ComboBox;
-            if (cmb.Name == "dohAddKtoVnesCmF")
+            if (cmb.Name == "ProfitAddPErsonType")
             {
                 ISelectionChanged actionReact = new SelectingPersonTypeProfitAdd(this, cmb);
                 actionReact.SelectionChanged();
             }
 
-            if (cmb.Name == "dohChKtoVnesCmF")
+            if (cmb.Name == "ProfitChangePersonType")
             {
                 ISelectionChanged actionReact = new SelectingPersonTypeProfitChange(this,cmb);
                 actionReact.SelectionChanged();
@@ -140,7 +140,7 @@ namespace WpfApp12
             ComboBox cmb = sender as ComboBox;
             if (cmb.Name == "Listener")
                 updateDefraymentTable.Update(this, 1);
-            if (cmb.Name == "ListenerDolg")
+            if (cmb.Name == "ListenerDebt")
                 updateDefraymentTable.Update(this, 2);
 
         }
@@ -390,7 +390,7 @@ namespace WpfApp12
                 actionReact.SelectionChanged();
             }
 
-            if (cmb.Name == "dohChKtoVnesCm")
+            if (cmb.Name == "ProfitChangePerson")
             {
                 ISelectionChanged actionReact = new SelectingPersonChangeProfit(this);
                 actionReact.SelectionChanged();

@@ -34,7 +34,7 @@ namespace WpfApp12.strategiesForAdmin
             }
             StramReader.Close();
 
-            if (windowObj.rsBckpPyt.Text == "") { MessageBox.Show("Укажите файл для восстановления"); return; }
+            if (windowObj.BackUpPathRestore.Text == "") { MessageBox.Show("Укажите файл для восстановления"); return; }
             StreamReader reader = new StreamReader(@"setting.txt");
             ArrayList ListFromSettingFile = new ArrayList();
             while (!reader.EndOfStream)
@@ -85,7 +85,7 @@ namespace WpfApp12.strategiesForAdmin
             {
                 if (lastStr[i] == '<') { PathFileIndex = i; break; }
             }
-            StringArrFromBatFile[2] = "psql -d postgresql://postgres:" + arr[1].ToString().Split(':')[1] + "@" + arr[0].ToString().Split(':')[1] + ":" + arr[2].ToString().Split(':')[1] + "/db < " + windowObj.rsBckpPyt.Text;
+            StringArrFromBatFile[2] = "psql -d postgresql://postgres:" + arr[1].ToString().Split(':')[1] + "@" + arr[0].ToString().Split(':')[1] + ":" + arr[2].ToString().Split(':')[1] + "/db < " + windowObj.BackUpPathRestore.Text;
             StreamWriter StreamWriter = new StreamWriter(@"rsDump.bat");
             for (int i = 0; i < StringArrFromBatFile.Length; i++)
             {

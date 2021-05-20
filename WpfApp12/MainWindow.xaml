@@ -7,14 +7,14 @@
         mc:Ignorable="d"
         Title="Авторизация" Height="422.418" Width="867.762">
     <!--самый главный грид-->
-    <Grid Name="glGrid">
+    <Grid Name="MainGrid">
         <Grid.RowDefinitions>
             <RowDefinition Height="0.07*"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
 
         <!--грид настроек-->
-        <Grid Name="settingGrid" Grid.Column="0" Grid.Row="1" Visibility="Collapsed">
+        <Grid Name="SettingsGrid" Grid.Column="0" Grid.Row="1" Visibility="Collapsed">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition />
@@ -30,18 +30,18 @@
             </Grid.RowDefinitions>
             <Label Content="Настройки" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2" FontSize="20" HorizontalContentAlignment="Center" VerticalContentAlignment="Center"/>
             <Label Content="Подключение к БД" Grid.Column="0" Grid.Row="2" FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Right"/>
-            <TextBox Grid.Column="1" Grid.Row="2" Name="connect" ToolTip="Подключение к базе данных" />
+            <TextBox Grid.Column="1" Grid.Row="2" Name="DBServer" ToolTip="Подключение к базе данных" />
             <Label Content="Пароль БД" Grid.Column="0" Grid.Row="3" FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
-            <TextBox  Name="dbPassText" Grid.Column="1" Grid.Row="3" ToolTip="Напишите здесь пароль от базы который Вы указывали при ее установке" />
+            <TextBox  Name="DBPassword" Grid.Column="1" Grid.Row="3" ToolTip="Напишите здесь пароль от базы который Вы указывали при ее установке" />
 
             <Label Content="Порт БД" Grid.Column="0" Grid.Row="4" FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
-            <TextBox  Name="dbPortText" Grid.Column="1" Grid.Row="4" ToolTip="Напишите здесь порт от базы" />
+            <TextBox  Name="DBPort" Grid.Column="1" Grid.Row="4" ToolTip="Напишите здесь порт от базы" />
             <Button Content="Проверить подключение" Grid.Column="0" FontSize="16" Grid.Row="7" Click="Button_Click11" ToolTip="Нажмите что бы проверить подключение по заданным настройкам" />
             <Button Content="Сохранить настройки" Grid.Column="1" FontSize="16" Grid.Row="7" Click="Button_Click_1" ToolTip="Нажмите что бы сохранить настройки без проверки" />
         </Grid>
 
         <!--грид окна авторизации-->
-        <Grid Name="autGrid" Grid.Row="1" Grid.Column="0"  >
+        <Grid Name="AuthorizationGrid" Grid.Row="1" Grid.Column="0"  >
             <Grid.RowDefinitions>
                 <RowDefinition/>
                 <RowDefinition/>
@@ -67,7 +67,7 @@
             </Grid>
             
             <Label Content="Авторизация" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" FontSize="36"/>
-            <TextBox ToolTip="Здесь необходимо указать логин Вашей учётной записи в программе, для ее дальнейшего использования." Name="log" MaxLength="225"  Grid.Column="1" Grid.Row="3" FontSize="20">
+            <TextBox ToolTip="Здесь необходимо указать логин Вашей учётной записи в программе, для ее дальнейшего использования." Name="Login" MaxLength="225"  Grid.Column="1" Grid.Row="3" FontSize="20">
                 <TextBox.BorderBrush>
                     <LinearGradientBrush EndPoint="0,20" MappingMode="Absolute" StartPoint="0,0">
                         <GradientStop Color="#FFABADB3" Offset="0.05"/>
@@ -76,7 +76,7 @@
                     </LinearGradientBrush>
                 </TextBox.BorderBrush>
             </TextBox>
-            <PasswordBox Name="pas" ToolTip="Здесь необходимо указать пароль Вашей учётной записи в программе, для ее дальнейшего использования." MaxLength="225" Grid.Column="1"  Grid.Row="4" FontSize="20">
+            <PasswordBox Name="Password" ToolTip="Здесь необходимо указать пароль Вашей учётной записи в программе, для ее дальнейшего использования." MaxLength="225" Grid.Column="1"  Grid.Row="4" FontSize="20">
                 <PasswordBox.BorderBrush>
                     <LinearGradientBrush EndPoint="0,20" MappingMode="Absolute" StartPoint="0,0">
                         <GradientStop Color="#FFABADB3" Offset="0.05"/>

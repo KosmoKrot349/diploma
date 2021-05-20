@@ -20,7 +20,7 @@ namespace WpfApp12.strategiesForBookkeeper.MenuClick
         public void MenuClick()
         {
             windowObj.HideAll();
-            windowObj.OplataGrid.Visibility = Visibility.Visible;
+            windowObj.PaymentGrid.Visibility = Visibility.Visible;
             windowObj.Groups.Items.Clear();
             try
             {

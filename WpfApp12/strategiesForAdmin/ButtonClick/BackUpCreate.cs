@@ -21,9 +21,9 @@ namespace WpfApp12.strategiesForAdmin
 
         public void buttonClick()
         {
-            if (windowObj.bckpName.Text != "")
+            if (windowObj.BackUpFileNameCreateBackUp.Text != "")
             {
-                string backUpName = windowObj.bckpName.Text;
+                string backUpName = windowObj.BackUpFileNameCreateBackUp.Text;
                 for (int i = 0; i < backUpName.Length; i++)
                 {
                     if ((backUpName[i] >= 'а' && backUpName[i] <= 'я') || (backUpName[i] >= 'А' && backUpName[i] <= 'Я')) { MessageBox.Show("В имени копии не должно быть русскких символов"); return; }
@@ -48,14 +48,14 @@ namespace WpfApp12.strategiesForAdmin
             object[] stringArrFromSettingFile = settingList.ToArray();
 
             string lastStringForBatFile = "pg_dump -d postgresql://postgres:" + stringArrFromSettingFile[1].ToString().Split(':')[1] + "@" + stringArrFromSettingFile[0].ToString().Split(':')[1] + ":" + stringArrFromSettingFile[2].ToString().Split(':')[1] + "/db > ";
-            if (windowObj.bckpName.Text == "")
+            if (windowObj.BackUpFileNameCreateBackUp.Text == "")
             {
                 DateTime dateNow = DateTime.Now;
-                lastStringForBatFile += windowObj.bckpPyt.Text + "" + dateNow.Day + "_" + dateNow.Month + "_" + dateNow.Year + "_" + dateNow.Hour + "_" + dateNow.Minute + "_" + dateNow.Second + ".sql";
+                lastStringForBatFile += windowObj.BackUpPathCreateBackUp.Text + "" + dateNow.Day + "_" + dateNow.Month + "_" + dateNow.Year + "_" + dateNow.Hour + "_" + dateNow.Minute + "_" + dateNow.Second + ".sql";
             }
             else
             {
-                lastStringForBatFile += windowObj.bckpPyt.Text + windowObj.bckpName.Text + ".sql";
+                lastStringForBatFile += windowObj.BackUpPathCreateBackUp.Text + windowObj.BackUpFileNameCreateBackUp.Text + ".sql";
 
             }
             stringArrFromBatFile[2] = lastStringForBatFile;
