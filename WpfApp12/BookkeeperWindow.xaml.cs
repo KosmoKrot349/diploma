@@ -33,14 +33,16 @@ namespace WpfApp12
         public bool selected = false;
 
 
-        public filtr filter = new filtr();
-        public filtr PeopleFromCashboxFilter = new filtr();
-        public filtr ProfitTypesFromCashboxFilter = new filtr();
+        public filter filter = new filter();
+        public filter PeopleFromCashboxFilter = new filter();
+        public filter ProfitTypesFromCashboxFilter = new filter();
 
-        public filtr StaffFromCashboxFiltr = new filtr();
-        public filtr CostsTypesFromCashboxFilter = new filtr();
+        public filter StaffFromCashboxFiltr = new filter();
+        public filter CostsTypesFromCashboxFilter = new filter();
         public string personForProfit = "";
-
+        IButtonClick actionReactButton;
+        IMenuClick actionReactMenu;
+        
 
         //+
         public BookkeeperWindow()
@@ -72,96 +74,136 @@ namespace WpfApp12
 
             strategiesForBookkeeper.OtherMethods.HideAll.Hide(this);
         }
-        //+
-      
-        //переход из меню бухаглтера в меню админа +
-        private void AdminRoleB_Click(object sender, RoutedEventArgs e)
+
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            IButtonClick actionReact = new ToAdmin(this);
-            actionReact.ButtonClick();
+            Button button = sender as Button;
+            switch (button.Name)
+            {
+                //закрытие запими об оплате +
+                case "ClosePaymentEntry": { actionReactButton = new ClosePaymentEntry(this); break; }
+                //открытие записи +
+                case "UnClosePaymentEntry": { actionReactButton = new UnClosePaymentEntry(this); break; }
+                //приняте оплаты +
+                case "AddPayment": { actionReactButton = new AddPayment(this); break; }
+                //остановка оучения+
+                case "LearnStop": { actionReactButton = new LearnStop(this); break; }
+                //восстановление обучения+
+                case "LearnRestart": { actionReactButton = new LearnRestart(this); break; }
+                // переход к добавление дохода+
+                case "GoToAddProfit": { actionReactButton = new GoToAddProfit(this); break; }
+                //добавление дохода в базу+
+                case "AddProfit": { actionReactButton = new AddProfit(this); break; }
+                //удаление дохода+ 
+                case "DeleteProfit": { actionReactButton = new DeleteProfit(this); break; }
+                //переход к имзенению дохода+
+                case "GoToChangeProfit": { actionReactButton = new GoToChangeProfit(this); break; }
+                //изменение дохода+
+                case "ChangeProfit": { actionReactButton = new ChangeProfit(this); break; }
+                //переход к доабвлению расходов+
+                case "GoToAddCosts": { actionReactButton = new GoToAddCosts(this); break; }
+                //добавление расхода в базу+
+                case "AddCosts": { actionReactButton = new AddCosts(this); break; }
+                //удаление расхода+
+                case "DeleteCosts": { actionReactButton = new DeleteCosts(this); break; }
+                //переход к изменению расхода+
+                case "GoToChangeCosts": { actionReactButton = new GoToChangeCosts(this); break; }
+                //изменение расхода+
+                case "ChangeCosts": { actionReactButton = new ChangeCosts(this); break; }
+                //сохранение налогов+
+                case "SaveTax": { actionReactButton = new SaveTax(this); break; }
+                //выбрать всех в таблице начилсений +
+                case "AccrualsSelectAll": { actionReactButton = new AccrualsSelectAll(this); break; }
+                //переход к предыдущему месяцу в начислениях +
+                case "GoToPreviouslyMonth": { actionReactButton = new GoToPreviouslyMonth(this); break; }
+                //переход к следующему месяцу в начислениях +
+                case "GoToNextMonth": { actionReactButton = new GoToNextMonth(this); break; }
+                //начисление зп за месяц +
+                case "AccrualOfSalaryForMonth": { actionReactButton = new AccrualOfSalaryForMonth(this); break; }
+                //выплата зп +
+                case "SalaryPay": { actionReactButton = new SalaryPay(this); break; }
+                //оплата долга слушателем +
+                case "AddPaymentForArrears": { actionReactButton = new AddPaymentForArrears(this); break; }
+                //удаление долга+
+                case "DeleteArrears": { actionReactButton = new DeleteArrears(this); break; }
+                    
+            }
+            actionReactButton.ButtonClick();
         }
-        //переход из меню бухаглтера в меню бухглатера +
-        private void BuhgRoleB_Click(object sender, RoutedEventArgs e)
+
+        private void Menu_Click(object sender, RoutedEventArgs e)
         {
-            IButtonClick actionReact = new ToBookkeeper();
-            actionReact.ButtonClick();
-        }
-        //переход из меню бухаглтера в меню директора + 
-        private void DirectorRoleB_Click(object sender, RoutedEventArgs e)
-        {
-            IButtonClick actionReact = new ToManager(this);
-            actionReact.ButtonClick();
-        }
-        //выход из пользователя+
-        private void Leave_Click(object sender, RoutedEventArgs e)
-        {
-            IButtonClick actionReact = new UnLogin(this);
-            actionReact.ButtonClick();
-        }
+            MenuItem item = sender as MenuItem;
+            switch (item.Name)
+            {
+                //переход из меню бухаглтера в меню админа +
+                case "GoToAdmin": { actionReactMenu = new ToAdmin(this); break; }
+                //переход из меню бухаглтера в меню бухглатера +'
+                case "GoToBookkeeper": { actionReactMenu = new ToBookkeeper(); break; }
+                //переход из меню бухаглтера в меню директора +
+                case "GoToManager": { actionReactMenu = new ToManager(this); break; }
+                //выход из пользователя+
+                case "Leave": { actionReactMenu = new UnLogin(this); break; }
+                //переход к оплате слушателей+
+                case "PaymentForListenerMenu": { actionReactMenu = new PaymentMenu(this); break; }
+                //переход к таблице доходов+
+                case "ProfitTableMenu": { actionReactMenu = new ProfitMenu(this); break; }
+                //переход к расходам+
+                case "CostsTableMenu": { actionReactMenu = new CostsMenu(this); break; }
+                //переход к налогам+
+                case "TaxesMenu":{ actionReactMenu = new TaxMenu(this); break; }
+                //переход к начислениям+
+                case "AccrualSalaryMenu":{ actionReactMenu = new AccrualsMenu(this); break; }
+                //переход к гриду долга+
+                case "PaymentDebtMenu":{ actionReactMenu = new ArrearsMenu(this); break; }
+                //переход к гриду отчета кассы+
+                case "CashboxReportMenu":{ actionReactMenu = new CashboxReportMenu(this); break; }
+                //переход к гриду отчета статистика+
+                case "StatisticReportMenu":{ actionReactMenu = new StatisticReportMenu(this); break; }
+                //переход к гриду отчета списки выплат+
+                case "PaymentListReportMenu":{ actionReactMenu = new ListOfPaymentReportMenu(this); break; }
+                //кликл по меню прав+
+                case "RolesMenu":{ actionReactMenu = new AccessMenu(this); break; }
+                //кликл по меню доходов+
+                case "ProfitMenu":{ actionReactMenu = new SelectProfitMenu(this); break; }
+                //кликл по меню расходов+
+                case "CostsMenu":{ actionReactMenu = new SelectCostsMenu(this); break; }
+                //кликл по меню отчётов+
+                case "ReportsMenu":{ actionReactMenu = new ReportMenu(this); break; }
         
-        //переход к оплате слушателей+
-        private void OplataSlysh_Click(object sender, RoutedEventArgs e)
-        {
-            IMenuClick actionReact = new PaymentMenu(this);
-            actionReact.MenuClick();
-        }
-        //изменение группы выбор слушталей +
-        private void Groups_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ComboBox cmb = sender as ComboBox;
-            if (cmb.Name == "ProfitAddPErsonType")
-            {
-                ISelectionChanged actionReact = new SelectingPersonTypeProfitAdd(this, cmb);
-                actionReact.SelectionChanged();
+
+
             }
-
-            if (cmb.Name == "ProfitChangePersonType")
-            {
-                ISelectionChanged actionReact = new SelectingPersonTypeProfitChange(this,cmb);
-                actionReact.SelectionChanged();
+            actionReactMenu.MenuClick();
+        }
+        private void Combobox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ISelectionChanged actionReactComboBox=null;
+            ComboBox comboBox = sender as ComboBox;
+            switch (comboBox.Name)
+            { //выбор слушателя +
+                case "Listener": { updateDefraymentTable.Update(this, 1); break; }
+                //выбор слушателя долг +
+                case "ListenerDebt": { updateDefraymentTable.Update(this, 2); break; }
+                //выбор группы человека при добавлении доходв
+                case "ProfitAddPErsonType": { actionReactComboBox= new SelectingPersonTypeProfitAdd(this, comboBox); break; }
+                //выбор группы человека при изменении доходв
+                case "ProfitChangePersonType": { actionReactComboBox= new SelectingPersonTypeProfitChange(this, comboBox); break; }
+                //изменение группы выбор слушталей +
+                case "Groups": { actionReactComboBox= new SelectingGroop(this); break; }
+                //изменение группы выбор слушталей в долгах +
+                case "GroupsDolg": { actionReactComboBox= new SelectingGroopArrears(this); break; }
+                //выбор человека при добавленнии дохода
+                case "ProfitAddPerson": { actionReactComboBox= new SelectingPersonAddProfit(this); break; }
+                //выбор человека при изменении дохода
+                case "ProfitChangePerson": { actionReactComboBox= new SelectingPersonChangeProfit(this); break; }
+                   
             }
-
-            if (cmb.Name== "Groups")
-            {
-                ISelectionChanged actionReact = new SelectingGroop(this);
-                actionReact.SelectionChanged();
-            }
-
-            if (cmb.Name == "GroupsDolg")
-            {
-                ISelectionChanged actionReact = new SelectingGroopArrears(this);
-                actionReact.SelectionChanged();
-            }
+           if(actionReactComboBox!=null) actionReactComboBox.SelectionChanged();
+            
 
         }
-        //выбор слушателя +
-        private void Listener_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ComboBox cmb = sender as ComboBox;
-            if (cmb.Name == "Listener")
-                updateDefraymentTable.Update(this, 1);
-            if (cmb.Name == "ListenerDebt")
-                updateDefraymentTable.Update(this, 2);
 
-        }
-        //закрытие запими об оплате +
-        private void Closeing_Click(object sender, RoutedEventArgs e)
-        {
-            IButtonClick actionReact = new ClosePaymentEntry(this);
-            actionReact.ButtonClick();
-        }
-        //открытие записи +
-        private void Open_Click(object sender, RoutedEventArgs e)
-        {
-            IButtonClick actionReact = new UnClosePaymentEntry(this);
-            actionReact.ButtonClick();
-        }
-        //приняте оплаты +
-        private void AddPAy_Click(object sender, RoutedEventArgs e)
-        {
-            IButtonClick actionReact = new AddPayment(this);
-            actionReact.ButtonClick();
-        }
         //вод только цифер +
         public void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
@@ -174,228 +216,19 @@ namespace WpfApp12
                 if ((e.Text == ",") && ((tbne.Text.IndexOf(",") != -1) || (tbne.Text == "")))
             { e.Handled = true; }
         }
-      //остановка оучения+
-        private void StopLern_Click(object sender, RoutedEventArgs e)
-        {
-            IButtonClick actionReact = new LearnStop(this);
-            actionReact.ButtonClick();
-        }
-        //восстановление обучения+
-        private void RestartLern_Click(object sender, RoutedEventArgs e)
-        {
-            IButtonClick actionReact = new LearnRestart(this);
-            actionReact.ButtonClick();
-        }
-        //переход к таблице доходов+
-        private void DodhodyTable_Click(object sender, RoutedEventArgs e)
-        {
-            IMenuClick actionReact = new ProfitMenu(this);
-            actionReact.MenuClick();
-        }
-        // переход к добавление дохода+
-        private void DohAddButton_Click(object sender, RoutedEventArgs e)
-        {
-            IButtonClick actionReact = new GoToAddProfit(this);
-            actionReact.ButtonClick();
-        }
-        //добавление дохода в базу+
-        private void DohodyAddButton_Click(object sender, RoutedEventArgs e)
-        {
-            IButtonClick actionReact = new AddProfit(this);
-            actionReact.ButtonClick();
-        }
-        //удаление дохода+ 
-        private void DohDeleteButton_Click(object sender, RoutedEventArgs e)
-        {
-            IButtonClick actionReact = new DeleteProfit(this);
-            actionReact.ButtonClick();
-        }
-        //переход к имзенению дохода+
-        private void DohChangeButton_Click(object sender, RoutedEventArgs e)
-        {
-            IButtonClick actionReact = new GoToChangeProfit(this);
-            actionReact.ButtonClick();
-
-        }
-        //изменение дохода+
-        private void DohodyChangeButton_Click(object sender, RoutedEventArgs e)
-        {
-            IButtonClick actionReact = new ChangeProfit(this);
-            actionReact.ButtonClick();
-        }
-        //переход к расходам+
-        private void RashodyTable_Click(object sender, RoutedEventArgs e)
-        {
-            IMenuClick actionReact = new CostsMenu(this);
-            actionReact.MenuClick();
-        }
-        //переход к доабвлению расходов+
-        private void RashAddButton_Click(object sender, RoutedEventArgs e)
-        {
-            IButtonClick actionReact = new GoToAddCosts(this);
-            actionReact.ButtonClick();
-        }
-        //добавление расхода в базу+
-        private void RashodyAddButton_Click(object sender, RoutedEventArgs e)
-        {
-            IButtonClick actionReact = new AddCosts(this);
-            actionReact.ButtonClick();
-        }
-        //удаление расхода+
-        private void RashDeleteButton_Click(object sender, RoutedEventArgs e)
-        {
-            IButtonClick actionReact = new DeleteCosts(this);
-            actionReact.ButtonClick();
-        }
-        //переход к изменению расхода+
-        private void RashChangeButton_Click(object sender, RoutedEventArgs e)
-        {
-            IButtonClick actionReact = new GoToChangeCosts(this);
-            actionReact.ButtonClick();
-        }
-        //изменение расхода+
-        private void RashodyChangeButton_Click(object sender, RoutedEventArgs e)
-        {
-            IButtonClick actionReact = new ChangeCosts(this);
-            actionReact.ButtonClick();
-        }
-        //переход к налогам+
-        private void Nalogi_Click(object sender, RoutedEventArgs e)
-        {
-            IMenuClick actionReact = new TaxMenu(this);
-            actionReact.MenuClick();
-        }
-        //сохранение налогов+
-        private void NalogiSave_Click(object sender, RoutedEventArgs e)
-        {
-            IButtonClick actionReact = new SaveTax(this);
-            actionReact.ButtonClick();
-        }
-        //переход к начислениям+
-        private void ZP_Click(object sender, RoutedEventArgs e)
-        {
-            IMenuClick actionReact = new AccrualsMenu(this);
-            actionReact.MenuClick();
-        }
-        //выбрать всех в таблице начилсений +
-        private void NuchSelectAllSotrBut_Click(object sender, RoutedEventArgs e)
-        {
-            IButtonClick actionReact = new AccrualsSelectAll(this);
-            actionReact.ButtonClick();
-        }
-        //переход к предыдущему месяцу в начислениях +
-        private void NachMonthPrev_Click(object sender, RoutedEventArgs e)
-        {
-            IButtonClick actionReact = new GoToPreviouslyMonth(this);
-            actionReact.ButtonClick();
-        }
-        //переход к следующему месяцу в начислениях +
-        private void NachMonthNext_Click(object sender, RoutedEventArgs e)
-        {
-            IButtonClick actionReact = new GoToNextMonth(this);
-            actionReact.ButtonClick();
-        }
-        //начисление зп за месяц +
-        private void NachAddBut_Click(object sender, RoutedEventArgs e)
-        {
-            IButtonClick actionReact = new AccrualOfSalaryForMonth(this);
-            actionReact.ButtonClick();
-        }
-        //выплата зп +
-        private void ViplataBut_Click(object sender, RoutedEventArgs e)
-        {
-            IButtonClick actionReact = new SalaryPay(this);
-            actionReact.ButtonClick();
-        }
+  
         //применение фильтров + 
-        private void FiltrButton_Click(object sender, RoutedEventArgs e)
+        private void FilterButton_Click(object sender, RoutedEventArgs e)
         {
             ApplyFiltersButtonClick.ApplyForBookkeeper(this, sender);
         }
-        //переход к гриду долга+
-        private void OplataDolgMenu_Click(object sender, RoutedEventArgs e)
-        {
-            IMenuClick actionReact = new ArrearsMenu(this);
-            actionReact.MenuClick();
-        }
-        //оплата долга слушателем +
-        private void AddPAyDolg_Click(object sender, RoutedEventArgs e)
-        {
-            IButtonClick actionReact = new AddPaymentForArrears(this);
-            actionReact.ButtonClick();
-        }
-        //удаление долга+
-        private void deleteDolg_Click(object sender, RoutedEventArgs e)
-        {
-            IButtonClick actionReact = new DeleteArrears(this);
-            actionReact.ButtonClick();
-        }
-        //переход к гриду отчета кассы+
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            IMenuClick actionReact = new CashboxReportMenu(this);
-            actionReact.MenuClick();
-        }
-        //переход к гриду отчета статистика+
-        private void MenuItem_Click_1(object sender, RoutedEventArgs e)
-        {
-            IMenuClick actionReact = new StatisticReportMenu(this);
-            actionReact.MenuClick();
-
-        }
-        //переход к гриду отчета списки выплат+
-        private void MenuItem_Click_2(object sender, RoutedEventArgs e)
-        {
-            IMenuClick actionReact = new ListOfPaymentReportMenu(this);
-            actionReact.MenuClick();
-        }
-        //кликл по меню прав+
-        private void MenuRolesB_Click(object sender, RoutedEventArgs e)
-        {
-            IMenuClick actionReact = new AccessMenu(this);
-            actionReact.MenuClick();
-        }
-        //кликл по меню доходов+
-        private void Dohody_Click(object sender, RoutedEventArgs e)
-        {
-            IMenuClick actionReact = new SelectProfitMenu(this);
-            actionReact.MenuClick();
-        }
-        //кликл по меню расходов+
-        private void Rashody_Click(object sender, RoutedEventArgs e)
-        {
-            IMenuClick actionReact = new SelectCostsMenu(this);
-            actionReact.MenuClick();
-        }
-        //кликл по меню отчётов+
-        private void otchetMenu_Click(object sender, RoutedEventArgs e)
-        {
-            IMenuClick actionReact = new ReportMenu(this);
-            actionReact.MenuClick();
-        }
         //разблокировка всех кнопок +
-        private void NachDataGrid_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
+        private void DataGrid_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
         {
             ISelectedCellsChanged actionReact = new ControlButtonState(this);
             actionReact.SelectedCellsChanged();
         }
-   
-
-        private void dohAddKtoVnesCm_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            ComboBox cmb = sender as ComboBox;
-            if (cmb.Name == "dohAddKtoVnesCm")
-            {
-                ISelectionChanged actionReact = new SelectingPersonAddProfit(this);
-                actionReact.SelectionChanged();
-            }
-
-            if (cmb.Name == "ProfitChangePerson")
-            {
-                ISelectionChanged actionReact = new SelectingPersonChangeProfit(this);
-                actionReact.SelectionChanged();
-            }
-        }
+        
     }
 }
 

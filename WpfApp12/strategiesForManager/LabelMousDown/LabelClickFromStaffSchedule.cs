@@ -37,7 +37,7 @@ namespace WpfApp12.strategiesForManager.LabelMousDown
             if (index_i != 0 && lb.Content.ToString() != "")
             {
                 window.labelArrForStaffSchedule[index_i, index_j].Background = Brushes.Aqua;
-                window.ShtatRaspSaveBut.IsEnabled = true;
+                window.SaveStaffSchedule.IsEnabled = true;
                 for (int j = 0; j < window.checkBoxArrForStaffSchedule.Length; j++)
                 {
                     window.checkBoxArrForStaffSchedule[j].IsChecked = false;

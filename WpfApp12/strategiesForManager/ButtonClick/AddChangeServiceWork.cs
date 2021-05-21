@@ -49,7 +49,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             adapter.Update(table);
             DataGridUpdater.updateServiceWorksDataGrid(windowObj);
             windowObj.ServiceWorkDataGrid.SelectedItem = null;
-            windowObj.ObslWorkDeleteButton.IsEnabled = false;
+            windowObj.DeleteServiceWork.IsEnabled = false;
         }
     }
 }

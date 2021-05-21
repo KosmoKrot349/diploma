@@ -36,8 +36,8 @@
 
             <Label Content="Порт БД" Grid.Column="0" Grid.Row="4" FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Right" />
             <TextBox  Name="DBPort" Grid.Column="1" Grid.Row="4" ToolTip="Напишите здесь порт от базы" />
-            <Button Content="Проверить подключение" Grid.Column="0" FontSize="16" Grid.Row="7" Click="Button_Click11" ToolTip="Нажмите что бы проверить подключение по заданным настройкам" />
-            <Button Content="Сохранить настройки" Grid.Column="1" FontSize="16" Grid.Row="7" Click="Button_Click_1" ToolTip="Нажмите что бы сохранить настройки без проверки" />
+            <Button Content="Проверить подключение" Name="ConnectionCheck" Grid.Column="0" FontSize="16" Grid.Row="7" Click="Button_Click" ToolTip="Нажмите что бы проверить подключение по заданным настройкам" />
+            <Button Content="Сохранить настройки" Name="EnforcementSeatings" Grid.Column="1" FontSize="16" Grid.Row="7" Click="Button_Click" ToolTip="Нажмите что бы сохранить настройки без проверки" />
         </Grid>
 
         <!--грид окна авторизации-->
@@ -93,7 +93,7 @@
                     <ColumnDefinition />
                     <ColumnDefinition Width="50"/>
                 </Grid.ColumnDefinitions>
-                <Button Content="Вход" ToolTip="Нажмите для входа в Вашу учётную запись." Grid.Column="1" FontSize="24" Click="Button_Click" />
+                <Button Content="Вход" Name="Authorize" ToolTip="Нажмите для входа в Вашу учётную запись." Grid.Column="1" FontSize="24" Click="Button_Click" />
             </Grid>
         </Grid>
     </Grid>

@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WpfApp12.strategiesForAdmin.MenuClick
+namespace WpfApp12.strategiesForDataIn.ButtonClick
 {
-    interface IMenuClick
+    interface IButtonClick
     {
-       void MenuClick();
+        void ButtonClick();
     }
 }

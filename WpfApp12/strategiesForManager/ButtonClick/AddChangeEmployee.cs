@@ -10,11 +10,11 @@ using System.Windows;
 
 namespace WpfApp12.strategiesForManager.ButtonClick
 {
-    class AddEmployee:IButtonClick
+    class AddChangeEmployee:IButtonClick
     {
         ManagerWindow windoObj;
 
-        public AddEmployee(ManagerWindow windoObj)
+        public AddChangeEmployee(ManagerWindow windoObj)
         {
             this.windoObj = windoObj;
         }
@@ -50,9 +50,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 
             windoObj.EmployeesDataGrid.SelectedItem = null;
             //все сотрудники
-            windoObj.allSotrDeleteButton.IsEnabled = false;
-            windoObj.allSotrToPrepBtton.IsEnabled = false;
-            windoObj.allSotrToShtatBtton.IsEnabled = false;
+            windoObj.EmployeeDelet.IsEnabled = false;
+            windoObj.GoToEmployeeToTeacher.IsEnabled = false;
+            windoObj.GoToEmployeeToStuff.IsEnabled = false;
             DataGridUpdater.updateEmploeesDataGrid(windoObj);
         }
     }

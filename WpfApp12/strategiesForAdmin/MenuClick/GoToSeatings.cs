@@ -9,9 +9,9 @@ using Npgsql;
 using System.Collections;
 using System.Windows.Media;
 
-namespace WpfApp12.strategiesForAdmin
+namespace WpfApp12.strategiesForAdmin.MenuClick
 {
-    class GoToSeatings:IButtonClick
+    class GoToSeatings:IMenuClick
     {
         private AdminWindow windowObj;
 
@@ -20,15 +20,15 @@ namespace WpfApp12.strategiesForAdmin
             this.windowObj = windowObj;
         }
 
-        public void buttonClick()
+        public void MenuClick()
         {
-            windowObj.MenuRolesA.BorderBrush = null;
+            windowObj.MenuRoles.BorderBrush = null;
             windowObj.usersMenu.BorderBrush = null;
             windowObj.archiveMenu.BorderBrush = null;
             windowObj.settingMenu.BorderBrush = Brushes.DarkRed;
-            windowObj.ToNextYearMenu.BorderBrush = null;
+            windowObj.GoToNextYear.BorderBrush = null;
             windowObj.hideAll();
-            windowObj.settingGrid.Visibility = Visibility.Visible;
+            windowObj.SettingsGrid.Visibility = Visibility.Visible;
 
             StreamReader streamReader = new StreamReader(@"setting.txt");
             ArrayList list = new ArrayList();

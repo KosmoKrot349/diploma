@@ -37,8 +37,8 @@ namespace WpfApp12.strategiesForAdmin
             windowObj.hideAll();
             windowObj.UsersGrid.Visibility = Visibility.Visible;
             windowObj.usersDGrid.SelectedItem = null;
-            windowObj.changeUser.IsEnabled = false;
-            windowObj.dellUser.IsEnabled = false;
+            windowObj.GoToChangeUser.IsEnabled = false;
+            windowObj.DelUser.IsEnabled = false;
             DataGridUpdater.updateUsersDataGrid(windowObj);
         }
     }

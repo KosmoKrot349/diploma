@@ -8,9 +8,9 @@ using System.IO;
 using System.Windows;
 using System.Windows.Media;
 
-namespace WpfApp12.strategiesForAdmin
+namespace WpfApp12.strategiesForAdmin.MenuClick
 {
-    class GoToNextYear:IButtonClick
+    class GoToNextYear:IMenuClick
     {
         private AdminWindow windowObj;
 
@@ -19,15 +19,15 @@ namespace WpfApp12.strategiesForAdmin
             this.windowObj = windowObj;
         }
 
-        public void buttonClick()
+        public void MenuClick()
         {
-            windowObj.MenuRolesA.BorderBrush = null;
+            windowObj.MenuRoles.BorderBrush = null;
             windowObj.usersMenu.BorderBrush = null;
             windowObj.archiveMenu.BorderBrush = null;
             windowObj.settingMenu.BorderBrush = null;
-            windowObj.ToNextYearMenu.BorderBrush = Brushes.DarkRed;
+            windowObj.GoToNextYear.BorderBrush = Brushes.DarkRed;
             windowObj.hideAll();
-            windowObj.NextYearGrid.Visibility = Visibility.Visible;
+            windowObj.GoToNextYearGrid.Visibility = Visibility.Visible;
             windowObj.BackUpFileNameGoToNextYear.Text = "";
             windowObj.BackUpFilePathGoToNextYear.Text = "";
             windowObj.DBPathGoToNextYear.Text = "";

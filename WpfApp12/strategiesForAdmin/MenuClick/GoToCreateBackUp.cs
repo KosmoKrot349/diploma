@@ -7,9 +7,9 @@ using System.Windows;
 using System.IO;
 using System.Collections;
 
-namespace WpfApp12.strategiesForAdmin
+namespace WpfApp12.strategiesForAdmin.MenuClick
 {
-    class GoToCreateBackUp : IButtonClick
+    class GoToCreateBackUp : IMenuClick
     {
         private AdminWindow windowObj;
 
@@ -18,10 +18,10 @@ namespace WpfApp12.strategiesForAdmin
             this.windowObj = windowObj;
         }
 
-        public void buttonClick()
+        public void MenuClick()
         {
             windowObj.hideAll();
-            windowObj.crDumpGrid.Visibility = Visibility.Visible;
+            windowObj.CreateBackUpGrid.Visibility = Visibility.Visible;
 
             windowObj.BackUpFileNameCreateBackUp.Text = "";
             windowObj.BackUpPathCreateBackUp.Text = "";

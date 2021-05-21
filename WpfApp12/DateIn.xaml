@@ -8,22 +8,22 @@
        Height="104.651" Title="Ввод даты" Width="418.605" ResizeMode="NoResize">
     <Grid>
         <Grid Name="gridToRas"  Visibility="Collapsed">
-            <Button Content="Выбрать" HorizontalAlignment="Left" Margin="282,41,0,0" VerticalAlignment="Top" Width="121" Click="Button_Click"/>
+            <Button Content="Выбрать" HorizontalAlignment="Left" Margin="282,41,0,0" VerticalAlignment="Top" Width="121" Name="InputDateForSchedule" Click="Button_Click"/>
             <DatePicker HorizontalAlignment="Left" Name="datePick" Margin="10,42,0,0" VerticalAlignment="Top" Width="267"/>
             <Label Content="Введите дату понедельника с которого начнётся новая неделя" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="393"/>
         </Grid>
         <Grid Name="ToPayGrid" Visibility="Collapsed">
-            <Button Content="Выбрать" HorizontalAlignment="Left" Margin="282,41,0,0" VerticalAlignment="Top" Width="121" Click="Button_Click_1" />
+            <Button Content="Выбрать" HorizontalAlignment="Left" Margin="282,41,0,0" VerticalAlignment="Top" Width="121" Name="InputDateForLearningStop" Click="Button_Click" />
             <DatePicker HorizontalAlignment="Left" Name="SelectDateToPay" Margin="10,42,0,0" VerticalAlignment="Top" Width="267"/>
             <Label Content="Введите любую дату месяца в котором остановилось обучение " HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="393"/>
         </Grid>
         <Grid Name="FinePrecientGrid" Visibility="Collapsed">
-            <Button Content="Сохранить" HorizontalAlignment="Left" Margin="282,41,0,0" VerticalAlignment="Top" Width="121" Click="Button_Click_2" />
+            <Button Content="Сохранить" HorizontalAlignment="Left" Margin="282,41,0,0" VerticalAlignment="Top" Width="121" Name="InputFine" Click="Button_Click" />
             <Label Content="Введите процент пени" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="393"/>
             <TextBox Name="FinePrecent" HorizontalAlignment="Left" Height="23" Margin="10,41,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="267" PreviewTextInput="PenyaProc_PreviewTextInput"/>
         </Grid>
         <Grid Name="PaymentSalaryGrid" Visibility="Collapsed">
-            <Button Content="Выплатить" HorizontalAlignment="Left" Margin="282,41,0,0" VerticalAlignment="Top" Width="121" Click="Button_Click_3"  />
+            <Button Content="Выплатить" HorizontalAlignment="Left" Margin="282,41,0,0" VerticalAlignment="Top" Width="121" Click="Button_Click" Name="InputSalary" />
             <Label Content="Введите размер ЗП" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Width="393"/>
             <TextBox Name="PaymentSalary" HorizontalAlignment="Left" Height="23" Margin="10,41,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="267" PreviewTextInput="PenyaProc_PreviewTextInput"/>
         </Grid>

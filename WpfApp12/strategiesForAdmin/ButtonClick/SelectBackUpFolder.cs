@@ -32,7 +32,7 @@ namespace WpfApp12.strategiesForAdmin
                 {
                     if ((FilderBrowserDialog.SelectedPath[i] >= 'а' && FilderBrowserDialog.SelectedPath[i] <= 'я') || (FilderBrowserDialog.SelectedPath[i] >= 'А' && FilderBrowserDialog.SelectedPath[i] <= 'Я')) { MessageBox.Show("В пути не должно быть русскких символов"); return; }
                 }
-                if (but.Name == "SelectBackUpPathNextYear") windowObj.BackUpFilePathGoToNextYear.Text = FilderBrowserDialog.SelectedPath + "\\";
+                if (but.Name == "SelectBackUpFolderForNextYear") windowObj.BackUpFilePathGoToNextYear.Text = FilderBrowserDialog.SelectedPath + "\\";
                 else
                     windowObj.BackUpPathCreateBackUp.Text = FilderBrowserDialog.SelectedPath + "\\";
             }

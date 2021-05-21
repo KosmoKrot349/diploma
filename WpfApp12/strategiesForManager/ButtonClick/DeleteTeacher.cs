@@ -52,8 +52,8 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             windowObj.TeachersDataGrid.SelectedItem = null;
 
             //преподаватели
-            windowObj.prepDeleteButton.IsEnabled = false;
-            windowObj.prepChangeButton.IsEnabled = false;
+            windowObj.TeacherDelete.IsEnabled = false;
+            windowObj.GoToChangeTeacher.IsEnabled = false;
         }
     }
 }

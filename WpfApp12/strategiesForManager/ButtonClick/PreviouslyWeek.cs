@@ -44,9 +44,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
             windowObj.GroopsScheduleDateLabel.Content = "Расписание на " + windowObj.dateMonday.ToShortDateString() + " - " + windowObj.dateMonday.AddDays(6).ToShortDateString();
             Button but = sender as Button;
-            if (but.Name == "PrevRaspBut") ShowLearningSchedule.ShowForGroops(windowObj.dateMonday, windowObj.dateMonday.AddDays(6),windowObj);
-            if (but.Name == "PrevRaspButP") ShowLearningSchedule.ShowForTeachers(windowObj.dateMonday, windowObj.dateMonday.AddDays(6),windowObj);
-            if (but.Name == "PrevRaspButС") ShowLearningSchedule.ShowForCabinets(windowObj.dateMonday, windowObj.dateMonday.AddDays(6),windowObj);
+            if (but.Name == "PreviouslyWeekGroopSchedule") ShowLearningSchedule.ShowForGroops(windowObj.dateMonday, windowObj.dateMonday.AddDays(6),windowObj);
+            if (but.Name == "PreviouslyWeekTeacherSchedule") ShowLearningSchedule.ShowForTeachers(windowObj.dateMonday, windowObj.dateMonday.AddDays(6),windowObj);
+            if (but.Name == "PreviouslyWeekCabinetSchedule") ShowLearningSchedule.ShowForCabinets(windowObj.dateMonday, windowObj.dateMonday.AddDays(6),windowObj);
 
             for (int i = 0; i < (windowObj.quanLessonsInDay * 7) + 1; i++)
             {

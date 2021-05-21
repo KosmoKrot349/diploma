@@ -38,8 +38,8 @@ namespace WpfApp12.strategiesForBookkeeper.ButtonClick
                 }
                 catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
                 windowObj.CostsDataGrid.SelectedItem = null;
-                windowObj.RashDeleteButton.IsEnabled = false;
-                windowObj.RashChangeButton.IsEnabled = false;
+                windowObj.DeleteCosts.IsEnabled = false;
+                windowObj.GoToChangeCosts.IsEnabled = false;
                 DataGridUpdater.updateCostsDataGrid(windowObj);
             }
         }

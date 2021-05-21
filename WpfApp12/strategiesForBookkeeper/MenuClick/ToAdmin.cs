@@ -6,9 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace WpfApp12.strategiesForBookkeeper.ButtonClick
+namespace WpfApp12.strategiesForBookkeeper.MenuClick
 {
-    class ToAdmin : IButtonClick
+    class ToAdmin : IMenuClick
     {
         BookkeeperWindow windowObj;
 
@@ -17,10 +17,10 @@ namespace WpfApp12.strategiesForBookkeeper.ButtonClick
             this.windowObj = windowObj;
         }
 
-        public void ButtonClick()
+        public void MenuClick()
         {
             int checkerResult = 0;
-            if (windowObj.logUser != -1) checkerResult = Checker.adminCheck(windowObj.logUser, windowObj.connectionString);
+            if (windowObj.logUser != -1) checkerResult = Checker.AdminCheck(windowObj.logUser, windowObj.connectionString);
 
             if (checkerResult == 1 || windowObj.logUser == -1)
             {

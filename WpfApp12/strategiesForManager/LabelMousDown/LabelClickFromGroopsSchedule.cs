@@ -33,26 +33,26 @@ namespace WpfApp12.strategiesForManager.LabelMousDown
                 }
             }
             window.labelArr[window.iCoordScheduleLabel, window.jCoordScheduleLabel].Background = Brushes.Aqua;
-            window.DeleteRaspBut.IsEnabled = false;
-            window.ChangeRaspBut.IsEnabled = false;
-            window.AddRaspBut.IsEnabled = false;
-            window.DeleteRaspButС.IsEnabled = false;
-            window.ChangeRaspButС.IsEnabled = false;
-            window.AddRaspButС.IsEnabled = false;
-            window.DeleteRaspButP.IsEnabled = false;
-            window.ChangeRaspButP.IsEnabled = false;
-            window.AddRaspButP.IsEnabled = false;
-            if (window.labelArr[window.iCoordScheduleLabel, window.jCoordScheduleLabel].Content.ToString() == "") { window.AddRaspBut.IsEnabled = true; window.AddRaspButС.IsEnabled = true; window.AddRaspButP.IsEnabled = true; }
+            window.DeleteScheduleGroop.IsEnabled = false;
+            window.GoToChangeScheduleGroop.IsEnabled = false;
+            window.GoToAddScheduleGroop.IsEnabled = false;
+            window.DeleteScheduleCabinet.IsEnabled = false;
+            window.GoToChangeScheduleCabinet.IsEnabled = false;
+            window.GoToAddScheduleCabinet.IsEnabled = false;
+            window.DeleteScheduleTeacher.IsEnabled = false;
+            window.GoToChangeScheduleTeacher.IsEnabled = false;
+            window.GoToAddScheduleTeacher.IsEnabled = false;
+            if (window.labelArr[window.iCoordScheduleLabel, window.jCoordScheduleLabel].Content.ToString() == "") { window.GoToAddScheduleGroop.IsEnabled = true; window.GoToAddScheduleCabinet.IsEnabled = true; window.GoToAddScheduleTeacher.IsEnabled = true; }
             if (window.labelArr[window.iCoordScheduleLabel, window.jCoordScheduleLabel].Content.ToString() != "")
             {
-                window.DeleteRaspBut.IsEnabled = true;
-                window.ChangeRaspBut.IsEnabled = true;
+                window.DeleteScheduleGroop.IsEnabled = true;
+                window.GoToChangeScheduleGroop.IsEnabled = true;
 
-                window.DeleteRaspButС.IsEnabled = true;
-                window.ChangeRaspButС.IsEnabled = true;
+                window.DeleteScheduleCabinet.IsEnabled = true;
+                window.GoToChangeScheduleCabinet.IsEnabled = true;
 
-                window.DeleteRaspButP.IsEnabled = true;
-                window.ChangeRaspButP.IsEnabled = true;
+                window.DeleteScheduleTeacher.IsEnabled = true;
+                window.GoToChangeScheduleTeacher.IsEnabled = true;
             }
         }
     }

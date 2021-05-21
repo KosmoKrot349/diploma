@@ -53,9 +53,9 @@ namespace WpfApp12.strategiesForManager.OtherMethods
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
             if (window.quanLessonsInDay == 0) { MessageBox.Show("Нету занятий"); return; }
             window.HideAll();
-            window.DeleteRaspBut.IsEnabled = false;
-            window.ChangeRaspBut.IsEnabled = false;
-            window.AddRaspBut.IsEnabled = false;
+            window.DeleteScheduleGroop.IsEnabled = false;
+            window.GoToChangeScheduleGroop.IsEnabled = false;
+            window.GoToAddScheduleGroop.IsEnabled = false;
             window.GroopScheduleGrid.Visibility = Visibility.Visible;
             window.labelArr = new Label[(window.quanLessonsInDay * 7) + 1, window.quanGroops + 2];
             DataGridUpdater.updateGroopScheduleGrid(window);
@@ -111,9 +111,9 @@ namespace WpfApp12.strategiesForManager.OtherMethods
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
             if (window.quanLessonsInDay == 0) { MessageBox.Show("Нету занятий"); return; }
             window.HideAll();
-            window.DeleteRaspButP.IsEnabled = false;
-            window.ChangeRaspButP.IsEnabled = false;
-            window.AddRaspButP.IsEnabled = false;
+            window.DeleteScheduleTeacher.IsEnabled = false;
+            window.GoToChangeScheduleTeacher.IsEnabled = false;
+            window.GoToAddScheduleTeacher.IsEnabled = false;
             window.TeacherScheduleGrid.Visibility = Visibility.Visible;
             window.labelArr = new Label[(window.quanLessonsInDay * 7) + 1, window.quanGroops + 2];
             DataGridUpdater.updateTeacherScheduleGrid(window);
@@ -169,9 +169,9 @@ namespace WpfApp12.strategiesForManager.OtherMethods
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
             if (window.quanLessonsInDay == 0) { MessageBox.Show("Нет занятий"); return; }
             window.HideAll();
-            window.DeleteRaspButС.IsEnabled = false;
-            window.ChangeRaspButС.IsEnabled = false;
-            window.AddRaspButС.IsEnabled = false;
+            window.DeleteScheduleCabinet.IsEnabled = false;
+            window.GoToChangeScheduleCabinet.IsEnabled = false;
+            window.GoToAddScheduleCabinet.IsEnabled = false;
             window.CabinetScheduleGrid.Visibility = Visibility.Visible;
             window.labelArr = new Label[(window.quanLessonsInDay * 7) + 1, window.quanGroops + 2];
             DataGridUpdater.updateScheduleCabinetGrid(window);

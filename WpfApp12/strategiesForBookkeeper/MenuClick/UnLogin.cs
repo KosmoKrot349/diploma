@@ -4,18 +4,18 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WpfApp12.strategiesForAdmin
+namespace WpfApp12.strategiesForBookkeeper.MenuClick
 {
-    class UnLogin:IButtonClick
+    class UnLogin: IMenuClick
     {
-        private AdminWindow windowObj;
+        BookkeeperWindow windowObj;
 
-        public UnLogin(AdminWindow windowObj)
+        public UnLogin(BookkeeperWindow windowObj)
         {
             this.windowObj = windowObj;
         }
 
-        public void buttonClick()
+        public void MenuClick()
         {
             windowObj.logUser = -2;
             MainWindow wind = new MainWindow();

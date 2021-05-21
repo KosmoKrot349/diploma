@@ -49,8 +49,8 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
             DataGridUpdater.updatePositionsDataGrid(windowObj);
             windowObj.PositionsDataGrid.SelectedItem = null;
-            windowObj.StateChangeButton.IsEnabled = false;
-            windowObj.StateDeleteButton.IsEnabled = false;
+            windowObj.GoToChangePosition.IsEnabled = false;
+            windowObj.DeletePosition.IsEnabled = false;
         }
     }
 }

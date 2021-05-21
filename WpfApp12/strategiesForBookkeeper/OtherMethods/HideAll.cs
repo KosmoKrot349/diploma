@@ -32,15 +32,15 @@ namespace WpfApp12.strategiesForBookkeeper.OtherMethods
             window.PaymentListGrid.Visibility = Visibility.Collapsed;
 
             //начисления
-            window.ViplataBut.IsEnabled = false;
+            window.AccrualOfSalaryForMonth.IsEnabled = false;
 
             //расходы
-            window.RashDeleteButton.IsEnabled = false;
-            window.RashChangeButton.IsEnabled = false;
+            window.DeleteCosts.IsEnabled = false;
+            window.GoToChangeCosts.IsEnabled = false;
 
             //доходы
-            window.DohDeleteButton.IsEnabled = false;
-            window.DohChangeButton.IsEnabled = false;
+            window.DeleteProfit.IsEnabled = false;
+            window.GoToChangeProfit.IsEnabled = false;
 
         }
     }

@@ -421,7 +421,7 @@ namespace WpfApp12.strategiesForBookkeeper.ButtonClick
                 }
             }
             windowObj.AccrualsDataGrid.SelectedItem = null;
-            windowObj.ViplataBut.IsEnabled = false;
+            windowObj.AccrualOfSalaryForMonth.IsEnabled = false;
             DataGridUpdater.updateAccrualsSalaryDataGrid(windowObj);
         }
     }

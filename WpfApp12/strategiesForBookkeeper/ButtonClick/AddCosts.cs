@@ -47,8 +47,8 @@ namespace WpfApp12.strategiesForBookkeeper.ButtonClick
             }
 
             windowObj.CostsDataGrid.SelectedItem = null;
-            windowObj.RashDeleteButton.IsEnabled = false;
-            windowObj.RashChangeButton.IsEnabled = false;
+            windowObj.DeleteCosts.IsEnabled = false;
+            windowObj.GoToAddCosts.IsEnabled = false;
         }
     }
 }

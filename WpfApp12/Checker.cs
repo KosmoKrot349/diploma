@@ -11,7 +11,7 @@ namespace WpfApp12
     class Checker
     {
         //возвращает 1 или 0 на вопрос является ли пользователь директором
-        public static int dirCheck(int uid,string conStr)
+        public static int ManagerCheck(int uid,string conStr)
         {
             int a = 0;
             try
@@ -33,7 +33,7 @@ namespace WpfApp12
             return a;
         }
         //возвращает 1 или 0 на вопрос является ли пользователь бухгалтером
-        public static int buhgCheck(int uid, string conStr)
+        public static int BookkeeperCheck(int uid, string conStr)
         {
             int a = 0;
             try
@@ -55,7 +55,7 @@ namespace WpfApp12
             return a;
         }
         //возвращает 1 или 0 на вопрос является ли пользователь админом
-        public static int adminCheck(int uid, string conStr)
+        public static int AdminCheck(int uid, string conStr)
         {
             int a = 0;
             try

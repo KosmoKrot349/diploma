@@ -35,8 +35,8 @@ namespace WpfApp12.strategiesForBookkeeper.ButtonClick
             windowObj.CostsGrid.Visibility = Visibility.Visible;
 
             windowObj.CostsDataGrid.SelectedItem = null;
-            windowObj.RashDeleteButton.IsEnabled = false;
-            windowObj.RashChangeButton.IsEnabled = false;
+            windowObj.DeleteCosts.IsEnabled = false;
+            windowObj.GoToChangeCosts.IsEnabled = false;
             DataGridUpdater.updateCostsDataGrid(windowObj);
         }
     }

@@ -26,7 +26,7 @@ namespace WpfApp12.strategiesForAdmin
             object[] arr = DR.ItemArray;
             windowObj.userID = Convert.ToInt32(arr[0]);
             windowObj.hideAll();
-            windowObj.userChangeGrid.Visibility = Visibility.Visible;
+            windowObj.ChangeUserGrid.Visibility = Visibility.Visible;
             windowObj.uCFio.Text = arr[1].ToString();
             windowObj.uClog.Text = arr[2].ToString();
             windowObj.uCpas.Text = arr[3].ToString();

@@ -30,60 +30,60 @@ namespace WpfApp12.strategiesForManager.OtherMethods
 
 
             //слушатели
-            window.listenerDeleteButton.IsEnabled = false;
-            window.listenerChangeButton.IsEnabled = false;
+            window.DeleteListener.IsEnabled = false;
+            window.GoToChangeListener.IsEnabled = false;
 
             //курсы
-            window.coursDeleteButton.IsEnabled = false;
-            window.coursChangeButton.IsEnabled = false;
+            window.DeleteCourse.IsEnabled = false;
+            window.GoToChangeCourse.IsEnabled = false;
 
             //предметы
-            window.subDeleteButton.IsEnabled = false;
+            window.DeleteSubject.IsEnabled = false;
 
             //группы
-            window.groupDeleteButton.IsEnabled = false;
-            window.groupChangeButton.IsEnabled = false;
+            window.DeleteGroop.IsEnabled = false;
+            window.GoToChangeGroop.IsEnabled = false;
 
             //преподаватели
-            window.prepDeleteButton.IsEnabled = false;
-            window.prepChangeButton.IsEnabled = false;
+            window.TeacherDelete.IsEnabled = false;
+            window.GoToChangeTeacher.IsEnabled = false;
 
             //категории
-            window.kategDeleteButton.IsEnabled = false;
+            window.DeleteCategory.IsEnabled = false;
 
             //все сотрудники
-            window.allSotrDeleteButton.IsEnabled = false;
-            window.allSotrToPrepBtton.IsEnabled = false;
-            window.allSotrToShtatBtton.IsEnabled = false;
+            window.EmployeeDelet.IsEnabled = false;
+            window.GoToEmployeeToTeacher.IsEnabled = false;
+            window.GoToEmployeeToStuff.IsEnabled = false;
 
             //расписание звонков
-            window.zvonkiDeleteButton.IsEnabled = false;
+            window.TimeScheduleDelete.IsEnabled = false;
 
             //кабинеты
-            window.cabDeleteButton.IsEnabled = false;
+            window.DeleteCabinet.IsEnabled = false;
 
             //типы дохода
-            window.TypeDohDeleteButton.IsEnabled = false;
+            window.DeleteCost.IsEnabled = false;
 
             //типы расходов
-            window.TypeRashDeleteButton.IsEnabled = false;
+            window.DeleteProfit.IsEnabled = false;
 
             //коефициент за выслугу лет
-            window.KoefDeleteButton.IsEnabled = false;
+            window.DeleteWorkCoeff.IsEnabled = false;
 
             //работы обслуживания
-            window.ObslWorkDeleteButton.IsEnabled = false;
+            window.DeleteServiceWork.IsEnabled = false;
 
             //должности 
-            window.StateChangeButton.IsEnabled = false;
-            window.StateDeleteButton.IsEnabled = false;
+            window.GoToChangePosition.IsEnabled = false;
+            window.DeletePosition.IsEnabled = false;
 
             //штат
-            window.shtatDeleteButton.IsEnabled = false;
-            window.shtatChangeButton.IsEnabled = false;
+            window.DeleteFromStaff.IsEnabled = false;
+            window.GoToChangeStaffEmployee.IsEnabled = false;
 
             //штатное расписание
-            window.ShtatRaspSaveBut.IsEnabled = false;
+            window.SaveStaffSchedule.IsEnabled = false;
 
             window.ListenerAddGrid.Visibility = Visibility.Collapsed;
             window.helloGrdi.Visibility = Visibility.Collapsed;

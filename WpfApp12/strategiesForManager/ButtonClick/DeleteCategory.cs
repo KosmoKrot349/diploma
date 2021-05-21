@@ -53,7 +53,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             windowObj.CategoriesDataGrid.SelectedItem = null;
 
             //категории
-            windowObj.kategDeleteButton.IsEnabled = false;
+            windowObj.DeleteCategory.IsEnabled = false;
         }
     }
 }

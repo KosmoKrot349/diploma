@@ -37,8 +37,8 @@ namespace WpfApp12.strategiesForAdmin
             }
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
             windowObj.usersDGrid.SelectedItem = null;
-            windowObj.changeUser.IsEnabled = false;
-            windowObj.dellUser.IsEnabled = false;
+            windowObj.GoToChangeUser.IsEnabled = false;
+            windowObj.DelUser.IsEnabled = false;
             DataGridUpdater.updateUsersDataGrid(windowObj);
         }
     }

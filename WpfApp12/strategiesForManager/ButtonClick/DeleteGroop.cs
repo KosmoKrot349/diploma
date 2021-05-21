@@ -77,8 +77,8 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             windowObj.GroupsDataGrid.SelectedItem = null;
 
             //группы
-            windowObj.groupDeleteButton.IsEnabled = false;
-            windowObj.groupChangeButton.IsEnabled = false;
+            windowObj.DeleteGroop.IsEnabled = false;
+            windowObj.GoToChangeGroop.IsEnabled = false;
         }
     }
 }

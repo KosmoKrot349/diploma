@@ -34,7 +34,7 @@ namespace WpfApp12.strategiesForBookkeeper.ButtonClick
                 wind.Owner = windowObj;
                 wind.ShowDialog();
                 windowObj.AccrualsDataGrid.SelectedItem = null;
-                windowObj.ViplataBut.IsEnabled = false;
+                windowObj.AccrualOfSalaryForMonth.IsEnabled = false;
                 DataGridUpdater.updateAccrualsSalaryDataGrid(windowObj);
             }
         }

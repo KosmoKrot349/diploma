@@ -35,7 +35,7 @@ namespace WpfApp12.strategiesForManager.MenuClick
                     window.labelArrForStaffSchedule[i, j].Name = "name_" + i + "_" + j;
                     window.labelArrForStaffSchedule[i, j].BorderThickness = new Thickness(2);
                     window.labelArrForStaffSchedule[i, j].BorderBrush = Brushes.Black;
-                    window.labelArrForStaffSchedule[i, j].MouseDown += window.Label_shtatRasp_MouseDown;
+                    window.labelArrForStaffSchedule[i, j].MouseDown += window.Label_StaffSchedule_MouseDown;
                 }
 
             }

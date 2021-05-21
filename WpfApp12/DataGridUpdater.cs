@@ -1173,13 +1173,13 @@ namespace WpfApp12
 
                         if (reader.GetInt32(6) == 1)
                         {
-                            window.isClose.Content = "Запись об оплате закрыта"; window.Closeing.Visibility = Visibility.Collapsed; window.Open.Visibility = Visibility.Visible;
+                            window.isClose.Content = "Запись об оплате закрыта"; window.ClosePaymentEntry.Visibility = Visibility.Collapsed; window.UnClosePaymentEntry.Visibility = Visibility.Visible;
                             
                         }
-                        else { window.isClose.Content = "Запись об оплате открыта"; window.Closeing.Visibility = Visibility.Visible; window.Open.Visibility = Visibility.Collapsed; }
+                        else { window.isClose.Content = "Запись об оплате открыта"; window.ClosePaymentEntry.Visibility = Visibility.Visible; window.UnClosePaymentEntry.Visibility = Visibility.Collapsed; }
 
-                        if (!reader.IsDBNull(reader.GetOrdinal("date_stop"))) { window.isStop.Content = "Обучение остановленно " + reader.GetDateTime(5).ToShortDateString(); window.RestartLern.Visibility = Visibility.Visible; window.StopLern.Visibility = Visibility.Collapsed; }
-                        if (reader.IsDBNull(reader.GetOrdinal("date_stop"))) { window.isStop.Content = "Обучение не остановленно"; window.RestartLern.Visibility = Visibility.Collapsed; window.StopLern.Visibility = Visibility.Visible; }
+                        if (!reader.IsDBNull(reader.GetOrdinal("date_stop"))) { window.isStop.Content = "Обучение остановленно " + reader.GetDateTime(5).ToShortDateString(); window.LearnRestart.Visibility = Visibility.Visible; window.LearnStop.Visibility = Visibility.Collapsed; }
+                        if (reader.IsDBNull(reader.GetOrdinal("date_stop"))) { window.isStop.Content = "Обучение не остановленно"; window.LearnRestart.Visibility = Visibility.Collapsed; window.LearnStop.Visibility = Visibility.Visible; }
 
 
                         ArrayList Month = new ArrayList();

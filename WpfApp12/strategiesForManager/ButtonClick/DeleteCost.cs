@@ -53,7 +53,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
             DataGridUpdater.updateTypeCostsDataGrid(windowObj);
             windowObj.CostsTypeDataGrid.SelectedItem = null;
-            windowObj.TypeRashDeleteButton.IsEnabled = false;
+            windowObj.DeleteCost.IsEnabled = false;
         }
     }
 }

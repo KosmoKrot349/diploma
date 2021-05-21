@@ -39,8 +39,8 @@ namespace WpfApp12.strategiesForBookkeeper.ButtonClick
                 catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
 
                 windowObj.ProfitDataGrid.SelectedItem = null;
-                windowObj.DohDeleteButton.IsEnabled = false;
-                windowObj.DohChangeButton.IsEnabled = false;
+                windowObj.DeleteProfit.IsEnabled = false;
+                windowObj.GoToChangeProfit.IsEnabled = false;
                 DataGridUpdater.updateProfitDataGrid(windowObj);
             }
         }

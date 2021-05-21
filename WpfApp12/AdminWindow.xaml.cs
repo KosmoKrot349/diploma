@@ -5,7 +5,7 @@ using System.Windows.Controls;
 using System.Collections;
 using System.IO;
 using WpfApp12.strategiesForAdmin;
-using WpfApp12.strategiesForAdmin.strategiesForAdminMenuClick;
+using WpfApp12.strategiesForAdmin.MenuClick;
 
 namespace WpfApp12
 {
@@ -22,8 +22,10 @@ namespace WpfApp12
         public string UserName = "";
         //строка подключения
         public string connectionString = "";
-        public filtr filter = new filtr();
-        //+
+        public filter filter = new filter();
+
+        IButtonClick actionReactButton;
+        IMenuClick actionReactMenu;
         public AdminWindow()
         {
             InitializeComponent();
@@ -36,227 +38,126 @@ namespace WpfApp12
             object[] arr = ls.ToArray();
             connectionString = "Server=" + arr[0].ToString().Split(':')[1] + ";Port=" + arr[2].ToString().Split(':')[1] + ";User Id=postgres;Password=" + arr[1].ToString().Split(':')[1] + ";Database=db";
             filter.connectionString = connectionString;
-            MenuRolesA.BorderBrush = null;
+            MenuRoles.BorderBrush = null;
             usersMenu.BorderBrush = null;
             archiveMenu.BorderBrush = null;
             settingMenu.BorderBrush = null;
-            ToNextYearMenu.BorderBrush = null;
+            GoToNextYear.BorderBrush = null;
         }
         //+
         public void hideAll()
         {
-            helloGrdi.Visibility = Visibility.Collapsed;
-            UsersGrid.Visibility = Visibility.Collapsed;
-            RegistrationGrid.Visibility = Visibility.Collapsed;
-            crDumpGrid.Visibility = Visibility.Collapsed;
-            rsDumpGrid.Visibility = Visibility.Collapsed;
-            userChangeGrid.Visibility = Visibility.Collapsed;
-            settingGrid.Visibility = Visibility.Collapsed;
-            NextYearGrid.Visibility = Visibility.Collapsed;
+            strategiesForAdmin.OtherMethods.HideAll.Hide(this);
 
         }
-        //переход из меню админа в меню админа+
-        private void AdminRoleA_Click(object sender, RoutedEventArgs e)
-        {
-            IButtonClick actReact = new ToAdmin();
-            actReact.buttonClick();
-        }
-        //переход из меню админа в меню бухгалтера+
-        private void BuhgRoleA_Click(object sender, RoutedEventArgs e)
-        {
-            IButtonClick actReact = new ToBookkeeper(this);
-            actReact.buttonClick();
-        }
-        //переход из меню админа в меню директора+
-        private void DirectorRoleA_Click(object sender, RoutedEventArgs e)
-        {
-            IButtonClick actReact = new ToManager(this);
-            actReact.buttonClick();
-        }
 
-        //Выбор роли админа для пользователя+
-        private void adm_Checked(object sender, RoutedEventArgs e)
-        {
-            adminRole = 1;
-        }
-        //Выбор роли админа для пользователя+
-        private void adm_Unchecked(object sender, RoutedEventArgs e)
-        {
-            adminRole = 0;
-        }
-        //Выбор роли бухгалтера для пользователя+
-        private void bh_Unchecked(object sender, RoutedEventArgs e)
-        {
-            bookkeeperRole = 0;
-        }
-        //Выбор роли бухгалтера для пользователя+
-        private void bh_Checked(object sender, RoutedEventArgs e)
-        {
-            bookkeeperRole = 1;
-        }
-        //Выбор роли директора для пользователя+
-        private void dr_Checked(object sender, RoutedEventArgs e)
-        {
-            managerRole = 1;
-        }
-        //Выбор роли директора для пользователя+
-        private void dr_Unchecked(object sender, RoutedEventArgs e)
-        {
-            managerRole = 0;
-        }
-        //Переход к окну регистрации+
-        private void useradd_menu_Click(object sender, RoutedEventArgs e)
-        {
-            IButtonClick actReact = new GoToRegister(this);
-            actReact.buttonClick();
-        }
-        //регистрация+
-        private void register_Click(object sender, RoutedEventArgs e)
-        {
-            IButtonClick actReact = new Register(this);
-            actReact.buttonClick(); 
-        }
-      
-        //удаление пользователя+
-        private void dellUser_Click(object sender, RoutedEventArgs e)
-        { 
-            IButtonClick actReact = new DelUser(this);
-            actReact.buttonClick();
-        }
-        //переход к изменению пользователя+
-        private void changeUser_Click(object sender, RoutedEventArgs e)
-        {
-            IButtonClick actReact = new GoToChangeUser(this);
-            actReact.buttonClick();
-        }
-        //изменение  пользоателя+
-        private void change_Click(object sender, RoutedEventArgs e)
-        {
-            IButtonClick actReact = new ChangeUser(this);
-            actReact.buttonClick();
-        }
-        //
-        //переход к окну бэкапа+
-        private void crDump_Click(object sender, RoutedEventArgs e)
-        {
-            IButtonClick actReact = new GoToCreateBackUp(this);
-            actReact.buttonClick();
-        }
-
-        //выбор папки СУБД+
-        private void selectBin_Click(object sender, RoutedEventArgs e)
-        {
-            IButtonClick actReact = new SelectBin(this,sender);
-            actReact.buttonClick();
-        }
-        //Выбор папки для бэкапа+
-        private void selectbckp_Click(object sender, RoutedEventArgs e)
-        {
-            IButtonClick actReact = new SelectBackUpFolder(this, sender);
-            actReact.buttonClick();
-        }
-        //Создание бэкапа+
-        private void crDumpButton_Click(object sender, RoutedEventArgs e)
-        {
-            IButtonClick actReact = new BackUpCreate(this);
-            actReact.buttonClick();
-        }
-        //выбор бэкапа+
-        private void rsSelectbckp_Click(object sender, RoutedEventArgs e)
-        {
-            IButtonClick actReact = new SelectBackUp(this);
-            actReact.buttonClick();
-        }
-        //выбор папки СУБД+
-        private void rsSelectBin_Click(object sender, RoutedEventArgs e)
-        {
-            IButtonClick actReact = new SelectFolderBackUpRestore(this);
-            actReact.buttonClick();
-        }
-        //переход к окну восстановления+
-        private void rstrDump_Click(object sender, RoutedEventArgs e)
-        {
-            IButtonClick actReact = new GoToRestore(this);
-            actReact.buttonClick();
-        }
-        //восстановление бэкапа+
-        private void rsDumpButton_Click(object sender, RoutedEventArgs e)
-        {
-            IButtonClick actReact = new Restore(this);
-            actReact.buttonClick();
-        }
-        //выход из пользователя+
-        private void Leave_Click(object sender, RoutedEventArgs e)
-        {
-            IButtonClick actReact = new UnLogin(this);
-            actReact.buttonClick();
-        }
-        // переход к настройкам+
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            IButtonClick actReact = new GoToSeatings(this);
-            actReact.buttonClick();
-        }
-        //проверка подключения+
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            IButtonClick actReact = new ConnectionCheck(this);
-            actReact.buttonClick();
+            Button button = sender as Button;
+            switch (button.Name)
+            {
+                //переход к созданию пользователя
+                case "GoToRegister": { actionReactButton = new GoToRegister(this); break; }
+                //регистрация+
+                case "Register": { actionReactButton = new Register(this); break; }
+                //удаление пользователя+
+                case "DelUser": { actionReactButton = new DelUser(this); break; }
+                //переход к изменению пользователя+
+                case "GoToChangeUser": { actionReactButton = new GoToChangeUser(this); break; }
+                //изменение  пользоателя+
+                case "ChangeUser": { actionReactButton = new ChangeUser(this); break; }
+                //выбор папки СУБД+
+                case "SelectBinForNextYear": { actionReactButton = new SelectBin(this,sender); break; }
+                //Выбор папки для бэкапа+
+                case "SelectBackUpFolderForNextYear": { actionReactButton = new SelectBackUpFolder(this,sender); break; }
+                //выбор папки СУБД+
+                case "SelectBin": { actionReactButton = new SelectBin(this, sender); break; }
+                //Выбор папки для бэкапа+
+                case "SelectBackUpFolder": { actionReactButton = new SelectBackUpFolder(this, sender); break; }
+                //Создание бэкапа+
+                case "BackUpCreate": { actionReactButton = new BackUpCreate(this); break; }
+                //выбор бэкапа+
+                case "SelectBackUp": { actionReactButton = new SelectBackUp(this); break; }
+                //выбор папки СУБД+
+                case "SelectFolderBackUpRestore": { actionReactButton = new SelectFolderBackUpRestore(this); break; }
+                //восстановление бэкапа+
+                case "Restore": { actionReactButton = new Restore(this); break; }
+                //проверка подключения+
+                case "ConnectionCheck": { actionReactButton = new ConnectionCheck(this); break; }
+                //принудительное сохранение+
+                case "EnforcementSeatings":{ actionReactButton = new EnforcementSeatings(this); break; }
+                //сохранение пароля рута+
+                case "SaveRootPassword":{ actionReactButton = new SaveRootPassword(this); break; }
+                //применение фильтра по ролям
+                case "FilterApp":{ actionReactButton = new FilterApp(this); break; }
+                //переход на новый год
+                case "ToNextYear":{ actionReactButton = new ToNextYear(this); break; }
+                  
+
+            }
+
+        actionReactButton.buttonClick();
         }
+        private void Menu_Click(object sender, RoutedEventArgs e)
+        {
+            MenuItem item = sender as MenuItem;
+            switch (item.Name)
+            {
+                //переход к следующему году+
+                case "GoToNextYear": { actionReactMenu = new GoToNextYear(this); break; }
+                //переход из меню админа в меню админа+
+                case "GoToAdminMenu": { actionReactMenu = new ToAdmin(); break; }
+                //переход из меню админа в меню бухгалтера+
+                case "GoToBookkeerMenu": { actionReactMenu = new ToBookkeeper(this); break; }
+                //переход из меню админа в меню директора+
+                case "GoToManagerMenu": { actionReactMenu = new ToManager(this); break; }
+                //переход к окну бэкапа+
+                case "CreateBackUpMenu": { actionReactMenu = new GoToCreateBackUp(this); break; }
+                //переход к окну восстановления+
+                case "RestoreBackUpMenu": { actionReactMenu = new GoToRestore(this); break; }
+                //выход из пользователя+
+                case "Leave": { actionReactMenu = new UnLogin(this); break; }
+                // переход к настройкам+
+                case "settingMenu": { actionReactMenu = new UnLogin(this); break; }
+                //переход к пользователям+
+                case "usersMenu": { actionReactMenu = new UsersMenuClick(this); break; }
+                //клик по меню права+
+                 case "MenuRoles": { actionReactMenu = new AccessMenuClick(this); break; }
+                 //клик по меню архив+
+                 case "archiveMenu": { actionReactMenu = new ArchiveMenuClick(this); break; }   
+            }
+
+            actionReactMenu.MenuClick();
+        }
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            CheckBox checkBox = sender as CheckBox;
+            switch (checkBox.Name)
+            {
+                case "RoleAdminCreateUser": { adminRole = 1; break; }
+                case "RoleBookkeeperCreateUser": { bookkeeperRole = 1; break; }
+                case "RoleManagerCreateUser": { managerRole = 1; break; }
+            }
         
-        //принудительное сохранение+
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            IButtonClick actReact = new EnforcementSeatings(this);
-            actReact.buttonClick();
         }
-        //сохранение пароля рута+
-        private void rootSave_Click(object sender, RoutedEventArgs e)
+        private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
-            IButtonClick actReact = new SaveRootPassword(this);
-            actReact.buttonClick();
-        }
-        //переход к пользователям+
-        private void MenuItem_Click_1(object sender, RoutedEventArgs e)
-        {
-            IMenuClick actReact = new UsersMenuClick(this);
-            actReact.MenuClick();
-        }
-        //клик по меню права+
-        private void MenuRolesA_Click(object sender, RoutedEventArgs e)
-        {
-            IMenuClick actReact = new AccessMenuClick(this);
-            actReact.MenuClick();
-        }
-        //клик по меню архив+
-        private void MenuItem_Click_2(object sender, RoutedEventArgs e)
-        {
-            IMenuClick actReact = new ArchiveMenuClick(this);
-            actReact.MenuClick();
+            CheckBox checkBox = sender as CheckBox;
+            switch (checkBox.Name)
+            {
+                case "RoleAdminCreateUser": { adminRole = 0; break; }
+                case "RoleBookkeeperCreateUser": { bookkeeperRole = 0; break; }
+                case "RoleManagerCreateUser": { managerRole = 0; break; }
+            }
+
         }
         //изменение кнопок контроля для DataGrid
-        private void usersDGrid_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
+        private void DataGrid_SelectedCellsChanged(object sender, SelectedCellsChangedEventArgs e)
         {
-            changeUser.IsEnabled = true;
-            dellUser.IsEnabled = true;
+            GoToChangeUser.IsEnabled = true;
+            DelUser.IsEnabled = true;
         }
-        //применение фильтра по ролям
-        private void FiltrRolesButton_Click(object sender, RoutedEventArgs e)
-        {
-            IButtonClick actReact = new FilterApp(this);
-            actReact.buttonClick();
-        }
-        //переход к следующему году+
-        private void ToNextYearMenu_Click(object sender, RoutedEventArgs e)
-        {
-            IButtonClick actReact = new GoToNextYear(this);
-            actReact.buttonClick();
-        }
-        //переход на новый год
-        private void crDumpButtonNextYear_Click(object sender, RoutedEventArgs e)
-        {
-            IButtonClick actReact = new ToNextYear(this);
-            actReact.buttonClick();
-        }
+
+       
     }
 }

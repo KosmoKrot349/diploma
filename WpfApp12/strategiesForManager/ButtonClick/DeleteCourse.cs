@@ -65,8 +65,8 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             windowObj.CourcesDataGrid.SelectedItem = null;
 
             //курсы
-            windowObj.coursDeleteButton.IsEnabled = false;
-            windowObj.coursChangeButton.IsEnabled = false;
+            windowObj.DeleteCourse.IsEnabled = false;
+            windowObj.GoToChangeCourse.IsEnabled = false;
         }
     }
 }

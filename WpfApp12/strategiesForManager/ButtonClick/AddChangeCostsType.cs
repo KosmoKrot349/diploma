@@ -43,7 +43,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             adapter.Update(table);
             DataGridUpdater.updateTypeCostsDataGrid(windowObj);
             windowObj.CostsTypeDataGrid.SelectedItem = null;
-            windowObj.TypeRashDeleteButton.IsEnabled = false;
+            windowObj.DeleteCost.IsEnabled = false;
         }
     }
 }

@@ -18,7 +18,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
         public void ButtonClick()
         {
             windowObj.date = windowObj.date.AddMonths(-1);
-            windowObj.ShtatRaspSaveBut.IsEnabled = false;
+            windowObj.SaveStaffSchedule.IsEnabled = false;
             for (int i = 0; i < 7; i++)
             {
                 for (int j = 0; j < 7; j++)

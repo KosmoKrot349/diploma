@@ -25,8 +25,8 @@ namespace WpfApp12.strategiesForBookkeeper.MenuClick
             windowObj.filter.CreateCostsFilter(windowObj.FilterGridRashody);
             windowObj.filter.sql = "SELECT rashody.rashid as rashid, typerash.title as title, sotrudniki.fio as fio, rashody.summ as summ , rashody.data as data, rashody.description as description FROM rashody inner join typerash using(typeid) inner join sotrudniki using(sotrid)";
             windowObj.ProfitDataGrid.SelectedItem = null;
-            windowObj.DohDeleteButton.IsEnabled = false;
-            windowObj.DohChangeButton.IsEnabled = false;
+            windowObj.DeleteProfit.IsEnabled = false;
+            windowObj.GoToChangeProfit.IsEnabled = false;
             DataGridUpdater.updateCostsDataGrid(windowObj);
         }
     }

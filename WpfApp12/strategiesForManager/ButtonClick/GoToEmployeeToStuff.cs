@@ -130,11 +130,11 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 
                         windowObj.checkBoxArrPositions[i].Name = "Name_" + i + "_" + reader.GetInt32(0) + "_state";
                         windowObj.checkBoxArrPositions[i].Content = reader.GetString(1);
-                        windowObj.checkBoxArrPositions[i].Checked += windowObj.Shtat_Checked;
-                        windowObj.checkBoxArrPositions[i].Unchecked += windowObj.Shtat_UnChecked;
+                        windowObj.checkBoxArrPositions[i].Checked += windowObj.Staff_Checked;
+                        windowObj.checkBoxArrPositions[i].Unchecked += windowObj.Staff_UnChecked;
 
                         windowObj.textBoxArrRate[i].IsEnabled = false;
-                        windowObj.textBoxArrRate[i].PreviewTextInput += windowObj.grPayment_PreviewTextInput;
+                        windowObj.textBoxArrRate[i].PreviewTextInput += windowObj.DigitWithDot_PreviewTextInput;
 
                         RowDefinition rwd = new RowDefinition();
                         rwd.Height = new GridLength(40);
@@ -200,11 +200,11 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 
                         windowObj.checkBoxArrServiceWorks[i].Name = "Name_" + i + "_" + reader.GetInt32(0) + "_obsl";
                         windowObj.checkBoxArrServiceWorks[i].Content = reader.GetString(1);
-                        windowObj.checkBoxArrServiceWorks[i].Checked += windowObj.Shtat_Checked;
-                        windowObj.checkBoxArrServiceWorks[i].Unchecked += windowObj.Shtat_UnChecked;
+                        windowObj.checkBoxArrServiceWorks[i].Checked += windowObj.Staff_Checked;
+                        windowObj.checkBoxArrServiceWorks[i].Unchecked += windowObj.Staff_UnChecked;
 
                         windowObj.textBoxArrVolumeWork[i].IsEnabled = false;
-                        windowObj.textBoxArrVolumeWork[i].PreviewTextInput += windowObj.grPayment_PreviewTextInput;
+                        windowObj.textBoxArrVolumeWork[i].PreviewTextInput += windowObj.DigitWithDot_PreviewTextInput;
 
                         lb.Content = reader.GetString(2);
 

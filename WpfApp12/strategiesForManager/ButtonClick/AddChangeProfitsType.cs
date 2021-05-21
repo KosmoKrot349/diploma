@@ -46,7 +46,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             adapter.Update(table);
             DataGridUpdater.updateProfitTypeDataGri(windowObj);
             windowObj.ProfitTypesDataGrid.SelectedItem = null;
-            windowObj.TypeDohDeleteButton.IsEnabled = false;
+            windowObj.DeleteProfit.IsEnabled = false;
         }
     }
 }

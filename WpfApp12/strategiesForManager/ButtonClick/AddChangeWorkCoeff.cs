@@ -46,7 +46,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             adapter.Update(table);
             DataGridUpdater.updateWorkCoeffDataGrid(windowObj);
             windowObj.WorkCoeffDataGrid.SelectedItem = null;
-            windowObj.KoefDeleteButton.IsEnabled = false;
+            windowObj.DeleteWorkCoeff.IsEnabled = false;
         }
     }
 }

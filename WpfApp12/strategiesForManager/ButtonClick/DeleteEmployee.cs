@@ -121,9 +121,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 
             windowObj.EmployeesDataGrid.SelectedItem = null;
             //все сотрудники
-            windowObj.allSotrDeleteButton.IsEnabled = false;
-            windowObj.allSotrToPrepBtton.IsEnabled = false;
-            windowObj.allSotrToShtatBtton.IsEnabled = false;
+            windowObj.EmployeeDelet.IsEnabled = false;
+            windowObj.GoToEmployeeToTeacher.IsEnabled = false;
+            windowObj.GoToEmployeeToStuff.IsEnabled = false;
         }
     }
 }

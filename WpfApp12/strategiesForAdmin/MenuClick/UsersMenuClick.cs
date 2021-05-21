@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows;
 
-namespace WpfApp12.strategiesForAdmin.strategiesForAdminMenuClick
+namespace WpfApp12.strategiesForAdmin.MenuClick
 {
     class UsersMenuClick : IMenuClick
     {
@@ -19,16 +19,16 @@ namespace WpfApp12.strategiesForAdmin.strategiesForAdminMenuClick
 
         public void MenuClick()
         {
-            windowObj.MenuRolesA.BorderBrush = null;
+            windowObj.MenuRoles.BorderBrush = null;
             windowObj.usersMenu.BorderBrush = Brushes.DarkRed;
             windowObj.archiveMenu.BorderBrush = null;
             windowObj.settingMenu.BorderBrush = null;
-            windowObj.ToNextYearMenu.BorderBrush = null;
+            windowObj.GoToNextYear.BorderBrush = null;
 
             windowObj.usersDGrid.SelectedItem = null;
 
-            windowObj.changeUser.IsEnabled = false;
-            windowObj.dellUser.IsEnabled = false;
+            windowObj.GoToChangeUser.IsEnabled = false;
+            windowObj.DelUser.IsEnabled = false;
 
             windowObj.hideAll();
             windowObj.UsersGrid.Visibility = Visibility.Visible;

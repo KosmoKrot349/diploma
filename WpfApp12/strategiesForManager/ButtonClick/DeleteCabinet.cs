@@ -54,7 +54,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             windowObj.CabinetsDataGrid.SelectedItem = null;
 
             //кабинет
-            windowObj.cabDeleteButton.IsEnabled = false;
+            windowObj.DeleteCabinet.IsEnabled = false;
         }
     }
 }

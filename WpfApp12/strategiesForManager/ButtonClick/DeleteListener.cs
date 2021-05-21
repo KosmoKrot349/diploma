@@ -82,8 +82,8 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             windowObj.ListenersDataGrid.SelectedItem = null;
 
             //слушатели
-            windowObj.listenerDeleteButton.IsEnabled = false;
-            windowObj.listenerChangeButton.IsEnabled = false;
+            windowObj.DeleteListener.IsEnabled = false;
+            windowObj.GoToChangeListener.IsEnabled = false;
             DataGridUpdater.updateListenerDataGrid(windowObj);
         }
     }

@@ -51,7 +51,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
             DataGridUpdater.updateServiceWorksDataGrid(windowObj);
             windowObj.ServiceWorkDataGrid.SelectedItem = null;
-            windowObj.ObslWorkDeleteButton.IsEnabled = false;
+            windowObj.DeleteServiceWork.IsEnabled = false;
         }
     }
 }

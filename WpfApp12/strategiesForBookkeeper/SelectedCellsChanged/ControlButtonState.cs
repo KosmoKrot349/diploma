@@ -18,15 +18,15 @@ namespace WpfApp12.strategiesForBookkeeper.SelectedCellsChanged
         public void SelectedCellsChanged()
         {
             //начисления
-           window.ViplataBut.IsEnabled = true;
+           window.AccrualOfSalaryForMonth.IsEnabled = true;
 
             //расходы
-            window.RashDeleteButton.IsEnabled = true;
-            window.RashChangeButton.IsEnabled = true;
+            window.DeleteCosts.IsEnabled = true;
+            window.GoToChangeCosts.IsEnabled = true;
 
             //доходы
-            window.DohDeleteButton.IsEnabled = true;
-            window.DohChangeButton.IsEnabled = true;
+            window.DeleteProfit.IsEnabled = true;
+            window.GoToChangeProfit.IsEnabled = true;
         }
     }
 }

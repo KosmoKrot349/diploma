@@ -1,5 +1,4 @@
-﻿using Npgsql;
-using System;
+﻿using System;
 using System.Collections;
 using System.IO;
 using System.Windows;
@@ -17,6 +16,7 @@ namespace WpfApp12
     {
         //строка подключения
         public string connectionString = "";
+        IButtonClick actionReact;
         public MainWindow()
         {
             InitializeComponent();
@@ -31,27 +31,24 @@ namespace WpfApp12
             FillingStaffSchedule.Fill(this);
             Recalculation.Recalc(this);
         }
-        //авторизация пользователя
+        
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            IButtonClick actionReact = new Authorize(this);
+            Button button = sender as Button;
+            switch (button.Name)
+            {
+                //авторизация пользователя
+                case "Authorize": { actionReact = new Authorize(this);  break; }
+                //проверка подключения
+                case "ConnectionCheck": { actionReact = new ConnectionCheck(this);  break; }
+                //принудительное сохранение
+                case "EnforcementSeatings": { actionReact = new EnforcementSeatings(this);  break; }    
+            }
             actionReact.ButtonClick();
         }
-        //проверка подключения
-        private void Button_Click11(object sender, RoutedEventArgs e)
-        {
-            IButtonClick actionReact = new ConnectionCheck(this);
-            actionReact.ButtonClick();
-        }
-  
-        //принудительное сохранение
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            IButtonClick actionReact = new EnforcementSeatings(this);
-            actionReact.ButtonClick();
-        }
+       
         //воод только цифр
-        private void ip1_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             TextBox tbne = sender as TextBox;
             if ((!Char.IsDigit(e.Text, 0)))

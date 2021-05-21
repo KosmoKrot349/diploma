@@ -5,11 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace WpfApp12.strategiesForManager.ButtonClick
+namespace WpfApp12.strategiesForManager.MenuClick
 {
-    class GoToManager : IButtonClick
+    class GoToManager : IMenuClick
     {
-        public void ButtonClick()
+        public void MenuClick()
         {
             MessageBox.Show("Вы уже выбрали роль директора");
         }

@@ -118,7 +118,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                         windowObj.checkBoxArrForListeners[i].Unchecked += windowObj.CheckBox_Unchecked;
                         windowObj.checkBoxArrForListeners[i].Checked += windowObj.CheckBox_Checked;
                         windowObj.textBoxArrForListeners[i] = new TextBox();
-                        windowObj.textBoxArrForListeners[i].PreviewTextInput += windowObj.grPayment_PreviewTextInput;
+                        windowObj.textBoxArrForListeners[i].PreviewTextInput += windowObj.DigitWithDot_PreviewTextInput;
                         RowDefinition rwd = new RowDefinition();
                         rwd.Height = new GridLength(40);
                         windowObj.GroopsOfListenerGrid.RowDefinitions.Add(rwd);

@@ -37,9 +37,9 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 
             windowObj.dateMonday = dateNow.AddDays(dayDifference);
             Button but = sender as Button;
-            if (but.Name == "NuwRaspBut") { ShowLearningSchedule.ShowForGroops(windowObj.dateMonday, windowObj.dateMonday.AddDays(6),windowObj); }
-            if (but.Name == "NuwRaspButP") { ShowLearningSchedule.ShowForTeachers(windowObj.dateMonday, windowObj.dateMonday.AddDays(6),windowObj); }
-            if (but.Name == "NuwRaspButС") { ShowLearningSchedule.ShowForCabinets(windowObj.dateMonday, windowObj.dateMonday.AddDays(6),windowObj); }
+            if (but.Name == "OnThisWeekGroopSchedule") { ShowLearningSchedule.ShowForGroops(windowObj.dateMonday, windowObj.dateMonday.AddDays(6),windowObj); }
+            if (but.Name == "OnThisWeekTeacherSchedule") { ShowLearningSchedule.ShowForTeachers(windowObj.dateMonday, windowObj.dateMonday.AddDays(6),windowObj); }
+            if (but.Name == "OnThisWeekCabinetSchedule") { ShowLearningSchedule.ShowForCabinets(windowObj.dateMonday, windowObj.dateMonday.AddDays(6),windowObj); }
         }
     }
 }

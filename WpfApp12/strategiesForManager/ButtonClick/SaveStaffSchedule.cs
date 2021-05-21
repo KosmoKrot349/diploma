@@ -87,7 +87,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
 
                 }
                 DataGridUpdater.updateStaffScheduleGrid(windowObj);
-            windowObj.ShtatRaspSaveBut.IsEnabled = false;
+            windowObj.SaveStaffSchedule.IsEnabled = false;
          
 
         }

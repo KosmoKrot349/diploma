@@ -54,8 +54,8 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             windowObj.StaffDataGrid.SelectedItem = null;
 
             //штат
-            windowObj.shtatDeleteButton.IsEnabled = false;
-            windowObj.shtatChangeButton.IsEnabled = false;
+            windowObj.DeleteFromStaff.IsEnabled = false;
+            windowObj.GoToChangeStaffEmployee.IsEnabled = false;
         }
     }
 }

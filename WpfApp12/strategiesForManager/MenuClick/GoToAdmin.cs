@@ -6,25 +6,24 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace WpfApp12.strategiesForBookkeeper.ButtonClick
+namespace WpfApp12.strategiesForManager.MenuClick
 {
-    class ToManager:IButtonClick
+    class GoToAdmin:IMenuClick
     {
-        BookkeeperWindow windowObj;
+        ManagerWindow windowObj;
 
-        public ToManager(BookkeeperWindow windowObj)
+        public GoToAdmin(ManagerWindow windowObj)
         {
             this.windowObj = windowObj;
         }
 
-        public void ButtonClick()
+        public void MenuClick()
         {
             int checkerResult = 0;
-            if (windowObj.logUser != -1) checkerResult = Checker.dirCheck(windowObj.logUser, windowObj.connectionString);
-
+            if (windowObj.logUser != -1) checkerResult = Checker.AdminCheck(windowObj.logUser, windowObj.connectionString);
             if (checkerResult == 1 || windowObj.logUser == -1)
             {
-                ManagerWindow wind = new ManagerWindow();
+                AdminWindow wind = new AdminWindow();
                 try
                 {
                     NpgsqlConnection connection = new NpgsqlConnection(windowObj.connectionString);
@@ -37,17 +36,17 @@ namespace WpfApp12.strategiesForBookkeeper.ButtonClick
                         while (dReader.Read())
                         {
                             if (dReader.GetInt32(0) == 0) { wind.GoToAdminMenu.IsEnabled = false; }
-                            if (dReader.GetInt32(1) == 0) { wind.GoToBookkeeperMenu.IsEnabled = false; }
+                            if (dReader.GetInt32(1) == 0) { wind.GoToBookkeerMenu.IsEnabled = false; }
                             if (dReader.GetInt32(2) == 0) { wind.GoToManagerMenu.IsEnabled = false; }
 
                         }
                     }
                 }
-                catch { MessageBox.Show("Не удалось подклюситься к базе данных"); return; }
+                catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
                 wind.logUser = windowObj.logUser;
-                wind.userName = windowObj.UserName;
-                wind.Title = windowObj.UserName + " - Директор";
-                wind.hello_label.Text = "Здравствуйте, Ваша текущая роль директор. Для начала роботы выберите один из пунктов меню.";
+                wind.UserName = windowObj.userName;
+                wind.Title = windowObj.userName + " - Админ";
+                wind.hello_label.Text = "Здравствуйте, Ваша текущая роль администратор. Для начала роботы выберите один из пунктов меню.";
                 wind.Width = windowObj.Width;
                 wind.Height = windowObj.Height;
                 wind.Left = windowObj.Left;
@@ -55,7 +54,7 @@ namespace WpfApp12.strategiesForBookkeeper.ButtonClick
                 wind.Show();
                 windowObj.Close();
             }
-            else { MessageBox.Show("Вы не имете доступа к этой роли"); }
+            else { MessageBox.Show("Вы не имеете доступа к этой роли"); }
         }
     }
 }

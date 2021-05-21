@@ -14,32 +14,32 @@
         </Grid.RowDefinitions>
         <!--меню бухаглтера-->
         <Menu Name="buhgMenu"  Grid.Row="0">
-            <MenuItem Name="RolesMenu" Header="Права" ToolTip="Нажмите для выбора доступной Вам роли" Click="MenuRolesB_Click" >
-                <MenuItem  Name="GoToAdmin" Header="Админ" Click="AdminRoleB_Click" ToolTip="Нажмите для перехода к роли администратора"/>
-                <MenuItem  Name="GoToBookkeeper" Header="Бухгалтер" Click="BuhgRoleB_Click" ToolTip="Роль бухгалтера уже выбрана"/>
-                <MenuItem  Name="GoToManager" Header="Директор" Click="DirectorRoleB_Click" ToolTip="Нажмите для перехода к роли директора"/>
+            <MenuItem Name="RolesMenu" Header="Права" ToolTip="Нажмите для выбора доступной Вам роли" Click="Menu_Click" >
+                <MenuItem  Name="GoToAdmin" Header="Админ" Click="Menu_Click" ToolTip="Нажмите для перехода к роли администратора"/>
+                <MenuItem  Name="GoToBookkeeper" Header="Бухгалтер" Click="Menu_Click" ToolTip="Роль бухгалтера уже выбрана"/>
+                <MenuItem  Name="GoToManager" Header="Директор" Click="Menu_Click" ToolTip="Нажмите для перехода к роли директора"/>
             </MenuItem>
-            <MenuItem Name="ProfitMenu" Header="Доходы" Click="Dohody_Click">
+            <MenuItem Name="ProfitMenu" Header="Доходы" Click="Menu_Click">
                 <MenuItem Header="Оплата за обучение">
-                    <MenuItem Name="PaymentForListenerMenu" Header="Оплата слушателя" Click="OplataSlysh_Click" />
-                    <MenuItem Name="PaymentDebtMenu" Header="Оплата за прошлые года" Click="OplataDolgMenu_Click"  />
+                    <MenuItem Name="PaymentForListenerMenu" Header="Оплата слушателя" Click="Menu_Click" />
+                    <MenuItem Name="PaymentDebtMenu" Header="Оплата за прошлые года" Click="Menu_Click"  />
                 </MenuItem>
-                
-           
-                <MenuItem Name="ProfitTableMenu" Header="Таблица доходов" Click="DodhodyTable_Click"/>
+
+
+                <MenuItem Name="ProfitTableMenu" Header="Таблица доходов" Click="Menu_Click"/>
             </MenuItem>
-            <MenuItem Name="CostsMenu" Header="Расходы" Click="Rashody_Click">
-                <MenuItem Name="AccrualSalaryMenu" Header="Начисления ЗП" Click="ZP_Click" />
-                <MenuItem Name="CostsTableMenu" Header="Таблица расходов" Click="RashodyTable_Click"/>
+            <MenuItem Name="CostsMenu" Header="Расходы" Click="Menu_Click">
+                <MenuItem Name="AccrualSalaryMenu" Header="Начисления ЗП" Click="Menu_Click" />
+                <MenuItem Name="CostsTableMenu" Header="Таблица расходов" Click="Menu_Click"/>
             </MenuItem>
-            <MenuItem Name="TaxesMenu" Header="Налоги" Click="Nalogi_Click" />
-            <MenuItem Header="Отчёты" Name="ReportsMenu" Click="otchetMenu_Click">
-                <MenuItem  Header="Касса" Click="MenuItem_Click" />
-                <MenuItem  Header="Списки выплат" Click="MenuItem_Click_2" />
-                <MenuItem  Header="Статистика доходов/расходов" Click="MenuItem_Click_1" />
+            <MenuItem Name="TaxesMenu" Header="Налоги" Click="Menu_Click" />
+            <MenuItem Header="Отчёты" Name="ReportsMenu" Click="Menu_Click">
+                <MenuItem Name="CashboxReportMenu"  Header="Касса" Click="Menu_Click" />
+                <MenuItem Name="PaymentListReportMenu" Header="Списки выплат" Click="Menu_Click" />
+                <MenuItem Name="StatisticReportMenu"  Header="Статистика доходов/расходов" Click="Menu_Click" />
             </MenuItem>
 
-            <MenuItem Name="Leave" Header="Выйти" ToolTip="Нажмите что бы выйти из учётной записи" Click="Leave_Click" />
+            <MenuItem Name="Leave" Header="Выйти" ToolTip="Нажмите что бы выйти из учётной записи" Click="Menu_Click" />
         </Menu>
         <!--грид окна приветсвия-->
         <Grid Name="helloGrdi" Grid.Row="1" >
@@ -95,7 +95,7 @@
                     <Grid Name="ProfitTypesFilter">
                     </Grid>
                 </ScrollViewer>
-                <Button Content="Применить" Grid.Row="5" Name="PrimFKD" Click="FiltrButton_Click" />
+                <Button Content="Применить" Grid.Row="5" Name="FilterCashBoxProfit" Click="FilterButton_Click" />
             </Grid>
 
 
@@ -119,7 +119,7 @@
                     <Grid Name="CostsTypeFilter">
                     </Grid>
                 </ScrollViewer>
-                <Button Content="Применить"  Name="PrimFKR"  Grid.Row="5"  Click="FiltrButton_Click"/>
+                <Button Content="Применить"  Name="FilterCashBoxCosts"  Grid.Row="5"  Click="FilterButton_Click"/>
             </Grid>
 
 
@@ -198,9 +198,9 @@
                     <ColumnDefinition Width="1.5*"/>
                 </Grid.ColumnDefinitions>
                 <Label Grid.Column="0" Content="Группа: " FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Right"  />
-                <ComboBox Name="DebtPeymentGroops" Grid.Column="1" SelectionChanged="Groups_SelectionChanged" />
+                <ComboBox Name="DebtPeymentGroops" Grid.Column="1" SelectionChanged="Combobox_SelectionChanged" />
                 <Label Grid.Column="2" Content="Слушатель: " FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Right"  />
-                <ComboBox Name="ListenerDebt" Grid.Column="3" SelectionChanged="Listener_SelectionChanged" />
+                <ComboBox Name="ListenerDebt" Grid.Column="3" SelectionChanged="Combobox_SelectionChanged" />
                 <Label Grid.Column="4" Name="DateOfChange" Content="Дата перехода" FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  />
                 <Label Grid.Column="5" Name="isStopDebt" FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"  />
             </Grid>
@@ -252,8 +252,8 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="0" FontSize="16" Content="Оплата" Name="AddPAyDolg" Click="AddPAyDolg_Click"  />
-                <Button Grid.Column="1" FontSize="16" Content="Удалить запись" Name="deleteDolg" Click="deleteDolg_Click" />
+                <Button Grid.Column="0" FontSize="16" Content="Оплата" Name="AddPaymentForArrears" Click="Button_Click"  />
+                <Button Grid.Column="1" FontSize="16" Content="Удалить запись" Name="DeleteArrears" Click="Button_Click" />
                
             </Grid>
         </Grid>
@@ -284,12 +284,12 @@
                         <ColumnDefinition Width="3*"/>
                         <ColumnDefinition Width="1*"/>
                     </Grid.ColumnDefinitions>
-                    <Button Name="NachMonthPrev" Content="Предыдущий" FontSize="16" Grid.Column="0" Grid.Row="0" Click="NachMonthPrev_Click" />
+                    <Button Name="GoToPreviouslyMonth" Content="Предыдущий" FontSize="16" Grid.Column="0" Grid.Row="0" Click="Button_Click" />
                     <Label Grid.Row="0" Grid.Column="1" Name="NachMonthLabel" FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
-                    <Button Name="NachMonthNext" Content="Следующий"  FontSize="16" Grid.Column="2" Grid.Row="0" Click="NachMonthNext_Click" />
+                    <Button Name="GoToNextMonth" Content="Следующий"  FontSize="16" Grid.Column="2" Grid.Row="0" Click="Button_Click" />
                 </Grid>
                 
-                    <DataGrid Name="AccrualsDataGrid" IsReadOnly="true" Grid.Column="0" Grid.Row="1" ItemsSource="{Binding}" AutoGenerateColumns="False" SelectedCellsChanged="NachDataGrid_SelectedCellsChanged">
+                    <DataGrid Name="AccrualsDataGrid" IsReadOnly="true" Grid.Column="0" Grid.Row="1" ItemsSource="{Binding}" AutoGenerateColumns="False" SelectedCellsChanged="DataGrid_SelectedCellsChanged">
                         <DataGrid.Columns>
                             <DataGridTextColumn Visibility="Collapsed" Header="ID" Binding="{Binding nachid}" Width="10*" />
                             <DataGridTextColumn Header="ФИО" Binding="{Binding fio}" Width="10*" />
@@ -326,11 +326,11 @@
                     <ColumnDefinition />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <Button Name="NachAddBut" FontSize="16" Content="Начислить" Grid.Column="0" Click="NachAddBut_Click" />
-                <Button Name="ViplataBut" FontSize="16" Content="Выплатить" Grid.Column="1" Click="ViplataBut_Click" />
+                <Button Name="AccrualOfSalaryForMonth" FontSize="16" Content="Начислить" Grid.Column="0" Click="Button_Click" />
+                <Button Name="SalaryPay" FontSize="16" Content="Выплатить" Grid.Column="1" Click="Button_Click" />
             </Grid>
 
-            <Button Name="NuchSelectAllSotrBut" FontSize="16" Content="Выбрать всех" Grid.Column="1" Grid.Row="1" Click="NuchSelectAllSotrBut_Click" />
+            <Button Name="AccrualsSelectAll" FontSize="16" Content="Выбрать всех" Grid.Column="1" Grid.Row="1" Click="Button_Click" />
      
         </Grid>
 
@@ -364,7 +364,7 @@
                 </Grid>
             </ScrollViewer>
             <Canvas Grid.Row="1" Background="LightGray" />
-            <Button Name="NalogiSave" Content="Сохранить" FontSize="16" ToolTip="Нажмите для сохранения процентов налогов" Grid.Row="2" Click="NalogiSave_Click" />
+            <Button Name="SaveTax" Content="Сохранить" FontSize="16" ToolTip="Нажмите для сохранения процентов налогов" Grid.Row="2" Click="Button_Click" />
 
         </Grid>
 
@@ -398,7 +398,7 @@
             <DatePicker Name="CostsChangeDate"  Grid.Column="1" Grid.Row="4"/>
             <TextBox Name="CostsChangeComment"  Grid.Column="1" Grid.Row="5" />
 
-            <Button Name="RashodyChangeButton" FontSize="16" Content="Сохранить"  ToolTip="Нажмите для изменения расхода" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="8" Click="RashodyChangeButton_Click" />
+            <Button Name="ChangeCosts" FontSize="16" Content="Сохранить"  ToolTip="Нажмите для изменения расхода" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="8" Click="Button_Click" />
 
         </Grid>
 
@@ -433,7 +433,7 @@
             <DatePicker Name="CostsAddDate"  Grid.Column="1" Grid.Row="4"/>
             <TextBox Name="CostsAddDesc"  Grid.Column="1" Grid.Row="5" />
 
-            <Button Name="RashodyAddButton" FontSize="16" Content="Добавить"  ToolTip="Нажмите для добавления нового расхода" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="8" Click="RashodyAddButton_Click"     />
+            <Button Name="AddCosts" FontSize="16" Content="Добавить"  ToolTip="Нажмите для добавления нового расхода" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="8" Click="Button_Click"     />
 
         </Grid>
         
@@ -460,12 +460,12 @@
                         <Grid Name="FilterGridRashody" >
                     </Grid>
                 </ScrollViewer>
-                <Button Content="Применить" FontSize="16" Name="FiltrRashodyButton" Grid.Column="1" Click="FiltrButton_Click"/>
+                <Button Content="Применить" FontSize="16" Name="FilterProfitButton" Grid.Column="1" Click="FilterButton_Click"/>
                 </Grid>
 
 
 
-            <DataGrid ToolTip="Таблица в которой отображаются расходы. Для работы с ними выберете одну из записей кликнув н неё, после чего выберете одно из действий ниже." Name="CostsDataGrid" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" IsReadOnly="true" ItemsSource="{Binding}" AutoGenerateColumns="False" SelectedCellsChanged="NachDataGrid_SelectedCellsChanged">
+            <DataGrid ToolTip="Таблица в которой отображаются расходы. Для работы с ними выберете одну из записей кликнув н неё, после чего выберете одно из действий ниже." Name="CostsDataGrid" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" IsReadOnly="true" ItemsSource="{Binding}" AutoGenerateColumns="False" SelectedCellsChanged="DataGrid_SelectedCellsChanged">
                 <DataGrid.Columns>
                     <DataGridTextColumn Visibility="Collapsed" Header="ID" Binding="{Binding rashid}" Width="6*" />
                     <DataGridTextColumn Header="Тип расхода" Binding="{Binding title}" Width="6*" />
@@ -475,9 +475,9 @@
                     <DataGridTextColumn Header="Уточнение" Binding="{Binding description}" Width="6*" />
                 </DataGrid.Columns>
             </DataGrid>
-            <Button Name="RashDeleteButton" FontSize="16" Content="Удалить" ToolTip="Нажмите для удаления выбранного расхода" Grid.Column="0"  Grid.Row="2" Click="RashDeleteButton_Click"    />
-            <Button Name="RashChangeButton" FontSize="16" Content="Изменить" ToolTip="Нажмите для изменения выбранного расхода" Grid.Column="1" Grid.Row="2" Click="RashChangeButton_Click"     />
-            <Button Name="RashAddButton" FontSize="16" Content="Добавить"  ToolTip="Нажмите для добавления нового расхода" Grid.Column="2" Grid.Row="2" Click="RashAddButton_Click" />
+            <Button Name="DeleteCosts" FontSize="16" Content="Удалить" ToolTip="Нажмите для удаления выбранного расхода" Grid.Column="0"  Grid.Row="2" Click="Button_Click"    />
+            <Button Name="GoToChangeCosts" FontSize="16" Content="Изменить" ToolTip="Нажмите для изменения выбранного расхода" Grid.Column="1" Grid.Row="2" Click="Button_Click"     />
+            <Button Name="GoToAddCosts" FontSize="16" Content="Добавить"  ToolTip="Нажмите для добавления нового расхода" Grid.Column="2" Grid.Row="2" Click="Button_Click" />
 
         </Grid>
         
@@ -514,17 +514,17 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-              
-                <ComboBox Name="ProfitChangePersonType" Grid.Column="0" SelectionChanged="Groups_SelectionChanged" >
+
+                <ComboBox Name="ProfitChangePersonType" Grid.Column="0" SelectionChanged="Combobox_SelectionChanged" >
                     <ComboBoxItem Content="Сотрудники"/>
                     <ComboBoxItem Content="Слушатели"/>
                     <ComboBoxItem Content="Другое"/>
                 </ComboBox>
-                <ComboBox Name="ProfitChangePerson" Grid.Column="1" SelectionChanged="dohAddKtoVnesCm_SelectionChanged" />
+                <ComboBox Name="ProfitChangePerson" Grid.Column="1" SelectionChanged="Combobox_SelectionChanged" />
                 <TextBox Name="ProfitChangePersonName" IsEnabled="False" Grid.Column="2" />
             </Grid>
 
-            <Button Name="DohodyChangeButton" FontSize="16" Content="Изменить"  ToolTip="Нажмите для изменения дохода" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="6" Click="DohodyChangeButton_Click" />
+            <Button Name="ChangeProfit" FontSize="16" Content="Изменить"  ToolTip="Нажмите для изменения дохода" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="6" Click="Button_Click" />
 
         </Grid>
 
@@ -561,17 +561,17 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <ComboBox Name="ProfitAddPErsonType" Grid.Column="0" SelectionChanged="Groups_SelectionChanged" >
+                <ComboBox Name="ProfitAddPErsonType" Grid.Column="0" SelectionChanged="Combobox_SelectionChanged" >
                     <ComboBoxItem Content="Сотрудники"/>
                     <ComboBoxItem Content="Слушатели"/>
                     <ComboBoxItem Content="Другое"/>
                 </ComboBox>
-                <ComboBox Name="ProfitAddPerson" Grid.Column="1" SelectionChanged="dohAddKtoVnesCm_SelectionChanged" />
+                <ComboBox Name="ProfitAddPerson" Grid.Column="1" SelectionChanged="Combobox_SelectionChanged" />
                 <TextBox Name="ProfitAddPersonNmae" IsEnabled="False" Grid.Column="2" />
               
             </Grid>
 
-            <Button Name="DohodyAddButton" FontSize="16" Content="Добавить"  ToolTip="Нажмите для добавления нового дохода" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="6" Click="DohodyAddButton_Click"     />
+            <Button Name="AddProfit" FontSize="16" Content="Добавить"  ToolTip="Нажмите для добавления нового дохода" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="6" Click="Button_Click"     />
 
         </Grid>
 
@@ -599,10 +599,10 @@
                     <Grid Name="FilterGridDohody" >
                     </Grid>
                 </ScrollViewer>
-                <Button Content="Применить" FontSize="16" Name="FiltrDohodyButton" Grid.Column="1" Click="FiltrButton_Click"/>
+                <Button Content="Применить" FontSize="16" Name="FilterCostsButton" Grid.Column="1" Click="FilterButton_Click"/>
             </Grid>
 
-            <DataGrid ToolTip="Таблица в которой отображаются поступившие доходы. Для работы с ними выберете одну из записей кликнув н неё, после чего выберете одно из действий ниже." Name="ProfitDataGrid" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" IsReadOnly="true" ItemsSource="{Binding}" AutoGenerateColumns="False" SelectedCellsChanged="NachDataGrid_SelectedCellsChanged">
+            <DataGrid ToolTip="Таблица в которой отображаются поступившие доходы. Для работы с ними выберете одну из записей кликнув н неё, после чего выберете одно из действий ниже." Name="ProfitDataGrid" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" IsReadOnly="true" ItemsSource="{Binding}" AutoGenerateColumns="False" SelectedCellsChanged="DataGrid_SelectedCellsChanged">
                 <DataGrid.Columns>
                     <DataGridTextColumn Visibility="Collapsed" Header="ID" Binding="{Binding dohid}" Width="5*" />
                     <DataGridTextColumn Header="Тип дохода" Binding="{Binding title}" Width="5*" />
@@ -611,9 +611,9 @@
                     <DataGridTextColumn Header="Дата" Binding="{Binding data}" Width="5*" />
                 </DataGrid.Columns>
             </DataGrid>
-            <Button Name="DohDeleteButton" FontSize="16" Content="Удалить" ToolTip="Нажмите для удаления выбранного дохода" Grid.Column="0"  Grid.Row="2" Click="DohDeleteButton_Click"    />
-            <Button Name="DohChangeButton" FontSize="16" Content="Изменить" ToolTip="Нажмите для изменения выбранного дохода" Grid.Column="1" Grid.Row="2" Click="DohChangeButton_Click"    />
-            <Button Name="DohAddButton" FontSize="16" Content="Добавить"  ToolTip="Нажмите для добавления нового дохода" Grid.Column="2" Grid.Row="2" Click="DohAddButton_Click"    />
+            <Button Name="DeleteProfit" FontSize="16" Content="Удалить" ToolTip="Нажмите для удаления выбранного дохода" Grid.Column="0"  Grid.Row="2" Click="Button_Click"    />
+            <Button Name="GoToChangeProfit" FontSize="16" Content="Изменить" ToolTip="Нажмите для изменения выбранного дохода" Grid.Column="1" Grid.Row="2" Click="Button_Click"    />
+            <Button Name="GoToAddProfit" FontSize="16" Content="Добавить"  ToolTip="Нажмите для добавления нового дохода" Grid.Column="2" Grid.Row="2" Click="Button_Click"    />
 
         </Grid>
 
@@ -637,9 +637,9 @@
                     <ColumnDefinition Width="1.5*"/>
                 </Grid.ColumnDefinitions>
                 <Label Grid.Column="0" Content="Группа: " VerticalContentAlignment="Center" HorizontalContentAlignment="Right" FontSize="16"  />
-                <ComboBox Name="Groups" Grid.Column="1" SelectionChanged="Groups_SelectionChanged" />
+                <ComboBox Name="Groups" Grid.Column="1" SelectionChanged="Combobox_SelectionChanged" />
                 <Label Grid.Column="2" Content="Слушатель: " VerticalContentAlignment="Center" HorizontalContentAlignment="Right" FontSize="16"  />
-                <ComboBox Name="Listener" Grid.Column="3" SelectionChanged="Listener_SelectionChanged" />
+                <ComboBox Name="Listener" Grid.Column="3" SelectionChanged="Combobox_SelectionChanged" />
                 <Label Grid.Column="4" Name="isStop"  FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" />
                 <Label Grid.Column="5"  Name="isClose"  FontSize="16" VerticalContentAlignment="Center" HorizontalContentAlignment="Center"/>
             </Grid>
@@ -692,11 +692,11 @@
                     <ColumnDefinition/>
                     <ColumnDefinition/>
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="0" FontSize="16" Content="Оплата" Name="AddPAy" Click="AddPAy_Click" />
-                <Button Grid.Column="1" FontSize="16" Content="Остановить обучение" Visibility="Collapsed" Name="StopLern" Click="StopLern_Click" />
-                <Button Grid.Column="1" FontSize="16" Content="Восстановить обучение" Visibility="Collapsed" Name="RestartLern" Click="RestartLern_Click"  />
-                <Button Grid.Column="2" FontSize="16" Content="Закрыть оплату" Name="Closeing" Click="Closeing_Click" Visibility="Collapsed" />
-                <Button Grid.Column="2" FontSize="16" Content="Открыть оплату" Name="Open"  Visibility="Collapsed" Click="Open_Click"/>
+                <Button Grid.Column="0" FontSize="16" Content="Оплата" Name="AddPayment" Click="Button_Click" />
+                <Button Grid.Column="1" FontSize="16" Content="Остановить обучение" Visibility="Collapsed" Name="LearnStop" Click="Button_Click" />
+                <Button Grid.Column="1" FontSize="16" Content="Восстановить обучение" Visibility="Collapsed" Name="LearnRestart" Click="Button_Click"  />
+                <Button Grid.Column="2" FontSize="16" Content="Закрыть оплату" Name="ClosePaymentEntry" Click="Button_Click" Visibility="Collapsed" />
+                <Button Grid.Column="2" FontSize="16" Content="Открыть оплату" Name="UnClosePaymentEntry"  Visibility="Collapsed" Click="Button_Click"/>
             </Grid>
         </Grid>
 

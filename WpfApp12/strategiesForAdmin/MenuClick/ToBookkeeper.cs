@@ -6,28 +6,30 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace WpfApp12.strategiesForManager.ButtonClick
+namespace WpfApp12.strategiesForAdmin.MenuClick
 {
-    class GoToAdmin:IButtonClick
-    {
-        ManagerWindow windowObj;
 
-        public GoToAdmin(ManagerWindow windowObj)
+    class ToBookkeeper:IMenuClick
+    {
+        private AdminWindow windowObj;
+
+        public ToBookkeeper(AdminWindow windowObj)
         {
             this.windowObj = windowObj;
         }
 
-        public void ButtonClick()
+        public void MenuClick()
         {
-            int checkerResult = 0;
-            if (windowObj.logUser != -1) checkerResult = Checker.adminCheck(windowObj.logUser, windowObj.connectionString);
-            if (checkerResult == 1 || windowObj.logUser == -1)
+            int b = 0;
+            if (windowObj.logUser != -1) b = Checker.BookkeeperCheck(windowObj.logUser, windowObj.connectionString);
+            if (b == 1 || windowObj.logUser == -1)
             {
-                AdminWindow wind = new AdminWindow();
+                BookkeeperWindow wind = new BookkeeperWindow();
                 try
                 {
                     NpgsqlConnection connection = new NpgsqlConnection(windowObj.connectionString);
                     string sql = "select admin,buhgalter,director from users where uid = " + windowObj.logUser;
+
                     connection.Open();
                     NpgsqlCommand command = new NpgsqlCommand(sql, connection);
                     NpgsqlDataReader dReader = command.ExecuteReader();
@@ -35,26 +37,27 @@ namespace WpfApp12.strategiesForManager.ButtonClick
                     {
                         while (dReader.Read())
                         {
-                            if (dReader.GetInt32(0) == 0) { wind.GoToAdminMenu.IsEnabled = false; }
-                            if (dReader.GetInt32(1) == 0) { wind.GoToBookkeerMenu.IsEnabled = false; }
-                            if (dReader.GetInt32(2) == 0) { wind.GoToManagerMenu.IsEnabled = false; }
+                            if (dReader.GetInt32(0) == 0) { wind.GoToAdmin.IsEnabled = false; }
+                            if (dReader.GetInt32(1) == 0) { wind.GoToBookkeeper.IsEnabled = false; }
+                            if (dReader.GetInt32(2) == 0) { wind.GoToManager.IsEnabled = false; }
 
                         }
                     }
                 }
                 catch { MessageBox.Show("Не удалось подключиться к базе данных"); return; }
                 wind.logUser = windowObj.logUser;
-                wind.UserName = windowObj.userName;
-                wind.Title = windowObj.userName + " - Админ";
-                wind.hello_label.Text = "Здравствуйте, Ваша текущая роль администратор. Для начала роботы выберите один из пунктов меню.";
+                wind.UserName = windowObj.UserName;
+                wind.Title = windowObj.UserName + " - Бухгалтер";
+                wind.hello_label.Text = "Здравствуйте, Ваша текущая роль бухгалтер. Для начала роботы выберите один из пунктов меню.";
                 wind.Width = windowObj.Width;
                 wind.Height = windowObj.Height;
                 wind.Left = windowObj.Left;
                 wind.Top = windowObj.Top;
                 wind.Show();
                 windowObj.Close();
+
             }
-            else { MessageBox.Show("Вы не имеете доступа к этой роли"); }
+            else { MessageBox.Show("Вы не имете доступа к этой роли"); }
         }
     }
 }

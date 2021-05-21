@@ -4,7 +4,7 @@ using Npgsql;
 
 namespace WpfApp12
 {
-   public class filtr
+   public class filter
     {
     public CheckBox[] checkBoxVariantsArr;
     public string sql = "";
@@ -760,7 +760,7 @@ namespace WpfApp12
             }
 
         }
-        public void ApplyProfitFilterForCashboxReport(filtr filterProfitTypes) { 
+        public void ApplyProfitFilterForCashboxReport(filter filterProfitTypes) { 
             sql = "SELECT data,title,sum,fio  FROM dodhody inner join typedohod using(idtype) where (";
             bool change = false;
             for (int i = 0; i < checkBoxVariantsArr.Length; i++)
@@ -788,7 +788,7 @@ namespace WpfApp12
 
             if (change == true && change2==true) { sql += " and " + sql2; } if(change == false && change2 == true) { sql += " where " + sql2; }
         }
-        public void ApplyCostsFilterForCashboxReport(filtr filterCostsTypes)
+        public void ApplyCostsFilterForCashboxReport(filter filterCostsTypes)
         {
             sql = "SELECT data,title,fio,summ  FROM rashody inner join typerash using(typeid) inner join sotrudniki using(sotrid) where (";
             bool change = false;

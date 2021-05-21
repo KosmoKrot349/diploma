@@ -44,8 +44,8 @@ namespace WpfApp12.strategiesForBookkeeper.ButtonClick
                 windowObj.ProfitGrid.Visibility = Visibility.Visible;
 
                 windowObj.ProfitDataGrid.SelectedItem = null;
-                windowObj.DohDeleteButton.IsEnabled = false;
-                windowObj.DohChangeButton.IsEnabled = false;
+                windowObj.DeleteProfit.IsEnabled = false;
+                windowObj.GoToChangeProfit.IsEnabled = false;
                 DataGridUpdater.updateProfitDataGrid(windowObj);
             }
         }

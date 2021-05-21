@@ -63,7 +63,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             DataGridUpdater.updateTimeScheduleDataGrid(windowObj);
             windowObj.TimeScheduleDataGrid.SelectedItem = null;
             //расписание звонков
-            windowObj.zvonkiDeleteButton.IsEnabled = false;
+            windowObj.TimeScheduleDelete.IsEnabled = false;
         }
     }
 }

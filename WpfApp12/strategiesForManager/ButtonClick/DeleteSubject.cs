@@ -75,7 +75,7 @@ namespace WpfApp12.strategiesForManager.ButtonClick
             windowObj.SubjectsDataGrid.SelectedItem = null;
 
             //предметы
-            windowObj.subDeleteButton.IsEnabled = false;
+            windowObj.DeleteSubject.IsEnabled = false;
         }
     }
 }

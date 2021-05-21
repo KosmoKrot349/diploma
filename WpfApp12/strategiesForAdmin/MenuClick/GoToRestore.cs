@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.IO;
 
-namespace WpfApp12.strategiesForAdmin
+namespace WpfApp12.strategiesForAdmin.MenuClick
 {
-    class GoToRestore:IButtonClick
+    class GoToRestore:IMenuClick
     {
         private AdminWindow windowObj;
 
@@ -18,10 +18,10 @@ namespace WpfApp12.strategiesForAdmin
             this.windowObj = windowObj;
         }
 
-        public void buttonClick()
+        public void MenuClick()
         {
             windowObj.hideAll();
-            windowObj.rsDumpGrid.Visibility = Visibility.Visible;
+            windowObj.RestoreBackUpGrid.Visibility = Visibility.Visible;
 
             StreamReader StreamReader = new StreamReader(@"rsDump.bat");
             ArrayList restoreBackUpList = new ArrayList();
